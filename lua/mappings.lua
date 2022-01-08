@@ -42,6 +42,10 @@ set_keymap('i', '<C-k>', '<C-r>=KillLine()<CR>', {})
 set_keymap('i', '<C-p>', '<Up>', {})
 set_keymap('i', '<C-n>', '<Down>', {})
 
+-- normal mode
+set_keymap('n', '<C-p>', '<Up>', {})
+set_keymap('n', '<C-n>', '<Down>', {})
+
 -- command line mode
 set_keymap('c', '<C-p>', '<Up>', {})
 set_keymap('c', '<C-n>', '<Down>', {})
@@ -79,14 +83,12 @@ utils.safe_require('which-key', function(wk)
     },
     f = {
       name = '+Files',
-      -- f = { "<cmd>lua require 'telescope'.extensions.file_browser.file_browser()<CR>", 'Find file' },
-      -- f = { '<cmd>Telescope find_files<cr>', 'Find file' },
-      f = { ":FilesWithDevicons <C-R>=expand('%:h')<CR><CR>", "Find file" },
+      f = { "<cmd>lua require'functions'.find_current_directory_files()<CR>", 'Find file' },
       r = { '<cmd>Telescope oldfiles<cr>', 'Open recent file', noremap = false },
     },
     p = {
       name = '+Projects',
-      f = { ':ProjectFiles<CR>', 'Find project files' },
+      f = { '<cmd>Telescope find_files<CR>', 'Find project files' },
     },
     j = {
       name = '+Jump',

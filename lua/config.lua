@@ -1,3 +1,4 @@
+local vim = vim
 local utils = require('utils')
 
 -- Setup for lualine
@@ -50,11 +51,6 @@ utils.safe_require('lualine', function(lualine)
   -- Inserts a component in lualine_b at left section
   local function ins_config_left(component)
     table.insert(config.sections.lualine_b, component)
-  end
-
-  -- Inserts a component in lualine_x ot right section
-  local function ins_config_right(component)
-    table.insert(config.sections.lualine_x, component)
   end
 
   local lsp_progress = require('lualine.components.lsp_progress')
@@ -111,7 +107,14 @@ end)
 
 -- Setup for lspsaga
 utils.safe_require('lspsaga', function(saga)
-  saga.init_lsp_saga()
+  saga.init_lsp_saga({
+    code_action_keys = {
+      quit = {"q", "<ESC>"},
+    },
+    rename_action_keys = {
+      quit = {"q", "<ESC>"},
+    },
+  })
 end)
 -- End of setup for lspsaga
 
@@ -175,8 +178,54 @@ end)
 
 -- Setup for telescope
 utils.safe_require('telescope', function(telescope)
+  local theme = 'ivy'
   telescope.load_extension 'project'
   telescope.load_extension 'file_browser'
+  telescope.setup {
+    defaults = {
+      mappings = {
+        i = {
+          ["<Esc>"] = require('telescope.actions').close
+        },
+      },
+    },
+    pickers = {
+      find_files = {
+        theme = theme,
+      },
+      oldfiles = {
+        theme = theme,
+      },
+      live_grep = {
+        theme = theme,
+      },
+      current_buffer_fuzzy_find = {
+        theme = theme,
+      },
+      commands = {
+        theme = theme,
+      },
+      lsp_document_symbols = {
+        theme = theme,
+      },
+      diagnostics = {
+        theme = theme,
+        initial_mode = 'normal',
+      },
+      lsp_references = {
+        theme = 'cursor',
+        initial_mode = 'normal',
+        layout_config = {
+          width = 0.8,
+          height = 0.4,
+        },
+      },
+      lsp_code_actions = {
+        theme = 'cursor',
+        initial_mode = 'normal',
+      },
+    },
+  }
 end)
 -- End of setup for telescope
 

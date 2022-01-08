@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
 
     use 'wakatime/vim-wakatime'
 
+    use 'ygm2/rooter.nvim'
     use 'ryanoasis/vim-devicons'
     use 'folke/which-key.nvim'
     use 'tpope/vim-surround'

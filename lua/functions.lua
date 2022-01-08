@@ -1,3 +1,5 @@
+local vim = vim
+
 vim.cmd [[
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
@@ -41,3 +43,18 @@ function! s:split_line_text_at_cursor()
   return [text_before_cursor, text_after_cursor]
 endfunction
 ]]
+
+local M = {}
+
+M.find_current_directory_files = function()
+  local dir = vim.fn.expand('%:p:h')
+  if dir == "" then
+    dir = vim.fn.getcwd()
+  end
+  return require('telescope.builtin').find_files{
+    search_dirs = { dir },
+  }
+end
+
+return M
+
