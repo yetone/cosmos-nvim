@@ -88,6 +88,7 @@ utils.safe_require('which-key', function(wk)
     },
     p = {
       name = '+Projects',
+      p = { '<cmd>Telescope projects theme=ivy<cr>', 'List projects' },
       f = { '<cmd>Telescope find_files<CR>', 'Find project files' },
     },
     j = {

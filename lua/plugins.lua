@@ -43,7 +43,7 @@ return require('packer').startup(function(use)
 
     use 'wakatime/vim-wakatime'
 
-    use 'ygm2/rooter.nvim'
+    use 'ahmedkhalf/project.nvim'
     use 'ryanoasis/vim-devicons'
     use 'folke/which-key.nvim'
     use 'tpope/vim-surround'
@@ -54,7 +54,6 @@ return require('packer').startup(function(use)
     use 'easymotion/vim-easymotion'
     use 'justinmk/vim-sneak'
     use 'jiangmiao/auto-pairs'
-    use 'dbakker/vim-projectroot'
     use 'luochen1990/rainbow'
     use 'wellle/targets.vim'
     use 'rafamadriz/neon'
@@ -83,7 +82,6 @@ return require('packer').startup(function(use)
       'nvim-telescope/telescope.nvim',
       requires = { {'nvim-lua/plenary.nvim'} }
     }
-    use 'nvim-telescope/telescope-project.nvim'
     use 'nvim-telescope/telescope-file-browser.nvim'
 
     use 'hrsh7th/cmp-nvim-lsp'

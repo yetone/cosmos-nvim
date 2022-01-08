@@ -176,10 +176,20 @@ utils.safe_require('cmp', function(cmp)
 end)
 -- End of setup for nvim-cmp.
 
+-- Setup for project
+utils.safe_require('project_nvim', function(project)
+  project.setup {
+    exclude_dirs = { "*//*" },
+    detection_methods = { "pattern" },
+    patterns = { ".git", },
+  }
+end)
+-- End of setup for project
+
 -- Setup for telescope
 utils.safe_require('telescope', function(telescope)
   local theme = 'ivy'
-  telescope.load_extension 'project'
+  telescope.load_extension 'projects'
   telescope.load_extension 'file_browser'
   telescope.setup {
     defaults = {
