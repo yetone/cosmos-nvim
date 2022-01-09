@@ -341,6 +341,68 @@ utils.safe_require('nvim-treesitter.configs', function(treesitter)
       -- Instead of true it can also be a list of languages
       additional_vim_regex_highlighting = false,
     },
+
+    textobjects = {
+      select = {
+        enable = true,
+        -- Automatically jump forward to textobj, similar to targets.vim
+        lookahead = true,
+        keymaps = {
+          -- You can use the capture groups defined in textobjects.scm
+          ["af"] = "@function.outer",
+          ["if"] = "@function.inner",
+          ["ac"] = "@conditional.outer",
+          ["ic"] = "@conditional.inner",
+          ["ai"] = "@call.outer",
+          ["ii"] = "@call.inner",
+          ["ab"] = "@block.outer",
+          ["ib"] = "@block.inner",
+          ["is"] = "@statement.inner",
+          ["as"] = "@statement.outer",
+          ["aC"] = "@class.outer",
+          ["iC"] = "@class.inner",
+          ["al"] = "@loop.outer",
+          ["il"] = "@loop.inner",
+        },
+      },
+      swap = {
+        enable = true,
+        swap_next = {
+          ["<leader>a"] = "@parameter.inner",
+        },
+        swap_previous = {
+          ["<leader>A"] = "@parameter.inner",
+        },
+      },
+      move = {
+        enable = true,
+        set_jumps = true, -- whether to set jumps in the jumplist
+        goto_next_start = {
+          ["]m"] = "@function.outer",
+          ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+          ["]M"] = "@function.outer",
+          ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+          ["[m"] = "@function.outer",
+          ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+          ["[M"] = "@function.outer",
+          ["[]"] = "@class.outer",
+        },
+      },
+      lsp_interop = {
+        enable = true,
+        border = 'none',
+        peek_definition_code = {
+          ["<leader>sd"] = "@function.outer",
+          ["<leader>sD"] = "@class.outer",
+        },
+      },
+    },
   }
 end)
 -- End of setup for tree-sitter

@@ -79,7 +79,6 @@ utils.safe_require('which-key', function(wk)
       n = { ':BufferLineCycleNext<CR>', 'Next buffer' },
       p = { ':BufferLineCyclePrev<CR>', 'Previous buffer' },
       d = { ':bw<CR>', 'Delete buffer' },
-      h = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
     },
     f = {
       name = '+Files',
@@ -106,6 +105,7 @@ utils.safe_require('which-key', function(wk)
       name = '+Search/Symbols',
       e = { ':Lspsaga rename<CR>', 'Edit symbol' },
       s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>", 'Search current buffer' },
+      h = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover symbol' },
     },
     g = {
       name = '+Git',
@@ -121,7 +121,7 @@ utils.safe_require('which-key', function(wk)
     [';'] = {
       name = 'Comment',
       [';'] = {
-        'gcc', 'Comment line', noremap = false
+        'gcc<Esc>', 'Comment line', noremap = false, mode = 'v',
       },
     },
     ["'"] = { ':Lspsaga open_floaterm<CR>', 'Open shell' },
