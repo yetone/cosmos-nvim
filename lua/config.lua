@@ -200,6 +200,9 @@ utils.safe_require('telescope', function(telescope)
       },
     },
     pickers = {
+      buffers = {
+        theme = theme,
+      },
       find_files = {
         theme = theme,
       },
