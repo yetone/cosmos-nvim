@@ -126,6 +126,33 @@ end)
 
 -- Setup for nvim-cmp.
 utils.safe_require('cmp', function(cmp)
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  end
+
+  local tab_complete = function(fallback)
+    if vim.fn.pumvisible() == 1 then
+      feedkey("<C-n>", "n")
+    elseif cmp.visible() then
+      cmp.select_next_item()
+    elseif has_words_before() then
+      cmp.complete()
+    else
+      fallback()
+    end
+  end
+
+  local s_tab_complete = function(fallback)
+    if vim.fn.pumvisible() == 1 then
+      feedkey("<C-p>", "n")
+    elseif cmp.visible() then
+      cmp.select_prev_item()
+    else
+      fallback()
+    end
+  end
+
   cmp.setup({
     snippet = {
       -- REQUIRED - you must specify a snippet engine
@@ -140,6 +167,8 @@ utils.safe_require('cmp', function(cmp)
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<Tab>'] = tab_complete,
+      ['<S-Tab>'] = s_tab_complete,
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),

@@ -138,6 +138,7 @@ tmap('<A-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>')
 set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 
 vim.cmd [[
+imap <silent><script><expr> <C-E> copilot#Accept("\<CR>")
 au FileType html,typescriptreact,javascriptreact EmmetInstall
 au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 ]]
