@@ -28,7 +28,7 @@ function M.safe_require(pkg_name, cbk)
     if is_module_available(pkg_name_) then
       pkgs[i] = require(pkg_name_)
     else
-      print('WARNING: ' .. pkg_name_ .. ' is not found')
+      print('WARNING: package ' .. pkg_name_ .. ' is not found')
       return
     end
   end
