@@ -105,7 +105,9 @@ utils.safe_require('which-key', function(wk)
       name = '+Search/Symbols',
       e = { ':Lspsaga rename<CR>', 'Edit symbol' },
       s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>", 'Search current buffer' },
-      h = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover symbol' },
+      h = { "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", 'Hover symbol' },
+      p = { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", "Preview symbol" },
+      H = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", 'Show symbol signature' },
     },
     g = {
       name = '+Git',
@@ -134,11 +136,13 @@ end)
 
 nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 nmap('gD', ':Lspsaga preview_definition<CR>')
+nmap('<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
+nmap('<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 tmap('<A-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>')
 set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 
 vim.cmd [[
-imap <silent><script><expr> <C-I> copilot#Accept("\<CR>")
+imap <silent><script><expr> <M-;> copilot#Accept("\<CR>")
 au FileType html,typescriptreact,javascriptreact EmmetInstall
 au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 ]]

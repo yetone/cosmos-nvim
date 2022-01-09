@@ -11,7 +11,7 @@ function! Home()
 endfunction
 
 function! KillLine()
-  let [text_before_cursor, text_after_cursor] = s:split_line_text_at_cursor()
+  let [text_before_cursor, text_after_cursor] = SplitLineTextAtCursor()
   if len(text_after_cursor) == 0
     normal! J
   else
@@ -20,7 +20,7 @@ function! KillLine()
   return ''
 endfunction
 
-function! s:split_line_text_at_cursor()
+function! SplitLineTextAtCursor()
   let line_text = getline(line('.'))
   let text_after_cursor  = line_text[col('.')-1 :]
   let text_before_cursor = (col('.') > 1) ? line_text[: col('.')-2] : ''
