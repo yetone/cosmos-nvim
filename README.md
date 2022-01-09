@@ -18,9 +18,9 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
 
 # Install
 
-## 1. Install Neovim
+## 1. Install Neovim 6+
 
-Please refer to the official installation documentation of Neovim: [Install Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+**Only Neovim 6.0 and above are supported**, please refer to the official installation documentation of Neovim: [Install Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 
 ## 2. Install my configuration
 
