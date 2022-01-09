@@ -79,6 +79,7 @@ utils.safe_require('which-key', function(wk)
       n = { ':BufferLineCycleNext<CR>', 'Next buffer' },
       p = { ':BufferLineCyclePrev<CR>', 'Previous buffer' },
       d = { ':bw<CR>', 'Delete buffer' },
+      h = { '<cmd>lua vim.lsp.buf.hover()<CR>', 'Hover' },
     },
     f = {
       name = '+Files',
