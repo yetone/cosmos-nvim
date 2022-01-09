@@ -1,4 +1,3 @@
-local vim = vim
 local utils = require('utils')
 
 vim.cmd [[
@@ -53,19 +52,12 @@ function M.edit_neovim()
   end)
 end
 
-local reload = function(module)
-  return utils.safe_require('plenary.reload', function(plenary)
-    plenary.reload_module(module)
-    require(module)
-  end)
-end
-
 function M.reload_configuration()
-  reload('plugins')
-  reload('functions')
-  reload('settings')
-  reload('config')
-  reload('mappings')
+  utils.reload('plugins')
+  utils.reload('functions')
+  utils.reload('settings')
+  utils.reload('config')
+  utils.reload('mappings')
 end
 
 M.commands = function(opts)

@@ -33,7 +33,7 @@ function M.safe_require(pkg_name, cbk)
     end
   end
 
-  cbk(unpack(pkgs))
+  return cbk(unpack(pkgs))
 end
 
 function M.index_of(tbl, val, cmp)
@@ -44,6 +44,17 @@ function M.index_of(tbl, val, cmp)
     end
   end
   return -1
+end
+
+function M.reload(module)
+  return M.safe_require('plenary.reload', function(plenary)
+    plenary.reload_module(module)
+    require(module)
+  end)
+end
+
+function M.t(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 return M

@@ -1,5 +1,4 @@
 local utils = require('utils')
-local vim = vim
 local set_keymap = vim.api.nvim_set_keymap
 
 function _map(mode, shortcut, command)

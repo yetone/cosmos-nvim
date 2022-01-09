@@ -1,4 +1,3 @@
-local vim = vim
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
 if not packer_exists then
@@ -102,6 +101,8 @@ return require('packer').startup(function(use)
     use 'arkav/lualine-lsp-progress'
 
     use 'dstein64/vim-startuptime'
+
+    use 'folke/lua-dev.nvim'
 
     use {
       'pwntester/octo.nvim',
