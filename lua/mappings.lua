@@ -85,6 +85,11 @@ utils.safe_require('which-key', function(wk)
       name = '+Files',
       f = { "<cmd>lua require'functions'.find_current_directory_files()<CR>", 'Find file' },
       r = { '<cmd>Telescope oldfiles<cr>', 'Open recent file', noremap = false },
+      e = {
+        name = 'Config files',
+        d = { "<cmd>lua require'functions'.edit_neovim()<CR>", 'Open dotfiles' },
+        R = { "<cmd>lua require'functions'.reload_configuration()<CR>", 'Reload configuration' },
+      }
     },
     p = {
       name = '+Projects',
@@ -126,8 +131,6 @@ utils.safe_require('which-key', function(wk)
     ['<Space>'] = { ':Telescope commands<CR>', 'Commands' },
   }, { prefix = '<leader>' })
 end)
-
-map('<Leader>fed', ':e ~/.config/nvim/lua/config.lua<CR>')
 
 nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 nmap('gD', ':Lspsaga preview_definition<CR>')

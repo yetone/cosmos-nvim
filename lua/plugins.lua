@@ -43,6 +43,9 @@ return require('packer').startup(function(use)
 
     use 'wakatime/vim-wakatime'
 
+    use 'nvim-lua/plenary.nvim'
+
+    use 'ygm2/rooter.nvim'
     use 'ahmedkhalf/project.nvim'
     use 'ryanoasis/vim-devicons'
     use 'folke/which-key.nvim'

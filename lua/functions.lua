@@ -1,4 +1,5 @@
 local vim = vim
+local utils = require('utils')
 
 vim.cmd [[
 function! RipgrepFzf(query, fullscreen)
@@ -46,14 +47,41 @@ endfunction
 
 local M = {}
 
-M.find_current_directory_files = function()
+function M.find_current_directory_files()
   local dir = vim.fn.expand('%:p:h')
   if dir == "" then
     dir = vim.fn.getcwd()
   end
-  return require('telescope.builtin').find_files{
-    search_dirs = { dir },
-  }
+  utils.safe_require('telescope.builtin', function(telescope)
+    telescope.find_files{
+      search_dirs = { dir },
+    }
+  end)
+end
+
+function M.edit_neovim()
+  utils.safe_require('telescope.builtin', function(telescope)
+    telescope.find_files{
+      shorten_path = true,
+      cwd = '~/.config/nvim',
+      prompt_title = "~ dotfiles ~",
+    }
+  end)
+end
+
+local reload = function(module)
+  return utils.safe_require('plenary.reload', function(plenary)
+    plenary.reload_module(module)
+    require(module)
+  end)
+end
+
+function M.reload_configuration()
+  reload('plugins')
+  reload('functions')
+  reload('settings')
+  reload('config')
+  reload('mappings')
 end
 
 return M
