@@ -76,7 +76,7 @@ utils.safe_require('which-key', function(wk)
     },
     b = {
       name = '+Buffers',
-      b = { '<cmd>Telescope buffers<cr>', 'List buffers' },
+      b = { "<cmd>lua require('telescope.builtin').buffers { sort_mru = true }<cr>", 'List buffers' },
       n = { ':BufferLineCycleNext<CR>', 'Next buffer' },
       p = { ':BufferLineCyclePrev<CR>', 'Previous buffer' },
       d = { ':bw<CR>', 'Delete buffer' },
@@ -105,7 +105,7 @@ utils.safe_require('which-key', function(wk)
     s = {
       name = '+Search/Symbols',
       e = { ':Lspsaga rename<CR>', 'Edit symbol' },
-      s = { ':Telescope current_buffer_fuzzy_find fuzzy=false case_mode=ignore_case<cr>', 'Search current buffer' },
+      s = { "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false,  case_mode = 'ignore_case' }<cr>", 'Search current buffer' },
     },
     g = {
       name = '+Git',
@@ -128,7 +128,7 @@ utils.safe_require('which-key', function(wk)
     ['*'] = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", 'Search reference in current project' },
     ['/'] = { ':Telescope live_grep<CR>', 'Search project' },
     ['<Tab>'] = { ':b#<CR>', 'Last buffer' },
-    ['<Space>'] = { ':Telescope commands<CR>', 'Commands' },
+    ['<Space>'] = { "<cmd>lua require('functions').commands(require('telescope.themes').get_ivy({}))<CR>", 'Commands' },
   }, { prefix = '<leader>' })
 end)
 

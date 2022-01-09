@@ -15,14 +15,35 @@ local function is_module_available(name)
   end
 end
 
-local function safe_require(pkg, cbk)
-  if is_module_available(pkg) then
-    cbk(require(pkg))
+function M.safe_require(pkg_name, cbk)
+  local pkg_names = {}
+  if type(pkg_name) == 'table' then
+    pkg_names = pkg_name
   else
-    print('WARNING: ' .. pkg .. ' is not found')
+    pkg_names = { pkg_name }
   end
+
+  local pkgs = {}
+  for i, pkg_name_ in ipairs(pkg_names) do
+    if is_module_available(pkg_name_) then
+      pkgs[i] = require(pkg_name_)
+    else
+      print('WARNING: ' .. pkg_name_ .. ' is not found')
+      return
+    end
+  end
+
+  cbk(unpack(pkgs))
 end
 
-M.safe_require = safe_require
+function M.index_of(tbl, val, cmp)
+  cmp = cmp or function(a, b) return a == b end
+  for i, v in ipairs(tbl) do
+    if cmp(v, val) then
+      return i
+    end
+  end
+  return -1
+end
 
 return M

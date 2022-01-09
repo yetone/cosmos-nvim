@@ -2,22 +2,6 @@ local vim = vim
 local utils = require('utils')
 
 vim.cmd [[
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#devicon#vim#grep(initial_command, 1, fzf#devicon#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-function! s:guess_project_root()
-  return projectroot#guess()
-endfunction
-
-command! ProjectFiles execute 'FilesWithDevicons' s:guess_project_root()
-
 function! Home()
   let start_col = col('.')
   normal! ^
@@ -82,6 +66,111 @@ function M.reload_configuration()
   reload('settings')
   reload('config')
   reload('mappings')
+end
+
+M.commands = function(opts)
+  opts = opts or {}
+  utils.safe_require({'telescope.builtin', 'plenary.context_manager'}, function(_, context_manager)
+    local with = context_manager.with
+    local open = context_manager.open
+    local actions = require "telescope.actions"
+    local action_state = require "telescope.actions.state"
+    local finders = require "telescope.finders"
+    local make_entry = require "telescope.make_entry"
+    local pickers = require "telescope.pickers"
+
+    local conf = require("telescope.config").values
+
+    local directory = string.format("%s/site/", vim.fn.stdpath("data"))
+    vim.fn.mkdir(directory, "p")
+    local history_filepath = directory .. "nvim_commands_history.txt"
+
+    local history_content = ''
+    local history_file = io.open(history_filepath, "r")
+    if history_file then
+      history_content = history_file:read("*all")
+      history_file:close()
+    else
+      local _f = io.open(history_filepath, "w")
+      _f:write(history_content)
+      _f:close()
+    end
+
+    local history_lines = vim.split(history_content, "\n")
+
+    local max_line = 10
+
+    if #history_lines > max_line then
+      history_lines = vim.list_slice(history_lines, #history_lines - max_line, #history_lines)
+    end
+
+    pickers.new(opts, {
+      prompt_title = "Commands",
+      finder = finders.new_table {
+        results = (function()
+          local command_iter = vim.api.nvim_get_commands {}
+          local commands = {}
+
+          for _, cmd in pairs(command_iter) do
+            table.insert(commands, cmd)
+          end
+
+          local cmp = function(a, b)
+            if a == nil or b == nil then
+              return false
+            end
+            return string.lower(a) == string.lower(b)
+          end
+
+          table.sort(commands, function(a, b)
+            return utils.index_of(history_lines, a.name, cmp) > utils.index_of(history_lines, b.name, cmp)
+          end)
+
+          return commands
+        end)(),
+
+        entry_maker = opts.entry_maker or make_entry.gen_from_commands(opts),
+      },
+      sorter = conf.generic_sorter(opts),
+      attach_mappings = function(prompt_bufnr)
+        actions.select_default:replace(function()
+          local selection = action_state.get_selected_entry()
+          if selection == nil then
+            print "[telescope] Nothing currently selected"
+            return
+          end
+
+          actions.close(prompt_bufnr)
+
+          local val = selection.value
+          local cmd = string.format([[:%s ]], val.name)
+
+          local result = {}
+
+          for _, v in ipairs(history_lines) do
+            if string.lower(v) ~= string.lower(val.name) then
+              table.insert(result, v)
+            end
+          end
+
+          table.insert(result, val.name)
+
+          with(open(history_filepath, 'w'), function(f)
+            f:write(table.concat(result, "\n"))
+          end)
+
+          if val.nargs == "0" then
+            vim.cmd(cmd)
+          else
+            vim.cmd [[stopinsert]]
+            vim.fn.feedkeys(cmd)
+          end
+        end)
+
+        return true
+      end,
+    }):find()
+  end)
 end
 
 return M
