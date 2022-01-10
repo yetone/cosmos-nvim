@@ -1,4 +1,5 @@
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
+local packer_bootstrap = nil
 
 if not packer_exists then
   if vim.fn.input("Download Packer? (y for yes) ") ~= "y" then
@@ -11,10 +12,9 @@ if not packer_exists then
   vim.fn.mkdir(directory, "p")
 
   print(" Downloading packer.nvim...")
-  local out = vim.fn.system(
-  string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
-  )
-  print(out)
+  local install_path = directory .. "/packer.nvim"
+  packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  print(packer_bootstrap)
 
   vim.cmd [[packadd packer.nvim]]
 end

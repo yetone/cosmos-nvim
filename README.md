@@ -28,8 +28,6 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
 mv ~/.config/nvim{,.yetone-backup} || true
 
 git clone https://github.com/yetone/nvim.git ~/.config/nvim
-
-vim +PackerInstall
 ```
 
 ## 3. Install your language lsp server in your nvim
