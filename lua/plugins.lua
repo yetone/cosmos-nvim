@@ -73,6 +73,7 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'p00f/nvim-ts-rainbow'
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     use 'neovim/nvim-lspconfig'
     use 'ojroques/nvim-lspfuzzy'
@@ -92,6 +93,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
+    use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'

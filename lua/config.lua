@@ -49,7 +49,9 @@ utils.safe_require('lualine', function(lualine)
 
   -- Inserts a component in lualine_b at left section
   local function ins_config_left(component)
-    table.insert(config.sections.lualine_b, component)
+    if utils.index_of(config.sections.lualine_b, component) < 0 then
+      table.insert(config.sections.lualine_b, component)
+    end
   end
 
   local lsp_progress = require('lualine.components.lsp_progress')
@@ -124,7 +126,7 @@ end)
 -- End of setup for lspfuzzy
 
 -- Setup for nvim-cmp.
-utils.safe_require('cmp', function(cmp)
+utils.safe_require({ 'cmp', 'lspkind' }, function(cmp, lspkind)
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
@@ -183,7 +185,19 @@ utils.safe_require('cmp', function(cmp)
       -- { name = 'snippy' }, -- For snippy users.
     }, {
       { name = 'buffer' },
-    })
+    }),
+    formatting = {
+      format = lspkind.cmp_format({
+        with_text = false, -- do not show text alongside icons
+        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+        -- The function below will be called before any actual modifications from lspkind
+        -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+        before = function (entry, vim_item)
+          return vim_item
+        end
+      })
+    },
   })
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -216,9 +230,9 @@ end)
 
 -- Setup for telescope
 utils.safe_require('telescope', function(telescope)
-  local theme = 'ivy'
   telescope.load_extension 'projects'
   telescope.load_extension 'file_browser'
+  local theme = 'ivy'
   telescope.setup {
     defaults = {
       mappings = {
@@ -350,6 +364,10 @@ utils.safe_require('nvim-treesitter.configs', function(treesitter)
       max_file_lines = nil, -- Do not enable for files with more than n lines, int
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
+    },
+
+    context_commentstring = {
+      enable = true
     },
 
     textobjects = {
