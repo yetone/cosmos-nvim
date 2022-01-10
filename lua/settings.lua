@@ -30,6 +30,7 @@ vim.cmd('filetype plugin indent on')
 
 local indent = 2
 
+opt.cursorline = true
 opt.timeoutlen = 500
 opt.mouse = 'a'
 opt.encoding = 'utf-8'
