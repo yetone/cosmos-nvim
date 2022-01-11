@@ -52,12 +52,15 @@ opt.ignorecase = true
 opt.incsearch = true
 
 opt.autoindent = true
-opt.tabstop = 8
-opt.softtabstop = 8
+opt.copyindent = true
 opt.shiftwidth = indent
+opt.softtabstop = -1
 opt.expandtab = true
 opt.smartindent = true
 opt.smarttab = true
+
+opt.list = true
+opt.listchars = 'tab:»·,trail:·,nbsp:·'
 
 opt.undofile = true
 opt.ruler = true
