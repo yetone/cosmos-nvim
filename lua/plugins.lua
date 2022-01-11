@@ -70,9 +70,9 @@ return require('packer').startup(function(use)
     use 'mattn/emmet-vim'
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'p00f/nvim-ts-rainbow'
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
+    use { 'p00f/nvim-ts-rainbow', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
+    use { 'JoosepAlviste/nvim-ts-context-commentstring', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
 
     use 'neovim/nvim-lspconfig'
     use 'ojroques/nvim-lspfuzzy'
@@ -96,6 +96,7 @@ return require('packer').startup(function(use)
 
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
 
     use 'windwp/nvim-autopairs'
 
