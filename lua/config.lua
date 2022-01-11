@@ -247,6 +247,7 @@ utils.safe_require('telescope', function(telescope)
     defaults = {
       mappings = {
         i = {
+          ["<C-a>"] = { "<esc>0i", type = "command" },
           ["<Esc>"] = require('telescope.actions').close
         },
       },
