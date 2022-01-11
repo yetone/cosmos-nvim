@@ -32,7 +32,7 @@ git clone https://github.com/yetone/nvim.git ~/.config/nvim
 
 ## 3. Install your language lsp server in your nvim
 
-For example, if you wright python you need open nvim and then run:
+For example, if you are writing `Python`, you will need to open nvim and run the following command:
 
 ```bash
 :LspInstall python
