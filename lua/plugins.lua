@@ -55,7 +55,6 @@ return require('packer').startup(function(use)
 
     use 'easymotion/vim-easymotion'
     use 'justinmk/vim-sneak'
-    use 'jiangmiao/auto-pairs'
     use 'wellle/targets.vim'
     use 'rafamadriz/neon'
     use 'github/copilot.vim'
@@ -97,6 +96,8 @@ return require('packer').startup(function(use)
 
     use 'hrsh7th/cmp-vsnip'
     use 'hrsh7th/vim-vsnip'
+
+    use 'windwp/nvim-autopairs'
 
     use 'tamago324/nlsp-settings.nvim'
     use 'williamboman/nvim-lsp-installer'

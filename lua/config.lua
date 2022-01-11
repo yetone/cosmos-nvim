@@ -125,8 +125,18 @@ utils.safe_require('lspfuzzy', function(lspfuzzy)
 end)
 -- End of setup for lspfuzzy
 
+-- Setup for nvim-autopairs
+utils.safe_require('nvim-autopairs', function(autopairs)
+  autopairs.setup({
+    disable_filetype = { "TelescopePrompt" },
+  })
+end)
+-- End of setup for nvim-autopairs
+
 -- Setup for nvim-cmp.
-utils.safe_require({ 'cmp', 'lspkind' }, function(cmp, lspkind)
+utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, function(cmp, lspkind, cmp_autopairs)
+  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
