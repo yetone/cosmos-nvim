@@ -28,7 +28,7 @@ vim.cmd('silent! colorscheme neon')
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
-local indent = 2
+local indent = 4
 
 opt.cursorline = true
 vim.cmd [[
@@ -52,10 +52,12 @@ opt.ignorecase = true
 opt.incsearch = true
 
 opt.autoindent = true
+opt.tabstop = 8
+opt.softtabstop = 8
 opt.shiftwidth = indent
+opt.expandtab = true
 opt.smartindent = true
 opt.smarttab = true
-opt.softtabstop = indent
 
 opt.undofile = true
 opt.ruler = true
