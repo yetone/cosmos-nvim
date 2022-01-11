@@ -1,31 +1,31 @@
 local utils = require('utils')
 local set_keymap = vim.api.nvim_set_keymap
 
-function _map(mode, shortcut, command)
+local function _map(mode, shortcut, command)
   set_keymap(mode, shortcut, command, { noremap = true, silent = true })
 end
 
-function map(shortcut, command)
+local function map(shortcut, command)
   _map('', shortcut, command)
 end
 
-function nmap(shortcut, command)
+local function nmap(shortcut, command)
   _map('n', shortcut, command)
 end
 
-function imap(shortcut, command)
+local function imap(shortcut, command)
   _map('i', shortcut, command)
 end
 
-function vmap(shortcut, command)
+local function vmap(shortcut, command)
   _map('v', shortcut, command)
 end
 
-function cmap(shortcut, command)
+local function cmap(shortcut, command)
   _map('c', shortcut, command)
 end
 
-function tmap(shortcut, command)
+local function tmap(shortcut, command)
   _map('t', shortcut, command)
 end
 
@@ -33,7 +33,7 @@ end
 -- insert mode
 set_keymap('i', '<C-b>', '<Left>', {})
 set_keymap('i', '<C-f>', '<Right>', {})
-set_keymap('i', '<C-a>', '<C-o>:call Home()<CR>', {})
+set_keymap('i', '<C-a>', '<Esc>0i', {})
 set_keymap('i', '<C-e>', '<End>', {})
 set_keymap('i', '<C-d>', '<Del>', {})
 set_keymap('i', '<C-h>', '<BS>', {})
@@ -53,8 +53,8 @@ set_keymap('c', '<C-f>', '<Right>', {})
 set_keymap('c', '<C-a>', '<Home>', {})
 set_keymap('c', '<C-e>', '<End>', {})
 set_keymap('c', '<C-d>', '<Del>', {})
-set_keymap('c', '<C-h>', '<BS>', {})
-set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', {})
+set_keymap('c', '<C-h>', '<BS>', { noremap = true })
+set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', { noremap = true })
 -- End of setup for emacs keybindings
 
 utils.safe_require('which-key', function(wk)
@@ -140,6 +140,7 @@ nmap('<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>"
 nmap('<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 tmap('<A-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>')
 set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
+set_keymap('n', '<leader>;;', 'gcc', {})
 
 vim.cmd [[
 imap <silent><script><expr> <M-.> copilot#Accept("\<CR>")
