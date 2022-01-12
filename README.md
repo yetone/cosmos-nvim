@@ -22,7 +22,7 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
 
 3. Looking forward to your continued exploration, [there are some screenshots](#some-screenshots)
 
-# Quick Trial
+# Get A Taste Of
 
 If you're worried about breaking your current vim configuration but want to try it out for yourself, you can use docker to give it a quick try in an isolated environment:
 
