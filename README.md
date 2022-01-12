@@ -27,7 +27,7 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
 If you're worried about breaking your current vim configuration but want to try it out for yourself, you can use docker to give it a quick try in an isolated environment:
 
 ```bash
-docker run -it -w /root/.config/nvim yetone/cosmosvim nvim
+docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
 ```
 
 # Install
@@ -47,7 +47,7 @@ Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched 
 ```bash
 mv ~/.config/nvim{,.yetone-backup} || true
 
-git clone https://github.com/yetone/nvim.git ~/.config/nvim
+git clone https://github.com/yetone/cosmos-nvim.git ~/.config/nvim
 ```
 
 ## 3. Install your language lsp server in your nvim
@@ -60,9 +60,9 @@ For example, if you are writing `Python`, you will need to open nvim and run the
 
 # Custom Configuration
 
-If you want to define your own configuration, you can create a file called `.cosmosvim.lua` in the `$HOME` root directory, for example:
+If you want to define your own configuration, you can create a file called `.cosmos-nvim.lua` in the `$HOME` root directory, for example:
 
-`~/.cosmosvim.lua`
+`~/.cosmos-nvim.lua`
 
 ```lua
 return {

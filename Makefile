@@ -1,4 +1,4 @@
-IMG := yetone/cosmosvim:latest
+IMG := yetone/cosmos-nvim:latest
 
 build:
 	docker build -t ${IMG} .
