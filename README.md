@@ -32,9 +32,15 @@ docker run -it -w /root/.config/nvim yetone/cosmosvim nvim
 
 # Install
 
-## 1. Install Neovim 6+
+## 1. Requirements
+
+### Neovim 6+
 
 **Only Neovim 6.0 and above are supported**, please refer to the official installation documentation of Neovim: [Install Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
+
+### Nerd Fonts
+
+Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched fonts you are currently using.
 
 ## 2. Install my configuration
 
