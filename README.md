@@ -8,13 +8,21 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
     <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard2.png" >
 </p>
 
-# Key features
+# Key Features
 
 1. [LSP](https://microsoft.github.io/language-server-protocol/): [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), [lspsaga](https://github.com/glepnir/lspsaga.nvim), [lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)
 
 2. [Spacemacs](https://www.spacemacs.org/) operating experience: spacemacs style keyboard shortcuts with [which-key](https://github.com/folke/which-key.nvim), [Telescope](https://github.com/nvim-telescope/telescope.nvim) like [ivy](https://github.com/abo-abo/swiper) and [helm-swoop](https://github.com/emacsorphanage/helm-swoop), etc.
 
 3. Looking forward to your continued exploration, [there are some screenshots](#some-screenshots)
+
+# Quick Trial
+
+If you're worried about breaking your current vim configuration but want to try it out for yourself, you can use docker to give it a quick try in an isolated environment:
+
+```bash
+docker run -it -w /root/.config/nvim yetone/cosmosvim nvim
+```
 
 # Install
 
@@ -38,7 +46,7 @@ For example, if you are writing `Python`, you will need to open nvim and run the
 :LspInstall python
 ```
 
-# Some screenshots
+# Some Screenshots
 
 ## Which Key like spacemacs
 
