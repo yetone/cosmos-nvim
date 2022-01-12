@@ -73,7 +73,6 @@ require('packer').startup(function(use)
   use 'rafamadriz/neon'
   use 'github/copilot.vim'
   use 'jreybert/vimagit'
-  use { 'liuchengxu/vim-clap', run = ':Clap install-binary!' }
   use 'editorconfig/editorconfig-vim'
 
   use 'Yggdroot/indentLine'
