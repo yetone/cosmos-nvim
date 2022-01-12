@@ -145,8 +145,6 @@ utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, functi
   local tab_complete = function(fallback)
     if cmp.visible() then
       cmp.select_next_item()
-    elseif has_words_before() then
-      cmp.complete()
     else
       fallback()
     end
@@ -155,6 +153,8 @@ utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, functi
   local s_tab_complete = function(fallback)
     if cmp.visible() then
       cmp.select_prev_item()
+    elseif has_words_before() then
+      cmp.complete()
     else
       fallback()
     end

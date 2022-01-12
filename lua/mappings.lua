@@ -144,6 +144,7 @@ set_keymap('n', '<leader>;;', 'gcc', {})
 
 vim.cmd [[
 imap <silent><script><expr> <M-.> copilot#Accept("\<CR>")
+imap <silent><script><expr> <Tab> copilot#Accept("\<CR>")
 au FileType html,typescriptreact,javascriptreact EmmetInstall
 au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 ]]
