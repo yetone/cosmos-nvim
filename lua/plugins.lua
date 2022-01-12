@@ -50,9 +50,12 @@ require('packer').startup(function(use)
   use 'nvim-lua/plenary.nvim'
 
   use 'ygm2/rooter.nvim'
-  use { 'ahmedkhalf/project.nvim', config = function()
-    require('configs.project')
-  end }
+  use {
+    'ahmedkhalf/project.nvim',
+    config = function()
+      require('configs.project')
+    end,
+  }
   use 'ryanoasis/vim-devicons'
   use {
     'folke/which-key.nvim',
@@ -71,14 +74,13 @@ require('packer').startup(function(use)
   use 'github/copilot.vim'
   use 'jreybert/vimagit'
   use { 'liuchengxu/vim-clap', run = ':Clap install-binary!' }
-  use { 'inside/vim-textobj-jsxattr', requires = {{ 'kana/vim-textobj-user' }}}
   use 'editorconfig/editorconfig-vim'
 
   use 'Yggdroot/indentLine'
 
   use {
     'lewis6991/gitsigns.nvim',
-    requires = {{ 'nvim-lua/plenary.nvim' }},
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       require('configs.gitsigns')
     end,
@@ -94,12 +96,12 @@ require('packer').startup(function(use)
       end
     end,
   }
-  use { 'nvim-treesitter/playground', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
-  use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
-  use { 'p00f/nvim-ts-rainbow', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
+  use { 'nvim-treesitter/playground', after = { 'nvim-treesitter' }}
+  use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' }}
+  use { 'p00f/nvim-ts-rainbow', after = { 'nvim-treesitter' }}
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
-    requires = {{ 'nvim-treesitter/nvim-treesitter' }},
+    requires = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('configs.tree-sitter')
     end,
@@ -120,9 +122,9 @@ require('packer').startup(function(use)
 
   use {
     'nvim-lualine/lualine.nvim',
-    requires = {{
+    requires = {
       'arkav/lualine-lsp-progress',
-    }},
+    },
     config = function()
       require('configs.lualine')
     end,
@@ -142,7 +144,7 @@ require('packer').startup(function(use)
   }
   use {
     'nvim-telescope/telescope-file-browser.nvim',
-    requires = {{ 'nvim-telescope/telescope.nvim' }},
+    requires = { 'nvim-telescope/telescope.nvim' },
     config = function()
       require('configs.telescope')
     end,
@@ -152,28 +154,32 @@ require('packer').startup(function(use)
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
-  use 'hrsh7th/nvim-cmp'
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      require('configs.cmp')
+    end,
+  }
   use 'onsails/lspkind-nvim'
 
-  use 'hrsh7th/cmp-vsnip'
+  use { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp', requires = { 'hrsh7th/nvim-cmp' } }
   use 'hrsh7th/vim-vsnip'
   use 'hrsh7th/vim-vsnip-integ'
 
   use {
     'windwp/nvim-autopairs',
-    requires = {{ 'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim' }},
+    requires = { 'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim' },
     config = function()
       require('configs.autopairs')
-      require('configs.cmp')
     end,
   }
 
   use {
     'williamboman/nvim-lsp-installer',
-    requires = {{
+    requires = {
       'tamago324/nlsp-settings.nvim',
       'neovim/nvim-lspconfig',
-    }},
+    },
     config = function()
       require('configs.lsp')
     end,
