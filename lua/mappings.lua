@@ -141,6 +141,7 @@ nmap('<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
 tmap('<A-d>', '<C-\\><C-n>:Lspsaga close_floaterm<CR>')
 set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 set_keymap('n', '<leader>;;', 'gcc', {})
+set_keymap('v', '<leader>;', 'gcc<esc>', {})
 
 vim.cmd [[
 imap <silent><script><expr> <M-.> copilot#Accept("\<CR>")
