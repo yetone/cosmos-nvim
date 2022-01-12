@@ -33,7 +33,7 @@ end
 -- insert mode
 set_keymap('i', '<C-b>', '<Left>', {})
 set_keymap('i', '<C-f>', '<Right>', {})
-set_keymap('i', '<C-a>', '<Esc>0i', {})
+set_keymap('i', '<C-a>', '<Home>', {})
 set_keymap('i', '<C-e>', '<End>', {})
 set_keymap('i', '<C-d>', '<Del>', {})
 set_keymap('i', '<C-h>', '<BS>', {})
