@@ -3,6 +3,8 @@ local utils = require('utils')
 utils.safe_require('telescope', function(telescope)
   telescope.load_extension 'projects'
   telescope.load_extension 'file_browser'
+  local fb_actions = require "telescope".extensions.file_browser.actions
+
   local theme = 'ivy'
   telescope.setup {
     defaults = {
@@ -10,6 +12,22 @@ utils.safe_require('telescope', function(telescope)
         i = {
           ["<C-a>"] = { "<esc>0i", type = "command" },
           ["<Esc>"] = require('telescope.actions').close
+        },
+      },
+    },
+    extensions = {
+      file_browser = {
+        theme = theme,
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+            ["<C-h>"] = fb_actions.goto_parent_dir,
+            ["<C-e>"] = fb_actions.rename,
+            ["<C-c>"] = fb_actions.create,
+          },
+          ["n"] = {
+            -- your custom normal mode mappings
+          },
         },
       },
     },

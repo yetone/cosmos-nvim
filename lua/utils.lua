@@ -59,7 +59,7 @@ end
 
 local user_config
 
-function get_user_config()
+local function get_user_config()
   if user_config then
     return user_config
   end
@@ -77,10 +77,12 @@ function get_user_config()
     end
   end
   if user_config.setup_mappings == nil then
+    ---@diagnostic disable-next-line: unused-local
     user_config.setup_mappings = function(wk)
     end
   end
   if user_config.setup_plugins == nil then
+    ---@diagnostic disable-next-line: unused-local
     user_config.setup_plugins= function(use)
     end
   end

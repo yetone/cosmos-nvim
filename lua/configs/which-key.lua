@@ -26,6 +26,7 @@ utils.safe_require('which-key', function(wk)
     f = {
       name = '+Files',
       f = { "<cmd>lua require'functions'.find_current_directory_files()<CR>", 'Find file' },
+      b = { ":Telescope file_browser<CR>", 'File browser' },
       r = { '<cmd>Telescope oldfiles<cr>', 'Open recent file', noremap = false },
       e = {
         name = 'Config files',
@@ -35,7 +36,7 @@ utils.safe_require('which-key', function(wk)
     },
     p = {
       name = '+Projects',
-      p = { '<cmd>Telescope projects theme=ivy<cr>', 'List projects' },
+      p = { '<cmd>Telescope projects theme=ivy<cr>', 'Switch project' },
       f = { '<cmd>Telescope find_files<CR>', 'Find project files' },
     },
     j = {
