@@ -59,6 +59,10 @@ opt.expandtab = true
 opt.smartindent = true
 opt.smarttab = true
 
+vim.cmd [[
+autocmd FileType make setlocal noexpandtab
+]]
+
 opt.list = true
 opt.listchars = 'tab:»·,trail:·,nbsp:·'
 
@@ -80,3 +84,6 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 ]]
+
+require('utils').setup_user_settings()
+
