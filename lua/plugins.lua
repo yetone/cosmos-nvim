@@ -86,7 +86,14 @@ require('packer').startup(function(use)
 
   use 'mattn/emmet-vim'
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      if #vim.api.nvim_list_uis() ~= 0 then
+        vim.cmd 'TSUpdate'
+      end
+    end,
+  }
   use { 'nvim-treesitter/playground', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
   use { 'nvim-treesitter/nvim-treesitter-textobjects', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
   use { 'p00f/nvim-ts-rainbow', requires = {{ 'nvim-treesitter/nvim-treesitter' }}}
