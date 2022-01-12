@@ -195,6 +195,8 @@ require('packer').startup(function(use)
     end,
   }
 
+  use 'danilamihailov/beacon.nvim'
+
   require('utils').setup_user_plugins(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
