@@ -46,6 +46,27 @@ For example, if you are writing `Python`, you will need to open nvim and run the
 :LspInstall python
 ```
 
+# Custom Configuration
+
+If you want to define your own configuration, you can create a file called `.cosmosvim.lua` in the `$HOME` root directory, for example:
+
+`~/.cosmosvim.lua`
+
+```lua
+return {
+  setup_settings = function()
+    -- Put your settings here
+  end,
+  setup_mappings = function(wk)
+    -- Put your key mappings here and where you can group and name shortcuts with `which-key`
+  end,
+  setup_plugins = function(use)
+    -- Put the plugins you want to add here, where you can use the `use` function of `packer.nvim`
+    use 'wakatime/vim-wakatime'
+  end,
+}
+```
+
 # Some Screenshots
 
 ## Which Key like spacemacs
