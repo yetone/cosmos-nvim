@@ -47,7 +47,7 @@ Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched 
 ```bash
 mv ~/.config/nvim{,.yetone-backup} || true
 
-git clone https://github.com/yetone/cosmos-nvim.git ~/.config/nvim
+git clone --depth 1 https://github.com/yetone/cosmos-nvim.git ~/.config/nvim
 ```
 
 ## 3. Install your language lsp server in your nvim
