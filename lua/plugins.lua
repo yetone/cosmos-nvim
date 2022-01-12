@@ -188,6 +188,13 @@ require('packer').startup(function(use)
 
   use 'folke/lua-dev.nvim'
 
+  use {
+    'karb94/neoscroll.nvim',
+    config = function()
+      require('configs.neoscroll')
+    end,
+  }
+
   require('utils').setup_user_plugins(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
