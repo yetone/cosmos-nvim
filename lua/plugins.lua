@@ -97,6 +97,7 @@ require('packer').startup(function(use)
   }
   use { 'nvim-treesitter/playground', after = { 'nvim-treesitter' }}
   use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' }}
+  use { 'RRethy/nvim-treesitter-textsubjects', after = { 'nvim-treesitter' }}
   use { 'p00f/nvim-ts-rainbow', after = { 'nvim-treesitter' }}
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',

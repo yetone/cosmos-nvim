@@ -57,6 +57,15 @@ utils.safe_require('nvim-treesitter.configs', function(treesitter)
       enable = true
     },
 
+    textsubjects = {
+      enable = true,
+      prev_selection = ',', -- (Optional) keymap to select the previous selection
+      keymaps = {
+        ['.'] = 'textsubjects-smart',
+        [';'] = 'textsubjects-container-outer',
+      },
+    },
+
     textobjects = {
       select = {
         enable = true,
