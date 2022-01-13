@@ -70,7 +70,7 @@ utils.safe_require('which-key', function(wk)
         'gcc<Esc>', 'Comment line', noremap = false, mode = 'v',
       },
     },
-    ["'"] = { ':Lspsaga open_floaterm<CR>', 'Open shell' },
+    ["'"] = { '<CMD>lua require("FTerm").toggle()<CR>', 'Open shell' },
     ['*'] = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", 'Search reference in current project' },
     ['/'] = { ':Telescope live_grep<CR>', 'Search project' },
     ['<Tab>'] = { ':b#<CR>', 'Last buffer' },

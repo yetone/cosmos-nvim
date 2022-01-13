@@ -198,6 +198,8 @@ require('packer').startup(function(use)
 
   use 'danilamihailov/beacon.nvim'
 
+  use 'numToStr/FTerm.nvim'
+
   require('utils').setup_user_plugins(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
