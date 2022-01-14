@@ -57,7 +57,6 @@ require('packer').startup(function(use)
       require('configs.project')
     end,
   }
-  use 'ryanoasis/vim-devicons'
   use {
     'folke/which-key.nvim',
     config = function()
