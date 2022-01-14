@@ -20,5 +20,5 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build image
-        run: make build
+        run: make build-img
 
