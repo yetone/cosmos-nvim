@@ -66,6 +66,10 @@ If you want to define your own configuration, you can create a file called `.cos
 
 ```lua
 return {
+  config = {
+    -- Put your config here to overwrite the default cosmos configurations
+    enable_rainbow = false, -- disable rainbow
+  },
   setup_settings = function()
     -- Put your settings here
   end,

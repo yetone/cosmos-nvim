@@ -57,36 +57,69 @@ function M.t(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local user_config
+local _user_config
 
 local function get_user_config()
-  if user_config then
-    return user_config
+  if _user_config then
+    return _user_config
   end
   local ok
-  ok, user_config = pcall(dofile, require('config').user_config_path)
+  ok, _user_config = pcall(dofile, require('config').user_config_path)
   if not ok then
-    if not string.find(user_config, 'No such file or directory') then
+    if not string.find(_user_config, 'No such file or directory') then
       print('WARNING: user config file is invalid')
-      print(user_config)
-    end
-    user_config = {}
-  end
-  if user_config.setup_settings == nil then
-    user_config.setup_settings = function()
+      print(_user_config)
     end
   end
-  if user_config.setup_mappings == nil then
+  if _user_config == nil then
+    _user_config = {}
+  end
+  if _user_config.config == nil then
+    _user_config.config = {}
+  end
+  if _user_config.setup_settings == nil then
+    _user_config.setup_settings = function()
+    end
+  end
+  if _user_config.setup_mappings == nil then
     ---@diagnostic disable-next-line: unused-local
-    user_config.setup_mappings = function(wk)
+    _user_config.setup_mappings = function(wk)
     end
   end
-  if user_config.setup_plugins == nil then
+  if _user_config.setup_plugins == nil then
     ---@diagnostic disable-next-line: unused-local
-    user_config.setup_plugins= function(use)
+    _user_config.setup_plugins= function(use)
     end
   end
-  return user_config
+  return _user_config
+end
+
+function M.reset_user_config()
+  _user_config = nil
+end
+
+function M.startup()
+  M.fill_config()
+  require('plugins')
+  require('functions')
+  require('settings')
+  require('mappings')
+end
+
+function M.restartup()
+  M.reset_user_config()
+  M.fill_config()
+  M.reload('plugins')
+  M.reload('functions')
+  M.reload('settings')
+  M.reload('mappings')
+  require('packer').compile()
+end
+
+function M.fill_config()
+  local user_config = get_user_config()
+  local config = require('config')
+  config.cosmos = vim.tbl_deep_extend('force', config.cosmos, user_config.config)
 end
 
 function M.setup_user_settings()

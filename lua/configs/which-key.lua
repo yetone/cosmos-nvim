@@ -1,4 +1,5 @@
 local utils = require('utils')
+local config = require('config').cosmos
 
 utils.safe_require('which-key', function(wk)
   wk.register({
@@ -30,13 +31,14 @@ utils.safe_require('which-key', function(wk)
       r = { '<cmd>Telescope oldfiles<cr>', 'Open recent file', noremap = false },
       e = {
         name = 'Config files',
-        d = { "<cmd>lua require'functions'.edit_neovim()<CR>", 'Open dotfiles' },
+        d = { "<cmd>e ~/.cosmos-nvim.lua<CR>", 'Open cosmos configuration file' },
+        D = { "<cmd>lua require'functions'.edit_neovim()<CR>", 'Open cosmos source files' },
         R = { "<cmd>lua require'functions'.reload_configuration()<CR>", 'Reload configuration' },
       }
     },
     p = {
       name = '+Projects',
-      p = { '<cmd>Telescope projects theme=ivy<cr>', 'Switch project' },
+      p = { '<cmd>Telescope projects theme=' .. config.telescope_theme .. '<cr>', 'Switch project' },
       f = { '<cmd>Telescope find_files<CR>', 'Find project files' },
     },
     j = {
@@ -74,7 +76,7 @@ utils.safe_require('which-key', function(wk)
     ['*'] = { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", 'Search reference in current project' },
     ['/'] = { ':Telescope live_grep<CR>', 'Search project' },
     ['<Tab>'] = { ':b#<CR>', 'Last buffer' },
-    ['<Space>'] = { "<cmd>lua require('functions').commands(require('telescope.themes').get_ivy({}))<CR>", 'Commands' },
+    ['<Space>'] = { "<cmd>lua require('functions').commands(require('telescope.themes').get_" .. config.telescope_theme .. "({}))<CR>", 'Commands' },
   }, { prefix = '<leader>' })
   require('utils').setup_user_mappings(wk)
 end)

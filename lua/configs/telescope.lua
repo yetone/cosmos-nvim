@@ -1,11 +1,12 @@
 local utils = require('utils')
+local config = require('config').cosmos
 
 utils.safe_require('telescope', function(telescope)
   telescope.load_extension 'projects'
   telescope.load_extension 'file_browser'
   local fb_actions = require "telescope".extensions.file_browser.actions
 
-  local theme = 'ivy'
+  local theme = config.telescope_theme
   telescope.setup {
     defaults = {
       mappings = {

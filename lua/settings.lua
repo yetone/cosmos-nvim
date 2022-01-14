@@ -1,3 +1,4 @@
+local config = require('config').cosmos
 local g = vim.g
 local opt = vim.opt
 
@@ -10,14 +11,13 @@ g.user_emmet_settings = {
     extends = 'tsx'
   }
 }
-g.rainbow_active = 1
+
 g.neon_style = 'doom'
 g.EasyMotion_do_mapping = 0
 g.EasyMotion_smartcase = 1
-g.swoopAutoInsertMode = 1
 g.rust_clip_command = 'pbcopy'
-g.python3_host_prog = '~/.pyenv/versions/nvim-py3/bin/python'
-g.indentLine_fileTypeExclude = { 'alpha' }
+g.python3_host_prog = config.python3_host_prog
+g.indentLine_fileTypeExclude = config.indentLine_fileTypeExclude
 g.user_emmet_install_global = 0
 g.copilot_no_tab_map = true
 g.copilot_assume_mapped = true

@@ -1,3 +1,4 @@
+local config = require('config').cosmos
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 local packer_bootstrap = nil
 
@@ -189,14 +190,18 @@ require('packer').startup(function(use)
 
   use 'folke/lua-dev.nvim'
 
-  use {
-    'karb94/neoscroll.nvim',
-    config = function()
-      require('configs.neoscroll')
-    end,
-  }
+  if config.enable_smooth_scrolling then
+    use {
+      'karb94/neoscroll.nvim',
+      config = function()
+        require('configs.neoscroll')
+      end,
+    }
+  end
 
-  use 'danilamihailov/beacon.nvim'
+  if config.enable_beacon then
+    use 'danilamihailov/beacon.nvim'
+  end
 
   use 'numToStr/FTerm.nvim'
 
@@ -212,7 +217,7 @@ end)
 vim.cmd([[
 augroup packer_user_config
   autocmd!
-  autocmd BufWritePost .cosmos-nvim.lua source <afile> | PackerCompile
-  autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  autocmd BufWritePost .cosmos-nvim.lua source <afile> | PackerInstall
+  autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup end
 ]])

@@ -53,11 +53,8 @@ function M.edit_neovim()
 end
 
 function M.reload_configuration()
-  utils.reload('plugins')
-  utils.reload('functions')
-  utils.reload('settings')
-  utils.reload('config')
-  utils.reload('mappings')
+  utils.restartup()
+  print('reloaded')
 end
 
 M.commands = function(opts)
