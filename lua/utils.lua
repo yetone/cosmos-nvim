@@ -70,6 +70,7 @@ local function get_user_config()
       print('WARNING: user config file is invalid')
       print(_user_config)
     end
+    _user_config = nil
   end
   if _user_config == nil then
     _user_config = {}
