@@ -70,5 +70,5 @@ vim.cmd [[
 imap <silent><script><expr> <M-.> copilot#Accept("\<CR>")
 imap <silent><script><expr> <Tab> copilot#Accept("\<Tab>")
 au FileType html,typescriptreact,javascriptreact EmmetInstall
-au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+" au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 ]]
