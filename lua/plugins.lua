@@ -217,7 +217,6 @@ end)
 vim.cmd([[
 augroup packer_user_config
   autocmd!
-  autocmd BufWritePost .cosmos-nvim.lua source <afile> | PackerInstall
   autocmd BufWritePost plugins.lua source <afile> | PackerSync
 augroup end
 ]])

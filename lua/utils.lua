@@ -121,7 +121,7 @@ function M.restartup()
   M.reload('functions')
   M.reload('settings')
   M.reload('mappings')
-  require('packer').compile()
+  require('packer').sync()
 end
 
 function M.fill_config()
