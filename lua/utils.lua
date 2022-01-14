@@ -63,13 +63,20 @@ local function get_user_config()
   if _user_config then
     return _user_config
   end
+  local config = require('config')
   local ok
-  ok, _user_config = pcall(dofile, require('config').user_config_path)
+  ok, _user_config = pcall(dofile, config.user_config_path)
   if not ok then
     if not string.find(_user_config, 'No such file or directory') then
       print('WARNING: user config file is invalid')
       print(_user_config)
     end
+    local sample_config_file = io.open(config.cosmos_configs_root .. '/.cosmos-nvim.sample.lua', 'r')
+    local sample_config = sample_config_file:read('*a')
+    sample_config_file:close()
+    local user_config_file = io.open(config.user_config_path, 'w')
+    user_config_file:write(sample_config)
+    user_config_file:close()
     _user_config = nil
   end
   if _user_config == nil then

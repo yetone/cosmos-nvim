@@ -1,4 +1,5 @@
 local utils = require('utils')
+local config = require('config').cosmos
 
 vim.cmd [[
 function! Home()
@@ -46,7 +47,7 @@ function M.edit_neovim()
   utils.safe_require('telescope.builtin', function(telescope)
     telescope.find_files{
       shorten_path = true,
-      cwd = '~/.config/nvim',
+      cwd = config.cosmos_configs_root,
       prompt_title = "~ dotfiles ~",
     }
   end)

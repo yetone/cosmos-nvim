@@ -1,5 +1,8 @@
+local stdpath = vim.fn.stdpath
+
 return {
   user_config_path = vim.fn.expand('$HOME/.cosmos-nvim.lua'),
+  cosmos_configs_root = stdpath("config"),
   cosmos = {
     enable_beacon = true,
     enable_smooth_scrolling = true,
