@@ -40,6 +40,8 @@ set_keymap('i', '<C-h>', '<BS>', {})
 set_keymap('i', '<C-k>', '<C-r>=KillLine()<CR>', {})
 set_keymap('i', '<C-p>', '<Up>', {})
 set_keymap('i', '<C-n>', '<Down>', {})
+set_keymap('i', '<A-f>', '<Esc>lWi', {})
+set_keymap('i', '<A-b>', '<Esc>Bi', {})
 
 -- normal mode
 set_keymap('n', '<C-p>', '<Up>', {})
