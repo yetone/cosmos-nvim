@@ -11,6 +11,9 @@ g.user_emmet_settings = {
     extends = 'tsx'
   }
 }
+g.copilot_filetypes = {
+  TelescopePrompt = false,
+}
 
 g.neon_style = 'doom'
 g.EasyMotion_do_mapping = 0
