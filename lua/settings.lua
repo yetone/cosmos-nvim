@@ -24,6 +24,7 @@ g.indentLine_fileTypeExclude = config.indentLine_fileTypeExclude
 g.user_emmet_install_global = 0
 g.copilot_no_tab_map = true
 g.copilot_assume_mapped = true
+g.copilot_tab_fallback = ""
 
 opt.complete = ''
 opt.background = 'dark'

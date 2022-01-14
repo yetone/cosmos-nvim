@@ -1,4 +1,5 @@
 local utils = require('utils')
+local config = require('config').cosmos
 
 utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, function(cmp, lspkind, cmp_autopairs)
   cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
@@ -9,10 +10,24 @@ utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, functi
   end
 
   local tab_complete = function(fallback)
-    if cmp.visible() then
-      cmp.select_next_item()
+    if config.tab_complete_copilot_first then
+      local copilot_keys = vim.fn["copilot#Accept"]()
+      if copilot_keys ~= "" then
+        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+      elseif cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
     else
-      fallback()
+      local copilot_keys = vim.fn["copilot#Accept"]()
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif copilot_keys ~= "" then
+        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+      else
+        fallback()
+      end
     end
   end
 
@@ -46,9 +61,18 @@ utils.safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, functi
       ['<S-Tab>'] = s_tab_complete,
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
-        i = cmp.mapping.abort(),
+        i = function(fallback)
+          local copilot_keys = vim.fn["copilot#Accept"]()
+          if copilot_keys ~= "" then
+            vim.api.nvim_feedkeys(copilot_keys, "i", true)
+          else
+            cmp.mapping.abort()(fallback)
+          end
+        end,
         c = cmp.mapping.close(),
       }),
+      ['<C-c>'] = cmp.mapping.abort(),
+      ['<C-g>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
     sources = cmp.config.sources({

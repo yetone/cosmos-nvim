@@ -66,9 +66,3 @@ set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 set_keymap('n', '<leader>;;', 'gcc', {})
 set_keymap('v', '<leader>;', 'gcc<esc>', {})
 
-vim.cmd [[
-imap <silent><script><expr> <M-.> copilot#Accept("\<CR>")
-imap <silent><script><expr> <Tab> copilot#Accept("\<Tab>")
-au FileType html,typescriptreact,javascriptreact EmmetInstall
-" au FileType html,gohtmltmpl,typescriptreact,javascriptreact imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-]]

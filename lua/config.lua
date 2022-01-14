@@ -7,5 +7,6 @@ return {
     python3_host_prog = '~/.pyenv/versions/nvim-py3/bin/python',
     indentLine_fileTypeExclude = { 'alpha' },
     telescope_theme = 'ivy',
+    tab_complete_copilot_first = true,
   },
 }
