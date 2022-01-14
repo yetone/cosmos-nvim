@@ -14,6 +14,7 @@ utils.safe_require('telescope', function(telescope)
           ["<Esc>"] = require('telescope.actions').close
         },
       },
+      file_ignore_patterns = { "node_modules", ".git" },
     },
     extensions = {
       file_browser = {
@@ -37,9 +38,11 @@ utils.safe_require('telescope', function(telescope)
       },
       find_files = {
         theme = theme,
+        hidden = true,
       },
       oldfiles = {
         theme = theme,
+        hidden = true,
       },
       live_grep = {
         theme = theme,
