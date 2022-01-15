@@ -1,16 +1,19 @@
+local cosmos = require('core.cosmos')
+
 return {
-    config = {
-        -- enable_beacon = true,
-        -- enable_rainbow = true,
-        -- enable_smooth_scrolling = true,
-        -- telescope_theme = 'ivy',
-        -- tab_complete_copilot_first = true,
-    },
-    setup_settings = function()
-    end,
-    setup_mappings = function(wk)
-    end,
-    setup_plugins = function(use)
-        -- use 'wakatime/vim-wakatime'
-    end,
+  layers = {
+    'editor',
+    'git',
+    'ui',
+    'completion',
+  },
+  options = {
+    -- python3_host_prog = '~/.pyenv/versions/nvim-py3/bin/python',
+  },
+  before_setup = function()
+    -- cosmos.add_plugin('wakatime/vim-wakatime')
+  end,
+  after_setup = function()
+    -- cosmos.add_leader_keymapping('n|aw', { '<cmd>WakaTimeToday<cr>', name = 'WakaTime Today' })
+  end,
 }
