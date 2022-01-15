@@ -1,1 +1,1 @@
-require('utils').startup()
+require('core')

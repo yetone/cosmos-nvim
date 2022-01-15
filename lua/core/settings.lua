@@ -1,4 +1,4 @@
-local config = require('config').cosmos
+local options = require('core.options')
 local g = vim.g
 local opt = vim.opt
 
@@ -15,20 +15,13 @@ g.copilot_filetypes = {
   TelescopePrompt = false,
 }
 
-g.neon_style = 'doom'
 g.EasyMotion_do_mapping = 0
 g.EasyMotion_smartcase = 1
 g.rust_clip_command = 'pbcopy'
-g.python3_host_prog = config.python3_host_prog
-g.indentLine_fileTypeExclude = config.indentLine_fileTypeExclude
-g.user_emmet_install_global = 0
-g.copilot_no_tab_map = true
-g.copilot_assume_mapped = true
-g.copilot_tab_fallback = ""
+g.python3_host_prog = options.python3_host_prog
 
 opt.complete = ''
 opt.background = 'dark'
-vim.cmd('silent! colorscheme neon')
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
@@ -75,7 +68,7 @@ opt.ruler = true
 opt.undolevels = 1000
 opt.backspace = 'indent,eol,start'
 opt.clipboard = 'unnamed'
-opt.shell = 'zsh'
+opt.shell = os.getenv('SHELL') or 'bash'
 
 vim.cmd [[
 hi Pmenu ctermfg=white ctermbg=238
@@ -88,6 +81,4 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 ]]
-
-require('utils').setup_user_settings()
 

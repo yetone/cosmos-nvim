@@ -18,7 +18,17 @@ If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the
 
 1. [LSP](https://microsoft.github.io/language-server-protocol/): [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig), [lspsaga](https://github.com/glepnir/lspsaga.nvim), [lspfuzzy](https://github.com/ojroques/nvim-lspfuzzy)
 
-2. [Spacemacs](https://www.spacemacs.org/) operating experience: spacemacs style keyboard shortcuts with [which-key](https://github.com/folke/which-key.nvim), [Telescope](https://github.com/nvim-telescope/telescope.nvim) like [ivy](https://github.com/abo-abo/swiper) and [helm-swoop](https://github.com/emacsorphanage/helm-swoop), etc.
+2. [Spacemacs](https://www.spacemacs.org/) operating experience:
+
+    a. **shortcuts**: spacemacs style keyboard shortcuts with [which-key](https://github.com/folke/which-key.nvim),
+
+    b. **ivy**: [Telescope](https://github.com/nvim-telescope/telescope.nvim) like [ivy](https://github.com/abo-abo/swiper) and [helm-swoop](https://github.com/emacsorphanage/helm-swoop)
+
+    c. **layers**: spacemacs layer abstraction
+
+    d. **customization**: like spacemacs, it can be easily customized by users in particular
+
+    e. etc.
 
 3. Looking forward to your continued exploration, [there are some screenshots](#some-screenshots)
 
@@ -60,28 +70,40 @@ For example, if you are writing `Python`, you will need to open nvim and run the
 
 # Custom Configuration
 
-If you want to define your own configuration, you can create a file called `.cosmos-nvim.lua` in the `$HOME` root directory, for example:
+If you want to define your own configuration, you can create a file called `.cosmos-nvim.lua` in the `$HOME` root directory (the shortchut is <kbd>leader</kbd> - <kbd>f</kbd> - <kbd>e</kbd> - <kbd>d</kbd>), for example:
 
 `~/.cosmos-nvim.lua`
 
 ```lua
+local cosmos = require('core.cosmos')
+
 return {
-  config = {
-    -- Put your config here to overwrite the default cosmos configurations
-    enable_rainbow = false, -- disable rainbow
+  layers = {
+    'editor',
+    'git',
+    {
+      'ui',
+      enable_beacon = false,
+      enable_smooth_scrolling = false,
+    },
+    {
+      'completion',
+      tab_complete_copilot_first = false,
+    },
   },
-  setup_settings = function()
-    -- Put your settings here
+  options = {
+    -- python3_host_prog = '~/.pyenv/versions/nvim-py3/bin/python',
+  },
+  before_setup = function()
+    -- cosmos.add_plugin('wakatime/vim-wakatime')
   end,
-  setup_mappings = function(wk)
-    -- Put your key mappings here and where you can group and name shortcuts with `which-key`
-  end,
-  setup_plugins = function(use)
-    -- Put the plugins you want to add here, where you can use the `use` function of `packer.nvim`
-    use 'wakatime/vim-wakatime'
+  after_setup = function()
+    -- cosmos.add_leader_keymapping('n|aw', { '<cmd>WakaTimeToday<cr>', name = 'WakaTime Today' })
   end,
 }
 ```
+
+**Note**: When you have finished changing the configuration file, always remember to restart nvim and run `:PackerSync`
 
 # Some Screenshots
 
