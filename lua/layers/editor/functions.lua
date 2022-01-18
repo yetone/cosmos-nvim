@@ -19,7 +19,7 @@ function M.edit_neovim()
   utils.safe_require('telescope.builtin', function(telescope)
     telescope.find_files{
       shorten_path = true,
-      cwd = require('config').cosmos_configs_root,
+      cwd = require('core.options').cosmos_configs_root,
       prompt_title = "~ dotfiles ~",
     }
   end)
