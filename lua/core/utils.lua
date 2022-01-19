@@ -15,7 +15,8 @@ local function is_module_available(name)
   end
 end
 
-function M.safe_require(pkg_name, cbk)
+function M.safe_require(pkg_name, cbk, opts)
+  opts = opts or {}
   local pkg_names = {}
   if type(pkg_name) == 'table' then
     pkg_names = pkg_name
@@ -28,7 +29,9 @@ function M.safe_require(pkg_name, cbk)
     if is_module_available(pkg_name_) then
       pkgs[i] = require(pkg_name_)
     else
-      print('WARNING: package ' .. pkg_name_ .. ' is not found')
+      if not opts.silent then
+        print('WARNING: package ' .. pkg_name_ .. ' is not found')
+      end
       return
     end
   end

@@ -1,7 +1,17 @@
 local options = require('layers.ui.options')
 local g = vim.g
+local opt = vim.opt
 
-g.neon_style = 'doom'
-vim.cmd('silent! colorscheme neon')
+opt.termguicolors = true
+vim.cmd('silent! colorscheme kanagawa')
 g.indentLine_fileTypeExclude = options.indentLine_fileTypeExclude
+g.illuminate_delay = options.illuminate_delay
+
+vim.cmd [[
+augroup illuminate_augroup
+    autocmd!
+    autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
+    autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
+augroup END
+]]
 

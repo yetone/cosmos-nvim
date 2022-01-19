@@ -35,7 +35,6 @@ autocmd WinLeave * setlocal nocursorline
 opt.timeoutlen = 500
 opt.mouse = 'a'
 opt.encoding = 'utf-8'
-opt.termguicolors = true
 opt.number = true
 opt.relativenumber = true
 opt.linebreak = true

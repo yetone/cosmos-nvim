@@ -17,7 +17,7 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('rafamadriz/neon')
+cosmos.add_plugin('rebelot/kanagawa.nvim')
 
 cosmos.add_plugin('Yggdroot/indentLine')
 
@@ -60,4 +60,8 @@ end
 
 if options.enable_beacon then
   cosmos.add_plugin('danilamihailov/beacon.nvim')
+end
+
+if options.enable_illuminate then
+  cosmos.add_plugin('RRethy/vim-illuminate')
 end

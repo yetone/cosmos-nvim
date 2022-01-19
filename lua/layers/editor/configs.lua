@@ -23,6 +23,10 @@ function configs.lsp_installer()
 
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    require('core.utils').safe_require('illuminate', function(illuminate)
+      illuminate.on_attach(client)
+    end, { silent = true })
   end
 
   require('core.utils').safe_require('nvim-lsp-installer', function(lsp_installer)
