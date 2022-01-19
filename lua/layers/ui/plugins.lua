@@ -17,7 +17,7 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('rebelot/kanagawa.nvim')
+cosmos.add_plugin('NTBBloodbath/doom-one.nvim')
 
 cosmos.add_plugin('Yggdroot/indentLine')
 

@@ -183,4 +183,36 @@ function configs.neoscroll()
   end)
 end
 
+function configs.doom_one()
+  require('core.utils').safe_require('doom-one', function(doom_one)
+    doom_one.setup({
+      cursor_coloring = true,
+      terminal_colors = true,
+      italic_comments = true,
+      enable_treesitter = true,
+      transparent_background = false,
+      pumblend = {
+        enable = true,
+        transparency_amount = 20,
+      },
+      plugins_integrations = {
+        neorg = true,
+        barbar = true,
+        bufferline = true,
+        gitgutter = true,
+        gitsigns = true,
+        telescope = true,
+        neogit = true,
+        nvim_tree = true,
+        dashboard = true,
+        startify = true,
+        whichkey = true,
+        indent_blankline = true,
+        vim_illuminate = true,
+        lspsaga = true,
+      },
+    })
+  end)
+end
+
 return configs

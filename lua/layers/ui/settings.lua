@@ -3,7 +3,7 @@ local g = vim.g
 local opt = vim.opt
 
 opt.termguicolors = true
-vim.cmd('silent! colorscheme kanagawa')
+vim.cmd('silent! colorscheme doom-one')
 g.indentLine_fileTypeExclude = options.indentLine_fileTypeExclude
 g.illuminate_delay = options.illuminate_delay
 
