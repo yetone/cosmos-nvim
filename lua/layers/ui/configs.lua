@@ -190,7 +190,7 @@ function configs.doom_one()
       terminal_colors = true,
       italic_comments = true,
       enable_treesitter = true,
-      transparent_background = false,
+      transparent_background = true,
       pumblend = {
         enable = true,
         transparency_amount = 20,
