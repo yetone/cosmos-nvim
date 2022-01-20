@@ -97,7 +97,11 @@ function configs.lualine()
 
     local auto_theme = require('lualine.themes.auto')
 
-    auto_theme.normal.c.bg = auto_theme.normal.a.fg
+    local function window()
+      return vim.api.nvim_win_get_number(0)
+    end
+
+    -- auto_theme.normal.c.bg = auto_theme.normal.a.fg
 
     local config = {
       options = {
@@ -108,23 +112,27 @@ function configs.lualine()
       },
       sections = {
         lualine_a = {
-          { 'mode', separator = { left = '' }, right_padding = 2 },
+          { window, separator = { left = '', right = '', }, right_padding = 2 },
         },
-        lualine_b = {'branch', 'diff', 'diagnostics', 'filename'},
+        lualine_b = { 'mode', 'branch', 'diff', 'diagnostics', 'filename'},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {'encoding', 'fileformat', 'filetype', 'progress'},
         lualine_z = {
-          { 'location', separator = { right = '' }, left_padding = 2 },
+          { 'location', separator = { left = '', right = '' }, left_padding = 2 },
         },
       },
       inactive_sections = {
-        lualine_a = { 'filename' },
-        lualine_b = {},
-        lualine_c = {},
+        lualine_a = {},
+        lualine_b = {
+          { window, separator = { left = '', right = '', }, right_padding = 2 },
+        },
+        lualine_c = { 'filename' },
         lualine_x = {},
-        lualine_y = {},
-        lualine_z = { 'location' },
+        lualine_y = {
+          { 'location', separator = { left = '', right = '' }, left_padding = 2 },
+        },
+        lualine_z = {},
       },
       tabline = {},
       extensions = {}
