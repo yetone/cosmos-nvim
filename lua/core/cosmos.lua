@@ -150,6 +150,9 @@ local default_leader_keymapping_group_names = {
   w = {
     name = '+Windows',
   },
+  d = {
+    name = '+Debug',
+  },
   b = {
     name = '+Buffers',
   },

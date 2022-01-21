@@ -70,6 +70,10 @@ cosmos.add_plugin(
   {
     config = configs.lspfuzzy,
     after = { 'nvim-lspconfig' },
+    requires = {
+      {'junegunn/fzf'},
+      {'junegunn/fzf.vim'},  -- to enable preview (optional)
+    },
   }
 )
 
@@ -95,6 +99,12 @@ cosmos.add_plugin(
     requires = { 'nvim-telescope/telescope.nvim' },
   }
 )
+cosmos.add_plugin(
+  'nvim-telescope/telescope-dap.nvim',
+  {
+    requires = { 'nvim-telescope/telescope.nvim' },
+  }
+)
 
 cosmos.add_plugin(
   'williamboman/nvim-lsp-installer',
@@ -112,3 +122,31 @@ cosmos.add_plugin('dstein64/vim-startuptime')
 cosmos.add_plugin('folke/lua-dev.nvim')
 
 cosmos.add_plugin('numToStr/FTerm.nvim')
+
+cosmos.add_plugin('vim-scripts/AnsiEsc.vim')
+
+cosmos.add_plugin(
+  'mfussenegger/nvim-dap',
+  {
+    config = configs.dap,
+  }
+)
+
+cosmos.add_plugin('Pocco81/DAPInstall.nvim')
+
+cosmos.add_plugin(
+  'rcarriga/nvim-dap-ui',
+  {
+    requires = { 'mfussenegger/nvim-dap' },
+    config = configs.dapui,
+  }
+)
+
+cosmos.add_plugin(
+  'theHamsta/nvim-dap-virtual-text',
+  {
+    requires = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' },
+    config = configs.dap_virtual_text,
+  }
+)
+

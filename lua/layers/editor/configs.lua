@@ -19,10 +19,15 @@ function configs.lsp_installer()
   -- after the language server attaches to the current buffer
   ---@diagnostic disable-next-line: unused-local
   local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    local opts = { noremap=true, silent=true }
+    buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
     require('core.utils').safe_require('illuminate', function(illuminate)
       illuminate.on_attach(client)
@@ -231,6 +236,8 @@ function configs.telescope()
     local options = require('layers.editor.options')
     telescope.load_extension 'projects'
     telescope.load_extension 'file_browser'
+    telescope.load_extension 'dap'
+
     local fb_actions = require "telescope".extensions.file_browser.actions
 
     local theme = options.telescope_theme
@@ -302,6 +309,78 @@ function configs.telescope()
         },
       },
     }
+  end)
+end
+
+configs.dap = function()
+  require('core.utils').safe_require('dap', function(dap)
+    for name, adapter in pairs(require('layers.editor.utils').get_dap_adapters()) do
+      dap.adapters[name] = adapter
+    end
+    for name, configuration in pairs(require('layers.editor.utils').get_dap_configurations()) do
+      dap.configurations[name] = configuration
+    end
+  end)
+end
+
+configs.dap_install = function()
+  require('core.utils').safe_require('dap-install', function(dap_install)
+    dap_install.setup({
+      installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
+    })
+  end)
+end
+
+configs.dapui = function()
+  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapStopped', {text='👉', texthl='', linehl='', numhl=''})
+  require('core.utils').safe_require('dapui', function(dapui)
+    dapui.setup({
+      icons = { expanded = "▾", collapsed = "▸" },
+      mappings = {
+        -- Use a table to apply multiple mappings
+        expand = { "<CR>", "<2-LeftMouse>" },
+        open = "o",
+        remove = "d",
+        edit = "e",
+        repl = "r",
+      },
+      sidebar = {
+        -- You can change the order of elements in the sidebar
+        elements = {
+          -- Provide as ID strings or tables with "id" and "size" keys
+          {
+            id = "scopes",
+            size = 0.25, -- Can be float or integer > 1
+          },
+          { id = "breakpoints", size = 0.25 },
+          { id = "stacks", size = 0.25 },
+          { id = "watches", size = 00.25 },
+        },
+        size = 40,
+        position = "left", -- Can be "left", "right", "top", "bottom"
+      },
+      tray = {
+        elements = { "repl" },
+        size = 10,
+        position = "bottom", -- Can be "left", "right", "top", "bottom"
+      },
+      floating = {
+        max_height = nil, -- These can be integers or a float between 0 and 1.
+        max_width = nil, -- Floats will be treated as percentage of your screen.
+        border = "single", -- Border style. Can be "single", "double" or "rounded"
+        mappings = {
+          close = { "q", "<Esc>" },
+        },
+      },
+      windows = { indent = 1 },
+    })
+  end)
+end
+
+configs.dap_virtual_text = function()
+  require('core.utils').safe_require('nvim-dap-virtual-text', function(dap_virtual_text)
+    dap_virtual_text.setup({ enabled = true, enabled_commands = true, all_frames = true })
   end)
 end
 

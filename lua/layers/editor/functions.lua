@@ -135,5 +135,72 @@ M.commands = function(opts)
   end)
 end
 
+local dap_unmap = function()
+  local keys = {
+    "r",
+    "c",
+    "n",
+    "s",
+    "o",
+    "S",
+    "u",
+    "D",
+    "C",
+    "b",
+    "P",
+    "p",
+    "K",
+    "B",
+    "R",
+    "O",
+    "a",
+    "w",
+  }
+  for _, value in pairs(keys) do
+    local cmd = "silent! unmap " .. value
+    vim.cmd(cmd)
+  end
+
+  vim.cmd([[silent! vunmap p]])
+end
+
+local function dap_keybind()
+  local set_keymap = vim.api.nvim_set_keymap
+  set_keymap('n', 'b', "<CMD>lua require('dap').toggle_breakpoint()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'P', "<CMD>lua require('dap').pause()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'K', "<CMD>lua require('dapui').float_element()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'R', "<CMD>lua require('dapui').float_element('repl')<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'n', "<CMD>lua require('dap').step_over()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 's', "<CMD>lua require('dap').step_into()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'o', "<CMD>lua require('dap').step_out()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'c', "<CMD>lua require('dap').continue()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'r', "<CMD>lua require('layers.editor.functions').run_dap()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'S', "<CMD>lua require('layers.editor.functions').stop_dap()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 't', "<CMD>lua require('dapui').toggle()<CR>", { silent = true, noremap = true })
+  set_keymap('n', 'C', "<CMD>lua require('dapui').close()<CR>", { silent = true, noremap = true })
+end
+
+M.run_dap = function()
+  require('dap.ext.vscode').load_launchjs()
+  -- dap_keybind()
+  require('dap').continue()
+  require('dapui').open()
+end
+
+M.stop_dap = function()
+  -- dap_unmap()
+
+  local has_dap, dap = pcall(require, "dap")
+  if has_dap then
+    require("dap").disconnect()
+    require("dap").close()
+    require("dap").repl.close()
+  end
+  local has_dapui, dapui = pcall(require, "dapui")
+  if has_dapui then
+    dapui.close()
+  end
+end
+
 return M
 

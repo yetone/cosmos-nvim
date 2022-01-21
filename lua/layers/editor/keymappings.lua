@@ -31,7 +31,21 @@ cosmos.add_leader_keymapping('n|sH', { "<cmd>lua require('lspsaga.signaturehelp'
 cosmos.add_leader_keymapping('n|el', { "<cmd>lua require('telescope.builtin').diagnostics{ bufnr=0 }<cr>", name = 'List errors' })
 cosmos.add_leader_keymapping('n|en', { ':Lspsaga diagnostic_jump_next<CR>', name = 'Next error' })
 cosmos.add_leader_keymapping('n|ep', { ':Lspsaga diagnostic_jump_prev<CR>', name = 'Previous error' })
-cosmos.add_leader_keymapping('n|ef', { ':Lspsaga code_action<CR>', name = 'Fix error' })
+cosmos.add_leader_keymapping('n|ef', { ':Telescope lsp_code_actions<CR>', name = 'Fix error' })
+-- cosmos.add_leader_keymapping('n|ef', { ':Lspsaga code_action<CR>', name = 'Fix error' })
+
+cosmos.add_leader_keymapping('n|db', { "<CMD>lua require('dap').toggle_breakpoint()<CR>", name = 'Toggle breakpoint', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dP', { "<CMD>lua require('dap').pause()<CR>", name = 'Pause', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dK', { "<CMD>lua require('dapui').float_element()<CR>", name = 'Float element', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dR', { "<CMD>lua require('dapui').float_element('repl')<CR>", name = 'REPL', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dn', { "<CMD>lua require('dap').step_over()<CR>", name = 'Step over', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|ds', { "<CMD>lua require('dap').step_into()<CR>", name = 'Step into', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|do', { "<CMD>lua require('dap').step_out()<CR>", name = 'Step out', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dc', { "<CMD>lua require('dap').continue()<CR>", name = 'Continue', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dr', { "<CMD>lua require('layers.editor.functions').run_dap()<CR>", name = 'Run', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dS', { "<CMD>lua require('layers.editor.functions').stop_dap()<CR>", name = 'Stop', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dt', { "<CMD>lua require('dapui').toggle()<CR>", name = 'Toggle', silent = true, noremap = true })
+cosmos.add_leader_keymapping('n|dC', { "<CMD>lua require('dapui').close()<CR>", name = 'Close', silent = true, noremap = true })
 
 cosmos.add_leader_keymapping('v|;;', { 'gcc<Esc>', name = 'Comment line', noremap = false })
 

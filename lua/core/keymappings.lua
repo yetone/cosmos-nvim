@@ -5,6 +5,7 @@ local i = 0
 for i = 1, 6 do
   cosmos.add_leader_keymapping(string.format('n|%d', i), { string.format('%d<C-w><C-w>', i), name = string.format('Select window %d', i) })
 end
+
 cosmos.add_leader_keymapping('n|ws', { '<C-w>s', name = 'Split window below' })
 cosmos.add_leader_keymapping('n|wv', { '<C-w>v', name = 'Split window right' })
 cosmos.add_leader_keymapping('n|w-', { '<C-w>s', name = 'Split window below' })
