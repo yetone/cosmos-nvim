@@ -237,6 +237,7 @@ function configs.telescope()
     telescope.load_extension 'projects'
     telescope.load_extension 'file_browser'
     telescope.load_extension 'dap'
+    telescope.load_extension 'ui-select'
 
     local fb_actions = require "telescope".extensions.file_browser.actions
 
@@ -252,6 +253,9 @@ function configs.telescope()
         file_ignore_patterns = { "node_modules", ".git" },
       },
       extensions = {
+        ['ui-select'] = {
+          require("telescope.themes").get_ivy {}
+        },
         file_browser = {
           theme = theme,
           mappings = {

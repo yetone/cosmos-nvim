@@ -99,8 +99,16 @@ cosmos.add_plugin(
     requires = { 'nvim-telescope/telescope.nvim' },
   }
 )
+
 cosmos.add_plugin(
   'nvim-telescope/telescope-dap.nvim',
+  {
+    requires = { 'nvim-telescope/telescope.nvim' },
+  }
+)
+
+cosmos.add_plugin(
+  'nvim-telescope/telescope-ui-select.nvim',
   {
     requires = { 'nvim-telescope/telescope.nvim' },
   }
