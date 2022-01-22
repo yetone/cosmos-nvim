@@ -19,15 +19,15 @@ function configs.lsp_installer()
   -- after the language server attaches to the current buffer
   ---@diagnostic disable-next-line: unused-local
   local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     -- Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    local opts = { noremap=true, silent=true }
-    buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- local opts = { noremap=true, silent=true }
+    -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
     require('core.utils').safe_require('illuminate', function(illuminate)
       illuminate.on_attach(client)
@@ -35,25 +35,51 @@ function configs.lsp_installer()
   end
 
   require('core.utils').safe_require({ 'nvim-lsp-installer', 'lspconfig' }, function(lsp_installer, lspconfig)
-    local opt = {
+    local default_opt = {
       capabilities = capabilities,
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 150,
       }
     }
+
+    local format_config = require 'layers.editor.format'
+
+    local servers = {
+      tsserver = {
+        root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
+      },
+      pyright = {
+        filetypes = {"python"},
+        init_options = {
+          formatters = {
+            black = {
+              command = "black",
+              args = {"--quiet", "-"},
+              rootPatterns = {"pyproject.toml"},
+            },
+            formatFiletypes = {
+              python = {"black"}
+            }
+          }
+        },
+      },
+      efm = {
+        filetypes = vim.tbl_keys(format_config),
+        init_options = { documentFormatting = true },
+        root_dir = lspconfig.util.root_pattern { '.git/', '.' },
+        settings = { languages = format_config },
+      },
+    }
+
+    require('core.utils').safe_require('lua-dev', function(luadev)
+      servers.sumneko_lua = luadev.setup(default_opt)
+    end)
+
     lsp_installer.on_server_ready(function(server)
-      local new_opt = opt
-      if server.name == 'sumneko_lua' then
-        new_opt = require('core.utils').safe_require('lua-dev', function(luadev)
-          return luadev.setup(opt)
-        end) or opt
-      elseif server.name == 'tsserver' then
-        new_opt = vim.tbl_deep_extend('force', {}, new_opt, {
-          root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
-        })
-      end
-      server:setup(new_opt)
+      local opt = servers[server.name] or {}
+      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+      server:setup(opt)
     end)
   end)
 end
@@ -241,7 +267,6 @@ function configs.telescope()
     telescope.load_extension 'projects'
     telescope.load_extension 'file_browser'
     telescope.load_extension 'dap'
-    telescope.load_extension 'ui-select'
 
     local fb_actions = require "telescope".extensions.file_browser.actions
 
@@ -317,6 +342,7 @@ function configs.telescope()
         },
       },
     }
+    telescope.load_extension 'ui-select'
   end)
 end
 
