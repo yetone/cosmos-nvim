@@ -43,13 +43,13 @@ function configs.lsp_installer()
       }
     }
     lsp_installer.on_server_ready(function(server)
+      local new_opt = opt
       if server.name == 'sumneko_lua' then
-        opt = require('core.utils').safe_require('lua-dev', function(luadev)
-          local opt_ = luadev.setup()
-          return vim.tbl_deep_extend('force', opt_, opt)
+        new_opt = require('core.utils').safe_require('lua-dev', function(luadev)
+          return luadev.setup(opt)
         end) or opt
       end
-      server:setup(opt)
+      server:setup(new_opt)
     end)
   end)
 end
