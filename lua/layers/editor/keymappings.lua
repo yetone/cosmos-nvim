@@ -28,7 +28,8 @@ cosmos.add_leader_keymapping('n|sh', { "<cmd>lua require('lspsaga.hover').render
 cosmos.add_leader_keymapping('n|sp', { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", name = "Preview symbol" })
 cosmos.add_leader_keymapping('n|sH', { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", name = 'Show symbol signature' })
 
-cosmos.add_leader_keymapping('n|el', { "<cmd>lua require('telescope.builtin').diagnostics{ bufnr=0 }<cr>", name = 'List errors' })
+cosmos.add_leader_keymapping('n|el', { "<cmd>TroubleToggle document_diagnostics<cr>", name = 'List errors' })
+cosmos.add_leader_keymapping('n|eL', { "<cmd>TroubleToggle workspace_diagnostics<cr>", name = 'List workspace errors' })
 cosmos.add_leader_keymapping('n|en', { ':Lspsaga diagnostic_jump_next<CR>', name = 'Next error' })
 cosmos.add_leader_keymapping('n|ep', { ':Lspsaga diagnostic_jump_prev<CR>', name = 'Previous error' })
 cosmos.add_leader_keymapping('n|ef', { ':Telescope lsp_code_actions<CR>', name = 'Fix error' })

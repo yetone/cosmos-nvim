@@ -158,3 +158,11 @@ cosmos.add_plugin(
   }
 )
 
+cosmos.add_plugin(
+  'folke/trouble.nvim',
+  {
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = configs.trouble,
+  }
+)
+
