@@ -34,7 +34,7 @@ function configs.lsp_installer()
     end, { silent = true })
   end
 
-  require('core.utils').safe_require('nvim-lsp-installer', function(lsp_installer)
+  require('core.utils').safe_require({ 'nvim-lsp-installer', 'lspconfig' }, function(lsp_installer, lspconfig)
     local opt = {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -48,6 +48,10 @@ function configs.lsp_installer()
         new_opt = require('core.utils').safe_require('lua-dev', function(luadev)
           return luadev.setup(opt)
         end) or opt
+      elseif server.name == 'tsserver' then
+        new_opt = vim.tbl_deep_extend('force', {}, new_opt, {
+          root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
+        })
       end
       server:setup(new_opt)
     end)
