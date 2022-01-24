@@ -12,22 +12,27 @@ cosmos.add_plugin('hrsh7th/cmp-cmdline')
 cosmos.add_plugin(
   'hrsh7th/nvim-cmp',
   {
-    requires = { 'hrsh7th/nvim-cmp', 'onsails/lspkind-nvim' },
+    requires = {
+      {
+        'onsails/lspkind-nvim'
+      },
+      {
+        'windwp/nvim-autopairs',
+        config = configs.autopairs,
+      },
+      {
+        'L3MON4D3/LuaSnip',
+        requires = {
+          'rafamadriz/friendly-snippets'
+        },
+        config = configs.luasnip,
+      }
+    },
     config = configs.cmp,
   }
 )
 
-cosmos.add_plugin(
-  'hrsh7th/cmp-vsnip',
-  { after = 'nvim-cmp', requires = { 'hrsh7th/nvim-cmp' } }
-)
-cosmos.add_plugin('hrsh7th/vim-vsnip')
-cosmos.add_plugin('hrsh7th/vim-vsnip-integ')
-
-cosmos.add_plugin(
-  'windwp/nvim-autopairs',
-  {
-    config = configs.autopairs,
-  }
-)
+cosmos.add_plugin('saadparwaiz1/cmp_luasnip', {
+  requires = { 'L3MON4D3/LuaSnip' },
+})
 

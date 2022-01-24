@@ -1,7 +1,7 @@
 local configs = {}
 
 function configs.cmp()
-  require('core.utils').safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp' }, function(cmp, lspkind, cmp_autopairs)
+  require('core.utils').safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp', 'luasnip' }, function(cmp, lspkind, cmp_autopairs, luasnip)
     local options = require('layers.completion.options')
     cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
@@ -10,22 +10,38 @@ function configs.cmp()
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
+    local function replace_termcodes(str)
+      return vim.api.nvim_replace_termcodes(str, true, true, true)
+    end
+
+    local function check_backspace()
+      local col = vim.fn.col(".") - 1
+      return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    end
+
     local tab_complete = function(fallback)
+      local copilot_keys = vim.fn["copilot#Accept"]()
       if options.tab_complete_copilot_first then
-        local copilot_keys = vim.fn["copilot#Accept"]()
         if copilot_keys ~= "" then
           vim.api.nvim_feedkeys(copilot_keys, "i", true)
         elseif cmp.visible() then
           cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+        elseif check_backspace() then
+          vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
         else
           fallback()
         end
       else
-        local copilot_keys = vim.fn["copilot#Accept"]()
         if cmp.visible() then
           cmp.select_next_item()
         elseif copilot_keys ~= "" then
           vim.api.nvim_feedkeys(copilot_keys, "i", true)
+        elseif luasnip.expand_or_jumpable() then
+          vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+        elseif check_backspace() then
+          vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
         else
           fallback()
         end
@@ -35,6 +51,8 @@ function configs.cmp()
     local s_tab_complete = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
       elseif has_words_before() then
         cmp.complete()
       else
@@ -46,8 +64,8 @@ function configs.cmp()
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-          vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-          -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+          -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
           -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
           -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
@@ -78,11 +96,12 @@ function configs.cmp()
       },
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
+        -- { name = 'vsnip' }, -- For vsnip users.
+        { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
         -- { name = 'snippy' }, -- For snippy users.
       }, {
+        { name = "path" },
         { name = 'buffer' },
       }),
       formatting = {
@@ -123,6 +142,10 @@ function configs.autopairs()
       disable_filetype = { "TelescopePrompt" },
     })
   end)
+end
+
+function configs.luasnip()
+  require('luasnip.loaders.from_vscode').lazy_load()
 end
 
 return configs
