@@ -319,6 +319,53 @@ local function setup()
     'folke/which-key.nvim',
     {
       config = function()
+        require('which-key').setup({
+          plugins = {
+            marks = false,
+            registers = false,
+            presets = {
+              operators = false,
+              motions = true,
+              text_objects = true,
+              windows = true,
+              nav = true,
+              z = true,
+              g = true,
+            },
+          },
+          icons = {
+            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
+            separator = "➜", -- symbol used between a key and it's label
+            group = "+", -- symbol prepended to a group
+          },
+          key_labels = {
+            ["<space>"] = "SPC",
+            ["<cr>"] = "RET",
+            ["<tab>"] = "TAB",
+          },
+          window = {
+            padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
+            border = "single",
+          },
+          layout = {
+            height = { min = 1, max = 10 }, -- min and max height of the columns
+            spacing = 3,
+            align = "left",
+          },
+          ignore_missing = true,
+          hidden = {
+            "<silent>",
+            "<Cmd>",
+            "<cmd>",
+            "<Plug>",
+            "call",
+            "lua",
+            "^:",
+            "^ ",
+          }, -- hide mapping boilerplate
+          show_help = true, -- show help message on the command line when the popup is visible
+          triggers = "auto", -- automatically setup triggers
+        })
         require('core.cosmos').setup_keymappings(true)
       end,
     }
