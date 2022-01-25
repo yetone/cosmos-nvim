@@ -84,20 +84,6 @@ function configs.lsp_installer()
   end)
 end
 
-function configs.fterm()
-  require('core.utils').safe_require('FTerm', function(fterm)
-    fterm.setup({
-      ft = 'FTerm',
-      cmd = 'TERM=xterm-256color ' .. os.getenv('SHELL'),
-      border = 'double',
-      dimensions  = {
-        height = 0.9,
-        width = 0.9,
-      },
-    })
-  end)
-end
-
 function configs.project()
   require('core.utils').safe_require('project_nvim', function(project)
     project.setup {
@@ -501,6 +487,29 @@ configs.nvimtree = function()
         relativenumber = false,
         signcolumn = "yes"
       },
+    })
+  end)
+end
+
+configs.toggleterm = function()
+  require('core.utils').safe_require('toggleterm', function(toggleterm)
+    toggleterm.setup({
+      size = function(term)
+        if term.direction == "horizontal" then
+          return 17
+        elseif term.direction == "vertical" then
+          return vim.o.columns * 0.4
+        end
+      end,
+      shade_filetypes = {},
+      shade_terminals = true,
+      shading_factor = 2, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
+      start_in_insert = true,
+      insert_mappings = false, -- whether or not the open mapping applies in insert mode
+      persist_size = false,
+      direction = 'horizontal',
+      close_on_exit = true,
+      shell = vim.o.shell,
     })
   end)
 end

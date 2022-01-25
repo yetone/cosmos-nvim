@@ -136,7 +136,12 @@ cosmos.add_plugin('dstein64/vim-startuptime')
 
 cosmos.add_plugin('folke/lua-dev.nvim')
 
-cosmos.add_plugin('numToStr/FTerm.nvim')
+cosmos.add_plugin(
+  'akinsho/toggleterm.nvim',
+  {
+    config = configs.toggleterm,
+  }
+)
 
 cosmos.add_plugin('vim-scripts/AnsiEsc.vim')
 

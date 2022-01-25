@@ -51,7 +51,7 @@ cosmos.add_leader_keymapping('n|dC', { "<CMD>lua require('dapui').close()<CR>", 
 
 cosmos.add_leader_keymapping('v|;;', { 'gcc<Esc>', name = 'Comment line', noremap = false })
 
-cosmos.add_leader_keymapping("n|'", { '<CMD>lua require("FTerm").toggle()<CR>', name = 'Open shell' })
+cosmos.add_leader_keymapping("n|'", { '<Cmd>exe v:count1 . "ToggleTerm"<CR>', name = 'Open shell' })
 cosmos.add_leader_keymapping('n|*', { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", name = 'Search reference in current project' })
 cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
@@ -61,8 +61,8 @@ utils.nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 utils.nmap('gD', ':Lspsaga preview_definition<CR>')
 utils.set_keymap('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", { noremap = true, silent = true })
 utils.set_keymap('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", { noremap = true, silent = true })
-utils.tmap('<A-d>', '<C-\\><C-n><CMD>lua require("FTerm").toggle()<CR>')
 utils.set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 utils.set_keymap('n', '<leader>;;', 'gcc', {})
 utils.set_keymap('v', '<leader>;', 'gcc<esc>', {})
+utils.set_keymap('t', '<A-d>', '<Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>', {})
 
