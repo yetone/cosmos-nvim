@@ -9,13 +9,20 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('nvim-lua/plenary.nvim')
-
 cosmos.add_plugin('ygm2/rooter.nvim')
 cosmos.add_plugin(
   'ahmedkhalf/project.nvim',
   {
     config = configs.project,
+  }
+)
+cosmos.add_plugin(
+  'kyazdani42/nvim-tree.lua',
+  {
+    config = configs.nvimtree,
+    requires = {
+      'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    },
   }
 )
 cosmos.add_plugin('tpope/vim-surround')

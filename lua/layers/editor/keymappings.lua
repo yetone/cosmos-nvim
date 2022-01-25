@@ -10,6 +10,7 @@ cosmos.add_leader_keymapping('n|bd', { ':bw<CR>', name = 'Delete buffer' })
 cosmos.add_leader_keymapping('n|ff', { "<cmd>lua require('layers.editor.functions').find_current_directory_files()<CR>", name = 'Find file' })
 cosmos.add_leader_keymapping('n|fb', { ":Telescope file_browser<CR>", name = 'File browser' })
 cosmos.add_leader_keymapping('n|fr', { '<cmd>Telescope oldfiles<cr>', name = 'Open recent file', noremap = false })
+cosmos.add_leader_keymapping('n|ft', { '<cmd>NvimTreeToggle<cr>', name = 'File tree', noremap = false })
 
 cosmos.add_leader_keymapping('n|fed', { "<cmd>e ~/.cosmos-nvim.lua<CR>", name = 'Open cosmos configuration file' })
 cosmos.add_leader_keymapping('n|feD', { "<cmd>lua require('layers.editor.functions').edit_neovim()<CR>", name = 'Open cosmos source files' })
