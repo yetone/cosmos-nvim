@@ -11,7 +11,7 @@
 If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the text-objects of **Vim**, I highly recommend you try this configuration.
 
 <p align="center">
-    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard2.png" >
+    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard4.png" >
 </p>
 
 # Key Features
@@ -51,6 +51,10 @@ docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
 ### Nerd Fonts
 
 Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched fonts you are currently using.
+
+### iTerm2 colorscheme [Optional]
+
+If you are using iTerm2 and expect the iTerm colors to blend well with cosmos-nvim colors, it is highly recommended to install and use this [colorscheme](https://github.com/yetone/cosmos-nvim/blob/main/colorschemes/doomone-yetone.itermcolors) for iTerm2.
 
 ## 2. Install my configuration
 
@@ -110,7 +114,7 @@ return {
 ## Which Key like spacemacs
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/which_key.gif" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/which_key1.gif" >
 </p>
 
 ## Fuzzy search commands like spacemacs
