@@ -31,11 +31,18 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-lualine/lualine.nvim',
   {
-    requires = {
-      'arkav/lualine-lsp-progress',
-    },
     after = { 'nvim-web-devicons' },
     config = configs.lualine,
+  }
+)
+
+cosmos.add_plugin(
+  'j-hui/fidget.nvim',
+  {
+    requires = {
+      'nvim-lualine/lualine.nvim',
+    },
+    config = configs.fidget,
   }
 )
 

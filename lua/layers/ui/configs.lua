@@ -85,16 +85,6 @@ end
 
 function configs.lualine()
   require('core.utils').safe_require('lualine', function(lualine)
-    local colors = {
-      blue   = '#80a0ff',
-      cyan   = '#79dac8',
-      black  = '#080808',
-      white  = '#c6c6c6',
-      red    = '#ff5189',
-      violet = '#d183e8',
-      grey   = '#303030',
-    }
-
     local auto_theme = require('lualine.themes.auto')
 
     local function window()
@@ -138,40 +128,13 @@ function configs.lualine()
       extensions = {}
     }
 
-    -- Inserts a component in lualine_b at left section
-    local function ins_config_left(component)
-      if require('core.utils').index_of(config.sections.lualine_b, component) < 0 then
-        table.insert(config.sections.lualine_b, component)
-      end
-    end
-
-    local lsp_progress = require('lualine.components.lsp_progress')
-
-    ins_config_left {
-      'lsp_progress',
-      display_components = { 'lsp_client_name', 'spinner', { 'title', 'percentage', 'message' }},
-      colors = {
-        percentage  = colors.cyan,
-        title  = colors.cyan,
-        message  = colors.cyan,
-        spinner = colors.cyan,
-        lsp_client_name = colors.magenta,
-        use = true,
-      },
-      separators = {
-        component = ' ',
-        progress = ' | ',
-        percentage = { pre = '', post = '%% ' },
-        title = { pre = '', post = ': ' },
-        lsp_client_name = { pre = '[', post = ']' },
-        spinner = { pre = '', post = '' },
-        message = { commenced = 'In Progress', completed = 'Completed' },
-      },
-      timer = { progress_enddelay = 500, spinner = 500, lsp_client_name_enddelay = 1000 },
-      spinner_symbols = lsp_progress.default.spinner_symbols_moon,
-    }
-
     lualine.setup(config)
+  end)
+end
+
+function configs.fidget()
+  require('core.utils').safe_require('fidget', function(fidget)
+    fidget.setup()
   end)
 end
 
