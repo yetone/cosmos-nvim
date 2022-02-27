@@ -48,12 +48,13 @@ opt.ignorecase = true
 opt.incsearch = true
 
 opt.autoindent = true
-opt.copyindent = true
+-- opt.copyindent = true
 opt.shiftwidth = indent
-opt.softtabstop = -1
+opt.tabstop = indent
+-- opt.softtabstop = -1
 opt.expandtab = true
-opt.smartindent = true
-opt.smarttab = true
+-- opt.smartindent = true
+-- opt.smarttab = true
 
 vim.cmd [[
 autocmd FileType make setlocal noexpandtab
@@ -65,7 +66,7 @@ opt.listchars = 'tab:»·,trail:·,nbsp:·'
 opt.undofile = true
 opt.ruler = true
 opt.undolevels = 1000
-opt.backspace = 'indent,eol,start'
+-- opt.backspace = 'indent,eol,start'
 opt.clipboard = 'unnamed'
 opt.shell = os.getenv('SHELL') or 'bash'
 
