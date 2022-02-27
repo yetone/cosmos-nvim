@@ -139,7 +139,7 @@ end
 function configs.autopairs()
   require('core.utils').safe_require('nvim-autopairs', function(autopairs)
     autopairs.setup({
-      disable_filetype = { "TelescopePrompt" },
+      disable_filetype = { "TelescopePrompt", "vim" },
     })
   end)
 end

@@ -118,6 +118,10 @@ function configs.treesitter()
     local options = require('layers.editor.options')
     local ui_options = require('layers.ui.options')
     treesitter.setup {
+      indent = {
+        enable = true,
+      },
+
       -- One of "all", "maintained" (parsers with maintainers), or a list of languages
       ensure_installed = "maintained",
 
