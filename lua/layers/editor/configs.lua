@@ -307,6 +307,7 @@ function configs.telescope()
     local theme = options.telescope_theme
     telescope.setup {
       defaults = {
+        path_display = { "smart" },
         mappings = {
           i = {
             ["<C-a>"] = { "<esc>0i", type = "command" },
