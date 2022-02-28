@@ -99,6 +99,14 @@ cosmos.add_plugin(
   }
 )
 
+cosmos.add_plugin(
+  'lewis6991/spellsitter.nvim',
+  {
+    after = { 'nvim-treesitter' },
+    config = configs.spellsitter,
+  }
+)
+
 cosmos.add_plugin('neovim/nvim-lspconfig')
 
 cosmos.add_plugin(
@@ -126,6 +134,13 @@ cosmos.add_plugin(
   {
     requires = { 'nvim-lua/plenary.nvim' },
     config = configs.telescope,
+  }
+)
+
+cosmos.add_plugin(
+  'nvim-telescope/telescope-fzf-native.nvim',
+  {
+    run = 'make',
   }
 )
 
