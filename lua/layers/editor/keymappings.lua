@@ -20,7 +20,7 @@ cosmos.add_leader_keymapping('n|pp', { '<cmd>Telescope projects theme=' .. optio
 cosmos.add_leader_keymapping('n|pf', { '<cmd>Telescope find_files<CR>', name = 'Find project files' })
 
 cosmos.add_leader_keymapping('n|jj', { '<cmd>HopChar1<cr>', name = 'Jump to char' })
-cosmos.add_leader_keymapping('v|jj', { '<cmd>HopChar1<cr>', name = 'Jump to char' })
+utils.set_keymap('v', 'jj', '<cmd>HopChar1<cr>', {})
 cosmos.add_leader_keymapping('n|jl', { '<cmd>HopLine<cr>', name = 'Jump to line' })
 cosmos.add_leader_keymapping('n|ji', { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to symbol' })
 
@@ -62,7 +62,6 @@ utils.nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 utils.nmap('gD', ':Lspsaga preview_definition<CR>')
 utils.set_keymap('n', '<C-f>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", { noremap = true, silent = true })
 utils.set_keymap('n', '<C-b>', "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", { noremap = true, silent = true })
-utils.set_keymap('n', 's', '<Plug>(easymotion-overwin-f)', {})
 utils.set_keymap('n', '<leader>;;', 'gcc', {})
 utils.set_keymap('v', '<leader>;', 'gcc<esc>', {})
 utils.set_keymap('t', '<A-d>', '<Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>', {})

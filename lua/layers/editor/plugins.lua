@@ -36,7 +36,13 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('justinmk/vim-sneak')
+cosmos.add_plugin(
+  'ggandor/lightspeed.nvim',
+  {
+    requires = { 'tpope/vim-repeat' },
+  }
+)
+
 cosmos.add_plugin('wellle/targets.vim')
 cosmos.add_plugin('editorconfig/editorconfig-vim')
 
