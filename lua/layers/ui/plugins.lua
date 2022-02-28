@@ -26,6 +26,16 @@ cosmos.add_plugin(
   }
 )
 
+if options.enable_todo_comments then
+  cosmos.add_plugin(
+    'folke/todo-comments.nvim',
+  {
+      requires = 'nvim-lua/plenary.nvim',
+      config = configs.todo_comments,
+    }
+  )
+end
+
 cosmos.add_plugin(
   'p00f/nvim-ts-rainbow',
   {

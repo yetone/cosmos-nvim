@@ -226,4 +226,10 @@ function configs.indent_blankline()
   end)
 end
 
+function configs.todo_comments()
+  require('core.utils').safe_require('todo-comments', function(todo_comments)
+    todo_comments.setup()
+  end)
+end
+
 return configs
