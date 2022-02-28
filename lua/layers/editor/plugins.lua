@@ -83,6 +83,13 @@ cosmos.add_plugin(
   }
 )
 
+cosmos.add_plugin(
+  'windwp/nvim-ts-autotag',
+  {
+    after = { 'nvim-treesitter' },
+  }
+)
+
 cosmos.add_plugin('neovim/nvim-lspconfig')
 
 cosmos.add_plugin(

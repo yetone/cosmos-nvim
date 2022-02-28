@@ -152,6 +152,10 @@ function configs.treesitter()
     local options = require('layers.editor.options')
     local ui_options = require('layers.ui.options')
     treesitter.setup {
+      autotag = {
+        enable = true,
+      },
+
       indent = {
         enable = true,
       },
