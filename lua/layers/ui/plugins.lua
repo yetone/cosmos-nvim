@@ -19,7 +19,12 @@ cosmos.add_plugin(
 
 cosmos.add_plugin('NTBBloodbath/doom-one.nvim')
 
-cosmos.add_plugin('Yggdroot/indentLine')
+cosmos.add_plugin(
+  'lukas-reineke/indent-blankline.nvim',
+  {
+    config = configs.indent_blankline,
+  }
+)
 
 cosmos.add_plugin(
   'p00f/nvim-ts-rainbow',
