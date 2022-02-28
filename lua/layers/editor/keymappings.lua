@@ -20,6 +20,7 @@ cosmos.add_leader_keymapping('n|pp', { '<cmd>Telescope projects theme=' .. optio
 cosmos.add_leader_keymapping('n|pf', { '<cmd>Telescope find_files<CR>', name = 'Find project files' })
 
 cosmos.add_leader_keymapping('n|jj', { '<cmd>HopChar1<cr>', name = 'Jump to char' })
+cosmos.add_leader_keymapping('v|jj', { '<cmd>HopChar1<cr>', name = 'Jump to char' })
 cosmos.add_leader_keymapping('n|jl', { '<cmd>HopLine<cr>', name = 'Jump to line' })
 cosmos.add_leader_keymapping('n|ji', { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to symbol' })
 
