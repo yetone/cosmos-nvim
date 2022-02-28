@@ -573,4 +573,10 @@ configs.hop = function()
   end)
 end
 
+configs.numb = function()
+  require('core.utils').safe_require('numb', function(numb)
+    numb.setup()
+  end)
+end
+
 return configs
