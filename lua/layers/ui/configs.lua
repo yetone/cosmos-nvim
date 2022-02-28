@@ -232,4 +232,10 @@ function configs.todo_comments()
   end)
 end
 
+function configs.colorizer()
+  require('core.utils').safe_require('colorizer', function(colorizer)
+    colorizer.setup()
+  end)
+end
+
 return configs

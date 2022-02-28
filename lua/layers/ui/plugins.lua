@@ -87,3 +87,12 @@ end
 if options.enable_illuminate then
   cosmos.add_plugin('RRethy/vim-illuminate')
 end
+
+if options.enable_colorizer then
+  cosmos.add_plugin(
+    'norcalli/nvim-colorizer.lua',
+    {
+      config = configs.colorizer,
+    }
+  )
+end
