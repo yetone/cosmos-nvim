@@ -34,7 +34,7 @@ function configs.lsp_installer()
     end, { silent = true })
   end
 
-  require('core.utils').safe_require({ 'nvim-lsp-installer', 'lspconfig' }, function(lsp_installer, lspconfig)
+  require('core.utils').safe_require({ 'nvim-lsp-installer', 'lspconfig', 'lspconfig.configs' }, function(lsp_installer, lspconfig, lsp_configs)
     local default_opt = {
       capabilities = capabilities,
       on_attach = on_attach,
@@ -75,6 +75,40 @@ function configs.lsp_installer()
     require('core.utils').safe_require('lua-dev', function(luadev)
       servers.sumneko_lua = luadev.setup(default_opt)
     end)
+
+    if not lsp_configs.ls_emmet then
+      lsp_configs.ls_emmet = {
+        default_config = {
+          cmd = { 'ls_emmet', '--stdio' };
+          filetypes = {
+            'html',
+            'css',
+            'scss',
+            'javascript',
+            'javascriptreact',
+            'typescript',
+            'typescriptreact',
+            'haml',
+            'xml',
+            'xsl',
+            'pug',
+            'slim',
+            'sass',
+            'stylus',
+            'less',
+            'sss',
+            'hbs',
+            'handlebars',
+          };
+          root_dir = function(fname)
+            return vim.loop.cwd()
+          end;
+          settings = {};
+        };
+      }
+    end
+
+    lspconfig.ls_emmet.setup { capabilities = capabilities }
 
     lsp_installer.on_server_ready(function(server)
       local opt = servers[server.name] or {}
