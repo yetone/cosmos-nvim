@@ -563,4 +563,10 @@ configs.toggleterm = function()
   end)
 end
 
+configs.hop = function()
+  require('core.utils').safe_require('hop', function(hop)
+    hop.setup { keys = 'etovxqpdygfblzhckisuran' }
+  end)
+end
+
 return configs

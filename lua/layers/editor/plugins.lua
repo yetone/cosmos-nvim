@@ -28,7 +28,14 @@ cosmos.add_plugin(
 cosmos.add_plugin('tpope/vim-surround')
 cosmos.add_plugin('tpope/vim-commentary')
 
-cosmos.add_plugin('easymotion/vim-easymotion')
+cosmos.add_plugin(
+  'phaazon/hop.nvim',
+  {
+    branch = 'v1',
+    config = configs.hop,
+  }
+)
+
 cosmos.add_plugin('justinmk/vim-sneak')
 cosmos.add_plugin('wellle/targets.vim')
 cosmos.add_plugin('editorconfig/editorconfig-vim')

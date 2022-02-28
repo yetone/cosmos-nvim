@@ -19,8 +19,8 @@ cosmos.add_leader_keymapping('n|feR', { "<cmd>lua require('layers.editor.functio
 cosmos.add_leader_keymapping('n|pp', { '<cmd>Telescope projects theme=' .. options.telescope_theme .. '<cr>', name = 'Switch project' })
 cosmos.add_leader_keymapping('n|pf', { '<cmd>Telescope find_files<CR>', name = 'Find project files' })
 
-cosmos.add_leader_keymapping('n|jj', { '<Plug>(easymotion-s)', name = 'Jump to char' })
-cosmos.add_leader_keymapping('n|jl', { '<Plug>(easymotion-bd-jk)', name = 'Jump to line' })
+cosmos.add_leader_keymapping('n|jj', { '<cmd>HopChar1<cr>', name = 'Jump to char' })
+cosmos.add_leader_keymapping('n|jl', { '<cmd>HopLine<cr>', name = 'Jump to line' })
 cosmos.add_leader_keymapping('n|ji', { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to symbol' })
 
 cosmos.add_leader_keymapping('n|se', { ':Lspsaga rename<CR>', name = 'Edit symbol' })
