@@ -51,13 +51,13 @@ opt.autoindent = true
 -- opt.copyindent = true
 opt.shiftwidth = indent
 opt.tabstop = indent
--- opt.softtabstop = -1
+opt.softtabstop = indent
 opt.expandtab = true
 -- opt.smartindent = true
--- opt.smarttab = true
 
 vim.cmd [[
 autocmd FileType make setlocal noexpandtab
+autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 ]]
 
 opt.list = true
