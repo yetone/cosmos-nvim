@@ -90,6 +90,8 @@ cosmos.add_plugin(
   }
 )
 
+cosmos.add_plugin('sheerun/vim-polyglot')
+
 cosmos.add_plugin('neovim/nvim-lspconfig')
 
 cosmos.add_plugin(

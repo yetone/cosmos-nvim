@@ -157,7 +157,7 @@ function configs.treesitter()
       },
 
       indent = {
-        enable = true,
+        enable = false,
       },
 
       -- One of "all", "maintained" (parsers with maintainers), or a list of languages

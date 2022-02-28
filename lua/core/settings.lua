@@ -20,6 +20,8 @@ g.EasyMotion_smartcase = 1
 g.rust_clip_command = 'pbcopy'
 g.python3_host_prog = options.python3_host_prog
 
+vim.cmd('set nocompatible')
+
 opt.complete = ''
 opt.background = 'dark'
 vim.cmd('syntax on')
