@@ -128,6 +128,14 @@ function configs.lualine()
       extensions = {}
     }
 
+    local has_gps, gps = pcall(require, 'nvim-gps')
+    if has_gps then
+      local component = { gps.get_location, cond = gps.is_available }
+      if require('core.utils').index_of(config.sections.lualine_b, component) < 0 then
+        table.insert(config.sections.lualine_b, component)
+      end
+    end
+
     lualine.setup(config)
   end)
 end
@@ -248,6 +256,12 @@ function configs.scrollbar()
   require('core.utils').safe_require('scrollbar', function(scrollbar)
     require('scrollbar.handlers.search').setup()
     scrollbar.setup()
+  end)
+end
+
+function configs.gps()
+  require('core.utils').safe_require('nvim-gps', function(gps)
+    gps.setup()
   end)
 end
 

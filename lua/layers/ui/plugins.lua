@@ -111,3 +111,13 @@ if options.enable_scrollbar then
     }
   )
 end
+
+if options.enable_gps then
+  cosmos.add_plugin(
+    'SmiteshP/nvim-gps',
+    {
+      requires = { 'nvim-treesitter/nvim-treesitter' },
+      config = configs.gps,
+    }
+  )
+end

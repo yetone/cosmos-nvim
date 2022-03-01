@@ -6,6 +6,7 @@ return {
   enable_todo_comments = true,
   enable_colorizer = true,
   enable_scrollbar = true,
+  enable_gps = true,
   illuminate_delay = 0,
   indentLine_fileTypeExclude = { 'alpha' },
 }
