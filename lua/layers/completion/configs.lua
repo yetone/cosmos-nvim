@@ -3,7 +3,7 @@ local configs = {}
 function configs.cmp()
   require('core.utils').safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp', 'luasnip' }, function(cmp, lspkind, cmp_autopairs, luasnip)
     local options = require('layers.completion.options')
-    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))

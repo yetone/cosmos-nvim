@@ -2,6 +2,7 @@ local options = require('core.options')
 local g = vim.g
 local opt = vim.opt
 
+g.polyglot_disabled = { 'graphql', 'jsx', 'javascript', 'javascriptreact', 'tsx', 'typescript', 'typescriptreact' }
 g.mapleader = ' '
 g.user_emmet_settings = {
   javascript = {
@@ -24,7 +25,7 @@ vim.cmd('set nocompatible')
 
 opt.complete = ''
 opt.background = 'dark'
-vim.cmd('syntax on')
+-- vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
 local indent = 4
