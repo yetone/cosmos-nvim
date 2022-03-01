@@ -5,6 +5,7 @@ return {
   enable_illuminate = true,
   enable_todo_comments = true,
   enable_colorizer = true,
+  enable_scrollbar = true,
   illuminate_delay = 0,
   indentLine_fileTypeExclude = { 'alpha' },
 }

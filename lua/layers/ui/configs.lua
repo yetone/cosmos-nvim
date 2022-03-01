@@ -238,4 +238,17 @@ function configs.colorizer()
   end)
 end
 
+function configs.hlslens()
+  require('core.utils').safe_require('hlslens', function(hlslens)
+    hlslens.setup()
+  end)
+end
+
+function configs.scrollbar()
+  require('core.utils').safe_require('scrollbar', function(scrollbar)
+    require('scrollbar.handlers.search').setup()
+    scrollbar.setup()
+  end)
+end
+
 return configs

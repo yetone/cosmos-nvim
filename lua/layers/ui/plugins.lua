@@ -96,3 +96,18 @@ if options.enable_colorizer then
     }
   )
 end
+
+if options.enable_scrollbar then
+  cosmos.add_plugin(
+    'petertriho/nvim-scrollbar',
+    {
+      requires = {
+        {
+          'kevinhwang91/nvim-hlslens',
+          config = configs.hlslens,
+        },
+      },
+      config = configs.scrollbar,
+    }
+  )
+end
