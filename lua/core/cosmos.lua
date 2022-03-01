@@ -244,6 +244,9 @@ local function setup_plugins()
     return
   end
   local packer = require('packer')
+  packer.init({
+    max_jobs=50
+  })
   packer.reset()
   packer.startup(function(use)
     use {
