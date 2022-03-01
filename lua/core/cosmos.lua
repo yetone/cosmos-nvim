@@ -244,9 +244,11 @@ local function setup_plugins()
     return
   end
   local packer = require('packer')
-  packer.init({
-    max_jobs=50
-  })
+  if os.getenv('COSMOS_BUILD_IMG') == nil then
+    packer.init({
+      max_jobs=50
+    })
+  end
   packer.reset()
   packer.startup(function(use)
     use {
