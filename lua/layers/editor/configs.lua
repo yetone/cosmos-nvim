@@ -581,6 +581,14 @@ configs.hop = function()
   end)
 end
 
+configs.lightspeed = function()
+  require('core.utils').safe_require('lightspeed', function(lightspeed)
+    lightspeed.setup {
+      ignore_case = true,
+    }
+  end)
+end
+
 configs.numb = function()
   require('core.utils').safe_require('numb', function(numb)
     numb.setup()

@@ -40,6 +40,7 @@ cosmos.add_plugin(
   'ggandor/lightspeed.nvim',
   {
     requires = { 'tpope/vim-repeat' },
+    config = configs.lightspeed,
   }
 )
 
