@@ -61,6 +61,7 @@ function configs.cmp()
     end
 
     cmp.setup({
+      preselect = cmp.PreselectMode.None,
       snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
