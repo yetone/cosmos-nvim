@@ -142,7 +142,11 @@ end
 
 function configs.fidget()
   require('core.utils').safe_require('fidget', function(fidget)
-    fidget.setup()
+    fidget.setup({
+      text = {
+        spinner = 'moon',
+      },
+    })
   end)
 end
 
