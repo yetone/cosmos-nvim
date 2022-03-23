@@ -269,4 +269,11 @@ function configs.gps()
   end)
 end
 
+function configs.onedark()
+  require('onedark').setup {
+    style = 'darker'
+  }
+  require('onedark').load()
+end
+
 return configs

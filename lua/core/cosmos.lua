@@ -349,8 +349,8 @@ local function setup()
             ["<tab>"] = "TAB",
           },
           window = {
-            padding = { 0, 0, 0, 0 }, -- extra window padding [top, right, bottom, left]
-            border = "single",
+            padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+            border = "none",
           },
           layout = {
             height = { min = 1, max = 10 }, -- min and max height of the columns

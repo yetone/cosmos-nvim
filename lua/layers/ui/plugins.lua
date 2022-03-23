@@ -17,7 +17,12 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('NTBBloodbath/doom-one.nvim')
+cosmos.add_plugin(
+  'navarasu/onedark.nvim',
+  {
+    config = configs.onedark,
+  }
+)
 
 cosmos.add_plugin(
   'lukas-reineke/indent-blankline.nvim',
