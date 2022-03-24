@@ -222,7 +222,10 @@ end
 
 function configs.indent_blankline()
   require('core.utils').safe_require('indent_blankline', function(indent_blankline)
+    local options = require('layers.ui.options')
+
     indent_blankline.setup({
+      filetype_exclude = options.indentline_filetype_exclude,
       space_char_blankline = " ",
       show_current_context = true,
       show_current_context_start = true,

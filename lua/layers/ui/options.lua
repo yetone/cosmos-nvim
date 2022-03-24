@@ -8,5 +8,5 @@ return {
   enable_scrollbar = true,
   enable_gps = true,
   illuminate_delay = 0,
-  indentLine_fileTypeExclude = { 'alpha' },
+  indentline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble' },
 }

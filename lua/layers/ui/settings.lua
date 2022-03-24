@@ -3,7 +3,6 @@ local g = vim.g
 local opt = vim.opt
 
 opt.termguicolors = true
-g.indentLine_fileTypeExclude = options.indentLine_fileTypeExclude
 g.illuminate_delay = options.illuminate_delay
 
 vim.cmd [[
