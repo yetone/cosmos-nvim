@@ -258,6 +258,8 @@ local function setup_plugins()
 
     use 'wbthomason/packer.nvim'
 
+		use 'nathom/filetype.nvim'
+
     use 'nvim-lua/plenary.nvim'
 
     use 'antoinemadec/FixCursorHold.nvim' -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
