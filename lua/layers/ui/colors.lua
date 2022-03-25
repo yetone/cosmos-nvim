@@ -13,7 +13,7 @@ M.init = function(theme)
 
    if present then
       -- first load the base16 theme
-      base16(base16.themes(theme), true)
+      -- base16(base16.themes(theme), true)
 
       -- unload to force reload
       package.loaded["layers.ui.highlights" or false] = nil

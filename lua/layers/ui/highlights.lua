@@ -106,8 +106,8 @@ fg("NvimTreeFolderIcon", folder_bg)
 fg("NvimTreeFolderName", folder_bg)
 fg("NvimTreeGitDirty", red)
 fg("NvimTreeIndentMarker", one_bg2)
-bg("NvimTreeNormal", darker_black)
-bg("NvimTreeNormalNC", darker_black)
+-- bg("NvimTreeNormal", darker_black)
+-- bg("NvimTreeNormalNC", darker_black)
 fg("NvimTreeOpenedFolderName", folder_bg)
 fg("NvimTreeRootFolder", red .. " gui=underline") -- enable underline for root folder in nvim tree
 fg_bg("NvimTreeStatuslineNc", darker_black, darker_black)
@@ -117,6 +117,8 @@ fg_bg("NvimTreeWindowPicker", red, black2)
 -- Telescope
 fg_bg("TelescopeBorder", darker_black, darker_black)
 fg_bg("TelescopePromptBorder", black2, black2)
+fg_bg("TelescopeResultsBorder", darker_black, darker_black)
+fg_bg("TelescopePreviewBorder", darker_black, darker_black)
 
 fg_bg("TelescopePromptNormal", white, black2)
 fg_bg("TelescopePromptPrefix", red, black2)
@@ -128,6 +130,12 @@ fg_bg("TelescopePromptTitle", black, red)
 fg_bg("TelescopeResultsTitle", darker_black, darker_black)
 
 bg("TelescopeSelection", black2)
+
+-- LspSaga
+fg_bg("LspSagaDiagnosticBorder", darker_black, darker_black)
+fg_bg("LspSagaDiagnosticTruncateLine", darker_black, darker_black)
+fg_bg("LspSagaRenameBorder", darker_black, darker_black)
+fg_bg("LspSagaHoverBorder", darker_black, darker_black)
 
 -- keybinds cheatsheet
 

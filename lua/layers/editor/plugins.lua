@@ -155,6 +155,13 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
+  'nvim-telescope/telescope-media-files.nvim',
+  {
+    requires = { 'nvim-telescope/telescope.nvim' },
+  }
+)
+
+cosmos.add_plugin(
   'nvim-telescope/telescope-dap.nvim',
   {
     requires = { 'nvim-telescope/telescope.nvim' },
