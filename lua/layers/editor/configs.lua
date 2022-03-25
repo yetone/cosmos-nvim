@@ -131,6 +131,7 @@ end
 function configs.lspsaga()
   require('core.utils').safe_require('lspsaga', function(saga)
     saga.init_lsp_saga({
+      code_action_prompt = { enable = false, },
       code_action_keys = {
         quit = {"q", "<ESC>"},
       },
