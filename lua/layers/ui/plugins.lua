@@ -3,6 +3,16 @@ local options = require('layers.ui.options')
 local configs = require('layers.ui.configs')
 
 cosmos.add_plugin(
+  "NvChad/nvim-base16.lua",
+  {
+    after = "packer.nvim",
+    config = function()
+      require("layers.ui.colors").init()
+    end,
+  }
+)
+
+cosmos.add_plugin(
   'kyazdani42/nvim-web-devicons',
   {
     config = configs.web_devicons,

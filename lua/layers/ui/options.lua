@@ -9,4 +9,8 @@ return {
   enable_gps = true,
   illuminate_delay = 0,
   indentline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble' },
+  hl_override = "", -- path of your file that contains highlights
+  italic_comments = false,
+  theme = "onedark", -- default theme
+  transparency = false,
 }

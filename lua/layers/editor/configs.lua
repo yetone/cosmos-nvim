@@ -552,7 +552,7 @@ configs.nvimtree = function()
       view = {
         allow_resize = true,
         side = "left",
-        width = 25,
+        width = 30,
         hide_root_folder = true,
       },
       actions = {

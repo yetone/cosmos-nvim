@@ -168,15 +168,7 @@ function configs.bufferline()
           end
           return s
         end,
-        offsets = {
-          {
-            filetype = "NvimTree",
-            text = "File Explorer",
-            highlight = "Directory",
-            text_align = "left",
-            padding = 1,
-          },
-        },
+        offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
       },
     }
   end)
