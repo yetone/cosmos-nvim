@@ -152,6 +152,10 @@ end
 
 function configs.bufferline()
   require('core.utils').safe_require('bufferline', function(bufferline)
+    local default = {
+      colors = require("layers.ui.colors").get(),
+    }
+
     bufferline.setup{
       options = {
         always_show_bufferline = false,
@@ -169,6 +173,138 @@ function configs.bufferline()
           return s
         end,
         offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+      },
+
+      highlights = {
+        background = {
+          guifg = default.colors.grey_fg,
+          guibg = default.colors.black2,
+        },
+
+        -- buffers
+        buffer_selected = {
+          guifg = default.colors.white,
+          guibg = default.colors.black,
+          gui = "bold",
+        },
+        buffer_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+
+        -- for diagnostics = "nvim_lsp"
+        hint = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        hint_diagnostic = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        hint_diagnostic_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        info = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        info_diagnostic = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        info_diagnostic_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        error = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        error_diagnostic = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        error_diagnostic_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        warning = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        warning_diagnostic = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        warning_diagnostic_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+
+        -- close buttons
+        close_button = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        close_button_visible = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.black2,
+        },
+        close_button_selected = {
+          guifg = default.colors.red,
+          guibg = default.colors.black,
+        },
+        fill = {
+          guifg = default.colors.grey_fg,
+          guibg = default.colors.black2,
+        },
+        indicator_selected = {
+          guifg = default.colors.black,
+          guibg = default.colors.black,
+        },
+
+        -- modified
+        modified = {
+          guifg = default.colors.red,
+          guibg = default.colors.black2,
+        },
+        modified_visible = {
+          guifg = default.colors.red,
+          guibg = default.colors.black2,
+        },
+        modified_selected = {
+          guifg = default.colors.green,
+          guibg = default.colors.black,
+        },
+
+        -- separators
+        separator = {
+          guifg = default.colors.black2,
+          guibg = default.colors.black2,
+        },
+        separator_visible = {
+          guifg = default.colors.black2,
+          guibg = default.colors.black2,
+        },
+        separator_selected = {
+          guifg = default.colors.black2,
+          guibg = default.colors.black2,
+        },
+
+        -- tabs
+        tab = {
+          guifg = default.colors.light_grey,
+          guibg = default.colors.one_bg3,
+        },
+        tab_selected = {
+          guifg = default.colors.black2,
+          guibg = default.colors.nord_blue,
+        },
+        tab_close = {
+          guifg = default.colors.red,
+          guibg = default.colors.black,
+        },
       },
     }
   end)
