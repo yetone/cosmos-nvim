@@ -137,6 +137,18 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
+  'ojroques/nvim-lspfuzzy',
+  {
+    config = configs.lspfuzzy,
+    after = { 'nvim-lspconfig' },
+    requires = {
+      {'junegunn/fzf'},
+      {'junegunn/fzf.vim'},  -- to enable preview (optional)
+    },
+  }
+)
+
+cosmos.add_plugin(
   'tami5/lspsaga.nvim',
   {
     config = configs.lspsaga,

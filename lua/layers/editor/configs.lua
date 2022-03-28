@@ -142,6 +142,12 @@ function configs.lspsaga()
   end)
 end
 
+function configs.lspfuzzy()
+  require('core.utils').safe_require('lspfuzzy', function(lspfuzzy)
+    lspfuzzy.setup {}
+  end)
+end
+
 function configs.treesitter()
   require('core.utils').safe_require('nvim-treesitter.configs', function(treesitter)
     local options = require('layers.editor.options')
