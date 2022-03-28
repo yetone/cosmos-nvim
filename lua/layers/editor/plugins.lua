@@ -6,11 +6,16 @@ cosmos.add_plugin(
   'iamcco/markdown-preview.nvim',
   {
     run = ':call mkdp#util#install()',
-    event = 'BufEnter',
+    event = 'BufRead',
   }
 )
 
-cosmos.add_plugin('ygm2/rooter.nvim')
+cosmos.add_plugin(
+  'ygm2/rooter.nvim',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'ahmedkhalf/project.nvim',
@@ -59,7 +64,13 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('wellle/targets.vim')
+cosmos.add_plugin(
+  'wellle/targets.vim',
+  {
+    event = 'BufRead',
+  }
+)
+
 cosmos.add_plugin(
   'editorconfig/editorconfig-vim',
   {
@@ -218,14 +229,22 @@ cosmos.add_plugin(
   'williamboman/nvim-lsp-installer',
   {
     requires = {
-      'tamago324/nlsp-settings.nvim',
+      {
+        'tamago324/nlsp-settings.nvim',
+        after = { 'nvim-lspconfig' },
+      },
     },
     after = { 'nvim-lspconfig' },
     config = configs.lsp_installer,
   }
 )
 
-cosmos.add_plugin('dstein64/vim-startuptime')
+cosmos.add_plugin(
+  'dstein64/vim-startuptime',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin('folke/lua-dev.nvim')
 
@@ -233,6 +252,7 @@ cosmos.add_plugin(
   'akinsho/toggleterm.nvim',
   {
     config = configs.toggleterm,
+    event = 'BufRead',
   }
 )
 
@@ -281,6 +301,7 @@ cosmos.add_plugin(
   {
     requires = { 'kyazdani42/nvim-web-devicons' },
     config = configs.trouble,
+    event = 'BufRead',
   }
 )
 

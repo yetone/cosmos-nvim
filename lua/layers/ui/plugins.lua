@@ -127,9 +127,11 @@ cosmos.add_plugin(
       {
         'kevinhwang91/nvim-hlslens',
         config = configs.hlslens,
+        event = 'BufRead',
       },
     },
     config = configs.scrollbar,
+    event = 'BufRead',
   }
 )
 
