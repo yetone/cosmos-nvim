@@ -137,6 +137,7 @@ fg_bg("LspSagaDiagnosticBorder", darker_black, darker_black)
 fg_bg("LspSagaDiagnosticTruncateLine", darker_black, darker_black)
 fg_bg("LspSagaRenameBorder", darker_black, darker_black)
 fg_bg("LspSagaHoverBorder", darker_black, darker_black)
+fg_bg("LspSagaDefPreviewBorder", darker_black, darker_black)
 
 -- keybinds cheatsheet
 
