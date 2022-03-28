@@ -15,6 +15,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'kyazdani42/nvim-web-devicons',
   {
+    after = { "nvim-base16.lua" },
     config = configs.web_devicons,
   }
 )
