@@ -82,7 +82,6 @@ cosmos.add_plugin(
   {
     after = { 'nvim-web-devicons' },
     config = configs.bufferline,
-    event = "VimEnter",
   }
 )
 

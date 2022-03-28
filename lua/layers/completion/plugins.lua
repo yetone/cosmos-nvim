@@ -1,9 +1,12 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
-cosmos.add_plugin('github/copilot.vim')
-
-cosmos.add_plugin('mattn/emmet-vim')
+cosmos.add_plugin(
+  'github/copilot.vim',
+  {
+    after = 'nvim-cmp',
+  }
+)
 
 cosmos.add_plugin(
   'hrsh7th/nvim-cmp',

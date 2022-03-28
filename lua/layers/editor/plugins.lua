@@ -6,16 +6,19 @@ cosmos.add_plugin(
   'iamcco/markdown-preview.nvim',
   {
     run = ':call mkdp#util#install()',
+    event = 'BufEnter',
   }
 )
 
 cosmos.add_plugin('ygm2/rooter.nvim')
+
 cosmos.add_plugin(
   'ahmedkhalf/project.nvim',
   {
     config = configs.project,
   }
 )
+
 cosmos.add_plugin(
   'kyazdani42/nvim-tree.lua',
   {
@@ -57,7 +60,12 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin('wellle/targets.vim')
-cosmos.add_plugin('editorconfig/editorconfig-vim')
+cosmos.add_plugin(
+  'editorconfig/editorconfig-vim',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'nvim-treesitter/nvim-treesitter',
@@ -104,7 +112,12 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('sheerun/vim-polyglot')
+cosmos.add_plugin(
+  'sheerun/vim-polyglot',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'tpope/vim-sleuth',
@@ -141,9 +154,10 @@ cosmos.add_plugin(
   {
     config = configs.lspfuzzy,
     after = { 'nvim-lspconfig' },
+    event = 'BufRead',
     requires = {
-      {'junegunn/fzf'},
-      {'junegunn/fzf.vim'},  -- to enable preview (optional)
+      {'junegunn/fzf', event = 'BufRead' },
+      {'junegunn/fzf.vim', event = 'BufRead' },  -- to enable preview (optional)
     },
   }
 )
@@ -222,7 +236,12 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('vim-scripts/AnsiEsc.vim')
+cosmos.add_plugin(
+  'vim-scripts/AnsiEsc.vim',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'mfussenegger/nvim-dap',
@@ -231,13 +250,20 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('Pocco81/DAPInstall.nvim')
+cosmos.add_plugin(
+  'Pocco81/DAPInstall.nvim',
+  {
+    requires = { 'mfussenegger/nvim-dap' },
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'rcarriga/nvim-dap-ui',
   {
     requires = { 'mfussenegger/nvim-dap' },
     config = configs.dapui,
+    event = 'BufRead',
   }
 )
 

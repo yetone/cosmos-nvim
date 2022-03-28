@@ -258,6 +258,7 @@ local function setup_plugins()
 
     use {
       'wbthomason/packer.nvim',
+      event = "VimEnter",
     }
 
 		use 'nathom/filetype.nvim'
