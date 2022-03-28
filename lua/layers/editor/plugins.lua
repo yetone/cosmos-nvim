@@ -25,14 +25,25 @@ cosmos.add_plugin(
     },
   }
 )
-cosmos.add_plugin('tpope/vim-surround')
-cosmos.add_plugin('tpope/vim-commentary')
+cosmos.add_plugin(
+  'tpope/vim-surround',
+  {
+    event = 'BufRead',
+  }
+)
+cosmos.add_plugin(
+  'tpope/vim-commentary',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'phaazon/hop.nvim',
   {
     branch = 'v1',
     config = configs.hop,
+    event = 'BufRead',
   }
 )
 
@@ -41,6 +52,7 @@ cosmos.add_plugin(
   {
     requires = { 'tpope/vim-repeat' },
     config = configs.lightspeed,
+    event = 'BufRead',
   }
 )
 
@@ -56,6 +68,7 @@ cosmos.add_plugin(
       end
     end,
     config = configs.treesitter,
+    event = { "BufRead", "BufNewFile" },
   }
 )
 cosmos.add_plugin(
@@ -93,12 +106,18 @@ cosmos.add_plugin(
 
 cosmos.add_plugin('sheerun/vim-polyglot')
 
-cosmos.add_plugin('tpope/vim-sleuth')
+cosmos.add_plugin(
+  'tpope/vim-sleuth',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'nacro90/numb.nvim',
   {
     config = configs.numb,
+    event = 'BufRead',
   }
 )
 
@@ -110,7 +129,12 @@ cosmos.add_plugin(
   }
 )
 
-cosmos.add_plugin('neovim/nvim-lspconfig')
+cosmos.add_plugin(
+  'neovim/nvim-lspconfig',
+  {
+    event = 'BufReadPre',
+  }
+)
 
 cosmos.add_plugin(
   'tami5/lspsaga.nvim',
@@ -169,8 +193,8 @@ cosmos.add_plugin(
   {
     requires = {
       'tamago324/nlsp-settings.nvim',
-      'neovim/nvim-lspconfig',
     },
+    after = { 'nvim-lspconfig' },
     config = configs.lsp_installer,
   }
 )
@@ -209,6 +233,7 @@ cosmos.add_plugin(
   'theHamsta/nvim-dap-virtual-text',
   {
     requires = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' },
+    after = { 'nvim-dap', 'nvim-treesitter' },
     config = configs.dap_virtual_text,
   }
 )

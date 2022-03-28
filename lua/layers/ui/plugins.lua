@@ -39,6 +39,7 @@ cosmos.add_plugin(
   'lukas-reineke/indent-blankline.nvim',
   {
     config = configs.indent_blankline,
+    event = 'BufRead',
   }
 )
 
@@ -48,6 +49,7 @@ if options.enable_todo_comments then
   {
       requires = 'nvim-lua/plenary.nvim',
       config = configs.todo_comments,
+      event = 'BufRead',
     }
   )
 end
@@ -62,7 +64,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-lualine/lualine.nvim',
   {
-    after = { 'nvim-web-devicons' },
+    after = { 'nvim-web-devicons', 'nvim-gps' },
     config = configs.lualine,
   }
 )
@@ -70,9 +72,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'j-hui/fidget.nvim',
   {
-    requires = {
-      'nvim-lualine/lualine.nvim',
-    },
+    after = 'lualine.nvim',
     config = configs.fidget,
   }
 )
@@ -82,58 +82,63 @@ cosmos.add_plugin(
   {
     after = { 'nvim-web-devicons' },
     config = configs.bufferline,
+    event = "VimEnter",
   }
 )
 
-cosmos.add_plugin('onsails/lspkind-nvim')
+cosmos.add_plugin(
+  'karb94/neoscroll.nvim',
+  {
+    disable = not options.enable_smooth_scrolling,
+    config = configs.neoscroll,
+    event = 'BufRead',
+  }
+)
 
-if options.enable_smooth_scrolling then
-  cosmos.add_plugin(
-    'karb94/neoscroll.nvim',
-    {
-      config = configs.neoscroll,
-    }
-  )
-end
+cosmos.add_plugin(
+  'danilamihailov/beacon.nvim',
+  {
+    disable = not options.enable_beacon,
+    event = 'BufRead',
+  }
+)
 
-if options.enable_beacon then
-  cosmos.add_plugin('danilamihailov/beacon.nvim')
-end
+cosmos.add_plugin(
+  'RRethy/vim-illuminate',
+  {
+    disable = not options.enable_illuminate,
+    event = 'BufRead',
+  }
+)
 
-if options.enable_illuminate then
-  cosmos.add_plugin('RRethy/vim-illuminate')
-end
+cosmos.add_plugin(
+  'norcalli/nvim-colorizer.lua',
+  {
+    disable = not options.enable_colorizer,
+    config = configs.colorizer,
+    event = 'BufRead',
+  }
+)
 
-if options.enable_colorizer then
-  cosmos.add_plugin(
-    'norcalli/nvim-colorizer.lua',
-    {
-      config = configs.colorizer,
-    }
-  )
-end
-
-if options.enable_scrollbar then
-  cosmos.add_plugin(
-    'petertriho/nvim-scrollbar',
-    {
-      requires = {
-        {
-          'kevinhwang91/nvim-hlslens',
-          config = configs.hlslens,
-        },
+cosmos.add_plugin(
+  'petertriho/nvim-scrollbar',
+  {
+    disable = not options.enable_scrollbar,
+    requires = {
+      {
+        'kevinhwang91/nvim-hlslens',
+        config = configs.hlslens,
       },
-      config = configs.scrollbar,
-    }
-  )
-end
+    },
+    config = configs.scrollbar,
+  }
+)
 
-if options.enable_gps then
-  cosmos.add_plugin(
-    'SmiteshP/nvim-gps',
-    {
-      requires = { 'nvim-treesitter/nvim-treesitter' },
-      config = configs.gps,
-    }
-  )
-end
+cosmos.add_plugin(
+  'SmiteshP/nvim-gps',
+  {
+    disable = not options.enable_gps,
+    after = { 'nvim-treesitter' },
+    config = configs.gps,
+  }
+)

@@ -6,8 +6,10 @@ cosmos.add_plugin('jreybert/vimagit')
 cosmos.add_plugin(
   'lewis6991/gitsigns.nvim',
   {
-    requires = { 'nvim-lua/plenary.nvim' },
+    opt = true,
+    requires = { 'nvim-lua/plenary.nvim', opt = true },
     config = configs.gitsigns,
+    event = {'BufRead','BufNewFile'},
   }
 )
 

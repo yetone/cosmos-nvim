@@ -256,7 +256,9 @@ local function setup_plugins()
       -- rocks = 'mpack'
     }
 
-    use 'wbthomason/packer.nvim'
+    use {
+      'wbthomason/packer.nvim',
+    }
 
 		use 'nathom/filetype.nvim'
 
