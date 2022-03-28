@@ -9,6 +9,8 @@ return {
   enable_gps = true,
   illuminate_delay = 0,
   indentline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
+  statusline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
+  statusline_filetype_include = {},
   hl_override = "", -- path of your file that contains highlights
   italic_comments = false,
   theme = "onedark", -- default theme

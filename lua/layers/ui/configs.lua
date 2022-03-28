@@ -85,6 +85,7 @@ end
 
 function configs.lualine()
   require('core.utils').safe_require('lualine', function(lualine)
+    local options = require('layers.ui.options')
     local auto_theme = require('lualine.themes.auto')
 
     local function window()
@@ -95,6 +96,7 @@ function configs.lualine()
 
     local config = {
       options = {
+        disabled_filetypes = options.statusline_filetype_exclude,
         icons_enabled = true,
         theme = auto_theme,
         component_separators = '|',
