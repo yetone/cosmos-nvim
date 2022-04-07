@@ -31,6 +31,9 @@ cosmos.add_plugin(
     requires = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
     },
+    after = {
+      'nvim-web-devicons', -- optional, for file icon
+    },
   }
 )
 cosmos.add_plugin(
