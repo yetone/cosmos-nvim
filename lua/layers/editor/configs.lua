@@ -569,6 +569,11 @@ end
 configs.nvimtree = function()
   require('core.utils').safe_require('nvim-tree', function(nvimtree)
     nvimtree.setup({
+      renderer = {
+        indent_markers = {
+          enable = true,
+        },
+      },
       filters = {
         dotfiles = false,
       },
