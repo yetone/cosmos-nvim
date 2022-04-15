@@ -7,7 +7,7 @@ cosmos.add_leader_keymapping('n|bn', { ':BufferLineCycleNext<CR>', name = 'Next 
 cosmos.add_leader_keymapping('n|bp', { ':BufferLineCyclePrev<CR>', name = 'Previous buffer' })
 cosmos.add_leader_keymapping('n|bd', { ':bw<CR>', name = 'Delete buffer' })
 
-cosmos.add_leader_keymapping('n|ff', { "<cmd>lua require('layers.editor.functions').find_current_directory_files()<CR>", name = 'Find file' })
+cosmos.add_leader_keymapping('n|ff', { "<cmd>lua require('layers.editor.functions').find_current_directory_files()<CR>", name = 'Find file in current directory' })
 cosmos.add_leader_keymapping('n|fb', { ":Telescope file_browser<CR>", name = 'File browser' })
 cosmos.add_leader_keymapping('n|fr', { '<cmd>Telescope oldfiles<cr>', name = 'Open recent file', noremap = false })
 cosmos.add_leader_keymapping('n|ft', { '<cmd>NvimTreeToggle<cr>', name = 'File tree', noremap = false })
