@@ -2,6 +2,8 @@ local options = require('core.options')
 local g = vim.g
 local opt = vim.opt
 
+g.do_filetype_lua = 1
+g.did_load_filetypes = 0
 g.polyglot_disabled = { 'graphql', 'jsx', 'javascript', 'javascriptreact', 'tsx', 'typescript', 'typescriptreact' }
 g.mapleader = ' '
 g.user_emmet_settings = {
@@ -61,6 +63,9 @@ opt.expandtab = true
 vim.cmd [[
 autocmd FileType make setlocal noexpandtab
 autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
+
+autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
+autocmd bufnewfile,bufread *.jsx set filetype=javascriptreact
 ]]
 
 opt.list = true

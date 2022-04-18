@@ -254,6 +254,7 @@ cosmos.add_plugin('folke/lua-dev.nvim')
 cosmos.add_plugin(
   'akinsho/toggleterm.nvim',
   {
+    branch = 'main',
     config = configs.toggleterm,
     event = 'BufRead',
   }

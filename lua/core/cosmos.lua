@@ -261,7 +261,7 @@ local function setup_plugins()
       event = "VimEnter",
     }
 
-		use 'nathom/filetype.nvim'
+		-- use 'nathom/filetype.nvim'
 
     use 'nvim-lua/plenary.nvim'
 

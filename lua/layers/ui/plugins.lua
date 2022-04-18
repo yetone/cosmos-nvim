@@ -81,6 +81,7 @@ cosmos.add_plugin(
   'akinsho/bufferline.nvim',
   {
     after = { 'nvim-web-devicons' },
+    branch = 'main',
     config = configs.bufferline,
   }
 )
@@ -130,8 +131,8 @@ cosmos.add_plugin(
         event = 'BufRead',
       },
     },
+    after = { 'nvim-hlslens' },
     config = configs.scrollbar,
-    event = 'BufRead',
   }
 )
 
