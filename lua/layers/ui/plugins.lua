@@ -140,7 +140,7 @@ cosmos.add_plugin(
   'SmiteshP/nvim-gps',
   {
     disable = not options.enable_gps,
-    after = { 'nvim-treesitter' },
+    after = { 'nvim-treesitter', 'nvim-web-devicons' },
     config = configs.gps,
   }
 )
