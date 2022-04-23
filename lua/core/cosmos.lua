@@ -310,6 +310,9 @@ local function setup_plugins()
     }
 
     for _, opts in ipairs(plugins) do
+      if os.getenv('COSMOS_BUILD_IMG') ~= nil then
+        opts.event = nil
+      end
       use(opts)
     end
 

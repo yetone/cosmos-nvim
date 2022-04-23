@@ -1,7 +1,16 @@
 FROM ubuntu:22.04
 
 ENV PYTHONUNBUFFERED=1
+RUN date
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install git neovim nodejs npm golang python3 python3-pip wget curl unzip -y
+RUN DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install git nodejs npm golang python3 python3-pip wget curl unzip -y
 RUN ln -sf /usr/bin/python3 /usr/bin/python
+
+WORKDIR /home/ubuntu
+RUN curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+RUN chmod u+x nvim.appimage
+RUN ./nvim.appimage --appimage-extract
+RUN ./squashfs-root/AppRun --version
+RUN mv squashfs-root /
+RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
 
