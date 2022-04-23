@@ -8,6 +8,7 @@ return {
   enable_scrollbar = true,
   enable_gps = true,
   illuminate_delay = 0,
+  illuminate_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   indentline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   statusline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   statusline_filetype_include = {},

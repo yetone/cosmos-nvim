@@ -3,7 +3,8 @@ local g = vim.g
 local opt = vim.opt
 
 opt.termguicolors = true
-g.illuminate_delay = options.illuminate_delay
+g.Illuminate_delay = options.illuminate_delay
+g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
 
 vim.cmd [[
 augroup illuminate_augroup
