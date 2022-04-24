@@ -11,7 +11,7 @@
 If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the text-objects of **Vim**, I highly recommend you try this configuration.
 
 <p align="center">
-    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard4.png" >
+    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard6.png" >
 </p>
 
 # Key Features
@@ -114,35 +114,41 @@ return {
 ## Which Key like spacemacs
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/which_key1.gif" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/which-key2.gif" >
 </p>
 
 ## Fuzzy search commands like spacemacs
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/fuzzy_search_commands2.gif" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/fuzzy-search-commands3.gif" >
+</p>
+
+## Easymotion
+
+<p align="center">
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/easymotion3.gif" >
 </p>
 
 ## Find recent files
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/recent_files.png" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/recent-files2.png" >
 </p>
 
 ## The status bar with lsp status
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/status_bar.png" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/status-bar2.png" >
 </p>
 
 ## Search current buffer like emacs [helm-swoop](https://github.com/emacsorphanage/helm-swoop)
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/swoop.png" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/swoop2.png" >
 </p>
 
 ## List symbols
 
 <p align="center">
-  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/list_symbols.png" >
+  <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/list-symbols2.png" >
 </p>
