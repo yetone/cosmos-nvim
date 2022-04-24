@@ -359,7 +359,7 @@ function configs.indent_blankline()
       filetype_exclude = options.indentline_filetype_exclude,
       space_char_blankline = " ",
       show_current_context = true,
-      show_current_context_start = true,
+      show_current_context_start = false,
       context_highlight_list = {
         "IndentBlanklineIndent1",
         "IndentBlanklineIndent2",

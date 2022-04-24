@@ -6,11 +6,17 @@ opt.termguicolors = true
 g.Illuminate_delay = options.illuminate_delay
 g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
 
+opt.cursorline = true
+vim.cmd [[
+autocmd WinEnter * if &filetype != "alpha" | setlocal cursorline | endif
+autocmd WinLeave * setlocal nocursorline
+]]
+
 vim.cmd [[
 augroup illuminate_augroup
   autocmd!
-  autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline
-  autocmd VimEnter * hi illuminatedCurWord cterm=italic gui=italic
+  autocmd VimEnter * hi link illuminatedWord Visual
+  autocmd VimEnter * hi link illuminatedCurWord CursorLine
 augroup END
 ]]
 

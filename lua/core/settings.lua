@@ -32,11 +32,6 @@ vim.cmd('filetype plugin indent on')
 
 local indent = 4
 
-opt.cursorline = true
-vim.cmd [[
-autocmd WinEnter * setlocal cursorline
-autocmd WinLeave * setlocal nocursorline
-]]
 opt.timeoutlen = 500
 opt.mouse = 'a'
 opt.encoding = 'utf-8'

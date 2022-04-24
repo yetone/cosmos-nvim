@@ -32,13 +32,13 @@ local bg = require("core.utils").bg
 
 -- Comments
 if ui.italic_comments then
-   fg("Comment", grey_fg .. " gui=italic")
+  fg("Comment", grey_fg .. " gui=italic")
 else
-   fg("Comment", grey_fg)
+  fg("Comment", grey_fg)
 end
 
 -- Disable cursor line
-cmd "hi clear CursorLine"
+-- cmd "hi clear CursorLine"
 -- Line number
 fg("cursorlinenr", white)
 
