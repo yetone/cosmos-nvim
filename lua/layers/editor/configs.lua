@@ -303,12 +303,6 @@ end
 function configs.telescope()
   require('core.utils').safe_require('telescope', function(telescope)
     local options = require('layers.editor.options')
-    telescope.load_extension 'projects'
-    telescope.load_extension 'file_browser'
-    telescope.load_extension 'dap'
-    telescope.load_extension 'media_files'
-    telescope.load_extension 'ui-select'
-    telescope.load_extension 'fzf'
 
     local fb_actions = require "telescope".extensions.file_browser.actions
 
@@ -367,7 +361,8 @@ function configs.telescope()
       },
       extensions = {
         ['ui-select'] = {
-          require("telescope.themes").get_ivy {}
+          -- TODO: specify the cursor theme for codeaction only
+          require("telescope.themes").get_cursor {},
         },
         file_browser = {
           theme = theme,
@@ -439,6 +434,13 @@ function configs.telescope()
         },
       },
     }
+
+    telescope.load_extension 'projects'
+    telescope.load_extension 'file_browser'
+    telescope.load_extension 'dap'
+    telescope.load_extension 'media_files'
+    telescope.load_extension 'ui-select'
+    telescope.load_extension 'fzf'
   end)
 end
 

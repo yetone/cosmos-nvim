@@ -34,7 +34,7 @@ cosmos.add_leader_keymapping('n|el', { "<cmd>TroubleToggle document_diagnostics<
 cosmos.add_leader_keymapping('n|eL', { "<cmd>TroubleToggle workspace_diagnostics<cr>", name = 'List workspace errors' })
 cosmos.add_leader_keymapping('n|en', { ':Lspsaga diagnostic_jump_next<CR>', name = 'Next error' })
 cosmos.add_leader_keymapping('n|ep', { ':Lspsaga diagnostic_jump_prev<CR>', name = 'Previous error' })
-cosmos.add_leader_keymapping('n|ef', { ':Telescope lsp_code_actions<CR>', name = 'Fix error' })
+cosmos.add_leader_keymapping('n|ef', { ':lua vim.lsp.buf.code_action()<CR>', name = 'Fix error' })
 -- cosmos.add_leader_keymapping('n|ef', { ':Lspsaga code_action<CR>', name = 'Fix error' })
 
 cosmos.add_leader_keymapping('n|db', { "<CMD>lua require('dap').toggle_breakpoint()<CR>", name = 'Toggle breakpoint', silent = true, noremap = true })
