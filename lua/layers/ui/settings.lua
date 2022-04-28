@@ -15,8 +15,8 @@ autocmd WinLeave * setlocal nocursorline
 vim.cmd [[
 augroup illuminate_augroup
   autocmd!
-  autocmd VimEnter * hi link illuminatedWord Visual
-  autocmd VimEnter * hi link illuminatedCurWord CursorLine
+  autocmd VimEnter * hi link illuminatedWord CursorLine
+  autocmd VimEnter * hi illuminatedCurWord cterm=underline gui=underline
 augroup END
 ]]
 
