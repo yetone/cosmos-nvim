@@ -406,6 +406,10 @@ function configs.telescope()
         },
         live_grep = {
           theme = theme,
+          on_input_filter_cb = function(prompt)
+            -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
+            return { prompt = prompt:gsub("%s", ".*") }
+          end,
         },
         current_buffer_fuzzy_find = {
           theme = theme,
