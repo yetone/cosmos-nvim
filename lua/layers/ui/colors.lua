@@ -9,17 +9,10 @@ M.init = function(theme)
    -- set the global theme, used at various places like theme switcher, highlights
    vim.g.cosmos_theme = theme
 
-   local present, base16 = pcall(require, "base16")
-
-   if present then
-      -- first load the base16 theme
-      -- base16(base16.themes(theme), true)
-
-      -- unload to force reload
-      package.loaded["layers.ui.highlights" or false] = nil
-      -- then load the highlights
-      require "layers.ui.highlights"
-   end
+    -- unload to force reload
+    package.loaded["layers.ui.highlights" or false] = nil
+    -- then load the highlights
+    require "layers.ui.highlights"
 end
 
 -- returns a table of colors for given or current theme
@@ -28,7 +21,39 @@ M.get = function(theme)
       theme = vim.g.cosmos_theme
    end
 
-   return require("hl_themes." .. theme)
+   return {
+     white = "#abb2bf",
+     darker_black = "#1b1f27",
+     black = "#1e222a", --  nvim bg
+     black2 = "#252931",
+     one_bg = "#282c34", -- real bg of onedark
+     one_bg2 = "#353b45",
+     one_bg3 = "#30343c",
+     grey = "#42464e",
+     grey_fg = "#565c64",
+     grey_fg2 = "#6f737b",
+     light_grey = "#6f737b",
+     red = "#d47d85",
+     baby_pink = "#DE8C92",
+     pink = "#ff75a0",
+     line = "#2a2e36", -- for lines like vertsplit
+     green = "#A3BE8C",
+     vibrant_green = "#7eca9c",
+     nord_blue = "#81A1C1",
+     blue = "#61afef",
+     yellow = "#e7c787",
+     sun = "#EBCB8B",
+     purple = "#b4bbc8",
+     dark_purple = "#c882e7",
+     teal = "#519ABA",
+     orange = "#fca2aa",
+     cyan = "#a3b8ef",
+     statusline_bg = "#22262e",
+     lightbg = "#2d3139",
+     lightbg2 = "#262a32",
+     pmenu_bg = "#A3BE8C",
+     folder_bg = "#61afef",
+   }
 end
 
 return M

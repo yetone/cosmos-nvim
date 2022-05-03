@@ -544,6 +544,7 @@ function configs.onedark()
     style = 'darker'
   }
   require('onedark').load()
+  require("layers.ui.colors").init()
 end
 
 return configs
