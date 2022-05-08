@@ -1,7 +1,8 @@
 local cmd = vim.cmd
 
 local override = require("layers.ui.options").hl_override
-local colors = require("layers.ui.colors").get()
+local colors = require("layers.ui.colors").get().base_30
+local theme = require("layers.ui.colors").get().base_16
 local ui = require("layers.ui.options")
 
 local black = colors.black
@@ -176,6 +177,453 @@ if ui.transparency then
    bg("TelescopePromptPrefix", "NONE")
    fg("TelescopeBorder", one_bg)
    fg_bg("TelescopeResultsTitle", black, blue)
+end
+
+local highlights = {
+
+   BufferLineBackground = {
+      fg = colors.grey_fg,
+      bg = colors.black2,
+   },
+
+   -- buffers
+   BufferLineBufferSelected = {
+      fg = colors.white,
+      bg = colors.black,
+      bold = true,
+   },
+
+   BufferLineBufferVisible = {
+      fg = colors.light_grey,
+      bg = colors.black2,
+   },
+
+   -- for diagnostics = "nvim_lsp"
+   BufferLineError = {
+      fg = colors.light_grey,
+      bg = colors.black2,
+   },
+   BufferLineErrorDiagnostic = {
+      fg = colors.light_grey,
+      bg = colors.black2,
+   },
+
+   -- close buttons
+   BufferLineCloseButton = {
+      fg = colors.light_grey,
+      bg = colors.black2,
+   },
+   BufferLineCloseButtonVisible = {
+      fg = colors.light_grey,
+      bg = colors.black2,
+   },
+   BufferLineCloseButtonSelected = {
+      fg = colors.red,
+      bg = colors.black,
+   },
+   BufferLineFill = {
+      fg = colors.grey_fg,
+      bg = colors.black2,
+   },
+   BufferlineIndicatorSelected = {
+      fg = colors.black,
+      bg = colors.black,
+   },
+
+   -- modified
+   BufferLineModified = {
+      fg = colors.red,
+      bg = colors.black2,
+   },
+   BufferLineModifiedVisible = {
+      fg = colors.red,
+      bg = colors.black2,
+   },
+   BufferLineModifiedSelected = {
+      fg = colors.green,
+      bg = colors.black,
+   },
+
+   -- separators
+   BufferLineSeparator = {
+      fg = colors.black2,
+      bg = colors.black2,
+   },
+   BufferLineSeparatorVisible = {
+      fg = colors.black2,
+      bg = colors.black2,
+   },
+   BufferLineSeparatorSelected = {
+      fg = colors.black2,
+      bg = colors.black2,
+   },
+
+   -- tabs
+   BufferLineTab = {
+      fg = colors.light_grey,
+      bg = colors.one_bg3,
+   },
+   BufferLineTabSelected = {
+      fg = colors.black2,
+      bg = colors.nord_blue,
+   },
+   BufferLineTabClose = {
+      fg = colors.red,
+      bg = colors.black,
+   },
+
+   BufferLineDevIconDefaultInactive = {
+      bg = "NONE",
+   },
+
+   BufferLineDevIconDefaultSelected = {
+      bg = "NONE",
+   },
+
+   BufferLineDuplicate = {
+      fg = "NONE",
+      bg = colors.black2,
+   },
+   BufferLineDuplicateSelected = {
+      fg = colors.red,
+      bg = colors.black,
+   },
+   BufferLineDuplicateVisible = {
+      fg = colors.blue,
+      bg = colors.black2,
+   },
+
+   -- custom area
+   BufferLineRightCustomAreaText1 = {
+      bg = colors.grey,
+      fg = colors.white,
+   },
+   BufferLineRightCustomAreaText2 = {
+      fg = colors.red,
+   },
+
+   CmpItemKindConstant = { fg = theme.base09 },
+   CmpItemKindFunction = { fg = theme.base0D },
+   CmpItemKindIdentifier = { fg = theme.base08 },
+   CmpItemKindField = { fg = theme.base08 },
+   CmpItemKindVariable = { fg = theme.base0E },
+   CmpItemKindSnippet = { fg = colors.red },
+   CmpItemKindText = { fg = theme.base0B },
+   CmpItemKindStructure = { fg = theme.base0E },
+   CmpItemKindType = { fg = theme.base0A },
+   CmpItemKindKeyword = { fg = theme.base07 },
+   CmpItemKindMethod = { fg = theme.base0D },
+   CmpItemKindConstructor = { fg = colors.blue },
+   CmpItemKindFolder = { fg = theme.base07 },
+   CmpItemKindModule = { fg = theme.base0A },
+   CmpItemKindProperty = { fg = theme.base08 },
+   -- CmpItemKindEnum = { fg = "" },
+   CmpItemKindUnit = { fg = theme.base0E },
+   -- CmpItemKindClass = { fg = "" },
+   CmpItemKindFile = { fg = theme.base07 },
+   -- CmpItemKindInterface = { fg = "" },
+   CmpItemKindColor = { fg = colors.red },
+   CmpItemKindReference = { fg = theme.base05 },
+   -- CmpItemKindEnumMember = { fg = "" },
+   CmpItemKindStruct = { fg = theme.base0E },
+   -- CmpItemKindValue = { fg = "" },
+   -- CmpItemKindEvent = { fg = "" },
+   CmpItemKindOperator = { fg = theme.base05 },
+   CmpItemKindTypeParameter = { fg = theme.base08 },
+
+   DevIconc = { bg = "NONE", fg = colors.blue },
+   DevIconcss = { bg = "NONE", fg = colors.blue },
+   DevIcondeb = { bg = "NONE", fg = colors.cyan },
+   DevIconDockerfile = { bg = "NONE", fg = colors.cyan },
+   DevIconhtml = { bg = "NONE", fg = colors.baby_pink },
+   DevIconjpeg = { bg = "NONE", fg = colors.dark_purple },
+   DevIconjpg = { bg = "NONE", fg = colors.dark_purple },
+   DevIconjs = { bg = "NONE", fg = colors.sun },
+   DevIconkt = { bg = "NONE", fg = colors.orange },
+   DevIconlock = { bg = "NONE", fg = colors.red },
+   DevIconlua = { bg = "NONE", fg = colors.blue },
+   DevIconmp3 = { bg = "NONE", fg = colors.white },
+   DevIconmp4 = { bg = "NONE", fg = colors.white },
+   DevIconout = { bg = "NONE", fg = colors.white },
+   DevIconpng = { bg = "NONE", fg = colors.dark_purple },
+   DevIconpy = { bg = "NONE", fg = colors.cyan },
+   DevIcontoml = { bg = "NONE", fg = colors.blue },
+   DevIconts = { bg = "NONE", fg = colors.teal },
+   DevIconttf = { bg = "NONE", fg = colors.white },
+   DevIconrb = { bg = "NONE", fg = colors.pink },
+   DevIconrpm = { bg = "NONE", fg = colors.orange },
+   DevIconvue = { bg = "NONE", fg = colors.vibrant_green },
+   DevIconwoff = { bg = "NONE", fg = colors.white },
+   DevIconwoff2 = { bg = "NONE", fg = colors.white },
+   DevIconxz = { bg = "NONE", fg = colors.sun },
+   DevIconzip = { bg = "NONE", fg = colors.sun },
+
+   -- git commits
+   gitcommitOverflow = {
+      fg = theme.base08,
+   },
+
+   gitcommitSummary = {
+      fg = theme.base08,
+   },
+
+   gitcommitComment = {
+      fg = theme.base03,
+   },
+
+   gitcommitUntracked = {
+      fg = theme.base03,
+   },
+
+   gitcommitDiscarded = {
+      fg = theme.base03,
+   },
+
+   gitcommitSelected = {
+      fg = theme.base03,
+   },
+
+   gitcommitHeader = {
+      fg = theme.base0E,
+   },
+
+   gitcommitSelectedType = {
+      fg = theme.base0D,
+   },
+
+   gitcommitUnmergedType = {
+      fg = theme.base0D,
+   },
+
+   gitcommitDiscardedType = {
+      fg = theme.base0D,
+   },
+
+   gitcommitBranch = {
+      fg = theme.base09,
+      bold = true,
+   },
+
+   gitcommitUntrackedFile = {
+      fg = theme.base0A,
+   },
+
+   gitcommitUnmergedFile = {
+      fg = theme.base08,
+      bold = true,
+   },
+
+   gitcommitDiscardedFile = {
+      fg = theme.base08,
+      bold = true,
+   },
+
+   gitcommitSelectedFile = {
+      fg = theme.base0B,
+      bold = true,
+   },
+
+   mailQuoted1 = {
+      fg = theme.base0A,
+   },
+
+   mailQuoted2 = {
+      fg = theme.base0B,
+   },
+
+   mailQuoted3 = {
+      fg = theme.base0E,
+   },
+
+   mailQuoted4 = {
+      fg = theme.base0C,
+   },
+
+   mailQuoted5 = {
+      fg = theme.base0D,
+   },
+
+   mailQuoted6 = {
+      fg = theme.base0A,
+   },
+
+   mailURL = {
+      fg = theme.base0D,
+   },
+
+   mailEmail = {
+      fg = theme.base0D,
+   },
+
+
+   TSAnnotation = {
+      fg = theme.base0F,
+      sp = "none",
+   },
+
+   TSAttribute = {
+      fg = theme.base0A,
+      sp = "none",
+   },
+
+   TSCharacter = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSConstBuiltin = {
+      fg = theme.base09,
+      sp = "none",
+   },
+
+   TSConstMacro = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSError = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSException = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSFloat = {
+      fg = theme.base09,
+      sp = "none",
+   },
+
+   TSFuncBuiltin = {
+      fg = theme.base0D,
+      sp = "none",
+   },
+
+   TSFuncMacro = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSKeywordOperator = {
+      fg = theme.base0E,
+      sp = "none",
+   },
+
+   TSMethod = {
+      fg = theme.base0D,
+      sp = "none",
+   },
+
+   TSNamespace = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSNone = {
+      fg = theme.base05,
+      sp = "none",
+   },
+
+   TSParameter = {
+      fg = theme.base08,
+      sp = "none",
+   },
+
+   TSParameterReference = {
+      fg = theme.base05,
+      sp = "none",
+   },
+
+   TSPunctDelimiter = {
+      fg = theme.base0F,
+      sp = "none",
+   },
+
+   TSPunctSpecial = {
+      fg = theme.base05,
+      sp = "none",
+   },
+
+   TSStringRegex = {
+      fg = theme.base0C,
+      sp = "none",
+   },
+
+   TSStringEscape = {
+      fg = theme.base0C,
+      sp = "none",
+   },
+
+   TSSymbol = {
+      fg = theme.base0B,
+      sp = "none",
+   },
+
+   TSTagDelimiter = {
+      fg = theme.base0F,
+      sp = "none",
+   },
+
+   TSText = {
+      fg = theme.base05,
+      sp = "none",
+   },
+
+   TSStrong = {
+      bold = true,
+   },
+
+   TSEmphasis = {
+      fg = theme.base09,
+      sp = "none",
+   },
+
+   TSStrike = {
+      fg = theme.base00,
+      sp = "none",
+      strikethrough = true,
+   },
+
+   TSLiteral = {
+      fg = theme.base09,
+      sp = "none",
+   },
+
+   TSURI = {
+      fg = theme.base09,
+      sp = "none",
+      underline = true,
+   },
+
+   TSTypeBuiltin = {
+      fg = theme.base0A,
+      sp = "none",
+   },
+
+   TSVariableBuiltin = {
+      fg = theme.base09,
+      sp = "none",
+   },
+
+   TSDefinition = {
+      sp = theme.base04,
+      underline = true,
+   },
+
+   TSDefinitionUsage = {
+      sp = theme.base04,
+      underline = true,
+   },
+
+   TSCurrentScope = {
+      bold = true,
+   },
+}
+
+for hl, col in pairs(highlights) do
+   vim.api.nvim_set_hl(0, hl, col)
 end
 
 if #override ~= 0 then
