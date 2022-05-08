@@ -14,9 +14,6 @@ cosmos.add_plugin(
     wants = { "LuaSnip" },
     requires = {
       {
-        'onsails/lspkind-nvim'
-      },
-      {
         'windwp/nvim-autopairs',
         config = configs.autopairs,
       },

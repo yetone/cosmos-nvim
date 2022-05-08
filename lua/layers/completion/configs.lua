@@ -1,7 +1,35 @@
 local configs = {}
 
 function configs.cmp()
-  require('core.utils').safe_require({ 'cmp', 'lspkind', 'nvim-autopairs.completion.cmp', 'luasnip' }, function(cmp, lspkind, cmp_autopairs, luasnip)
+  local icons = {
+    Text = "",
+    Method = "",
+    Function = "",
+    Constructor = "⌘",
+    Field = "ﰠ",
+    Variable = "",
+    Class = "ﴯ",
+    Interface = "",
+    Module = "",
+    Property = "ﰠ",
+    Unit = "塞",
+    Value = "",
+    Enum = "",
+    Keyword = "廓",
+    Snippet = "",
+    Color = "",
+    File = "",
+    Reference = "",
+    Folder = "",
+    EnumMember = "",
+    Constant = "",
+    Struct = "פּ",
+    Event = "",
+    Operator = "",
+    TypeParameter = "",
+  }
+
+  require('core.utils').safe_require({ 'cmp', 'nvim-autopairs.completion.cmp', 'luasnip' }, function(cmp, cmp_autopairs, luasnip)
     local options = require('layers.completion.options')
     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
 
@@ -106,44 +134,13 @@ function configs.cmp()
         { name = 'buffer' },
       }),
       formatting = {
-        format = lspkind.cmp_format({
-          mode = 'symbol_text', -- show only symbol annotations
-          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+        fields = { "kind", "abbr", "menu" },
+        format = function(_, vim_item)
+          vim_item.menu = vim_item.kind
+          vim_item.kind = icons[vim_item.kind]
 
-          -- The function below will be called before any actual modifications from lspkind
-          -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
-          before = function (entry, vim_item)
-            return vim_item
-          end,
-
-          symbol_map = {
-            Text = "",
-            Method = "",
-            Function = "",
-            Constructor = "",
-            Field = "ﰠ",
-            Variable = "",
-            Class = "ﴯ",
-            Interface = "",
-            Module = "",
-            Property = "ﰠ",
-            Unit = "塞",
-            Value = "",
-            Enum = "",
-            Keyword = "",
-            Snippet = "",
-            Color = "",
-            File = "",
-            Reference = "",
-            Folder = "",
-            EnumMember = "",
-            Constant = "",
-            Struct = "פּ",
-            Event = "",
-            Operator = "",
-            TypeParameter = ""
-          },
-        })
+          return vim_item
+        end,
       },
     })
 
