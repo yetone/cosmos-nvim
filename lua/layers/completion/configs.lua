@@ -29,6 +29,34 @@ function configs.cmp()
     TypeParameter = "",
   }
 
+  local codicons = {
+    Text = '  ',
+    Method = '  ',
+    Function = '  ',
+    Constructor = '  ',
+    Field = '  ',
+    Variable = '  ',
+    Class = '  ',
+    Interface = '  ',
+    Module = '  ',
+    Property = '  ',
+    Unit = '  ',
+    Value = '  ',
+    Enum = '  ',
+    Keyword = '  ',
+    Snippet = '  ',
+    Color = '  ',
+    File = '  ',
+    Reference = '  ',
+    Folder = '  ',
+    EnumMember = '  ',
+    Constant = '  ',
+    Struct = '  ',
+    Event = '  ',
+    Operator = '  ',
+    TypeParameter = '  ',
+  }
+
   require('core.utils').safe_require({ 'cmp', 'nvim-autopairs.completion.cmp', 'luasnip' }, function(cmp, cmp_autopairs, luasnip)
     local options = require('layers.completion.options')
     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
@@ -136,8 +164,9 @@ function configs.cmp()
       formatting = {
         fields = { "kind", "abbr", "menu" },
         format = function(_, vim_item)
+          local icons_ = options.cmp_kind_use_codicons and codicons or icons
           vim_item.menu = vim_item.kind
-          vim_item.kind = icons[vim_item.kind]
+          vim_item.kind = icons_[vim_item.kind]
 
           return vim_item
         end,
