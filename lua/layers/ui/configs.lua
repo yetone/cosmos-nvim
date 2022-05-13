@@ -222,11 +222,29 @@ end
 function configs.lualine()
   require('core.utils').safe_require('lualine', function(lualine)
     local options = require('layers.ui.options')
-    local auto_theme = require('lualine.themes.auto')
 
     local function window()
       return vim.api.nvim_win_get_number(0)
     end
+
+    local colors = require("layers.ui.colors").get().base_30
+    local theme = {
+      normal = {
+        a = { fg = colors.one_bg, bg = colors.green, gui = 'bold' },
+        b = { fg = colors.white, bg = colors.one_bg2 },
+        c = { fg = colors.light_grey, bg = colors.one_bg },
+      },
+      command = { a = { fg = colors.one_bg, bg = colors.yellow, gui = 'bold' } },
+      insert = { a = { fg = colors.one_bg, bg = colors.blue, gui = 'bold' } },
+      visual = { a = { fg = colors.one_bg, bg = colors.dark_purple, gui = 'bold' } },
+      terminal = { a = { fg = colors.one_bg, bg = colors.cyan, gui = 'bold' } },
+      replace = { a = { fg = colors.one_bg, bg = colors.red, gui = 'bold' } },
+      inactive = {
+        a = { fg = colors.light_grey, bg = colors.one_bg, gui = 'bold' },
+        b = { fg = colors.light_grey, bg = colors.one_bg },
+        c = { fg = colors.light_grey, bg = colors.one_bg2 },
+      },
+    }
 
     -- auto_theme.normal.c.bg = auto_theme.normal.a.fg
 
@@ -234,16 +252,16 @@ function configs.lualine()
       options = {
         disabled_filetypes = options.statusline_filetype_exclude,
         icons_enabled = true,
-        theme = auto_theme,
+        theme = theme,
         component_separators = '|',
         section_separators = { left = '', right = '' },
         globalstatus = true,
       },
       sections = {
         lualine_a = {
-          { window, separator = { left = '', right = '', }, right_padding = 2 },
+          { 'mode', separator = { left = '', right = '', }, right_padding = 2 },
         },
-        lualine_b = { 'mode', 'branch', 'diff', 'diagnostics', 'filename'},
+        lualine_b = { 'branch', 'diff', 'diagnostics', 'filename'},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {'encoding', 'fileformat', 'filetype', 'progress'},
@@ -537,14 +555,6 @@ function configs.gps()
   require('core.utils').safe_require('nvim-gps', function(gps)
     gps.setup()
   end)
-end
-
-function configs.onedark()
-  require('onedark').setup {
-    style = 'darker'
-  }
-  require('onedark').load()
-  require("layers.ui.colors").init()
 end
 
 return configs

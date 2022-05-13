@@ -1,26 +1,20 @@
 local M = {}
 
 -- if theme given, load given theme if given, otherwise nvchad_theme
-M.init = function(theme)
-   if not theme then
-      theme = require("layers.ui.options").theme
-   end
+M.init = function()
+  vim.cmd("hi clear")
+  if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
+  vim.o.termguicolors = true
+  vim.g.colors_name = "onedark"
 
-   -- set the global theme, used at various places like theme switcher, highlights
-   vim.g.cosmos_theme = theme
-
-    -- unload to force reload
-    package.loaded["layers.ui.highlights" or false] = nil
-    -- then load the highlights
-    require "layers.ui.highlights"
+  -- unload to force reload
+  package.loaded["layers.ui.highlights" or false] = nil
+  -- then load the highlights
+  require "layers.ui.highlights"
 end
 
 -- returns a table of colors for given or current theme
-M.get = function(theme)
-   if not theme then
-      theme = vim.g.cosmos_theme
-   end
-
+M.get = function()
    return {
      base_30 = {
        white = "#abb2bf",

@@ -159,7 +159,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'neovim/nvim-lspconfig',
   {
-    event = 'BufReadPre',
+    event = 'BufRead',
   }
 )
 

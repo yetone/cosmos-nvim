@@ -12,20 +12,31 @@ autocmd WinEnter * if &filetype != "alpha" | setlocal cursorline | endif
 autocmd WinLeave * setlocal nocursorline
 ]]
 
-vim.cmd [[
-augroup illuminate_augroup
-  autocmd!
-  autocmd VimEnter * hi link illuminatedWord CursorLine
-  autocmd VimEnter * hi illuminatedCurWord cterm=underline gui=underline
-augroup END
-]]
+vim.api.nvim_create_autocmd("VimEnter", {
+  group = vim.api.nvim_create_augroup("illuminate_augroup", { clear = true }),
+  pattern = "*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "illuminatedWord", {
+      link = "Visual",
+    })
+    vim.api.nvim_set_hl(0, "illuminatedCurWord", {
+      underline = true,
+    })
+  end,
+})
 
-vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
-vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+vim.api.nvim_create_autocmd({
+    "BufEnter",
+    "BufRead",
+    "BufWinEnter",
+    "FileType",
+    "WinEnter",
+  }, {
+    pattern = "*",
+    callback = function()
+      require("layers.ui.utils").hide_statusline()
+    end,
+  })
 
-vim.cmd [[ autocmd BufEnter,BufRead,BufWinEnter,FileType,WinEnter * lua require("layers.ui.utils").hide_statusline() ]]
+require("layers.ui.colors").init()
 
