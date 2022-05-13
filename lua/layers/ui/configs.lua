@@ -209,11 +209,11 @@ function configs.alpha()
     dashboard.section.header.opts.hl = 'dashboard'
 
     dashboard.section.buttons.val = {
-      dashboard.button("e", "  New File    ", ":enew<CR>"),
-      dashboard.button("f", "  Find File   ", ":Telescope find_files<CR>"),
-      dashboard.button("t", "  Find Text   ", ":Telescope live_grep<CR>"),
-      dashboard.button("c", "  NVIM Config ", ":e ~/.config/nvim/init.lua<CR>:Telescope find_files<CR>"),
-      dashboard.button("q", "  Quit        ", ":qa<CR>"),
+      dashboard.button("e", "  New File    ", ":enew<CR>", nil),
+      dashboard.button("f", "  Find File   ", ":Telescope find_files<CR>", nil),
+      dashboard.button("t", "  Find Text   ", ":Telescope live_grep<CR>", nil),
+      dashboard.button("c", "  NVIM Config ", ":e ~/.config/nvim/init.lua<CR>:Telescope find_files<CR>", nil),
+      dashboard.button("q", "  Quit        ", ":qa<CR>", nil),
     }
     alpha.setup(dashboard.opts)
   end)
