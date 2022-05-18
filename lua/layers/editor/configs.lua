@@ -653,11 +653,20 @@ configs.hop = function()
   end)
 end
 
-configs.lightspeed = function()
-  require('core.utils').safe_require('lightspeed', function(lightspeed)
-    lightspeed.setup {
-      ignore_case = true,
+configs.leap = function()
+  require('core.utils').safe_require('leap', function(leap)
+    leap.setup {
+      case_insensitive = false,
+      special_keys = {
+        repeat_search = '<enter>',
+        next_match    = '<enter>',
+        prev_match    = '<tab>',
+        next_group    = '<space>',
+        prev_group    = '<tab>',
+        eol           = '<space>',
+      },
     }
+    leap.set_default_keymaps()
   end)
 end
 

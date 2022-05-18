@@ -59,10 +59,10 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'ggandor/lightspeed.nvim',
+  'ggandor/leap.nvim',
   {
     requires = { 'tpope/vim-repeat' },
-    config = configs.lightspeed,
+    config = configs.leap,
     event = 'BufRead',
   }
 )
