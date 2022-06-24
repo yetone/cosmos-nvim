@@ -483,25 +483,27 @@ configs.dapui = function()
         edit = "e",
         repl = "r",
       },
-      sidebar = {
-        -- You can change the order of elements in the sidebar
-        elements = {
-          -- Provide as ID strings or tables with "id" and "size" keys
-          {
-            id = "scopes",
-            size = 0.25, -- Can be float or integer > 1
+      layouts = {
+        {
+          -- You can change the order of elements in the sidebar
+          elements = {
+            -- Provide as ID strings or tables with "id" and "size" keys
+            {
+              id = "scopes",
+              size = 0.25, -- Can be float or integer > 1
+            },
+            { id = "breakpoints", size = 0.25 },
+            { id = "stacks", size = 0.25 },
+            { id = "watches", size = 00.25 },
           },
-          { id = "breakpoints", size = 0.25 },
-          { id = "stacks", size = 0.25 },
-          { id = "watches", size = 00.25 },
+          size = 40,
+          position = "left", -- Can be "left", "right", "top", "bottom"
         },
-        size = 40,
-        position = "left", -- Can be "left", "right", "top", "bottom"
-      },
-      tray = {
-        elements = { "repl" },
-        size = 10,
-        position = "bottom", -- Can be "left", "right", "top", "bottom"
+        {
+          elements = { "repl" },
+          size = 10,
+          position = "bottom", -- Can be "left", "right", "top", "bottom"
+        },
       },
       floating = {
         max_height = nil, -- These can be integers or a float between 0 and 1.
@@ -578,6 +580,38 @@ configs.nvimtree = function()
   require('core.utils').safe_require('nvim-tree', function(nvimtree)
     nvimtree.setup({
       renderer = {
+        add_trailing = false,
+        highlight_git = false,
+        highlight_opened_files = "none",
+        root_folder_modifier = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
+        icons = {
+          show = {
+            folder = true,
+            file = true,
+            git = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            git = {
+              deleted = "",
+              ignored = "◌",
+              renamed = "➜",
+              staged = "✓",
+              unmerged = "",
+              unstaged = "✗",
+              untracked = "★",
+            },
+            folder = {
+              default = "",
+              empty = "",
+              empty_open = "",
+              open = "",
+              symlink = "",
+              symlink_open = "",
+            },
+          },
+        },
         indent_markers = {
           enable = true,
         },
