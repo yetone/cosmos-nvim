@@ -5,6 +5,7 @@ cosmos.add_plugin(
   'jreybert/vimagit',
   {
     event = 'BufRead',
+    branch = 'master',
   }
 )
 
