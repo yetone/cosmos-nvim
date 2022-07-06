@@ -14,7 +14,7 @@ cosmos.add_plugin(
     opt = true,
     requires = { 'nvim-lua/plenary.nvim', opt = true },
     config = configs.gitsigns,
-    event = {'BufRead','BufNewFile'},
+    event = { 'BufRead', 'BufNewFile' },
   }
 )
 
