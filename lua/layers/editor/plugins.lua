@@ -7,6 +7,9 @@ cosmos.add_plugin(
   {
     run = ':call mkdp#util#install()',
     event = 'BufRead',
+    config = function()
+      vim.g.mkdp_open_to_the_world = 1
+    end,
   }
 )
 
