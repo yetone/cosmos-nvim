@@ -61,6 +61,7 @@ autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 
 autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
 autocmd bufnewfile,bufread *.jsx set filetype=javascriptreact
+autocmd bufnewfile,bufread *.ts set filetype=typescript
 ]]
 
 opt.list = true
