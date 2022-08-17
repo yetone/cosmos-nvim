@@ -15,6 +15,7 @@ cosmos.add_plugin(
     requires = {
       {
         'windwp/nvim-autopairs',
+        branch = 'master',
         config = configs.autopairs,
       },
       {

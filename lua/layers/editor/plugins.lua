@@ -281,6 +281,7 @@ cosmos.add_plugin(
   'Pocco81/DAPInstall.nvim',
   {
     requires = { 'mfussenegger/nvim-dap' },
+    config = configs.dap_install,
     event = 'BufRead',
   }
 )
