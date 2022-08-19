@@ -308,6 +308,22 @@ function configs.telescope()
 
     local fb_actions = require "telescope".extensions.file_browser.actions
 
+    local previewers = require('telescope.previewers')
+
+    local new_maker = function(filepath, bufnr, opts)
+      opts = opts or {}
+
+      filepath = vim.fn.expand(filepath)
+      vim.loop.fs_stat(filepath, function(_, stat)
+        if not stat then return end
+        if stat.size > 100000 then
+          return
+        else
+          previewers.buffer_previewer_maker(filepath, bufnr, opts)
+        end
+      end)
+    end
+
     local theme = options.telescope_theme
     telescope.setup {
       defaults = {
@@ -359,7 +375,7 @@ function configs.telescope()
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
         qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
         -- Developer configurations: Not meant for general override
-        buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+        buffer_previewer_maker = new_maker,
       },
       extensions = {
         ['ui-select'] = {
@@ -407,6 +423,7 @@ function configs.telescope()
           hidden = true,
         },
         live_grep = {
+          debounce = 100,
           theme = theme,
           on_input_filter_cb = function(prompt)
             -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
@@ -467,6 +484,10 @@ configs.dap_install = function()
       installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
     })
   end)
+end
+
+configs.dap_go = function()
+  require('dap-go').setup()
 end
 
 configs.dapui = function()

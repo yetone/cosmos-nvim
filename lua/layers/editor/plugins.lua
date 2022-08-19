@@ -287,6 +287,15 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
+  'leoluz/nvim-dap-go',
+  {
+    requires = { 'mfussenegger/nvim-dap' },
+    config = configs.dap_go,
+    event = 'BufRead',
+  }
+)
+
+cosmos.add_plugin(
   'rcarriga/nvim-dap-ui',
   {
     requires = { 'mfussenegger/nvim-dap' },
