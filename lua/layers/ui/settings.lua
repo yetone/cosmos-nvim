@@ -8,7 +8,7 @@ g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
 
 opt.cursorline = true
 vim.cmd [[
-autocmd WinEnter * if &filetype != "alpha" | setlocal cursorline | endif
+autocmd WinEnter * if (&filetype != "alpha" && &filetype != "dashboard") | setlocal cursorline | endif
 autocmd WinLeave * setlocal nocursorline
 ]]
 

@@ -8,9 +8,9 @@ return {
   enable_scrollbar = true,
   enable_gps = true,
   illuminate_delay = 0,
-  illuminate_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
-  indentline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
-  statusline_filetype_exclude = { 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
+  illuminate_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
+  indentline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
+  statusline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   statusline_filetype_include = {},
   hl_override = "", -- path of your file that contains highlights
   italic_comments = false,
