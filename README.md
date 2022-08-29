@@ -11,7 +11,7 @@
 If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the text-objects of **Vim**, I highly recommend you try this configuration.
 
 <p align="center">
-    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard7.png" >
+    <img src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard8.png" >
 </p>
 
 # Key Features
