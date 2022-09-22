@@ -167,14 +167,29 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
+  'williamboman/mason.nvim',
+  {
+    event = 'BufRead',
+  }
+)
+
+cosmos.add_plugin(
+  'williamboman/mason-lspconfig.nvim',
+  {
+    after = { 'mason.nvim', 'nvim-lspconfig', 'cmp-nvim-lsp', 'lua-dev.nvim' },
+    config = configs.mason,
+  }
+)
+
+cosmos.add_plugin(
   'ojroques/nvim-lspfuzzy',
   {
     config = configs.lspfuzzy,
     after = { 'nvim-lspconfig' },
     event = 'BufRead',
     requires = {
-      {'junegunn/fzf', event = 'BufRead' },
-      {'junegunn/fzf.vim', event = 'BufRead' },  -- to enable preview (optional)
+      { 'junegunn/fzf', event = 'BufRead' },
+      { 'junegunn/fzf.vim', event = 'BufRead' },  -- to enable preview (optional)
     },
   }
 )
@@ -232,27 +247,18 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'williamboman/nvim-lsp-installer',
-  {
-    requires = {
-      {
-        'tamago324/nlsp-settings.nvim',
-        after = { 'nvim-lspconfig' },
-      },
-    },
-    after = { 'nvim-lspconfig' },
-    config = configs.lsp_installer,
-  }
-)
-
-cosmos.add_plugin(
   'dstein64/vim-startuptime',
   {
     event = 'BufRead',
   }
 )
 
-cosmos.add_plugin('folke/lua-dev.nvim')
+cosmos.add_plugin(
+  'folke/lua-dev.nvim',
+  {
+    event = 'BufRead',
+  }
+)
 
 cosmos.add_plugin(
   'akinsho/toggleterm.nvim',
@@ -274,15 +280,6 @@ cosmos.add_plugin(
   'mfussenegger/nvim-dap',
   {
     config = configs.dap,
-  }
-)
-
-cosmos.add_plugin(
-  'Pocco81/DAPInstall.nvim',
-  {
-    requires = { 'mfussenegger/nvim-dap' },
-    config = configs.dap_install,
-    event = 'BufRead',
   }
 )
 

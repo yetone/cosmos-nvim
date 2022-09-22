@@ -1,18 +1,68 @@
 local configs = {}
 
-function configs.lsp_installer()
-  require('core.utils').safe_require('nlspsettings', function(nlspsettings)
-    nlspsettings.setup({
-      config_home = vim.fn.stdpath('config') .. '/nlsp-settings',
-      local_settings_root_markers = { '.git' },
-      jsonls_append_default_schemas = true
+function configs.mason()
+  require("mason").setup({
+      ui = {
+        keymaps = {
+          -- Keymap to expand a package
+          toggle_package_expand = "<CR>",
+          -- Keymap to install the package under the current cursor position
+          install_package = "i",
+          -- Keymap to reinstall/update the package under the current cursor position
+          update_package = "u",
+          -- Keymap to check for new version for the package under the current cursor position
+          check_package_version = "c",
+          -- Keymap to update all installed packages
+          update_all_packages = "U",
+          -- Keymap to check which installed packages are outdated
+          check_outdated_packages = "C",
+          -- Keymap to uninstall a package
+          uninstall_package = "X",
+          -- Keymap to cancel a package installation
+          cancel_installation = "<C-c>",
+          -- Keymap to apply language filter
+          apply_language_filter = "/",
+        },
+      }
     })
-  end)
+  require("mason-lspconfig").setup()
+
+  local lspconfig = require("lspconfig")
+  local lspconfig_configs = require('lspconfig.configs')
+  if not lspconfig_configs.ls_emmet then
+    lspconfig_configs.ls_emmet = {
+      default_config = {
+        cmd = { 'ls_emmet', '--stdio' };
+        filetypes = {
+          'html',
+          'css',
+          'scss',
+          'javascript',
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+          'haml',
+          'xml',
+          'xsl',
+          'pug',
+          'slim',
+          'sass',
+          'stylus',
+          'less',
+          'sss',
+          'hbs',
+          'handlebars',
+        };
+        root_dir = function(fname)
+          return vim.loop.cwd()
+        end;
+        settings = {};
+      };
+    }
+  end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  require('core.utils').safe_require('cmp_nvim_lsp', function(cmp_nvim_lsp)
-    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
-  end)
+  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- Use an on_attach function to only map the following keys
@@ -34,90 +84,56 @@ function configs.lsp_installer()
     end, { silent = true })
   end
 
-  require('core.utils').safe_require({ 'nvim-lsp-installer', 'lspconfig', 'lspconfig.configs' }, function(lsp_installer, lspconfig, lspconfig_configs)
-    lsp_installer.setup {}
-
-    local default_opt = {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      flags = {
-        debounce_text_changes = 150,
-      }
+  local default_opt = {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
     }
+  }
 
-    local format_config = require 'layers.editor.format'
+  local format_config = require 'layers.editor.format'
 
-    local servers = {
-      tsserver = {
-        root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
-      },
-      pyright = {
-        filetypes = {"python"},
-        init_options = {
-          formatters = {
-            black = {
-              command = "black",
-              args = {"--quiet", "-"},
-              rootPatterns = {"pyproject.toml"},
-            },
-            formatFiletypes = {
-              python = {"black"}
-            }
+  local servers = {
+    tsserver = {
+      root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
+    },
+    pyright = {
+      filetypes = {"python"},
+      init_options = {
+        formatters = {
+          black = {
+            command = "black",
+            args = {"--quiet", "-"},
+            rootPatterns = {"pyproject.toml"},
+          },
+          formatFiletypes = {
+            python = {"black"}
           }
-        },
+        }
       },
-      efm = {
-        filetypes = vim.tbl_keys(format_config),
-        init_options = { documentFormatting = true },
-        root_dir = lspconfig.util.root_pattern { '.git/', '.' },
-        settings = { languages = format_config },
-      },
-    }
+    },
+    efm = {
+      filetypes = vim.tbl_keys(format_config),
+      init_options = { documentFormatting = true },
+      root_dir = lspconfig.util.root_pattern { '.git/', '.' },
+      settings = { languages = format_config },
+    },
+  }
 
-    require('core.utils').safe_require('lua-dev', function(luadev)
-      servers.sumneko_lua = luadev.setup(default_opt)
-    end)
+  local luadev = require('lua-dev')
+  servers.sumneko_lua = luadev.setup(default_opt)
 
-    if not lspconfig_configs.ls_emmet then
-      lspconfig_configs.ls_emmet = {
-        default_config = {
-          cmd = { 'ls_emmet', '--stdio' };
-          filetypes = {
-            'html',
-            'css',
-            'scss',
-            'javascript',
-            'javascriptreact',
-            'typescript',
-            'typescriptreact',
-            'haml',
-            'xml',
-            'xsl',
-            'pug',
-            'slim',
-            'sass',
-            'stylus',
-            'less',
-            'sss',
-            'hbs',
-            'handlebars',
-          };
-          root_dir = function(fname)
-            return vim.loop.cwd()
-          end;
-          settings = {};
-        };
-      }
-    end
-
-    lspconfig.ls_emmet.setup { capabilities = capabilities }
-
-    for _, server_name in ipairs(require('nvim-lsp-installer.servers').get_installed_server_names()) do
-      local opt = servers[server_name] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
-      lspconfig[server_name].setup(opt)
-    end
-  end)
+  require("mason-lspconfig").setup_handlers({
+      -- The first entry (without a key) will be the default handler
+      -- and will be called for each installed server that doesn't have
+      -- a dedicated handler.
+      function (server_name) -- default handler (optional)
+        local opt = servers[server_name] or {}
+        opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+        lspconfig[server_name].setup(opt)
+      end,
+  })
 end
 
 function configs.project()
@@ -475,14 +491,6 @@ configs.dap = function()
     for name, configuration in pairs(require('layers.editor.utils').get_dap_configurations()) do
       dap.configurations[name] = configuration
     end
-  end)
-end
-
-configs.dap_install = function()
-  require('core.utils').safe_require('dap-install', function(dap_install)
-    dap_install.setup({
-      installation_path = vim.fn.stdpath("data") .. "/dapinstall/",
-    })
   end)
 end
 
