@@ -42,6 +42,7 @@ cosmos.add_plugin('hrsh7th/cmp-nvim-lsp', { after = 'nvim-cmp' })
 cosmos.add_plugin('hrsh7th/cmp-buffer', { after = 'nvim-cmp' })
 cosmos.add_plugin('hrsh7th/cmp-path', { after = 'nvim-cmp' })
 cosmos.add_plugin('hrsh7th/cmp-cmdline', { after = 'nvim-cmp' })
+cosmos.add_plugin('dmitmel/cmp-cmdline-history', { after = 'nvim-cmp' })
 
 cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { after = 'nvim-cmp' })
 
