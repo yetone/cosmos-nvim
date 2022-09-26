@@ -17,32 +17,6 @@ local function is_module_available(name)
   end
 end
 
-function M.safe_require(pkg_name, cbk, opts)
-  opts = opts or {}
-  local pkg_names = {}
-  if type(pkg_name) == 'table' then
-    pkg_names = pkg_name
-  else
-    pkg_names = { pkg_name }
-  end
-
-  local pkgs = {}
-  for i, pkg_name_ in ipairs(pkg_names) do
-    if is_module_available(pkg_name_) then
-      pkgs[i] = require(pkg_name_)
-    else
-      if not opts.silent then
-        print('WARNING: package ' .. pkg_name_ .. ' is not found')
-      end
-      return
-    end
-  end
-
-  if #pkgs == #pkg_names then
-      return cbk(unpack(pkgs))
-  end
-end
-
 function M.index_of(tbl, val, cmp)
   cmp = cmp or function(a, b) return a == b end
   for i, v in ipairs(tbl) do
@@ -54,10 +28,13 @@ function M.index_of(tbl, val, cmp)
 end
 
 function M.reload(module)
-  return M.safe_require('plenary.reload', function(plenary)
+  local has_plenary, plenary = pcall(require, 'plenary.reload')
+  if has_plenary then
     plenary.reload_module(module)
-    require(module)
-  end)
+  else
+    package.loaded[module] = nil
+  end
+  require(module)
 end
 
 function M.t(str)

@@ -230,9 +230,12 @@ function M.setup_keymappings(enable_which_key)
     ::continue::
   end
   if enable_which_key then
-    utils.safe_require('which-key', function(wk)
+    local has_wk, wk = pcall(require, 'which-key')
+    if has_wk then
       wk.register(_leader_keymappings, { prefix = '<leader>' })
-    end)
+    else
+      print('which-key not installed')
+    end
   end
 end
 
