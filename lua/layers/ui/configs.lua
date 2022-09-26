@@ -156,6 +156,42 @@ function configs.web_devicons()
   }
 end
 
+function configs.dashboard()
+  local home = os.getenv('HOME')
+  local db = require('dashboard')
+  db.session_directory = home .. '/.cache/nvim/session'
+  db.preview_command = 'chafa -s 70x70 -c full --fg-only --symbols braille --clear'
+  db.preview_file_path = '$(ls ' .. home .. '/.config/nvim/static/*.gif | sort -R)'
+  db.preview_file_height = 30
+  db.preview_file_width = 70
+  db.custom_center = {
+    {
+      icon = '  ',
+      desc = 'List Projects                           ',
+      action = 'Telescope projects',
+      shortcut = 'SPC p p',
+    },
+    {
+      icon = '  ',
+      desc = 'Recent Files                            ',
+      action = 'Telescope old_files',
+      shortcut = 'SPC f f',
+    },
+    {
+      icon = '  ',
+      desc = 'Find File                               ',
+      action = 'Telescope find_files',
+      shortcut = 'SPC f f',
+    },
+    {
+      icon = '  ',
+      desc = 'Find Text                               ',
+      action = 'Telescope live_grep',
+      shortcut = 'SPC /  ',
+    },
+  }
+end
+
 function configs.alpha()
   local alpha = require('alpha')
   math.randomseed(os.time())

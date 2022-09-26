@@ -54,7 +54,7 @@ cosmos.add_leader_keymapping('v|;;', { 'gcc<Esc>', name = 'Comment line', norema
 
 cosmos.add_leader_keymapping("n|'", { '<Cmd>exe v:count1 . "ToggleTerm"<CR>', name = 'Open shell' })
 cosmos.add_leader_keymapping('n|*', { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", name = 'Search reference in current project' })
-cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search project' })
+cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search text in current project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
 cosmos.add_leader_keymapping('n|<Space>', { "<cmd>lua require('layers.editor.functions').commands(require('telescope.themes').get_" .. options.telescope_theme .. "({}))<CR>", name = 'Commands' })
 

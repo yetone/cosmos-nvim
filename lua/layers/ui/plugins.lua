@@ -10,10 +10,10 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'goolord/alpha-nvim',
+  'glepnir/dashboard-nvim',
   {
     after = { 'nvim-web-devicons' },
-    config = configs.alpha,
+    config = configs.dashboard,
   }
 )
 
