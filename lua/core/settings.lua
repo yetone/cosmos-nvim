@@ -80,10 +80,10 @@ hi Pmenu ctermfg=white ctermbg=238
 ]]
 
 vim.cmd [[
-augroup last_cursor_position
+augroup last_position_jump
   autocmd!
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") && &ft !~# 'commit' | execute "normal! g`\"zvzz" | endif
+  autocmd BufRead * autocmd FileType <buffer> ++once
+    \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"zvzz' | endif
 augroup END
 ]]
 
