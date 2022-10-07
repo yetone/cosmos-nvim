@@ -3,6 +3,13 @@ local options = require('layers.editor.options')
 local configs = require('layers.editor.configs')
 
 cosmos.add_plugin(
+  'ojroques/nvim-osc52',
+  {
+    config = configs.osc52,
+  }
+)
+
+cosmos.add_plugin(
   'iamcco/markdown-preview.nvim',
   {
     run = ':call mkdp#util#install()',
