@@ -83,7 +83,7 @@ And restart nvim.
 
 # Custom Configuration
 
-If you want to define your own configuration, you can create a file called `.cosmos-nvim.lua` in the `$HOME` root directory (the shortchut is <kbd>leader</kbd> - <kbd>f</kbd> - <kbd>e</kbd> - <kbd>d</kbd>), for example:
+If you want to define your own configuration, you can create a file called `.cosmos-nvim.lua` in the `$HOME` root directory (the shortcut is <kbd>leader</kbd> - <kbd>f</kbd> - <kbd>e</kbd> - <kbd>d</kbd>), for example:
 
 `~/.cosmos-nvim.lua`
 
