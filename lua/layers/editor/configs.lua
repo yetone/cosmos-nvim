@@ -122,8 +122,8 @@ function configs.mason()
     },
   }
 
-  local luadev = require('lua-dev')
-  servers.sumneko_lua = luadev.setup(default_opt)
+  local neodev = require('neodev')
+  servers.sumneko_lua = neodev.setup(default_opt)
 
   require("mason-lspconfig").setup_handlers({
       -- The first entry (without a key) will be the default handler

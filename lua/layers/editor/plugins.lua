@@ -183,7 +183,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'williamboman/mason-lspconfig.nvim',
   {
-    after = { 'mason.nvim', 'nvim-lspconfig', 'cmp-nvim-lsp', 'lua-dev.nvim' },
+    after = { 'mason.nvim', 'nvim-lspconfig', 'cmp-nvim-lsp', 'neodev.nvim' },
     config = configs.mason,
   }
 )
@@ -261,7 +261,7 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'folke/lua-dev.nvim',
+  'folke/neodev.nvim',
   {
     event = 'BufRead',
   }
