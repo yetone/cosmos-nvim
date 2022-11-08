@@ -326,3 +326,10 @@ cosmos.add_plugin(
   }
 )
 
+cosmos.add_plugin(
+  'Pocco81/auto-save.nvim',
+  {
+    config = configs.auto_save,
+    event = 'BufRead',
+  }
+)

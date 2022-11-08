@@ -62,7 +62,7 @@ function configs.mason()
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   -- Use an on_attach function to only map the following keys
@@ -746,6 +746,10 @@ function configs.osc52()
     copy = {['+'] = copy, ['*'] = copy},
     paste = {['+'] = paste, ['*'] = paste},
   }
+end
+
+function configs.auto_save()
+  require('auto-save').setup()
 end
 
 return configs
