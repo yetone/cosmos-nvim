@@ -333,7 +333,7 @@ end
 function configs.bufferline()
   local bufferline = require('bufferline')
   local default = {
-    colors = require("layers.ui.colors").get(),
+    colors = require("layers.ui.colors").get().base_30,
   }
 
   bufferline.setup{

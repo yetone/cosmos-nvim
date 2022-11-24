@@ -263,7 +263,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'folke/neodev.nvim',
   {
-    event = 'BufRead',
+    after = { 'nvim-lspconfig' },
     config = configs.neodev,
   }
 )
