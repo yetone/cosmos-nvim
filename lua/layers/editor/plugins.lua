@@ -264,6 +264,7 @@ cosmos.add_plugin(
   'folke/neodev.nvim',
   {
     event = 'BufRead',
+    config = configs.neodev,
   }
 )
 

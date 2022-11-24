@@ -122,9 +122,6 @@ function configs.mason()
     },
   }
 
-  local neodev = require('neodev')
-  servers.sumneko_lua = neodev.setup(default_opt)
-
   require("mason-lspconfig").setup_handlers({
       -- The first entry (without a key) will be the default handler
       -- and will be called for each installed server that doesn't have
@@ -750,6 +747,10 @@ end
 
 function configs.auto_save()
   require('auto-save').setup()
+end
+
+function configs.neodev()
+  require('neodev').setup()
 end
 
 return configs
