@@ -341,13 +341,10 @@ function configs.bufferline()
       always_show_bufferline = false,
       diagnostics = 'nvim_lsp',
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        if context.buffer:current() then
-          return ''
-        end
         local s = " "
         for e, n in pairs(diagnostics_dict) do
-          local sym = e == "error" and " "
-          or (e == "warning" and " " or "" )
+          local sym = e == "error" and " "
+          or (e == "warning" and " " or " " )
           s = s .. n .. sym
         end
         return s
@@ -420,6 +417,16 @@ function configs.bufferline()
       warning_diagnostic_visible = {
         fg = default.colors.light_grey,
         bg = default.colors.black2,
+      },
+
+      duplicate = {
+        fg = default.colors.light_grey,
+        bg = default.colors.black2,
+      },
+
+      duplicate_visible = {
+        fg = default.colors.light_grey,
+        bg = default.colors.black,
       },
 
       -- close buttons
