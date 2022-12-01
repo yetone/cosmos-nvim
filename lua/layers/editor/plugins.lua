@@ -332,5 +332,6 @@ cosmos.add_plugin(
   {
     config = configs.auto_save,
     event = 'BufRead',
+    disable = not options.enable_autosave,
   }
 )
