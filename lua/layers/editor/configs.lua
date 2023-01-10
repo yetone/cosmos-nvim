@@ -596,6 +596,8 @@ end
 configs.nvimtree = function()
   local nvimtree = require('nvim-tree')
   nvimtree.setup({
+    sync_root_with_cwd = true,
+    respect_buf_cwd = true,
     renderer = {
       add_trailing = false,
       highlight_git = false,
@@ -646,6 +648,7 @@ configs.nvimtree = function()
     update_focused_file = {
       enable = true,
       update_cwd = false,
+      update_root = true
     },
     diagnostics = {
       enable = true,

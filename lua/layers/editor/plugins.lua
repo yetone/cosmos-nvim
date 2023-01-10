@@ -21,13 +21,6 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'ygm2/rooter.nvim',
-  {
-    event = 'BufRead',
-  }
-)
-
-cosmos.add_plugin(
   'ahmedkhalf/project.nvim',
   {
     config = configs.project,
