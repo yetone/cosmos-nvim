@@ -2,10 +2,9 @@ local cosmos = require('core.cosmos')
 local configs = require('layers.git.configs')
 
 cosmos.add_plugin(
-  'jreybert/vimagit',
+  'TimUntersberger/neogit',
   {
-    event = 'BufRead',
-    branch = 'master',
+    requires = { 'nvim-lua/plenary.nvim' },
   }
 )
 
