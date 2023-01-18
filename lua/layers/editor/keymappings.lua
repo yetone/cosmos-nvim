@@ -50,6 +50,8 @@ cosmos.add_leader_keymapping('n|dS', { "<CMD>lua require('layers.editor.function
 cosmos.add_leader_keymapping('n|dt', { "<CMD>lua require('dapui').toggle()<CR>", name = 'Toggle', silent = true, noremap = true })
 cosmos.add_leader_keymapping('n|dC', { "<CMD>lua require('dapui').close()<CR>", name = 'Close', silent = true, noremap = true })
 
+cosmos.add_leader_keymapping('n|rl', { "<CMD>lua require('telescope.builtin').resume()<CR>", name = 'Resume popup window', silent = true, noremap = true })
+
 cosmos.add_leader_keymapping('v|;;', { 'gcc<Esc>', name = 'Comment line', noremap = false })
 
 cosmos.add_leader_keymapping("n|'", { '<Cmd>exe v:count1 . "ToggleTerm"<CR>', name = 'Open shell' })

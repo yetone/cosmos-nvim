@@ -168,6 +168,9 @@ local default_leader_keymapping_group_names = {
   j = {
     name = '+Jump',
   },
+  r = {
+    name = '+Resume',
+  },
   s = {
     name = '+Search/Symbols',
   },
