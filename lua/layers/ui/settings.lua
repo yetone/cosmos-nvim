@@ -16,11 +16,15 @@ vim.api.nvim_create_autocmd("VimEnter", {
   group = vim.api.nvim_create_augroup("illuminate_augroup", { clear = true }),
   pattern = "*",
   callback = function()
-    vim.api.nvim_set_hl(0, "illuminatedWord", {
-      link = "Visual",
+    local color = "#2d323e"
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", {
+      bg = color,
     })
-    vim.api.nvim_set_hl(0, "illuminatedCurWord", {
-      underline = true,
+    vim.api.nvim_set_hl(0, "IlluminatedWordText", {
+      bg = color,
+    })
+    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {
+      bg = color,
     })
   end,
 })

@@ -78,11 +78,6 @@ function configs.mason()
     -- local opts = { noremap=true, silent=true }
     -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-
-    local has_illuminate, illuminate = pcall(require, 'illuminate')
-    if has_illuminate then
-      illuminate.on_attach(client)
-    end
   end
 
   local default_opt = {

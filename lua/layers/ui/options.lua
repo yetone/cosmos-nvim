@@ -7,7 +7,7 @@ return {
   enable_colorizer = true,
   enable_scrollbar = true,
   enable_gps = true,
-  illuminate_delay = 0,
+  illuminate_delay = 100,
   illuminate_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   indentline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
   statusline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'packer', 'startuptime' },
