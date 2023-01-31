@@ -250,11 +250,11 @@ local function setup_plugins()
     return
   end
   local packer = require('packer')
+  local init_opts = {}
   if os.getenv('COSMOS_BUILD_IMG') == nil then
-    packer.init({
-      max_jobs=50
-    })
+    init_opts.max_jobs = 50
   end
+  packer.init(init_opts)
   packer.reset()
   packer.startup(function(use)
     use {
@@ -267,7 +267,7 @@ local function setup_plugins()
       event = "VimEnter",
     }
 
-		-- use 'nathom/filetype.nvim'
+    -- use 'nathom/filetype.nvim'
 
     use 'nvim-lua/plenary.nvim'
 
@@ -315,9 +315,23 @@ local function setup_plugins()
       event = "BufRead",
     }
 
+    local snapshot_path = vim.fn.stdpath('config') .. '/packer-snapshots/cosmos.json'
+    local snapshot_file = io.open(snapshot_path, 'r')
+    local snapshot_json_string = snapshot_file:read('*all')
+    snapshot_file:close()
+    local snapshot = vim.fn.json_decode(snapshot_json_string)
+
     for _, opts in ipairs(plugins) do
       if os.getenv('COSMOS_BUILD_IMG') ~= nil then
         opts.event = nil
+      end
+      local plugin_name = opts[1]
+      for plugin_name_, plugin_commit in pairs(snapshot) do
+        -- if plugin_name endswith plugin_name_
+        if plugin_name:sub(-#plugin_name_) == plugin_name_ then
+          opts.commit = plugin_commit['commit']
+          break
+        end
       end
       use(opts)
     end
