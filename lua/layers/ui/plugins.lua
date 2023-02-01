@@ -12,7 +12,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'glepnir/dashboard-nvim',
   {
-    after = { 'nvim-web-devicons' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = configs.dashboard,
   }
 )
@@ -28,8 +28,8 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'folke/todo-comments.nvim',
   {
-    disable = not options.enable_todo_comments,
-    requires = 'nvim-lua/plenary.nvim',
+    enabled = options.enable_todo_comments,
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = configs.todo_comments,
     event = 'BufRead',
   }
@@ -38,14 +38,14 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'p00f/nvim-ts-rainbow',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 
 cosmos.add_plugin(
   'nvim-lualine/lualine.nvim',
   {
-    after = { 'nvim-web-devicons', 'nvim-gps' },
+    dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-gps' },
     config = configs.lualine,
   }
 )
@@ -53,7 +53,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'j-hui/fidget.nvim',
   {
-    after = 'lualine.nvim',
+    dependencies = { 'nvim-lualine/lualine.nvim' },
     config = configs.fidget,
   }
 )
@@ -61,7 +61,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'akinsho/bufferline.nvim',
   {
-    after = { 'nvim-web-devicons' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     branch = 'main',
     config = configs.bufferline,
   }
@@ -70,7 +70,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'karb94/neoscroll.nvim',
   {
-    disable = not options.enable_smooth_scrolling,
+    enabled = options.enable_smooth_scrolling,
     config = configs.neoscroll,
     event = 'BufRead',
   }
@@ -79,7 +79,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'danilamihailov/beacon.nvim',
   {
-    disable = not options.enable_beacon,
+    enabled = options.enable_beacon,
     event = 'BufRead',
   }
 )
@@ -87,7 +87,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'RRethy/vim-illuminate',
   {
-    disable = not options.enable_illuminate,
+    enabled = options.enable_illuminate,
     event = 'BufRead',
   }
 )
@@ -95,7 +95,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'norcalli/nvim-colorizer.lua',
   {
-    disable = not options.enable_colorizer,
+    enabled = options.enable_colorizer,
     config = configs.colorizer,
     event = 'BufRead',
   }
@@ -104,15 +104,14 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'petertriho/nvim-scrollbar',
   {
-    disable = not options.enable_scrollbar,
-    requires = {
+    enabled = options.enable_scrollbar,
+    dependencies = {
       {
         'kevinhwang91/nvim-hlslens',
         config = configs.hlslens,
         event = 'BufRead',
       },
     },
-    after = { 'nvim-hlslens' },
     config = configs.scrollbar,
   }
 )
@@ -120,8 +119,8 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'SmiteshP/nvim-gps',
   {
-    disable = not options.enable_gps,
-    after = { 'nvim-treesitter', 'nvim-web-devicons' },
+    enabled = options.enable_gps,
+    dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
     config = configs.gps,
   }
 )

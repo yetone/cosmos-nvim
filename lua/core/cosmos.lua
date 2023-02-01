@@ -82,31 +82,6 @@ local plugins_seen = {}
 
 local M = {}
 
-function M.load_packer()
-  local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-  local packer_bootstrap = nil
-
-  if not packer_exists then
-    if vim.fn.input("Download Packer? (y for yes) ") ~= "y" then
-      print('Please install Packer first!')
-      return false
-    end
-
-    local directory = string.format("%s/site/pack/packer/opt/", vim.fn.stdpath("data"))
-
-    vim.fn.mkdir(directory, "p")
-
-    print(" Downloading packer.nvim...")
-    local install_path = directory .. "/packer.nvim"
-    packer_bootstrap = vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    print(packer_bootstrap)
-
-    vim.cmd [[packadd packer.nvim]]
-  end
-
-  return packer_bootstrap
-end
-
 function M.add_leader_keymapping(shortcut, opts)
   opts = opts or {}
   local name = opts.name or opts[2]
@@ -244,39 +219,38 @@ end
 
 local function setup_plugins()
   load_layer_plugins()
-  local packer_bootstrap = M.load_packer()
-  -- packer_bootstrap is nil if the packer.nvim was already installed, so cannot use if not packer_bootstrap to instead of if packer_bootstrap == false
-  if packer_bootstrap == false then
-    return
+
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not vim.loop.fs_stat(lazypath) then
+    print('installing lazy.nvim...')
+    vim.fn.system({
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "--depth=1",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath,
+    })
+    print('installing lazy.nvim...done')
   end
-  local packer = require('packer')
-  local init_opts = {}
-  if os.getenv('COSMOS_BUILD_IMG') == nil then
-    init_opts.max_jobs = 50
-  end
-  packer.init(init_opts)
-  packer.reset()
-  packer.startup(function(use)
-    use {
+  vim.opt.rtp:prepend(lazypath)
+
+  plugins = vim.tbl_extend('force', {
+    {
       'lewis6991/impatient.nvim',
-      -- rocks = 'mpack'
-    }
+    },
 
-    use {
-      'wbthomason/packer.nvim',
-      event = "VimEnter",
-    }
+    -- { 'nathom/filetype.nvim' },
 
-    -- use 'nathom/filetype.nvim'
+    { 'nvim-lua/plenary.nvim'},
 
-    use 'nvim-lua/plenary.nvim'
-
-    use {
+    {
       'antoinemadec/FixCursorHold.nvim', -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
       event = "VimEnter",
-    }
+    },
 
-    use {
+    {
       "rcarriga/nvim-notify",
       config = function()
         require("notify").setup({
@@ -313,10 +287,12 @@ local function setup_plugins()
         })
       end,
       event = "BufRead",
-    }
+    },
+  }, plugins)
 
-    local snapshot_path = vim.fn.stdpath('config') .. '/packer-snapshots/cosmos.json'
-    local snapshot_file = io.open(snapshot_path, 'r')
+  local snapshot_path = vim.fn.stdpath('config') .. '/packer-snapshots/cosmos.json'
+  local snapshot_file = io.open(snapshot_path, 'r')
+  if snapshot_file ~= nil then
     local snapshot_json_string = snapshot_file:read('*all')
     snapshot_file:close()
     local snapshot = vim.fn.json_decode(snapshot_json_string)
@@ -325,23 +301,20 @@ local function setup_plugins()
       if os.getenv('COSMOS_BUILD_IMG') ~= nil then
         opts.event = nil
       end
-      local plugin_name = opts[1]
-      for plugin_name_, plugin_commit in pairs(snapshot) do
-        -- if plugin_name endswith plugin_name_
-        if plugin_name:sub(-#plugin_name_) == plugin_name_ then
-          opts.commit = plugin_commit['commit']
-          break
+      if snapshot ~= nil then
+        local plugin_name = opts[1]
+        for plugin_name_, plugin_commit in pairs(snapshot) do
+          -- if plugin_name endswith plugin_name_
+          if plugin_name:sub(-#plugin_name_) == plugin_name_ then
+            opts.commit = plugin_commit['commit']
+            break
+          end
         end
       end
-      use(opts)
     end
+  end
 
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-      require('packer').sync()
-    end
-  end)
+  require("lazy").setup(plugins)
 end
 
 local function setup()
@@ -427,7 +400,6 @@ function M.restartup()
   plugins_seen = {}
   utils.reset_user_config()
   M.startup()
-  require('packer').sync()
 end
 
 return M

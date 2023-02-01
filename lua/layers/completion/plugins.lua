@@ -4,15 +4,14 @@ local configs = require('layers.completion.configs')
 cosmos.add_plugin(
   'github/copilot.vim',
   {
-    after = 'nvim-cmp',
+    dependencies = { 'hrsh7th/nvim-cmp' },
   }
 )
 
 cosmos.add_plugin(
   'hrsh7th/nvim-cmp',
   {
-    wants = { "LuaSnip" },
-    requires = {
+    dependencies = {
       {
         'windwp/nvim-autopairs',
         branch = 'master',
@@ -20,8 +19,7 @@ cosmos.add_plugin(
       },
       {
         'L3MON4D3/LuaSnip',
-        wants = "friendly-snippets",
-        requires = {
+        dependencies = {
           {
             'rafamadriz/friendly-snippets',
             event = 'InsertEnter',
@@ -32,17 +30,16 @@ cosmos.add_plugin(
       }
     },
     config = configs.cmp,
-    after = 'nvim-autopairs',
     event = 'InsertEnter',
   }
 )
 
-cosmos.add_plugin('hrsh7th/cmp-nvim-lua', { after = 'nvim-cmp' })
-cosmos.add_plugin('hrsh7th/cmp-nvim-lsp', { after = 'nvim-cmp' })
-cosmos.add_plugin('hrsh7th/cmp-buffer', { after = 'nvim-cmp' })
-cosmos.add_plugin('hrsh7th/cmp-path', { after = 'nvim-cmp' })
-cosmos.add_plugin('hrsh7th/cmp-cmdline', { after = 'nvim-cmp' })
-cosmos.add_plugin('dmitmel/cmp-cmdline-history', { after = 'nvim-cmp' })
+cosmos.add_plugin('hrsh7th/cmp-nvim-lua', { dependencies = { 'hrsh7th/nvim-cmp' } })
+cosmos.add_plugin('hrsh7th/cmp-nvim-lsp', { dependencies = { 'hrsh7th/nvim-cmp' } })
+cosmos.add_plugin('hrsh7th/cmp-buffer', { dependencies = { 'hrsh7th/nvim-cmp' } })
+cosmos.add_plugin('hrsh7th/cmp-path', { dependencies = { 'hrsh7th/nvim-cmp' } })
+cosmos.add_plugin('hrsh7th/cmp-cmdline', { dependencies = { 'hrsh7th/nvim-cmp' } })
+cosmos.add_plugin('dmitmel/cmp-cmdline-history', { dependencies = { 'hrsh7th/nvim-cmp' } })
 
-cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { after = 'nvim-cmp' })
+cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { dependencies = { 'hrsh7th/nvim-cmp' } })
 

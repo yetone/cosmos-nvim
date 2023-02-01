@@ -2,9 +2,9 @@ local options = require('core.options')
 local g = vim.g
 local opt = vim.opt
 
-g.do_filetype_lua = 1
-g.did_load_filetypes = 0
-g.polyglot_disabled = { 'graphql', 'jsx', 'javascript', 'javascriptreact', 'tsx', 'typescript', 'typescriptreact' }
+-- g.do_filetype_lua = 1
+-- g.did_load_filetypes = 1
+-- g.polyglot_disabled = { 'graphql', 'jsx', 'javascript', 'javascriptreact', 'tsx', 'typescript', 'typescriptreact' }
 g.mapleader = ' '
 g.user_emmet_settings = {
   javascript = {
@@ -27,7 +27,7 @@ vim.cmd('set nocompatible')
 
 opt.complete = ''
 opt.background = 'dark'
--- vim.cmd('syntax on')
+vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
 local indent = 4
@@ -58,11 +58,12 @@ opt.expandtab = true
 vim.cmd [[
 autocmd FileType make setlocal noexpandtab
 autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-
-autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
-autocmd bufnewfile,bufread *.jsx set filetype=javascriptreact
-autocmd bufnewfile,bufread *.ts set filetype=typescript
 ]]
+
+-- autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
+-- autocmd bufnewfile,bufread *.jsx set filetype=javascriptreact
+-- autocmd bufnewfile,bufread *.ts set filetype=typescript
+-- autocmd bufnewfile,bufread *.lua set filetype=lua
 
 opt.list = true
 opt.listchars = 'tab:»·,trail:·,nbsp:·'

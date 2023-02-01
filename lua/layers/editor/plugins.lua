@@ -12,7 +12,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'iamcco/markdown-preview.nvim',
   {
-    run = ':call mkdp#util#install()',
+    build = ':call mkdp#util#install()',
     event = 'BufRead',
     config = function()
       vim.g.mkdp_open_to_the_world = 1
@@ -31,11 +31,8 @@ cosmos.add_plugin(
   'kyazdani42/nvim-tree.lua',
   {
     config = configs.nvimtree,
-    requires = {
+    dependencies = {
       'kyazdani42/nvim-web-devicons', -- optional, for file icon
-    },
-    after = {
-      'nvim-web-devicons', -- optional, for file icon
     },
   }
 )
@@ -64,7 +61,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'ggandor/leap.nvim',
   {
-    requires = { 'tpope/vim-repeat' },
+    dependencies = { 'tpope/vim-repeat' },
     config = configs.leap,
     event = 'BufRead',
   }
@@ -87,7 +84,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-treesitter/nvim-treesitter',
   {
-    run = function()
+    build = function()
       if #vim.api.nvim_list_uis() ~= 0 then
         vim.cmd 'TSUpdate'
       end
@@ -99,39 +96,40 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-treesitter/playground',
   {
-    after = { 'nvim-treesitter' }
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 cosmos.add_plugin(
   'nvim-treesitter/nvim-treesitter-textobjects',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 cosmos.add_plugin(
   'RRethy/nvim-treesitter-textsubjects',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 
 cosmos.add_plugin(
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 
 cosmos.add_plugin(
   'windwp/nvim-ts-autotag',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 )
 
 cosmos.add_plugin(
   'sheerun/vim-polyglot',
   {
+    enabled = false,
     event = 'BufRead',
   }
 )
@@ -154,7 +152,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'lewis6991/spellsitter.nvim',
   {
-    after = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = configs.spellsitter,
   }
 )
@@ -176,7 +174,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'williamboman/mason-lspconfig.nvim',
   {
-    after = { 'mason.nvim', 'nvim-lspconfig', 'cmp-nvim-lsp', 'neodev.nvim' },
+    dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp', 'folke/neodev.nvim' },
     config = configs.mason,
   }
 )
@@ -185,9 +183,9 @@ cosmos.add_plugin(
   'ojroques/nvim-lspfuzzy',
   {
     config = configs.lspfuzzy,
-    after = { 'nvim-lspconfig' },
     event = 'BufRead',
-    requires = {
+    dependencies = {
+      { 'neovim/nvim-lspconfig' },
       { 'junegunn/fzf', event = 'BufRead' },
       { 'junegunn/fzf.vim', event = 'BufRead' },  -- to enable preview (optional)
     },
@@ -198,14 +196,14 @@ cosmos.add_plugin(
   'tami5/lspsaga.nvim',
   {
     config = configs.lspsaga,
-    after = { 'nvim-lspconfig' },
+    dependencies = { 'neovim/nvim-lspconfig' },
   }
 )
 
 cosmos.add_plugin(
   'nvim-telescope/telescope.nvim',
   {
-    requires = { 'nvim-lua/plenary.nvim' },
+    dependencies = { 'nvim-lua/plenary.nvim' },
     config = configs.telescope,
   }
 )
@@ -213,36 +211,35 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-telescope/telescope-fzf-native.nvim',
   {
-    run = 'make',
-    requires = { 'nvim-telescope/telescope.nvim' },
+    build = 'make'
   }
 )
 
 cosmos.add_plugin(
   'nvim-telescope/telescope-file-browser.nvim',
   {
-    requires = { 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-telescope/telescope.nvim' },
   }
 )
 
 cosmos.add_plugin(
   'nvim-telescope/telescope-media-files.nvim',
   {
-    requires = { 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-telescope/telescope.nvim' },
   }
 )
 
 cosmos.add_plugin(
   'nvim-telescope/telescope-dap.nvim',
   {
-    requires = { 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-telescope/telescope.nvim' },
   }
 )
 
 cosmos.add_plugin(
   'nvim-telescope/telescope-ui-select.nvim',
   {
-    requires = { 'nvim-telescope/telescope.nvim' },
+    dependencies = { 'nvim-telescope/telescope.nvim' },
   }
 )
 
@@ -256,7 +253,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'folke/neodev.nvim',
   {
-    after = { 'nvim-lspconfig' },
+    dependencies = { 'neovim/nvim-lspconfig' },
     config = configs.neodev,
   }
 )
@@ -287,7 +284,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'leoluz/nvim-dap-go',
   {
-    requires = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap' },
     config = configs.dap_go,
     event = 'BufRead',
   }
@@ -296,7 +293,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'rcarriga/nvim-dap-ui',
   {
-    requires = { 'mfussenegger/nvim-dap' },
+    dependencies = { 'mfussenegger/nvim-dap' },
     config = configs.dapui,
     event = 'BufRead',
   }
@@ -305,8 +302,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'theHamsta/nvim-dap-virtual-text',
   {
-    requires = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' },
-    after = { 'nvim-dap', 'nvim-treesitter' },
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' },
     config = configs.dap_virtual_text,
   }
 )
@@ -314,7 +310,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'folke/trouble.nvim',
   {
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = configs.trouble,
     event = 'BufRead',
   }
@@ -325,6 +321,6 @@ cosmos.add_plugin(
   {
     config = configs.auto_save,
     event = 'BufRead',
-    disable = not options.enable_autosave,
+    enabled = options.enable_autosave,
   }
 )

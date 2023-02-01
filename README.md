@@ -69,14 +69,12 @@ git clone --depth 1 https://github.com/yetone/cosmos-nvim.git ~/.config/nvim
 cd ~/.config/nvim && git lfs install && git lfs fetch --all && git lfs pull
 ```
 
-Open `nvim` in the terminal and run `:PackerSync`.
-
 ## 3. Install your language lsp server in your nvim
 
 For example, if you are writing `Python`, you can start by opening a Python file and running the following command:
 
 ```bash
-:LspInstall
+:MasonInstall pyright
 ```
 
 And restart nvim.
@@ -115,8 +113,6 @@ return {
   end,
 }
 ```
-
-**Note**: When you have finished changing the configuration file, always remember to run `:PackerSync` and restart nvim
 
 # Some Screenshots
 
