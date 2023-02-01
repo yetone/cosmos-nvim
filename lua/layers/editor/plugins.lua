@@ -141,7 +141,7 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'tpope/vim-sleuth',
+  'Darazaki/indent-o-matic',
   {
     event = 'BufRead',
   }
