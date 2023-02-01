@@ -72,8 +72,6 @@ opt.undofile = true
 opt.ruler = true
 opt.undolevels = 1000
 -- opt.backspace = 'indent,eol,start'
-opt.clipboard = 'unnamed'
-opt.clipboard:append('unnamedplus')
 opt.shell = os.getenv('SHELL') or 'bash'
 
 vim.cmd [[

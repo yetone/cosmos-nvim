@@ -39,6 +39,7 @@ cosmos.add_plugin(
   'p00f/nvim-ts-rainbow',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 
@@ -47,6 +48,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-gps' },
     config = configs.lualine,
+    event = 'BufRead',
   }
 )
 
@@ -55,6 +57,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'nvim-lualine/lualine.nvim' },
     config = configs.fidget,
+    event = 'BufRead',
   }
 )
 
@@ -64,6 +67,7 @@ cosmos.add_plugin(
     dependencies = { 'kyazdani42/nvim-web-devicons' },
     branch = 'main',
     config = configs.bufferline,
+    event = 'BufRead',
   }
 )
 
@@ -122,5 +126,6 @@ cosmos.add_plugin(
     enabled = options.enable_gps,
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
     config = configs.gps,
+    event = 'BufRead',
   }
 )

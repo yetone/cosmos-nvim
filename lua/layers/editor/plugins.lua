@@ -6,6 +6,7 @@ cosmos.add_plugin(
   'ojroques/nvim-osc52',
   {
     config = configs.osc52,
+    event = 'BufRead',
   }
 )
 
@@ -97,18 +98,21 @@ cosmos.add_plugin(
   'nvim-treesitter/playground',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 cosmos.add_plugin(
   'nvim-treesitter/nvim-treesitter-textobjects',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 cosmos.add_plugin(
   'RRethy/nvim-treesitter-textsubjects',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 
@@ -116,6 +120,7 @@ cosmos.add_plugin(
   'JoosepAlviste/nvim-ts-context-commentstring',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 
@@ -123,6 +128,7 @@ cosmos.add_plugin(
   'windwp/nvim-ts-autotag',
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    event = 'BufRead',
   }
 )
 
@@ -154,6 +160,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = configs.spellsitter,
+    event = 'BufRead',
   }
 )
 
@@ -167,14 +174,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'williamboman/mason.nvim',
   {
-    event = 'BufRead',
-  }
-)
-
-cosmos.add_plugin(
-  'williamboman/mason-lspconfig.nvim',
-  {
-    dependencies = { 'williamboman/mason.nvim', 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp', 'folke/neodev.nvim' },
+    dependencies = { 'williamboman/mason-lspconfig.nvim', 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp', 'folke/neodev.nvim' },
     config = configs.mason,
   }
 )
@@ -197,6 +197,7 @@ cosmos.add_plugin(
   {
     config = configs.lspsaga,
     dependencies = { 'neovim/nvim-lspconfig' },
+    event = 'BufRead',
   }
 )
 
@@ -233,6 +234,7 @@ cosmos.add_plugin(
   'nvim-telescope/telescope-dap.nvim',
   {
     dependencies = { 'nvim-telescope/telescope.nvim' },
+    event = 'BufRead',
   }
 )
 
@@ -244,10 +246,7 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'dstein64/vim-startuptime',
-  {
-    event = 'BufRead',
-  }
+  'dstein64/vim-startuptime'
 )
 
 cosmos.add_plugin(
@@ -255,6 +254,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'neovim/nvim-lspconfig' },
     config = configs.neodev,
+    event = 'BufRead',
   }
 )
 
@@ -278,6 +278,7 @@ cosmos.add_plugin(
   'mfussenegger/nvim-dap',
   {
     config = configs.dap,
+    event = 'BufRead',
   }
 )
 
@@ -304,6 +305,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'mfussenegger/nvim-dap', 'nvim-treesitter/nvim-treesitter' },
     config = configs.dap_virtual_text,
+    event = 'BufRead',
   }
 )
 
