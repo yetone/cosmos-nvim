@@ -166,7 +166,7 @@ function configs.treesitter()
     },
 
     indent = {
-      enable = true,
+      enable = false,
     },
 
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -713,7 +713,7 @@ end
 configs.spellsitter = function()
   local spellsitter = require('spellsitter')
   spellsitter.setup({
-      enable = true,
+    enable = true,
   })
 end
 
