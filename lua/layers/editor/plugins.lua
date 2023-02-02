@@ -143,6 +143,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'NMAC427/guess-indent.nvim',
   {
+    config = configs.guess_indent,
     event = 'BufReadPost',
   }
 )
@@ -247,15 +248,6 @@ cosmos.add_plugin(
 
 cosmos.add_plugin(
   'dstein64/vim-startuptime'
-)
-
-cosmos.add_plugin(
-  'folke/neodev.nvim',
-  {
-    dependencies = { 'neovim/nvim-lspconfig' },
-    config = configs.neodev,
-    event = 'BufRead',
-  }
 )
 
 cosmos.add_plugin(

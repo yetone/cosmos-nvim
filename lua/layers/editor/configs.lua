@@ -27,6 +27,9 @@ function configs.mason()
   })
 
   require("mason-lspconfig").setup()
+  require('neodev').setup({
+    library = { plugins = { "nvim-dap-ui" }, types = true },
+  })
 
   local lspconfig = require("lspconfig")
   local lspconfig_configs = require('lspconfig.configs')
@@ -738,10 +741,6 @@ function configs.auto_save()
   require('auto-save').setup()
 end
 
-function configs.neodev()
-  require('neodev').setup()
-end
-
 function configs.nvim_window()
   require('nvim-window').setup({
     -- The characters available for hinting windows.
@@ -760,6 +759,10 @@ function configs.nvim_window()
     -- The border style to use for the floating window.
     border = 'none'
   })
+end
+
+function configs.guess_indent()
+  require('guess-indent').setup()
 end
 
 return configs
