@@ -141,9 +141,9 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin(
-  'Darazaki/indent-o-matic',
+  'NMAC427/guess-indent.nvim',
   {
-    event = 'BufRead',
+    event = 'BufReadPost',
   }
 )
 
@@ -324,5 +324,13 @@ cosmos.add_plugin(
     config = configs.auto_save,
     event = 'BufRead',
     enabled = options.enable_autosave,
+  }
+)
+
+cosmos.add_plugin(
+  'yorickpeterse/nvim-window',
+  {
+    url = 'https://gitlab.com/yorickpeterse/nvim-window.git',
+    config = configs.nvim_window,
   }
 )

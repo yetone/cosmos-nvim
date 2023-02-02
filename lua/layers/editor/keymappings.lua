@@ -12,6 +12,8 @@ cosmos.add_leader_keymapping('n|fb', { ":Telescope file_browser<CR>", name = 'Fi
 cosmos.add_leader_keymapping('n|fr', { '<cmd>Telescope oldfiles<cr>', name = 'Open recent file', noremap = false })
 cosmos.add_leader_keymapping('n|ft', { '<cmd>NvimTreeToggle<cr>', name = 'File tree', noremap = false })
 
+cosmos.add_leader_keymapping('n|wp', { "<cmd>lua require('nvim-window').pick()<cr>", name = 'Pick Window', noremap = true })
+
 cosmos.add_leader_keymapping('n|fed', { "<cmd>e ~/.cosmos-nvim.lua<CR>", name = 'Open cosmos configuration file' })
 cosmos.add_leader_keymapping('n|feD', { "<cmd>lua require('layers.editor.functions').edit_neovim()<CR>", name = 'Open cosmos source files' })
 cosmos.add_leader_keymapping('n|feR', { "<cmd>lua require('layers.editor.functions').reload_configuration()<CR>", name = 'Reload configuration' })

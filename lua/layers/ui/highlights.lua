@@ -25,6 +25,12 @@ local orange = colors.orange
 local one_bg3 = colors.one_bg3
 
 local highlights = {
+  -- custom
+  BlackOnLightYellow = {
+    fg = colors.black,
+    bg = colors.yellow,
+  },
+
   -- syntax
   Boolean = {
     fg = theme.base09,
