@@ -55,10 +55,14 @@ opt.softtabstop = indent
 opt.expandtab = true
 -- opt.smartindent = true
 
-vim.cmd [[
-autocmd FileType make setlocal noexpandtab
-autocmd BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
-]]
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "make",
+  command = "set noexpandtab",
+})
+vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+  pattern = "*.go",
+  command = "setlocal noet ts=4 sw=4 sts=4",
+})
 
 -- autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
 -- autocmd bufnewfile,bufread *.jsx set filetype=javascriptreact
@@ -78,10 +82,13 @@ vim.cmd [[
 hi Pmenu ctermfg=white ctermbg=238
 ]]
 
-vim.cmd [[
-autocmd BufReadPost *
-  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
-]]
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*",
+  callback = function()
+    local line = vim.fn.line("'")
+    if line >= 1 and line <= vim.fn.line("$") then
+      vim.cmd("normal! g`")
+    end
+  end,
+})
 
