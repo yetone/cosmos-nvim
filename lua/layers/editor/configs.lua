@@ -25,6 +25,28 @@ function configs.mason()
       },
     }
   })
+  local null_ls = require("null-ls")
+  null_ls.setup({
+    sources = {
+      null_ls.builtins.diagnostics.staticcheck,
+      null_ls.builtins.diagnostics.semgrep,
+      null_ls.builtins.diagnostics.stylelint,
+      null_ls.builtins.diagnostics.shellcheck,
+      null_ls.builtins.diagnostics.pydocstyle,
+      null_ls.builtins.diagnostics.pylint.with({
+        diagnostics_postprocess = function(diagnostic)
+          diagnostic.code = diagnostic.message_id
+        end,
+      }),
+      null_ls.builtins.formatting.black,
+      null_ls.builtins.formatting.prettier,
+    }
+  })
+  require("mason-null-ls").setup({
+    ensure_installed = nil,
+    automatic_installation = true,
+    automatic_setup = false,
+  })
 
   require("mason-lspconfig").setup()
   require('neodev').setup({
@@ -69,6 +91,8 @@ function configs.mason()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   ---@diagnostic disable-next-line: unused-local
@@ -82,6 +106,21 @@ function configs.mason()
     -- local opts = { noremap=true, silent=true }
     -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+          if vim.fn.has("nvim-0.8") == 1 then
+            vim.lsp.buf.format({ bufnr = bufnr })
+          else
+            vim.lsp.buf.formatting_sync()
+          end
+        end,
+      })
+    end
   end
 
   local default_opt = {
@@ -92,44 +131,21 @@ function configs.mason()
     }
   }
 
-  local format_config = require 'layers.editor.format'
-
   local servers = {
     tsserver = {
       root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
-    },
-    pyright = {
-      filetypes = {"python"},
-      init_options = {
-        formatters = {
-          black = {
-            command = "black",
-            args = {"--quiet", "-"},
-            rootPatterns = {"pyproject.toml"},
-          },
-          formatFiletypes = {
-            python = {"black"}
-          }
-        }
-      },
-    },
-    efm = {
-      filetypes = vim.tbl_keys(format_config),
-      init_options = { documentFormatting = true },
-      root_dir = lspconfig.util.root_pattern { '.git/', '.' },
-      settings = { languages = format_config },
-    },
+    }
   }
 
   require("mason-lspconfig").setup_handlers({
-      -- The first entry (without a key) will be the default handler
-      -- and will be called for each installed server that doesn't have
-      -- a dedicated handler.
-      function (server_name) -- default handler (optional)
-        local opt = servers[server_name] or {}
-        opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
-        lspconfig[server_name].setup(opt)
-      end,
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function(server_name) -- default handler (optional)
+      local opt = servers[server_name] or {}
+      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+      lspconfig[server_name].setup(opt)
+    end,
   })
 end
 
@@ -147,10 +163,10 @@ function configs.lspsaga()
   saga.init_lsp_saga({
     code_action_prompt = { enable = false, },
     code_action_keys = {
-      quit = {"q", "<ESC>"},
+      quit = { "q", "<ESC>" },
     },
     rename_action_keys = {
-      quit = {"q", "<ESC>"},
+      quit = { "q", "<ESC>" },
     },
   })
 end
@@ -357,17 +373,17 @@ function configs.telescope()
       sorting_strategy = "ascending",
       layout_strategy = "horizontal",
       layout_config = {
-         horizontal = {
-            prompt_position = "top",
-            preview_width = 0.55,
-            results_width = 0.8,
-         },
-         vertical = {
-            mirror = false,
-         },
-         width = 0.87,
-         height = 0.80,
-         preview_cutoff = 120,
+        horizontal = {
+          prompt_position = "top",
+          preview_width = 0.55,
+          results_width = 0.8,
+        },
+        vertical = {
+          mirror = false,
+        },
+        width = 0.87,
+        height = 0.80,
+        preview_cutoff = 120,
       },
       -- file_sorter = require("telescope.sorters").get_fuzzy_file,
       -- file_ignore_patterns = { "node_modules/", "\\.git/" },
@@ -405,16 +421,16 @@ function configs.telescope()
         },
       },
       fzf = {
-        fuzzy = true,                    -- false will only do exact matching
-        override_generic_sorter = true,  -- override the generic sorter
-        override_file_sorter = true,     -- override the file sorter
-        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+        fuzzy = true, -- false will only do exact matching
+        override_generic_sorter = true, -- override the generic sorter
+        override_file_sorter = true, -- override the file sorter
+        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
       media_files = {
         -- filetypes whitelist
         -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-        filetypes = {"png", "webp", "jpg", "jpeg"},
+        filetypes = { "png", "webp", "jpg", "jpeg" },
         find_cmd = "rg" -- find command (defaults to `fd`)
       },
     },
@@ -489,8 +505,8 @@ configs.dap_go = function()
 end
 
 configs.dapui = function()
-  vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
-  vim.fn.sign_define('DapStopped', {text='👉', texthl='', linehl='', numhl=''})
+  vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
   local dapui = require('dapui')
   dapui.setup({
     icons = { expanded = "▾", collapsed = "▸" },
@@ -554,39 +570,39 @@ configs.trouble = function()
     group = true, -- group results by file
     padding = true, -- add an extra new line on top of the list
     action_keys = { -- key mappings for actions in the trouble list
-        -- map to {} to remove a mapping, for example:
-        -- close = {},
-        close = "<esc>", -- close the list
-        cancel = "q", -- cancel the preview and get back to your last window / buffer / cursor
-        refresh = "r", -- manually refresh
-        jump = {"<cr>", "<tab>"}, -- jump to the diagnostic or open / close folds
-        open_split = { "<c-x>" }, -- open buffer in new split
-        open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-        open_tab = { "<c-t>" }, -- open buffer in new tab
-        jump_close = {"o"}, -- jump to the diagnostic and close the list
-        toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-        toggle_preview = "P", -- toggle auto_preview
-        hover = "K", -- opens a small popup with the full multiline message
-        preview = "p", -- preview the diagnostic location
-        close_folds = {"zM", "zm"}, -- close all folds
-        open_folds = {"zR", "zr"}, -- open all folds
-        toggle_fold = {"zA", "za"}, -- toggle fold of current file
-        previous = "k", -- preview item
-        next = "j" -- next item
+      -- map to {} to remove a mapping, for example:
+      -- close = {},
+      close = "<esc>", -- close the list
+      cancel = "q", -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = "r", -- manually refresh
+      jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
+      open_split = { "<c-x>" }, -- open buffer in new split
+      open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
+      open_tab = { "<c-t>" }, -- open buffer in new tab
+      jump_close = { "o" }, -- jump to the diagnostic and close the list
+      toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = "P", -- toggle auto_preview
+      hover = "K", -- opens a small popup with the full multiline message
+      preview = "p", -- preview the diagnostic location
+      close_folds = { "zM", "zm" }, -- close all folds
+      open_folds = { "zR", "zr" }, -- open all folds
+      toggle_fold = { "zA", "za" }, -- toggle fold of current file
+      previous = "k", -- preview item
+      next = "j" -- next item
     },
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = false, -- automatically open the list when you have diagnostics
     auto_close = false, -- automatically close the list when you have no diagnostics
     auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
     auto_fold = false, -- automatically fold a file trouble list at creation
-    auto_jump = {"lsp_definitions"}, -- for the given modes, automatically jump if there is only a single result
+    auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
     signs = {
-        -- icons / text used for a diagnostic
-        error = "",
-        warning = "",
-        hint = "",
-        information = "",
-        other = "﫠"
+      -- icons / text used for a diagnostic
+      error = "",
+      warning = "",
+      hint = "",
+      information = "",
+      other = "﫠"
     },
     use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
   })
@@ -726,13 +742,13 @@ function configs.osc52()
   end
 
   local function paste()
-    return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
+    return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
   end
 
   vim.g.clipboard = {
     name = 'osc52',
-    copy = {['+'] = copy, ['*'] = copy},
-    paste = {['+'] = paste, ['*'] = paste},
+    copy = { ['+'] = copy, ['*'] = copy },
+    paste = { ['+'] = paste, ['*'] = paste },
   }
   vim.opt.clipboard:append('unnamedplus')
 end
@@ -745,7 +761,7 @@ function configs.nvim_window()
   require('nvim-window').setup({
     -- The characters available for hinting windows.
     chars = {
-        '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
     },
 
     -- A group to use for overwriting the Normal highlight group in the floating

@@ -168,7 +168,14 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'williamboman/mason.nvim',
   {
-    dependencies = { 'williamboman/mason-lspconfig.nvim', 'neovim/nvim-lspconfig', 'hrsh7th/cmp-nvim-lsp', 'folke/neodev.nvim' },
+    dependencies = {
+      { 'williamboman/mason-lspconfig.nvim', lazy = true },
+      { 'neovim/nvim-lspconfig', lazy = true },
+      { 'hrsh7th/cmp-nvim-lsp', lazy = true, dependencies = { 'hrsh7th/nvim-cmp' } },
+      { 'folke/neodev.nvim', lazy = true },
+      { "jose-elias-alvarez/null-ls.nvim", lazy = true, event = { "BufReadPost", "BufNewFile" } },
+      { "jay-babu/mason-null-ls.nvim", lazy = true },
+    },
     config = configs.mason,
   }
 )
@@ -181,7 +188,7 @@ cosmos.add_plugin(
     dependencies = {
       { 'neovim/nvim-lspconfig' },
       { 'junegunn/fzf', event = 'BufRead' },
-      { 'junegunn/fzf.vim', event = 'BufRead' },  -- to enable preview (optional)
+      { 'junegunn/fzf.vim', event = 'BufRead' }, -- to enable preview (optional)
     },
   }
 )
@@ -198,7 +205,7 @@ cosmos.add_plugin(
 cosmos.add_plugin(
   'nvim-telescope/telescope.nvim',
   {
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = { { 'nvim-lua/plenary.nvim', lazy = true } },
     config = configs.telescope,
   }
 )

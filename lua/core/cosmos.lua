@@ -241,9 +241,7 @@ local function setup_plugins()
       'lewis6991/impatient.nvim',
     },
 
-    -- { 'nathom/filetype.nvim' },
-
-    { 'nvim-lua/plenary.nvim'},
+    { 'nvim-lua/plenary.nvim', lazy = true },
 
     {
       'antoinemadec/FixCursorHold.nvim', -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open

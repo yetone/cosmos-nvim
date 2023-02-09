@@ -17,18 +17,18 @@ cosmos.add_plugin(
         'windwp/nvim-autopairs',
         branch = 'master',
         config = configs.autopairs,
-        event = 'InsertCharPre',
+        lazy = true,
       },
       {
         'L3MON4D3/LuaSnip',
         dependencies = {
           {
             'rafamadriz/friendly-snippets',
-            event = 'InsertEnter',
+            lazy = true,
           }
         },
         config = configs.luasnip,
-        event = 'InsertCharPre',
+        lazy = true,
       }
     },
     config = configs.cmp,
@@ -37,11 +37,9 @@ cosmos.add_plugin(
 )
 
 cosmos.add_plugin('hrsh7th/cmp-nvim-lua', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
-cosmos.add_plugin('hrsh7th/cmp-nvim-lsp', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 cosmos.add_plugin('hrsh7th/cmp-buffer', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 cosmos.add_plugin('hrsh7th/cmp-path', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 cosmos.add_plugin('hrsh7th/cmp-cmdline', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 cosmos.add_plugin('dmitmel/cmp-cmdline-history', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 
 cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
-

@@ -48,7 +48,7 @@ cosmos.add_plugin(
   {
     dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-gps' },
     config = configs.lualine,
-    event = 'BufRead',
+    event = { 'BufRead', 'VimEnter' },
   }
 )
 
