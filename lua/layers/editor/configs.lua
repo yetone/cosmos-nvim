@@ -25,28 +25,14 @@ function configs.mason()
       },
     }
   })
-  local null_ls = require("null-ls")
-  null_ls.setup({
-    sources = {
-      null_ls.builtins.diagnostics.staticcheck,
-      null_ls.builtins.diagnostics.semgrep,
-      null_ls.builtins.diagnostics.stylelint,
-      null_ls.builtins.diagnostics.shellcheck,
-      null_ls.builtins.diagnostics.pydocstyle,
-      null_ls.builtins.diagnostics.pylint.with({
-        diagnostics_postprocess = function(diagnostic)
-          diagnostic.code = diagnostic.message_id
-        end,
-      }),
-      null_ls.builtins.formatting.black,
-      null_ls.builtins.formatting.prettier,
-    }
-  })
+
   require("mason-null-ls").setup({
     ensure_installed = nil,
-    automatic_installation = true,
-    automatic_setup = false,
+    automatic_installation = false,
+    automatic_setup = true,
   })
+  require("null-ls").setup()
+  require('mason-null-ls').setup_handlers()
 
   require("mason-lspconfig").setup()
   require('neodev').setup({
