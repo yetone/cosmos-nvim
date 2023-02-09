@@ -82,12 +82,13 @@ vim.cmd [[
 hi Pmenu ctermfg=white ctermbg=238
 ]]
 
+-- Jump to the last position when opening a file. If you want to seen more details, see :help last-position-jump'.
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function()
-    local line = vim.fn.line("'")
+    local line = vim.fn.line("'\"")
     if line >= 1 and line <= vim.fn.line("$") then
-      vim.cmd("normal! g`")
+      vim.cmd("normal! g`\"")
     end
   end,
 })
