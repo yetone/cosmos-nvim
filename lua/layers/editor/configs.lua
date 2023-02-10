@@ -287,7 +287,10 @@ function configs.treesitter()
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
           ["]m"] = "@function.outer",
-          ["]]"] = "@class.outer",
+          ["]]"] = { query = "@class.outer", desc = "Next class start" },
+          ["]o"] = "@loop.*",
+          ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
+          ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
         },
         goto_next_end = {
           ["]M"] = "@function.outer",
@@ -300,6 +303,12 @@ function configs.treesitter()
         goto_previous_end = {
           ["[M"] = "@function.outer",
           ["[]"] = "@class.outer",
+        },
+        goto_next = {
+          ["]d"] = "@conditional.outer",
+        },
+        goto_previous = {
+          ["[d"] = "@conditional.outer",
         },
       },
       lsp_interop = {
