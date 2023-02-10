@@ -117,6 +117,33 @@ return {
 }
 ```
 
+# Themes
+
+cosmos-nvim theme colors and highlights are copied from [NvChad/base46](https://github.com/NvChad/base46) project, because [NvChad/base46](https://github.com/NvChad/base46) can't be used alone, so I can only copy the code, please tell me if there is something wrong with this way of using, many thanks to the author [siduck](https://github.com/siduck)! His [NvChad](https://github.com/NvChad/NvChad) neovim distribution is also very impressive!
+
+All available themes are in this directory: [lua/layers/ui/themes](https://github.com/yetone/cosmos-nvim/tree/main/lua/layers/ui/themes).
+
+You can switch themes in this way:
+
+Change file `~/.cosmos-nvim.lua`(the shortcut is <kbd>leader</kbd> - <kbd>f</kbd> - <kbd>e</kbd> - <kbd>d</kbd>)
+
+```lua
+local cosmos = require('core.cosmos')
+
+return {
+  layers = {
+    'editor',
+    'git',
+    {
+      'ui',
+      theme = 'tokyonight' -- <-- add or modify this option
+    },
+    'completion',
+  },
+  -- ...
+}
+```
+
 # Some Screenshots
 
 ## Which Key like spacemacs
