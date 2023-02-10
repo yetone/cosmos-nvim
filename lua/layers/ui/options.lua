@@ -15,5 +15,5 @@ return {
   hl_override = '', -- path of your file that contains highlights
   italic_comments = false,
   theme = 'onedark', -- default theme
-  transparency = false,
+  transparency = 5,
 }

@@ -326,6 +326,7 @@ end
 function configs.telescope()
   local telescope = require('telescope')
   local options = require('layers.editor.options')
+  local ui_options = require('layers.ui.options')
 
   local fb_actions = require('telescope').extensions.file_browser.actions
 
@@ -388,7 +389,7 @@ function configs.telescope()
       -- file_ignore_patterns = { "node_modules/", "\\.git/" },
       generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
       path_display = { 'smart' },
-      winblend = 0,
+      winblend = ui_options.transparency,
       border = {},
       borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       color_devicons = true,

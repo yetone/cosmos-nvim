@@ -2,6 +2,9 @@ local options = require('layers.ui.options')
 local g = vim.g
 local opt = vim.opt
 
+opt.pumblend = options.transparency
+vim.api.nvim_set_hl(0, 'PmenuSel', { blend = 0 })
+
 opt.termguicolors = true
 g.Illuminate_delay = options.illuminate_delay
 g.Illuminate_ftblacklist = options.illuminate_filetype_exclude

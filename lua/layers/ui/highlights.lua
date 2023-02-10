@@ -1032,7 +1032,7 @@ local highlights = {
   },
 }
 
-if ui.transparency then
+if ui.transparency == 100 then
   highlights['Normal'] = {
     bg = 'NONE',
   }
@@ -1062,7 +1062,7 @@ for i, color in ipairs(section_title_colors) do
 end
 
 -- Disable some highlight in nvim tree if transparency enabled
-if ui.transparency then
+if ui.transparency == 100 then
   highlights['NormalFloat'] = {
     bg = 'NONE',
   }
