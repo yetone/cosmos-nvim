@@ -23,7 +23,7 @@ function configs.mason()
         -- Keymap to apply language filter
         apply_language_filter = "/",
       },
-    }
+    },
   })
 
   require("mason-null-ls").setup({
@@ -32,49 +32,49 @@ function configs.mason()
     automatic_setup = true,
   })
   require("null-ls").setup()
-  require('mason-null-ls').setup_handlers()
+  require("mason-null-ls").setup_handlers()
 
   require("mason-lspconfig").setup()
-  require('neodev').setup({
+  require("neodev").setup({
     library = { plugins = { "nvim-dap-ui" }, types = true },
   })
 
   local lspconfig = require("lspconfig")
-  local lspconfig_configs = require('lspconfig.configs')
+  local lspconfig_configs = require("lspconfig.configs")
   if not lspconfig_configs.ls_emmet then
     lspconfig_configs.ls_emmet = {
       default_config = {
-        cmd = { 'ls_emmet', '--stdio' };
+        cmd = { "ls_emmet", "--stdio" },
         filetypes = {
-          'html',
-          'css',
-          'scss',
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'haml',
-          'xml',
-          'xsl',
-          'pug',
-          'slim',
-          'sass',
-          'stylus',
-          'less',
-          'sss',
-          'hbs',
-          'handlebars',
-        };
+          "html",
+          "css",
+          "scss",
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "haml",
+          "xml",
+          "xsl",
+          "pug",
+          "slim",
+          "sass",
+          "stylus",
+          "less",
+          "sss",
+          "hbs",
+          "handlebars",
+        },
         root_dir = function(fname)
           return vim.loop.cwd()
-        end;
-        settings = {};
-      };
+        end,
+        settings = {},
+      },
     }
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -84,10 +84,12 @@ function configs.mason()
   ---@diagnostic disable-next-line: unused-local
   local on_attach = function(client, bufnr)
     -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    local function buf_set_option(...)
+      vim.api.nvim_buf_set_option(bufnr, ...)
+    end
 
     -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
     -- local opts = { noremap=true, silent=true }
     -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
@@ -114,13 +116,13 @@ function configs.mason()
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
-    }
+    },
   }
 
   local servers = {
     tsserver = {
       root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
-    }
+    },
   }
 
   require("mason-lspconfig").setup_handlers({
@@ -129,7 +131,7 @@ function configs.mason()
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
       local opt = servers[server_name] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+      opt = vim.tbl_deep_extend("force", {}, default_opt, opt)
       lspconfig[server_name].setup(opt)
     end,
   })
@@ -137,17 +139,17 @@ end
 
 function configs.project()
   local project = require("project_nvim")
-  project.setup {
+  project.setup({
     exclude_dirs = { "*//*" },
     detection_methods = { "pattern" },
-    patterns = { ".git", },
-  }
+    patterns = { ".git" },
+  })
 end
 
 function configs.lspsaga()
-  local saga = require('lspsaga')
+  local saga = require("lspsaga")
   saga.init_lsp_saga({
-    code_action_prompt = { enable = false, },
+    code_action_prompt = { enable = false },
     code_action_keys = {
       quit = { "q", "<ESC>" },
     },
@@ -158,14 +160,14 @@ function configs.lspsaga()
 end
 
 function configs.lspfuzzy()
-  local lspfuzzy = require('lspfuzzy')
+  local lspfuzzy = require("lspfuzzy")
   lspfuzzy.setup()
 end
 
 function configs.treesitter()
   local treesitter = require("nvim-treesitter.configs")
-  local ui_options = require('layers.ui.options')
-  treesitter.setup {
+  local ui_options = require("layers.ui.options")
+  treesitter.setup({
     autotag = {
       enable = true,
     },
@@ -189,16 +191,16 @@ function configs.treesitter()
       updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
       persist_queries = false, -- Whether the query persists across vim sessions
       keybindings = {
-        toggle_query_editor = 'o',
-        toggle_hl_groups = 'i',
-        toggle_injected_languages = 't',
-        toggle_anonymous_nodes = 'a',
-        toggle_language_display = 'I',
-        focus_language = 'f',
-        unfocus_language = 'F',
-        update = 'R',
-        goto_node = '<cr>',
-        show_help = '?',
+        toggle_query_editor = "o",
+        toggle_hl_groups = "i",
+        toggle_injected_languages = "t",
+        toggle_anonymous_nodes = "a",
+        toggle_language_display = "I",
+        focus_language = "f",
+        unfocus_language = "F",
+        update = "R",
+        goto_node = "<cr>",
+        show_help = "?",
       },
     },
 
@@ -226,7 +228,7 @@ function configs.treesitter()
     },
 
     context_commentstring = {
-      enable = true
+      enable = true,
     },
 
     incremental_selection = {
@@ -241,9 +243,9 @@ function configs.treesitter()
 
     textsubjects = {
       enable = true,
-      prev_selection = ',', -- (Optional) keymap to select the previous selection
+      prev_selection = ",", -- (Optional) keymap to select the previous selection
       keymaps = {
-        ['.'] = 'textsubjects-smart',
+        ["."] = "textsubjects-smart",
         -- [';'] = 'textsubjects-container-outer',
       },
     },
@@ -302,30 +304,32 @@ function configs.treesitter()
       },
       lsp_interop = {
         enable = true,
-        border = 'none',
+        border = "none",
         peek_definition_code = {
           ["<leader>sd"] = "@function.outer",
           ["<leader>sD"] = "@class.outer",
         },
       },
     },
-  }
+  })
 end
 
 function configs.telescope()
   local telescope = require("telescope")
-  local options = require('layers.editor.options')
+  local options = require("layers.editor.options")
 
-  local fb_actions = require "telescope".extensions.file_browser.actions
+  local fb_actions = require("telescope").extensions.file_browser.actions
 
-  local previewers = require('telescope.previewers')
+  local previewers = require("telescope.previewers")
 
   local new_maker = function(filepath, bufnr, opts)
     opts = opts or {}
 
     filepath = vim.fn.expand(filepath)
     vim.loop.fs_stat(filepath, function(_, stat)
-      if not stat then return end
+      if not stat then
+        return
+      end
       if stat.size > 100000 then
         return
       else
@@ -335,7 +339,7 @@ function configs.telescope()
   end
 
   local theme = options.telescope_theme
-  telescope.setup {
+  telescope.setup({
     defaults = {
       vimgrep_arguments = {
         "rg",
@@ -349,7 +353,7 @@ function configs.telescope()
       mappings = {
         i = {
           ["<C-a>"] = { "<esc>0i", type = "command" },
-          ["<Esc>"] = require('telescope.actions').close
+          ["<Esc>"] = require("telescope.actions").close,
         },
       },
       selection_caret = "  ",
@@ -388,9 +392,9 @@ function configs.telescope()
       buffer_previewer_maker = new_maker,
     },
     extensions = {
-      ['ui-select'] = {
+      ["ui-select"] = {
         -- TODO: specify the cursor theme for codeaction only
-        require("telescope.themes").get_cursor {},
+        require("telescope.themes").get_cursor({}),
       },
       file_browser = {
         theme = theme,
@@ -417,7 +421,7 @@ function configs.telescope()
         -- filetypes whitelist
         -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
         filetypes = { "png", "webp", "jpg", "jpeg" },
-        find_cmd = "rg" -- find command (defaults to `fd`)
+        find_cmd = "rg", -- find command (defaults to `fd`)
       },
     },
     pickers = {
@@ -451,49 +455,49 @@ function configs.telescope()
       },
       diagnostics = {
         theme = theme,
-        initial_mode = 'normal',
+        initial_mode = "normal",
       },
       lsp_references = {
-        theme = 'cursor',
-        initial_mode = 'normal',
+        theme = "cursor",
+        initial_mode = "normal",
         layout_config = {
           width = 0.8,
           height = 0.4,
         },
       },
       lsp_code_actions = {
-        theme = 'cursor',
-        initial_mode = 'normal',
+        theme = "cursor",
+        initial_mode = "normal",
       },
     },
-  }
+  })
 
-  telescope.load_extension 'projects'
-  telescope.load_extension 'file_browser'
-  telescope.load_extension 'dap'
-  telescope.load_extension 'media_files'
-  telescope.load_extension 'ui-select'
-  telescope.load_extension 'fzf'
+  telescope.load_extension("projects")
+  telescope.load_extension("file_browser")
+  telescope.load_extension("dap")
+  telescope.load_extension("media_files")
+  telescope.load_extension("ui-select")
+  telescope.load_extension("fzf")
 end
 
 configs.dap = function()
-  local dap = require('dap')
-  for name, adapter in pairs(require('layers.editor.utils').get_dap_adapters()) do
+  local dap = require("dap")
+  for name, adapter in pairs(require("layers.editor.utils").get_dap_adapters()) do
     dap.adapters[name] = adapter
   end
-  for name, configuration in pairs(require('layers.editor.utils').get_dap_configurations()) do
+  for name, configuration in pairs(require("layers.editor.utils").get_dap_configurations()) do
     dap.configurations[name] = configuration
   end
 end
 
 configs.dap_go = function()
-  require('dap-go').setup()
+  require("dap-go").setup()
 end
 
 configs.dapui = function()
-  vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
-  vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
-  local dapui = require('dapui')
+  vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
+  local dapui = require("dapui")
   dapui.setup({
     icons = { expanded = "▾", collapsed = "▸" },
     mappings = {
@@ -539,12 +543,12 @@ configs.dapui = function()
 end
 
 configs.dap_virtual_text = function()
-  local dap_virtual_text = require('nvim-dap-virtual-text')
+  local dap_virtual_text = require("nvim-dap-virtual-text")
   dap_virtual_text.setup({ enabled = true, enabled_commands = true, all_frames = true })
 end
 
 configs.trouble = function()
-  local trouble = require('trouble')
+  local trouble = require("trouble")
   trouble.setup({
     position = "bottom", -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
@@ -574,7 +578,7 @@ configs.trouble = function()
       open_folds = { "zR", "zr" }, -- open all folds
       toggle_fold = { "zA", "za" }, -- toggle fold of current file
       previous = "k", -- preview item
-      next = "j" -- next item
+      next = "j", -- next item
     },
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = false, -- automatically open the list when you have diagnostics
@@ -588,14 +592,14 @@ configs.trouble = function()
       warning = "",
       hint = "",
       information = "",
-      other = "﫠"
+      other = "﫠",
     },
-    use_diagnostic_signs = false -- enabling this will use the signs defined in your lsp client
+    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
   })
 end
 
 configs.nvimtree = function()
-  local nvimtree = require('nvim-tree')
+  local nvimtree = require("nvim-tree")
   nvimtree.setup({
     sync_root_with_cwd = true,
     respect_buf_cwd = true,
@@ -603,7 +607,7 @@ configs.nvimtree = function()
       add_trailing = false,
       highlight_git = false,
       highlight_opened_files = "none",
-      root_folder_modifier = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" },
+      root_folder_modifier = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
       icons = {
         show = {
           folder = true,
@@ -649,7 +653,7 @@ configs.nvimtree = function()
     update_focused_file = {
       enable = true,
       update_cwd = false,
-      update_root = true
+      update_root = true,
     },
     diagnostics = {
       enable = true,
@@ -658,7 +662,7 @@ configs.nvimtree = function()
         info = "",
         warning = "",
         error = "",
-      }
+      },
     },
     git = {
       enable = true,
@@ -679,7 +683,7 @@ configs.nvimtree = function()
 end
 
 configs.toggleterm = function()
-  local toggleterm = require('toggleterm')
+  local toggleterm = require("toggleterm")
   toggleterm.setup({
     size = function(term)
       if term.direction == "horizontal" then
@@ -694,29 +698,29 @@ configs.toggleterm = function()
     start_in_insert = true,
     insert_mappings = false, -- whether or not the open mapping applies in insert mode
     persist_size = false,
-    direction = 'horizontal',
+    direction = "horizontal",
     close_on_exit = true,
     shell = vim.o.shell,
   })
 end
 
 configs.hop = function()
-  local hop = require('hop')
-  hop.setup { keys = 'etovxqpdygfblzhckisuran' }
+  local hop = require("hop")
+  hop.setup({ keys = "etovxqpdygfblzhckisuran" })
 end
 
 configs.leap = function()
-  local leap = require('leap')
+  local leap = require("leap")
   leap.set_default_keymaps()
 end
 
 configs.numb = function()
-  local numb = require('numb')
+  local numb = require("numb")
   numb.setup()
 end
 
 configs.spellsitter = function()
-  local spellsitter = require('spellsitter')
+  local spellsitter = require("spellsitter")
   spellsitter.setup({
     enable = true,
   })
@@ -724,47 +728,56 @@ end
 
 function configs.osc52()
   local function copy(lines, _)
-    require('osc52').copy(table.concat(lines, '\n'))
+    require("osc52").copy(table.concat(lines, "\n"))
   end
 
   local function paste()
-    return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
   end
 
   vim.g.clipboard = {
-    name = 'osc52',
-    copy = { ['+'] = copy, ['*'] = copy },
-    paste = { ['+'] = paste, ['*'] = paste },
+    name = "osc52",
+    copy = { ["+"] = copy, ["*"] = copy },
+    paste = { ["+"] = paste, ["*"] = paste },
   }
-  vim.opt.clipboard:append('unnamedplus')
+  vim.opt.clipboard:append("unnamedplus")
 end
 
 function configs.auto_save()
-  require('auto-save').setup()
+  require("auto-save").setup()
 end
 
 function configs.nvim_window()
-  require('nvim-window').setup({
+  require("nvim-window").setup({
     -- The characters available for hinting windows.
     chars = {
-      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
     },
 
     -- A group to use for overwriting the Normal highlight group in the floating
     -- window. This can be used to change the background color.
-    normal_hl = 'BlackOnLightYellow',
+    normal_hl = "BlackOnLightYellow",
 
     -- The highlight group to apply to the line that contains the hint characters.
     -- This is used to make them stand out more.
-    hint_hl = 'Bold',
+    hint_hl = "Bold",
 
     -- The border style to use for the floating window.
-    border = 'none'
+    border = "none",
   })
 end
 
 function configs.guess_indent()
-  require('guess-indent').setup()
+  require("guess-indent").setup()
 end
 
 return configs
