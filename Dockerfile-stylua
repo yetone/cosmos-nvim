@@ -1,0 +1,8 @@
+FROM rust:1.67 as builder
+
+RUN cargo install stylua --features lua54
+
+FROM debian:bullseye-slim
+
+COPY --from=builder /usr/local/cargo/bin/stylua /usr/local/bin/stylua
+

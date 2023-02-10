@@ -1,7 +1,6 @@
 local utils = require('core.utils')
 local cosmos = require('core.cosmos')
 
-local i = 0
 for i = 1, 6 do
   cosmos.add_leader_keymapping(
     string.format('n|%d', i),

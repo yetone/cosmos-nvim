@@ -63,7 +63,6 @@ local function list_layer_module_names(filename)
       if not utils.file_exists(f) then
         goto continue
       end
-      exists = true
       local m = f:sub(#lua_dir + 1, -1)
       list[#list + 1] = {
         ---@diagnostic disable-next-line: undefined-field
