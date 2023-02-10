@@ -483,8 +483,8 @@ local highlights = {
   NvimTreeIndentMarker = {
     fg = one_bg2,
   },
-  -- bg("NvimTreeNormal", darker_black)
-  -- bg("NvimTreeNormalNC", darker_black)
+  NvimTreeNormal = { bg = colors.darker_black },
+  NvimTreeNormalNC = { bg = colors.darker_black },
   NvimTreeOpenedFolderName = {
     fg = folder_bg,
   },
@@ -503,6 +503,10 @@ local highlights = {
   NvimTreeVertSplit = {
     fg = darker_black,
     bg = darker_black,
+  },
+  NvimTreeWinSeparator = {
+    fg = colors.darker_black,
+    bg = colors.darker_black,
   },
   NvimTreeWindowPicker = {
     fg = red,
@@ -555,6 +559,19 @@ local highlights = {
 
   TelescopeSelection = {
     bg = black2,
+    fg = colors.white,
+  },
+
+  TelescopeResultsDiffAdd = {
+    fg = colors.green,
+  },
+
+  TelescopeResultsDiffChange = {
+    fg = colors.yellow,
+  },
+
+  TelescopeResultsDiffDelete = {
+    fg = colors.red,
   },
 
   -- LspSaga
@@ -1030,6 +1047,15 @@ local highlights = {
   TSCurrentScope = {
     bold = true,
   },
+
+  -- Mason
+  MasonHeader = { bg = colors.red, fg = colors.black },
+  MasonHighlight = { fg = colors.blue },
+  MasonHighlightBlock = { fg = colors.black, bg = colors.green },
+  MasonHighlightBlockBold = { link = 'MasonHighlightBlock' },
+  MasonHeaderSecondary = { link = 'MasonHighlightBlock' },
+  MasonMuted = { fg = colors.light_grey },
+  MasonMutedBlock = { fg = colors.light_grey, bg = colors.one_bg },
 }
 
 if ui.transparency == 100 then
