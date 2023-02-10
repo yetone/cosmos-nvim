@@ -3,8 +3,11 @@
 <p align="center">A must-have configuration for Spacemacs users after defecting to Vim</p>
 
 <p align="center">
-    <a href="https://github.com/yetone/nvim/actions/workflows/build.yml">
-        <img alt="Build Status" src="https://github.com/yetone/nvim/actions/workflows/build.yml/badge.svg">
+    <a href="https://github.com/yetone/cosmos-nvim/actions/workflows/lint.yaml">
+        <img alt="Build Status" src="https://github.com/yetone/cosmos-nvim/actions/workflows/lint.yaml/badge.svg">
+    </a>
+    <a href="https://github.com/yetone/cosmos-nvim/actions/workflows/build.yml">
+        <img alt="Build Status" src="https://github.com/yetone/cosmos-nvim/actions/workflows/build.yml/badge.svg">
     </a>
 </p>
 
