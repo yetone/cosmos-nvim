@@ -18,7 +18,9 @@ local function is_module_available(name)
 end
 
 function M.index_of(tbl, val, cmp)
-  cmp = cmp or function(a, b) return a == b end
+  cmp = cmp or function(a, b)
+    return a == b
+  end
   for i, v in ipairs(tbl) do
     if cmp(v, val) then
       return i
@@ -92,12 +94,10 @@ function M.get_user_config()
     _user_config.options = {}
   end
   if _user_config.before_setup == nil then
-    _user_config.before_setup = function()
-    end
+    _user_config.before_setup = function() end
   end
   if _user_config.after_setup == nil then
-    _user_config.after_setup = function()
-    end
+    _user_config.after_setup = function() end
   end
   return _user_config
 end
@@ -118,8 +118,8 @@ function M.fill_options(dest_options, new_options)
 end
 
 function M.file_exists(name)
-   local f = io.open(name, 'r')
-   if f ~= nil then
+  local f = io.open(name, 'r')
+  if f ~= nil then
     io.close(f)
     return true
   else
@@ -164,14 +164,14 @@ end
 -- @param color Color
 
 M.bg = function(group, col)
-   cmd("hi " .. group .. " guibg=" .. col)
+  cmd('hi ' .. group .. ' guibg=' .. col)
 end
 
 -- Define fg color
 -- @param group Group
 -- @param color Color
 M.fg = function(group, col)
-   cmd("hi " .. group .. " guifg=" .. col)
+  cmd('hi ' .. group .. ' guifg=' .. col)
 end
 
 -- Define bg and fg color
@@ -179,7 +179,7 @@ end
 -- @param fgcol Fg Color
 -- @param bgcol Bg Color
 M.fg_bg = function(group, fgcol, bgcol)
-   cmd("hi " .. group .. " guifg=" .. fgcol .. " guibg=" .. bgcol)
+  cmd('hi ' .. group .. ' guifg=' .. fgcol .. ' guibg=' .. bgcol)
 end
 
 return M

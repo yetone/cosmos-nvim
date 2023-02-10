@@ -8,11 +8,11 @@ local opt = vim.opt
 g.mapleader = ' '
 g.user_emmet_settings = {
   javascript = {
-    extends = 'jsx'
+    extends = 'jsx',
   },
   typescript = {
-    extends = 'tsx'
-  }
+    extends = 'tsx',
+  },
 }
 g.copilot_filetypes = {
   TelescopePrompt = false,
@@ -55,13 +55,13 @@ opt.softtabstop = indent
 opt.expandtab = true
 -- opt.smartindent = true
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "make",
-  command = "set noexpandtab",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'make',
+  command = 'set noexpandtab',
 })
-vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
-  pattern = "*.go",
-  command = "setlocal noet ts=4 sw=4 sts=4",
+vim.api.nvim_create_autocmd('BufNewFile,BufRead', {
+  pattern = '*.go',
+  command = 'setlocal noet ts=4 sw=4 sts=4',
 })
 
 -- autocmd bufnewfile,bufread *.tsx set filetype=typescriptreact
@@ -78,18 +78,17 @@ opt.undolevels = 1000
 -- opt.backspace = 'indent,eol,start'
 opt.shell = os.getenv('SHELL') or 'bash'
 
-vim.cmd [[
+vim.cmd([[
 hi Pmenu ctermfg=white ctermbg=238
-]]
+]])
 
 -- Jump to the last position when opening a file. If you want to seen more details, see :help last-position-jump'.
-vim.api.nvim_create_autocmd("BufReadPost", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('BufReadPost', {
+  pattern = '*',
   callback = function()
-    local line = vim.fn.line("'\"")
-    if line >= 1 and line <= vim.fn.line("$") then
-      vim.cmd("normal! g`\"")
+    local line = vim.fn.line('\'"')
+    if line >= 1 and line <= vim.fn.line('$') then
+      vim.cmd('normal! g`"')
     end
   end,
 })
-

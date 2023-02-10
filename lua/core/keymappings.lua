@@ -3,7 +3,10 @@ local cosmos = require('core.cosmos')
 
 local i = 0
 for i = 1, 6 do
-  cosmos.add_leader_keymapping(string.format('n|%d', i), { string.format('%d<C-w><C-w>', i), name = string.format('Select window %d', i) })
+  cosmos.add_leader_keymapping(
+    string.format('n|%d', i),
+    { string.format('%d<C-w><C-w>', i), name = string.format('Select window %d', i) }
+  )
 end
 
 cosmos.add_leader_keymapping('n|ws', { '<C-w>s', name = 'Split window below' })
@@ -47,4 +50,3 @@ utils.set_keymap('c', '<C-d>', '<Del>', {})
 utils.set_keymap('c', '<C-h>', '<BS>', { noremap = true })
 utils.set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', { noremap = true })
 -- End of setup for emacs keybindings
-

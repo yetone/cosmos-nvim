@@ -8,8 +8,8 @@ local current_layer_name = nil
 ---@diagnostic disable-next-line: unused-function, unused-local
 local function list_all_layer_module_names(filename)
   local list = {}
-  for _, dir in ipairs({layers_dir, private_layers_dir}) do
-    local tmp = vim.split(vim.fn.globpath(dir, "*/" .. filename), "\n")
+  for _, dir in ipairs({ layers_dir, private_layers_dir }) do
+    local tmp = vim.split(vim.fn.globpath(dir, '*/' .. filename), '\n')
     for _, f in ipairs(tmp) do
       local m = f:sub(#lua_dir + 1, -1)
       list[#list + 1] = m:sub(0, #m - 4)
@@ -21,7 +21,7 @@ end
 local function fill_layer_options()
   local user_config = utils.get_user_config()
   for _, layer in ipairs(user_config.layers) do
-    for _, dir in ipairs({layers_dir, private_layers_dir}) do
+    for _, dir in ipairs({ layers_dir, private_layers_dir }) do
       ---@diagnostic disable-next-line: undefined-field
       local f = dir .. '/' .. layer.name .. '/options.lua'
       if not utils.file_exists(f) then
@@ -41,7 +41,7 @@ end
 local function execute_layer_settings()
   local user_config = utils.get_user_config()
   for _, layer in ipairs(user_config.layers) do
-    for _, dir in ipairs({layers_dir, private_layers_dir}) do
+    for _, dir in ipairs({ layers_dir, private_layers_dir }) do
       ---@diagnostic disable-next-line: undefined-field
       local f = dir .. '/' .. layer.name .. '/settings.lua'
       if not utils.file_exists(f) then
@@ -57,19 +57,19 @@ local function list_layer_module_names(filename)
   local user_config = utils.get_user_config()
   local list = {}
   for _, layer in ipairs(user_config.layers) do
-    for _, dir in ipairs({layers_dir, private_layers_dir}) do
+    for _, dir in ipairs({ layers_dir, private_layers_dir }) do
       ---@diagnostic disable-next-line: undefined-field
-        local f = dir .. '/' .. layer.name .. '/' .. filename
-        if not utils.file_exists(f) then
-          goto continue
-        end
-        exists = true
-        local m = f:sub(#lua_dir + 1, -1)
-        list[#list + 1] = {
-          ---@diagnostic disable-next-line: undefined-field
-          layer_name = layer.name,
-          module_name = m:sub(0, #m - 4),
-        }
+      local f = dir .. '/' .. layer.name .. '/' .. filename
+      if not utils.file_exists(f) then
+        goto continue
+      end
+      exists = true
+      local m = f:sub(#lua_dir + 1, -1)
+      list[#list + 1] = {
+        ---@diagnostic disable-next-line: undefined-field
+        layer_name = layer.name,
+        module_name = m:sub(0, #m - 4),
+      }
       ::continue::
     end
   end
@@ -135,7 +135,7 @@ local default_leader_keymapping_group_names = {
     name = '+Files',
     e = {
       name = 'Config files',
-    }
+    },
   },
   p = {
     name = '+Projects',
@@ -169,7 +169,7 @@ function M.setup_keymappings(enable_which_key)
   load_layer_keymappings()
   local _leader_keymappings = {}
   for shortcut, opts in pairs(leader_keymappings) do
-    local mode, keymap = shortcut:match("([^|]*)|?(.*)")
+    local mode, keymap = shortcut:match('([^|]*)|?(.*)')
     if not enable_which_key then
       utils.set_keymap(mode, keymap, opts[1], opts)
       goto continue
@@ -220,16 +220,16 @@ end
 local function setup_plugins()
   load_layer_plugins()
 
-  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
   if not vim.loop.fs_stat(lazypath) then
     print('installing lazy.nvim...')
     vim.fn.system({
-      "git",
-      "clone",
-      "--filter=blob:none",
-      "--depth=1",
-      "https://github.com/folke/lazy.nvim.git",
-      "--branch=stable", -- latest stable release
+      'git',
+      'clone',
+      '--filter=blob:none',
+      '--depth=1',
+      'https://github.com/folke/lazy.nvim.git',
+      '--branch=stable', -- latest stable release
       lazypath,
     })
     print('installing lazy.nvim...done')
@@ -245,15 +245,15 @@ local function setup_plugins()
 
     {
       'antoinemadec/FixCursorHold.nvim', -- Needed while issue https://github.com/neovim/neovim/issues/12587 is still open
-      event = "VimEnter",
+      event = 'VimEnter',
     },
 
     {
-      "rcarriga/nvim-notify",
+      'rcarriga/nvim-notify',
       config = function()
-        require("notify").setup({
+        require('notify').setup({
           -- Animation style (see below for details)
-          stages = "fade_in_slide_out",
+          stages = 'fade_in_slide_out',
 
           -- Function called when a new window is opened, use for changing win settings/config
           on_open = nil,
@@ -262,29 +262,29 @@ local function setup_plugins()
           on_close = nil,
 
           -- Render function for notifications. See notify-render()
-          render = "default",
+          render = 'default',
 
           -- Default timeout for notifications
           timeout = 5000,
 
           -- For stages that change opacity this is treated as the highlight behind the window
           -- Set this to either a highlight group, an RGB hex value e.g. "#000000" or a function returning an RGB code for dynamic values
-          background_colour = "Normal",
+          background_colour = 'Normal',
 
           -- Minimum width for notification windows
           minimum_width = 50,
 
           -- Icons for the different levels
           icons = {
-            ERROR = "",
-            WARN = "",
-            INFO = "",
-            DEBUG = "",
-            TRACE = "✎",
+            ERROR = '',
+            WARN = '',
+            INFO = '',
+            DEBUG = '',
+            TRACE = '✎',
           },
         })
       end,
-      event = "BufRead",
+      event = 'BufRead',
     },
   }, plugins)
 
@@ -312,7 +312,7 @@ local function setup_plugins()
     end
   end
 
-  require("lazy").setup(plugins)
+  require('lazy').setup(plugins)
 end
 
 local function setup()
@@ -322,61 +322,58 @@ local function setup()
   fill_layer_options()
   execute_layer_settings()
 
-  M.add_plugin(
-    'folke/which-key.nvim',
-    {
-      config = function()
-        require('which-key').setup({
-          plugins = {
-            marks = false,
-            registers = false,
-            presets = {
-              operators = false,
-              motions = true,
-              text_objects = true,
-              windows = true,
-              nav = true,
-              z = true,
-              g = true,
-            },
+  M.add_plugin('folke/which-key.nvim', {
+    config = function()
+      require('which-key').setup({
+        plugins = {
+          marks = false,
+          registers = false,
+          presets = {
+            operators = false,
+            motions = true,
+            text_objects = true,
+            windows = true,
+            nav = true,
+            z = true,
+            g = true,
           },
-          icons = {
-            breadcrumb = "»", -- symbol used in the command line area that shows your active key combo
-            separator = "➜", -- symbol used between a key and it's label
-            group = "+", -- symbol prepended to a group
-          },
-          key_labels = {
-            ["<space>"] = "SPC",
-            ["<cr>"] = "RET",
-            ["<tab>"] = "TAB",
-          },
-          window = {
-            padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
-            border = "none",
-          },
-          layout = {
-            height = { min = 1, max = 10 }, -- min and max height of the columns
-            spacing = 3,
-            align = "left",
-          },
-          ignore_missing = true,
-          hidden = {
-            "<silent>",
-            "<Cmd>",
-            "<cmd>",
-            "<Plug>",
-            "call",
-            "lua",
-            "^:",
-            "^ ",
-          }, -- hide mapping boilerplate
-          show_help = true, -- show help message on the command line when the popup is visible
-          triggers = "auto", -- automatically setup triggers
-        })
-        require('core.cosmos').setup_keymappings(true)
-      end,
-    }
-  )
+        },
+        icons = {
+          breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
+          separator = '➜', -- symbol used between a key and it's label
+          group = '+', -- symbol prepended to a group
+        },
+        key_labels = {
+          ['<space>'] = 'SPC',
+          ['<cr>'] = 'RET',
+          ['<tab>'] = 'TAB',
+        },
+        window = {
+          padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+          border = 'none',
+        },
+        layout = {
+          height = { min = 1, max = 10 }, -- min and max height of the columns
+          spacing = 3,
+          align = 'left',
+        },
+        ignore_missing = true,
+        hidden = {
+          '<silent>',
+          '<Cmd>',
+          '<cmd>',
+          '<Plug>',
+          'call',
+          'lua',
+          '^:',
+          '^ ',
+        }, -- hide mapping boilerplate
+        show_help = true, -- show help message on the command line when the popup is visible
+        triggers = 'auto', -- automatically setup triggers
+      })
+      require('core.cosmos').setup_keymappings(true)
+    end,
+  })
   setup_plugins()
 
   user_config.after_setup()

@@ -8,50 +8,49 @@ g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
 
 opt.cursorline = true
 
-vim.api.nvim_create_autocmd("WinEnter", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('WinEnter', {
+  pattern = '*',
   callback = function(_)
-    if not vim.bo.filetype ~= "alpha" and not vim.bo.filetype ~= "dashboard" then
+    if not vim.bo.filetype ~= 'alpha' and not vim.bo.filetype ~= 'dashboard' then
       vim.o.cursorline = true
     end
   end,
 })
-vim.api.nvim_create_autocmd("WinLeave", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('WinLeave', {
+  pattern = '*',
   callback = function(_)
     vim.o.cursorline = false
   end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("illuminate_augroup", { clear = true }),
-  pattern = "*",
+vim.api.nvim_create_autocmd('VimEnter', {
+  group = vim.api.nvim_create_augroup('illuminate_augroup', { clear = true }),
+  pattern = '*',
   callback = function()
-    local color = "#2d323e"
-    vim.api.nvim_set_hl(0, "IlluminatedWordRead", {
+    local color = '#2d323e'
+    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', {
       bg = color,
     })
-    vim.api.nvim_set_hl(0, "IlluminatedWordText", {
+    vim.api.nvim_set_hl(0, 'IlluminatedWordText', {
       bg = color,
     })
-    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", {
+    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', {
       bg = color,
     })
   end,
 })
 
 vim.api.nvim_create_autocmd({
-    "BufEnter",
-    "BufRead",
-    "BufWinEnter",
-    "FileType",
-    "WinEnter",
-  }, {
-    pattern = "*",
-    callback = function()
-      require("layers.ui.utils").hide_statusline()
-    end,
-  })
+  'BufEnter',
+  'BufRead',
+  'BufWinEnter',
+  'FileType',
+  'WinEnter',
+}, {
+  pattern = '*',
+  callback = function()
+    require('layers.ui.utils').hide_statusline()
+  end,
+})
 
-require("layers.ui.colors").init()
-
+require('layers.ui.colors').init()

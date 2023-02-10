@@ -1,40 +1,34 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
-cosmos.add_plugin(
-  'github/copilot.vim',
-  {
-    dependencies = { 'hrsh7th/nvim-cmp' },
-    event = 'BufRead',
-  }
-)
+cosmos.add_plugin('github/copilot.vim', {
+  dependencies = { 'hrsh7th/nvim-cmp' },
+  event = 'BufRead',
+})
 
-cosmos.add_plugin(
-  'hrsh7th/nvim-cmp',
-  {
-    dependencies = {
-      {
-        'windwp/nvim-autopairs',
-        branch = 'master',
-        config = configs.autopairs,
-        lazy = true,
-      },
-      {
-        'L3MON4D3/LuaSnip',
-        dependencies = {
-          {
-            'rafamadriz/friendly-snippets',
-            lazy = true,
-          }
-        },
-        config = configs.luasnip,
-        lazy = true,
-      }
+cosmos.add_plugin('hrsh7th/nvim-cmp', {
+  dependencies = {
+    {
+      'windwp/nvim-autopairs',
+      branch = 'master',
+      config = configs.autopairs,
+      lazy = true,
     },
-    config = configs.cmp,
-    event = 'InsertEnter',
-  }
-)
+    {
+      'L3MON4D3/LuaSnip',
+      dependencies = {
+        {
+          'rafamadriz/friendly-snippets',
+          lazy = true,
+        },
+      },
+      config = configs.luasnip,
+      lazy = true,
+    },
+  },
+  config = configs.cmp,
+  event = 'InsertEnter',
+})
 
 cosmos.add_plugin('hrsh7th/cmp-nvim-lua', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 cosmos.add_plugin('hrsh7th/cmp-buffer', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })

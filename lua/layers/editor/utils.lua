@@ -3,15 +3,15 @@ local dap_adapters = {
     local stdout = vim.loop.new_pipe(false)
     local handle
     local pid_or_err
-    local host = config.host or "127.0.0.1"
-    local port = config.port or "38697"
-    local addr = string.format("%s:%s", host, port)
+    local host = config.host or '127.0.0.1'
+    local port = config.port or '38697'
+    local addr = string.format('%s:%s', host, port)
     local opts = {
-      stdio = {nil, stdout},
-      args = {"dap", "-l", addr},
-      detached = true
+      stdio = { nil, stdout },
+      args = { 'dap', '-l', addr },
+      detached = true,
     }
-    handle, pid_or_err = vim.loop.spawn("dlv", opts, function(code)
+    handle, pid_or_err = vim.loop.spawn('dlv', opts, function(code)
       stdout:close()
       handle:close()
       if code ~= 0 then
@@ -28,12 +28,10 @@ local dap_adapters = {
       end
     end)
     -- Wait for delve to start
-    vim.defer_fn(
-    function()
-      callback({type = "server", host = "127.0.0.1", port = port})
-    end,
-    100)
-  end
+    vim.defer_fn(function()
+      callback({ type = 'server', host = '127.0.0.1', port = port })
+    end, 100)
+  end,
 }
 
 local dap_configurations = {}
@@ -57,4 +55,3 @@ M.get_dap_configurations = function()
 end
 
 return M
-

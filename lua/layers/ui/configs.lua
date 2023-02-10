@@ -2,158 +2,158 @@ local configs = {}
 
 function configs.web_devicons()
   local web_devicons = require('nvim-web-devicons')
-  local colors = require("layers.ui.colors").get()
-  web_devicons.setup {
+  local colors = require('layers.ui.colors').get()
+  web_devicons.setup({
     -- your personnal icons can go here (to override)
     -- you can specify color or cterm_color instead of specifying both of them
     -- DevIcon will be appended to `name`
     override = {
       zsh = {
-        icon = "",
-        color = "#428850",
-        cterm_color = "65",
-        name = "Zsh"
+        icon = '',
+        color = '#428850',
+        cterm_color = '65',
+        name = 'Zsh',
       },
       c = {
-        icon = "",
+        icon = '',
         color = colors.blue,
-        name = "c",
+        name = 'c',
       },
       css = {
-        icon = "",
+        icon = '',
         color = colors.blue,
-        name = "css",
+        name = 'css',
       },
       deb = {
-        icon = "",
+        icon = '',
         color = colors.cyan,
-        name = "deb",
+        name = 'deb',
       },
       Dockerfile = {
-        icon = "",
+        icon = '',
         color = colors.cyan,
-        name = "Dockerfile",
+        name = 'Dockerfile',
       },
       html = {
-        icon = "",
+        icon = '',
         color = colors.baby_pink,
-        name = "html",
+        name = 'html',
       },
       jpeg = {
-        icon = "",
+        icon = '',
         color = colors.dark_purple,
-        name = "jpeg",
+        name = 'jpeg',
       },
       jpg = {
-        icon = "",
+        icon = '',
         color = colors.dark_purple,
-        name = "jpg",
+        name = 'jpg',
       },
       js = {
-        icon = "",
+        icon = '',
         color = colors.sun,
-        name = "js",
+        name = 'js',
       },
       kt = {
-        icon = "󱈙",
+        icon = '󱈙',
         color = colors.orange,
-        name = "kt",
+        name = 'kt',
       },
       lock = {
-        icon = "",
+        icon = '',
         color = colors.red,
-        name = "lock",
+        name = 'lock',
       },
       lua = {
-        icon = "",
+        icon = '',
         color = colors.blue,
-        name = "lua",
+        name = 'lua',
       },
       mp3 = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "mp3",
+        name = 'mp3',
       },
       mp4 = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "mp4",
+        name = 'mp4',
       },
       out = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "out",
+        name = 'out',
       },
       png = {
-        icon = "",
+        icon = '',
         color = colors.dark_purple,
-        name = "png",
+        name = 'png',
       },
       py = {
-        icon = "",
+        icon = '',
         color = colors.cyan,
-        name = "py",
+        name = 'py',
       },
-      ["robots.txt"] = {
-        icon = "ﮧ",
+      ['robots.txt'] = {
+        icon = 'ﮧ',
         color = colors.red,
-        name = "robots",
+        name = 'robots',
       },
       toml = {
-        icon = "",
+        icon = '',
         color = colors.blue,
-        name = "toml",
+        name = 'toml',
       },
       ts = {
-        icon = "ﯤ",
+        icon = 'ﯤ',
         color = colors.teal,
-        name = "ts",
+        name = 'ts',
       },
       ttf = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "TrueTypeFont",
+        name = 'TrueTypeFont',
       },
       rb = {
-        icon = "",
+        icon = '',
         color = colors.pink,
-        name = "rb",
+        name = 'rb',
       },
       rpm = {
-        icon = "",
+        icon = '',
         color = colors.orange,
-        name = "rpm",
+        name = 'rpm',
       },
       vue = {
-        icon = "﵂",
+        icon = '﵂',
         color = colors.vibrant_green,
-        name = "vue",
+        name = 'vue',
       },
       woff = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "WebOpenFontFormat",
+        name = 'WebOpenFontFormat',
       },
       woff2 = {
-        icon = "",
+        icon = '',
         color = colors.white,
-        name = "WebOpenFontFormat2",
+        name = 'WebOpenFontFormat2',
       },
       xz = {
-        icon = "",
+        icon = '',
         color = colors.sun,
-        name = "xz",
+        name = 'xz',
       },
       zip = {
-        icon = "",
+        icon = '',
         color = colors.sun,
-        name = "zip",
+        name = 'zip',
       },
     },
     -- globally enable default icons (default to false)
     -- will get overriden by `get_icons` option
-    default = true;
-  }
+    default = true,
+  })
 end
 
 function configs.dashboard()
@@ -195,13 +195,13 @@ end
 function configs.alpha()
   local alpha = require('alpha')
   math.randomseed(os.time())
-  local colors = {'white'}
+  local colors = { 'white' }
   local function random_colors(color_lst)
     return color_lst[math.random(1, #color_lst)]
   end
   vim.cmd(string.format('highlight dashboard guifg=%s guibg=bg', random_colors(colors)))
 
-  local dashboard = require("alpha.themes.dashboard")
+  local dashboard = require('alpha.themes.dashboard')
 
   local header = {
     [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
@@ -235,11 +235,11 @@ function configs.alpha()
   dashboard.section.header.opts.hl = 'dashboard'
 
   dashboard.section.buttons.val = {
-    dashboard.button("e", "  New File    ", ":enew<CR>", nil),
-    dashboard.button("f", "  Find File   ", ":Telescope find_files<CR>", nil),
-    dashboard.button("t", "  Find Text   ", ":Telescope live_grep<CR>", nil),
-    dashboard.button("c", "  NVIM Config ", ":e ~/.config/nvim/init.lua<CR>:Telescope find_files<CR>", nil),
-    dashboard.button("q", "  Quit        ", ":qa<CR>", nil),
+    dashboard.button('e', '  New File    ', ':enew<CR>', nil),
+    dashboard.button('f', '  Find File   ', ':Telescope find_files<CR>', nil),
+    dashboard.button('t', '  Find Text   ', ':Telescope live_grep<CR>', nil),
+    dashboard.button('c', '  NVIM Config ', ':e ~/.config/nvim/init.lua<CR>:Telescope find_files<CR>', nil),
+    dashboard.button('q', '  Quit        ', ':qa<CR>', nil),
   }
   alpha.setup(dashboard.opts)
 end
@@ -252,7 +252,7 @@ function configs.lualine()
     return vim.api.nvim_win_get_number(0)
   end
 
-  local colors = require("layers.ui.colors").get().base_30
+  local colors = require('layers.ui.colors').get().base_30
   local theme = {
     normal = {
       a = { fg = colors.one_bg, bg = colors.green, gui = 'bold' },
@@ -284,12 +284,12 @@ function configs.lualine()
     },
     sections = {
       lualine_a = {
-        { 'mode', separator = { left = '', right = '', }, right_padding = 2 },
+        { 'mode', separator = { left = '', right = '' }, right_padding = 2 },
       },
-      lualine_b = { 'branch', 'diff', 'diagnostics', 'filename'},
+      lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
       lualine_c = {},
       lualine_x = {},
-      lualine_y = {'encoding', 'fileformat', 'filetype', 'progress'},
+      lualine_y = { 'encoding', 'fileformat', 'filetype', 'progress' },
       lualine_z = {
         { 'location', separator = { left = '', right = '' }, left_padding = 2 },
       },
@@ -297,7 +297,7 @@ function configs.lualine()
     inactive_sections = {
       lualine_a = {},
       lualine_b = {
-        { window, separator = { left = '', right = '', }, right_padding = 2 },
+        { window, separator = { left = '', right = '' }, right_padding = 2 },
       },
       lualine_c = { 'filename' },
       lualine_x = {},
@@ -307,7 +307,7 @@ function configs.lualine()
       lualine_z = {},
     },
     tabline = {},
-    extensions = {}
+    extensions = {},
   }
 
   local has_gps, gps = pcall(require, 'nvim-gps')
@@ -324,32 +324,31 @@ end
 function configs.fidget()
   local fidget = require('fidget')
   fidget.setup({
-      text = {
-        spinner = 'moon',
-      },
-    })
+    text = {
+      spinner = 'moon',
+    },
+  })
 end
 
 function configs.bufferline()
   local bufferline = require('bufferline')
   local default = {
-    colors = require("layers.ui.colors").get().base_30,
+    colors = require('layers.ui.colors').get().base_30,
   }
 
-  bufferline.setup{
+  bufferline.setup({
     options = {
       always_show_bufferline = false,
       diagnostics = 'nvim_lsp',
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        local s = " "
+        local s = ' '
         for e, n in pairs(diagnostics_dict) do
-          local sym = e == "error" and " "
-          or (e == "warning" and " " or " " )
+          local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or ' ')
           s = s .. n .. sym
         end
         return s
       end,
-      offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+      offsets = { { filetype = 'NvimTree', text = '', padding = 1 } },
     },
 
     highlights = {
@@ -493,7 +492,7 @@ function configs.bufferline()
         bg = default.colors.black,
       },
     },
-  }
+  })
 end
 
 function configs.neoscroll()
@@ -504,32 +503,32 @@ end
 function configs.doom_one()
   local doom_one = require('doom-one')
   doom_one.setup({
-      cursor_coloring = true,
-      terminal_colors = true,
-      italic_comments = true,
-      enable_treesitter = true,
-      transparent_background = true,
-      pumblend = {
-        enable = true,
-        transparency_amount = 20,
-      },
-      plugins_integrations = {
-        neorg = true,
-        barbar = true,
-        bufferline = true,
-        gitgutter = true,
-        gitsigns = true,
-        telescope = true,
-        neogit = true,
-        nvim_tree = true,
-        dashboard = true,
-        startify = true,
-        whichkey = true,
-        indent_blankline = true,
-        vim_illuminate = true,
-        lspsaga = true,
-      },
-    })
+    cursor_coloring = true,
+    terminal_colors = true,
+    italic_comments = true,
+    enable_treesitter = true,
+    transparent_background = true,
+    pumblend = {
+      enable = true,
+      transparency_amount = 20,
+    },
+    plugins_integrations = {
+      neorg = true,
+      barbar = true,
+      bufferline = true,
+      gitgutter = true,
+      gitsigns = true,
+      telescope = true,
+      neogit = true,
+      nvim_tree = true,
+      dashboard = true,
+      startify = true,
+      whichkey = true,
+      indent_blankline = true,
+      vim_illuminate = true,
+      lspsaga = true,
+    },
+  })
 end
 
 function configs.indent_blankline()
@@ -537,19 +536,19 @@ function configs.indent_blankline()
   local options = require('layers.ui.options')
 
   indent_blankline.setup({
-      filetype_exclude = options.indentline_filetype_exclude,
-      space_char_blankline = " ",
-      show_current_context = true,
-      show_current_context_start = false,
-      context_highlight_list = {
-        "IndentBlanklineIndent1",
-        "IndentBlanklineIndent2",
-        "IndentBlanklineIndent3",
-        "IndentBlanklineIndent4",
-        "IndentBlanklineIndent5",
-        "IndentBlanklineIndent6",
-      },
-    })
+    filetype_exclude = options.indentline_filetype_exclude,
+    space_char_blankline = ' ',
+    show_current_context = true,
+    show_current_context_start = false,
+    context_highlight_list = {
+      'IndentBlanklineIndent1',
+      'IndentBlanklineIndent2',
+      'IndentBlanklineIndent3',
+      'IndentBlanklineIndent4',
+      'IndentBlanklineIndent5',
+      'IndentBlanklineIndent6',
+    },
+  })
 end
 
 function configs.todo_comments()

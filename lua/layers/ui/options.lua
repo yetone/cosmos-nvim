@@ -12,8 +12,8 @@ return {
   indentline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'lazy', 'startuptime' },
   statusline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'lazy', 'startuptime' },
   statusline_filetype_include = {},
-  hl_override = "", -- path of your file that contains highlights
+  hl_override = '', -- path of your file that contains highlights
   italic_comments = false,
-  theme = "onedark", -- default theme
+  theme = 'onedark', -- default theme
   transparency = false,
 }

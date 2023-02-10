@@ -1,69 +1,69 @@
 local configs = {}
 
 function configs.mason()
-  require("mason").setup({
+  require('mason').setup({
     ui = {
       keymaps = {
         -- Keymap to expand a package
-        toggle_package_expand = "<CR>",
+        toggle_package_expand = '<CR>',
         -- Keymap to install the package under the current cursor position
-        install_package = "i",
+        install_package = 'i',
         -- Keymap to reinstall/update the package under the current cursor position
-        update_package = "u",
+        update_package = 'u',
         -- Keymap to check for new version for the package under the current cursor position
-        check_package_version = "c",
+        check_package_version = 'c',
         -- Keymap to update all installed packages
-        update_all_packages = "U",
+        update_all_packages = 'U',
         -- Keymap to check which installed packages are outdated
-        check_outdated_packages = "C",
+        check_outdated_packages = 'C',
         -- Keymap to uninstall a package
-        uninstall_package = "X",
+        uninstall_package = 'X',
         -- Keymap to cancel a package installation
-        cancel_installation = "<C-c>",
+        cancel_installation = '<C-c>',
         -- Keymap to apply language filter
-        apply_language_filter = "/",
+        apply_language_filter = '/',
       },
     },
   })
 
-  require("mason-null-ls").setup({
+  require('mason-null-ls').setup({
     ensure_installed = nil,
     automatic_installation = false,
     automatic_setup = true,
   })
-  require("null-ls").setup()
-  require("mason-null-ls").setup_handlers()
+  require('null-ls').setup()
+  require('mason-null-ls').setup_handlers()
 
-  require("mason-lspconfig").setup()
-  require("neodev").setup({
-    library = { plugins = { "nvim-dap-ui" }, types = true },
+  require('mason-lspconfig').setup()
+  require('neodev').setup({
+    library = { plugins = { 'nvim-dap-ui' }, types = true },
   })
 
-  local lspconfig = require("lspconfig")
-  local lspconfig_configs = require("lspconfig.configs")
+  local lspconfig = require('lspconfig')
+  local lspconfig_configs = require('lspconfig.configs')
   if not lspconfig_configs.ls_emmet then
     lspconfig_configs.ls_emmet = {
       default_config = {
-        cmd = { "ls_emmet", "--stdio" },
+        cmd = { 'ls_emmet', '--stdio' },
         filetypes = {
-          "html",
-          "css",
-          "scss",
-          "javascript",
-          "javascriptreact",
-          "typescript",
-          "typescriptreact",
-          "haml",
-          "xml",
-          "xsl",
-          "pug",
-          "slim",
-          "sass",
-          "stylus",
-          "less",
-          "sss",
-          "hbs",
-          "handlebars",
+          'html',
+          'css',
+          'scss',
+          'javascript',
+          'javascriptreact',
+          'typescript',
+          'typescriptreact',
+          'haml',
+          'xml',
+          'xsl',
+          'pug',
+          'slim',
+          'sass',
+          'stylus',
+          'less',
+          'sss',
+          'hbs',
+          'handlebars',
         },
         root_dir = function(fname)
           return vim.loop.cwd()
@@ -74,10 +74,10 @@ function configs.mason()
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-  local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
 
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
@@ -89,19 +89,19 @@ function configs.mason()
     end
 
     -- Enable completion triggered by <c-x><c-o>
-    buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- local opts = { noremap=true, silent=true }
     -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    if client.supports_method("textDocument/formatting") then
+    if client.supports_method('textDocument/formatting') then
       vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd("BufWritePre", {
+      vim.api.nvim_create_autocmd('BufWritePre', {
         group = augroup,
         buffer = bufnr,
         callback = function()
           -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-          if vim.fn.has("nvim-0.8") == 1 then
+          if vim.fn.has('nvim-0.8') == 1 then
             vim.lsp.buf.format({ bufnr = bufnr })
           else
             vim.lsp.buf.formatting_sync()
@@ -121,52 +121,52 @@ function configs.mason()
 
   local servers = {
     tsserver = {
-      root_dir = lspconfig.util.root_pattern("tsconfig.json", "package.json", ".git"),
+      root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json', '.git'),
     },
   }
 
-  require("mason-lspconfig").setup_handlers({
+  require('mason-lspconfig').setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
       local opt = servers[server_name] or {}
-      opt = vim.tbl_deep_extend("force", {}, default_opt, opt)
+      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
       lspconfig[server_name].setup(opt)
     end,
   })
 end
 
 function configs.project()
-  local project = require("project_nvim")
+  local project = require('project_nvim')
   project.setup({
-    exclude_dirs = { "*//*" },
-    detection_methods = { "pattern" },
-    patterns = { ".git" },
+    exclude_dirs = { '*//*' },
+    detection_methods = { 'pattern' },
+    patterns = { '.git' },
   })
 end
 
 function configs.lspsaga()
-  local saga = require("lspsaga")
+  local saga = require('lspsaga')
   saga.init_lsp_saga({
     code_action_prompt = { enable = false },
     code_action_keys = {
-      quit = { "q", "<ESC>" },
+      quit = { 'q', '<ESC>' },
     },
     rename_action_keys = {
-      quit = { "q", "<ESC>" },
+      quit = { 'q', '<ESC>' },
     },
   })
 end
 
 function configs.lspfuzzy()
-  local lspfuzzy = require("lspfuzzy")
+  local lspfuzzy = require('lspfuzzy')
   lspfuzzy.setup()
 end
 
 function configs.treesitter()
-  local treesitter = require("nvim-treesitter.configs")
-  local ui_options = require("layers.ui.options")
+  local treesitter = require('nvim-treesitter.configs')
+  local ui_options = require('layers.ui.options')
   treesitter.setup({
     autotag = {
       enable = true,
@@ -177,7 +177,7 @@ function configs.treesitter()
     },
 
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = "all",
+    ensure_installed = 'all',
 
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
@@ -191,16 +191,16 @@ function configs.treesitter()
       updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
       persist_queries = false, -- Whether the query persists across vim sessions
       keybindings = {
-        toggle_query_editor = "o",
-        toggle_hl_groups = "i",
-        toggle_injected_languages = "t",
-        toggle_anonymous_nodes = "a",
-        toggle_language_display = "I",
-        focus_language = "f",
-        unfocus_language = "F",
-        update = "R",
-        goto_node = "<cr>",
-        show_help = "?",
+        toggle_query_editor = 'o',
+        toggle_hl_groups = 'i',
+        toggle_injected_languages = 't',
+        toggle_anonymous_nodes = 'a',
+        toggle_language_display = 'I',
+        focus_language = 'f',
+        unfocus_language = 'F',
+        update = 'R',
+        goto_node = '<cr>',
+        show_help = '?',
       },
     },
 
@@ -234,18 +234,18 @@ function configs.treesitter()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = "gnn",
-        node_incremental = "grn",
-        scope_incremental = "grc",
-        node_decremental = "grm",
+        init_selection = 'gnn',
+        node_incremental = 'grn',
+        scope_incremental = 'grc',
+        node_decremental = 'grm',
       },
     },
 
     textsubjects = {
       enable = true,
-      prev_selection = ",", -- (Optional) keymap to select the previous selection
+      prev_selection = ',', -- (Optional) keymap to select the previous selection
       keymaps = {
-        ["."] = "textsubjects-smart",
+        ['.'] = 'textsubjects-smart',
         -- [';'] = 'textsubjects-container-outer',
       },
     },
@@ -257,66 +257,66 @@ function configs.treesitter()
         lookahead = true,
         keymaps = {
           -- You can use the capture groups defined in textobjects.scm
-          ["af"] = "@function.outer",
-          ["if"] = "@function.inner",
-          ["ac"] = "@conditional.outer",
-          ["ic"] = "@conditional.inner",
-          ["ai"] = "@call.outer",
-          ["ii"] = "@call.inner",
-          ["ab"] = "@block.outer",
-          ["ib"] = "@block.inner",
-          ["is"] = "@statement.inner",
-          ["as"] = "@statement.outer",
-          ["aC"] = "@class.outer",
-          ["iC"] = "@class.inner",
-          ["al"] = "@loop.outer",
-          ["il"] = "@loop.inner",
+          ['af'] = '@function.outer',
+          ['if'] = '@function.inner',
+          ['ac'] = '@conditional.outer',
+          ['ic'] = '@conditional.inner',
+          ['ai'] = '@call.outer',
+          ['ii'] = '@call.inner',
+          ['ab'] = '@block.outer',
+          ['ib'] = '@block.inner',
+          ['is'] = '@statement.inner',
+          ['as'] = '@statement.outer',
+          ['aC'] = '@class.outer',
+          ['iC'] = '@class.inner',
+          ['al'] = '@loop.outer',
+          ['il'] = '@loop.inner',
         },
       },
       swap = {
         enable = true,
         swap_next = {
-          ["<leader>a"] = "@parameter.inner",
+          ['<leader>a'] = '@parameter.inner',
         },
         swap_previous = {
-          ["<leader>A"] = "@parameter.inner",
+          ['<leader>A'] = '@parameter.inner',
         },
       },
       move = {
         enable = true,
         set_jumps = true, -- whether to set jumps in the jumplist
         goto_next_start = {
-          ["]m"] = "@function.outer",
-          ["]]"] = { query = "@class.outer", desc = "Next class start" },
-          ["]o"] = "@loop.*",
-          ["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
-          ["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
+          [']m'] = '@function.outer',
+          [']]'] = { query = '@class.outer', desc = 'Next class start' },
+          [']o'] = '@loop.*',
+          [']s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
+          [']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
         },
         goto_next_end = {
-          ["]M"] = "@function.outer",
-          ["]["] = "@class.outer",
+          [']M'] = '@function.outer',
+          [']['] = '@class.outer',
         },
         goto_previous_start = {
-          ["[m"] = "@function.outer",
-          ["[["] = "@class.outer",
+          ['[m'] = '@function.outer',
+          ['[['] = '@class.outer',
         },
         goto_previous_end = {
-          ["[M"] = "@function.outer",
-          ["[]"] = "@class.outer",
+          ['[M'] = '@function.outer',
+          ['[]'] = '@class.outer',
         },
         goto_next = {
-          ["]d"] = "@conditional.outer",
+          [']d'] = '@conditional.outer',
         },
         goto_previous = {
-          ["[d"] = "@conditional.outer",
+          ['[d'] = '@conditional.outer',
         },
       },
       lsp_interop = {
         enable = true,
-        border = "none",
+        border = 'none',
         peek_definition_code = {
-          ["<leader>sd"] = "@function.outer",
-          ["<leader>sD"] = "@class.outer",
+          ['<leader>sd'] = '@function.outer',
+          ['<leader>sD'] = '@class.outer',
         },
       },
     },
@@ -324,12 +324,12 @@ function configs.treesitter()
 end
 
 function configs.telescope()
-  local telescope = require("telescope")
-  local options = require("layers.editor.options")
+  local telescope = require('telescope')
+  local options = require('layers.editor.options')
 
-  local fb_actions = require("telescope").extensions.file_browser.actions
+  local fb_actions = require('telescope').extensions.file_browser.actions
 
-  local previewers = require("telescope.previewers")
+  local previewers = require('telescope.previewers')
 
   local new_maker = function(filepath, bufnr, opts)
     opts = opts or {}
@@ -351,29 +351,29 @@ function configs.telescope()
   telescope.setup({
     defaults = {
       vimgrep_arguments = {
-        "rg",
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-        "--smart-case",
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
       },
       mappings = {
         i = {
-          ["<C-a>"] = { "<esc>0i", type = "command" },
-          ["<Esc>"] = require("telescope.actions").close,
+          ['<C-a>'] = { '<esc>0i', type = 'command' },
+          ['<Esc>'] = require('telescope.actions').close,
         },
       },
-      selection_caret = "  ",
-      entry_prefix = "  ",
-      initial_mode = "insert",
-      selection_strategy = "reset",
-      sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
+      selection_caret = '  ',
+      entry_prefix = '  ',
+      initial_mode = 'insert',
+      selection_strategy = 'reset',
+      sorting_strategy = 'ascending',
+      layout_strategy = 'horizontal',
       layout_config = {
         horizontal = {
-          prompt_position = "top",
+          prompt_position = 'top',
           preview_width = 0.55,
           results_width = 0.8,
         },
@@ -386,35 +386,35 @@ function configs.telescope()
       },
       -- file_sorter = require("telescope.sorters").get_fuzzy_file,
       -- file_ignore_patterns = { "node_modules/", "\\.git/" },
-      generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
-      path_display = { "smart" },
+      generic_sorter = require('telescope.sorters').get_generic_fuzzy_sorter,
+      path_display = { 'smart' },
       winblend = 0,
       border = {},
-      borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+      borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       color_devicons = true,
       use_less = true,
-      set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-      file_previewer = require("telescope.previewers").vim_buffer_cat.new,
-      grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
-      qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+      set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+      file_previewer = require('telescope.previewers').vim_buffer_cat.new,
+      grep_previewer = require('telescope.previewers').vim_buffer_vimgrep.new,
+      qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
       -- Developer configurations: Not meant for general override
       buffer_previewer_maker = new_maker,
     },
     extensions = {
-      ["ui-select"] = {
+      ['ui-select'] = {
         -- TODO: specify the cursor theme for codeaction only
-        require("telescope.themes").get_cursor({}),
+        require('telescope.themes').get_cursor({}),
       },
       file_browser = {
         theme = theme,
         mappings = {
-          ["i"] = {
+          ['i'] = {
             -- your custom insert mode mappings
-            ["<C-h>"] = fb_actions.goto_parent_dir,
-            ["<C-e>"] = fb_actions.rename,
-            ["<C-c>"] = fb_actions.create,
+            ['<C-h>'] = fb_actions.goto_parent_dir,
+            ['<C-e>'] = fb_actions.rename,
+            ['<C-c>'] = fb_actions.create,
           },
-          ["n"] = {
+          ['n'] = {
             -- your custom normal mode mappings
           },
         },
@@ -423,14 +423,14 @@ function configs.telescope()
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
         override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
       media_files = {
         -- filetypes whitelist
         -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-        filetypes = { "png", "webp", "jpg", "jpeg" },
-        find_cmd = "rg", -- find command (defaults to `fd`)
+        filetypes = { 'png', 'webp', 'jpg', 'jpeg' },
+        find_cmd = 'rg', -- find command (defaults to `fd`)
       },
     },
     pickers = {
@@ -450,7 +450,7 @@ function configs.telescope()
         theme = theme,
         on_input_filter_cb = function(prompt)
           -- AND operator for live_grep like how fzf handles spaces with wildcards in rg
-          return { prompt = prompt:gsub("%s", ".*") }
+          return { prompt = prompt:gsub('%s', '.*') }
         end,
       },
       current_buffer_fuzzy_find = {
@@ -464,58 +464,58 @@ function configs.telescope()
       },
       diagnostics = {
         theme = theme,
-        initial_mode = "normal",
+        initial_mode = 'normal',
       },
       lsp_references = {
-        theme = "cursor",
-        initial_mode = "normal",
+        theme = 'cursor',
+        initial_mode = 'normal',
         layout_config = {
           width = 0.8,
           height = 0.4,
         },
       },
       lsp_code_actions = {
-        theme = "cursor",
-        initial_mode = "normal",
+        theme = 'cursor',
+        initial_mode = 'normal',
       },
     },
   })
 
-  telescope.load_extension("projects")
-  telescope.load_extension("file_browser")
-  telescope.load_extension("dap")
-  telescope.load_extension("media_files")
-  telescope.load_extension("ui-select")
-  telescope.load_extension("fzf")
+  telescope.load_extension('projects')
+  telescope.load_extension('file_browser')
+  telescope.load_extension('dap')
+  telescope.load_extension('media_files')
+  telescope.load_extension('ui-select')
+  telescope.load_extension('fzf')
 end
 
 configs.dap = function()
-  local dap = require("dap")
-  for name, adapter in pairs(require("layers.editor.utils").get_dap_adapters()) do
+  local dap = require('dap')
+  for name, adapter in pairs(require('layers.editor.utils').get_dap_adapters()) do
     dap.adapters[name] = adapter
   end
-  for name, configuration in pairs(require("layers.editor.utils").get_dap_configurations()) do
+  for name, configuration in pairs(require('layers.editor.utils').get_dap_configurations()) do
     dap.configurations[name] = configuration
   end
 end
 
 configs.dap_go = function()
-  require("dap-go").setup()
+  require('dap-go').setup()
 end
 
 configs.dapui = function()
-  vim.fn.sign_define("DapBreakpoint", { text = "🛑", texthl = "", linehl = "", numhl = "" })
-  vim.fn.sign_define("DapStopped", { text = "👉", texthl = "", linehl = "", numhl = "" })
-  local dapui = require("dapui")
+  vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
+  vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
+  local dapui = require('dapui')
   dapui.setup({
-    icons = { expanded = "▾", collapsed = "▸" },
+    icons = { expanded = '▾', collapsed = '▸' },
     mappings = {
       -- Use a table to apply multiple mappings
-      expand = { "<tab>", "<2-LeftMouse>" },
-      open = "o",
-      remove = "d",
-      edit = "e",
-      repl = "r",
+      expand = { '<tab>', '<2-LeftMouse>' },
+      open = 'o',
+      remove = 'd',
+      edit = 'e',
+      repl = 'r',
     },
     layouts = {
       {
@@ -523,28 +523,28 @@ configs.dapui = function()
         elements = {
           -- Provide as ID strings or tables with "id" and "size" keys
           {
-            id = "scopes",
+            id = 'scopes',
             size = 0.25, -- Can be float or integer > 1
           },
-          { id = "breakpoints", size = 0.25 },
-          { id = "stacks", size = 0.25 },
-          { id = "watches", size = 00.25 },
+          { id = 'breakpoints', size = 0.25 },
+          { id = 'stacks', size = 0.25 },
+          { id = 'watches', size = 00.25 },
         },
         size = 40,
-        position = "left", -- Can be "left", "right", "top", "bottom"
+        position = 'left', -- Can be "left", "right", "top", "bottom"
       },
       {
-        elements = { "repl" },
+        elements = { 'repl' },
         size = 10,
-        position = "bottom", -- Can be "left", "right", "top", "bottom"
+        position = 'bottom', -- Can be "left", "right", "top", "bottom"
       },
     },
     floating = {
       max_height = nil, -- These can be integers or a float between 0 and 1.
       max_width = nil, -- Floats will be treated as percentage of your screen.
-      border = "single", -- Border style. Can be "single", "double" or "rounded"
+      border = 'single', -- Border style. Can be "single", "double" or "rounded"
       mappings = {
-        close = { "q", "<Esc>" },
+        close = { 'q', '<Esc>' },
       },
     },
     windows = { indent = 1 },
@@ -552,71 +552,71 @@ configs.dapui = function()
 end
 
 configs.dap_virtual_text = function()
-  local dap_virtual_text = require("nvim-dap-virtual-text")
+  local dap_virtual_text = require('nvim-dap-virtual-text')
   dap_virtual_text.setup({ enabled = true, enabled_commands = true, all_frames = true })
 end
 
 configs.trouble = function()
-  local trouble = require("trouble")
+  local trouble = require('trouble')
   trouble.setup({
-    position = "bottom", -- position of the list can be: bottom, top, left, right
+    position = 'bottom', -- position of the list can be: bottom, top, left, right
     height = 10, -- height of the trouble list when position is top or bottom
     width = 50, -- width of the list when position is left or right
     icons = true, -- use devicons for filenames
-    mode = "workspace_diagnostics", -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-    fold_open = "", -- icon used for open folds
-    fold_closed = "", -- icon used for closed folds
+    mode = 'workspace_diagnostics', -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
+    fold_open = '', -- icon used for open folds
+    fold_closed = '', -- icon used for closed folds
     group = true, -- group results by file
     padding = true, -- add an extra new line on top of the list
     action_keys = { -- key mappings for actions in the trouble list
       -- map to {} to remove a mapping, for example:
       -- close = {},
-      close = "<esc>", -- close the list
-      cancel = "q", -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = "r", -- manually refresh
-      jump = { "<cr>", "<tab>" }, -- jump to the diagnostic or open / close folds
-      open_split = { "<c-x>" }, -- open buffer in new split
-      open_vsplit = { "<c-v>" }, -- open buffer in new vsplit
-      open_tab = { "<c-t>" }, -- open buffer in new tab
-      jump_close = { "o" }, -- jump to the diagnostic and close the list
-      toggle_mode = "m", -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = "P", -- toggle auto_preview
-      hover = "K", -- opens a small popup with the full multiline message
-      preview = "p", -- preview the diagnostic location
-      close_folds = { "zM", "zm" }, -- close all folds
-      open_folds = { "zR", "zr" }, -- open all folds
-      toggle_fold = { "zA", "za" }, -- toggle fold of current file
-      previous = "k", -- preview item
-      next = "j", -- next item
+      close = '<esc>', -- close the list
+      cancel = 'q', -- cancel the preview and get back to your last window / buffer / cursor
+      refresh = 'r', -- manually refresh
+      jump = { '<cr>', '<tab>' }, -- jump to the diagnostic or open / close folds
+      open_split = { '<c-x>' }, -- open buffer in new split
+      open_vsplit = { '<c-v>' }, -- open buffer in new vsplit
+      open_tab = { '<c-t>' }, -- open buffer in new tab
+      jump_close = { 'o' }, -- jump to the diagnostic and close the list
+      toggle_mode = 'm', -- toggle between "workspace" and "document" diagnostics mode
+      toggle_preview = 'P', -- toggle auto_preview
+      hover = 'K', -- opens a small popup with the full multiline message
+      preview = 'p', -- preview the diagnostic location
+      close_folds = { 'zM', 'zm' }, -- close all folds
+      open_folds = { 'zR', 'zr' }, -- open all folds
+      toggle_fold = { 'zA', 'za' }, -- toggle fold of current file
+      previous = 'k', -- preview item
+      next = 'j', -- next item
     },
     indent_lines = true, -- add an indent guide below the fold icons
     auto_open = false, -- automatically open the list when you have diagnostics
     auto_close = false, -- automatically close the list when you have no diagnostics
     auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
     auto_fold = false, -- automatically fold a file trouble list at creation
-    auto_jump = { "lsp_definitions" }, -- for the given modes, automatically jump if there is only a single result
+    auto_jump = { 'lsp_definitions' }, -- for the given modes, automatically jump if there is only a single result
     signs = {
       -- icons / text used for a diagnostic
-      error = "",
-      warning = "",
-      hint = "",
-      information = "",
-      other = "﫠",
+      error = '',
+      warning = '',
+      hint = '',
+      information = '',
+      other = '﫠',
     },
     use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
   })
 end
 
 configs.nvimtree = function()
-  local nvimtree = require("nvim-tree")
+  local nvimtree = require('nvim-tree')
   nvimtree.setup({
     sync_root_with_cwd = true,
     respect_buf_cwd = true,
     renderer = {
       add_trailing = false,
       highlight_git = false,
-      highlight_opened_files = "none",
-      root_folder_modifier = table.concat({ ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }),
+      highlight_opened_files = 'none',
+      root_folder_modifier = table.concat({ ':t:gs?$?/..', string.rep(' ', 1000), '?:gs?^??' }),
       icons = {
         show = {
           folder = true,
@@ -624,24 +624,24 @@ configs.nvimtree = function()
           git = true,
         },
         glyphs = {
-          default = "",
-          symlink = "",
+          default = '',
+          symlink = '',
           git = {
-            deleted = "",
-            ignored = "◌",
-            renamed = "➜",
-            staged = "✓",
-            unmerged = "",
-            unstaged = "✗",
-            untracked = "★",
+            deleted = '',
+            ignored = '◌',
+            renamed = '➜',
+            staged = '✓',
+            unmerged = '',
+            unstaged = '✗',
+            untracked = '★',
           },
           folder = {
-            default = "",
-            empty = "",
-            empty_open = "",
-            open = "",
-            symlink = "",
-            symlink_open = "",
+            default = '',
+            empty = '',
+            empty_open = '',
+            open = '',
+            symlink = '',
+            symlink_open = '',
           },
         },
       },
@@ -654,7 +654,7 @@ configs.nvimtree = function()
     },
     disable_netrw = true,
     hijack_netrw = true,
-    ignore_ft_on_setup = { "dashboard" },
+    ignore_ft_on_setup = { 'dashboard' },
     open_on_tab = false,
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = false,
@@ -667,10 +667,10 @@ configs.nvimtree = function()
     diagnostics = {
       enable = true,
       icons = {
-        hint = "",
-        info = "",
-        warning = "",
-        error = "",
+        hint = '',
+        info = '',
+        warning = '',
+        error = '',
       },
     },
     git = {
@@ -679,7 +679,7 @@ configs.nvimtree = function()
       timeout = 500,
     },
     view = {
-      side = "left",
+      side = 'left',
       width = 30,
       hide_root_folder = true,
     },
@@ -692,12 +692,12 @@ configs.nvimtree = function()
 end
 
 configs.toggleterm = function()
-  local toggleterm = require("toggleterm")
+  local toggleterm = require('toggleterm')
   toggleterm.setup({
     size = function(term)
-      if term.direction == "horizontal" then
+      if term.direction == 'horizontal' then
         return 17
-      elseif term.direction == "vertical" then
+      elseif term.direction == 'vertical' then
         return vim.o.columns * 0.4
       end
     end,
@@ -707,29 +707,29 @@ configs.toggleterm = function()
     start_in_insert = true,
     insert_mappings = false, -- whether or not the open mapping applies in insert mode
     persist_size = false,
-    direction = "horizontal",
+    direction = 'horizontal',
     close_on_exit = true,
     shell = vim.o.shell,
   })
 end
 
 configs.hop = function()
-  local hop = require("hop")
-  hop.setup({ keys = "etovxqpdygfblzhckisuran" })
+  local hop = require('hop')
+  hop.setup({ keys = 'etovxqpdygfblzhckisuran' })
 end
 
 configs.leap = function()
-  local leap = require("leap")
+  local leap = require('leap')
   leap.set_default_keymaps()
 end
 
 configs.numb = function()
-  local numb = require("numb")
+  local numb = require('numb')
   numb.setup()
 end
 
 configs.spellsitter = function()
-  local spellsitter = require("spellsitter")
+  local spellsitter = require('spellsitter')
   spellsitter.setup({
     enable = true,
   })
@@ -737,56 +737,56 @@ end
 
 function configs.osc52()
   local function copy(lines, _)
-    require("osc52").copy(table.concat(lines, "\n"))
+    require('osc52').copy(table.concat(lines, '\n'))
   end
 
   local function paste()
-    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+    return { vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('') }
   end
 
   vim.g.clipboard = {
-    name = "osc52",
-    copy = { ["+"] = copy, ["*"] = copy },
-    paste = { ["+"] = paste, ["*"] = paste },
+    name = 'osc52',
+    copy = { ['+'] = copy, ['*'] = copy },
+    paste = { ['+'] = paste, ['*'] = paste },
   }
-  vim.opt.clipboard:append("unnamedplus")
+  vim.opt.clipboard:append('unnamedplus')
 end
 
 function configs.auto_save()
-  require("auto-save").setup()
+  require('auto-save').setup()
 end
 
 function configs.nvim_window()
-  require("nvim-window").setup({
+  require('nvim-window').setup({
     -- The characters available for hinting windows.
     chars = {
-      "1",
-      "2",
-      "3",
-      "4",
-      "5",
-      "6",
-      "7",
-      "8",
-      "9",
-      "0",
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0',
     },
 
     -- A group to use for overwriting the Normal highlight group in the floating
     -- window. This can be used to change the background color.
-    normal_hl = "BlackOnLightYellow",
+    normal_hl = 'BlackOnLightYellow',
 
     -- The highlight group to apply to the line that contains the hint characters.
     -- This is used to make them stand out more.
-    hint_hl = "Bold",
+    hint_hl = 'Bold',
 
     -- The border style to use for the floating window.
-    border = "none",
+    border = 'none',
   })
 end
 
 function configs.guess_indent()
-  require("guess-indent").setup()
+  require('guess-indent').setup()
 end
 
 return configs

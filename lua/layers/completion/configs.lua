@@ -2,31 +2,31 @@ local configs = {}
 
 function configs.cmp()
   local icons = {
-    Text = "",
-    Method = "",
-    Function = "",
-    Constructor = "⌘",
-    Field = "ﰠ",
-    Variable = "",
-    Class = "ﴯ",
-    Interface = "",
-    Module = "",
-    Property = "ﰠ",
-    Unit = "塞",
-    Value = "",
-    Enum = "",
-    Keyword = "廓",
-    Snippet = "",
-    Color = "",
-    File = "",
-    Reference = "",
-    Folder = "",
-    EnumMember = "",
-    Constant = "",
-    Struct = "פּ",
-    Event = "",
-    Operator = "",
-    TypeParameter = "",
+    Text = '',
+    Method = '',
+    Function = '',
+    Constructor = '⌘',
+    Field = 'ﰠ',
+    Variable = '',
+    Class = 'ﴯ',
+    Interface = '',
+    Module = '',
+    Property = 'ﰠ',
+    Unit = '塞',
+    Value = '',
+    Enum = '',
+    Keyword = '廓',
+    Snippet = '',
+    Color = '',
+    File = '',
+    Reference = '',
+    Folder = '',
+    EnumMember = '',
+    Constant = '',
+    Struct = 'פּ',
+    Event = '',
+    Operator = '',
+    TypeParameter = '',
   }
 
   local codicons = {
@@ -57,12 +57,12 @@ function configs.cmp()
     TypeParameter = '  ',
   }
 
-  local cmp = require("cmp")
-  local luasnip = require("luasnip")
-  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  local cmp = require('cmp')
+  local luasnip = require('luasnip')
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local options = require('layers.completion.options')
 
-  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -74,33 +74,33 @@ function configs.cmp()
   end
 
   local function check_backspace()
-    local col = vim.fn.col(".") - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+    local col = vim.fn.col('.') - 1
+    return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s')
   end
 
   local tab_complete = function(fallback)
-    local copilot_keys = vim.fn["copilot#Accept"]()
+    local copilot_keys = vim.fn['copilot#Accept']()
     if options.tab_complete_copilot_first then
-      if copilot_keys ~= "" then
-        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+      if copilot_keys ~= '' then
+        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
       elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
       elseif check_backspace() then
-        vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+        vim.fn.feedkeys(replace_termcodes('<Tab>'), 'n')
       else
         fallback()
       end
     else
       if cmp.visible() then
         cmp.select_next_item()
-      elseif copilot_keys ~= "" then
-        vim.api.nvim_feedkeys(copilot_keys, "i", true)
+      elseif copilot_keys ~= '' then
+        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
       elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-expand-or-jump"), "")
+        vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
       elseif check_backspace() then
-        vim.fn.feedkeys(replace_termcodes("<Tab>"), "n")
+        vim.fn.feedkeys(replace_termcodes('<Tab>'), 'n')
       else
         fallback()
       end
@@ -111,7 +111,7 @@ function configs.cmp()
     if cmp.visible() then
       cmp.select_prev_item()
     elseif luasnip.jumpable(-1) then
-      vim.fn.feedkeys(replace_termcodes("<Plug>luasnip-jump-prev"), "")
+      vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-jump-prev'), '')
     elseif has_words_before() then
       cmp.complete()
     else
@@ -141,9 +141,9 @@ function configs.cmp()
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
         i = function(fallback)
-          local copilot_keys = vim.fn["copilot#Accept"]()
-          if copilot_keys ~= "" then
-            vim.api.nvim_feedkeys(copilot_keys, "i", true)
+          local copilot_keys = vim.fn['copilot#Accept']()
+          if copilot_keys ~= '' then
+            vim.api.nvim_feedkeys(copilot_keys, 'i', true)
           else
             cmp.mapping.abort()(fallback)
           end
@@ -161,11 +161,11 @@ function configs.cmp()
       -- { name = 'ultisnips' }, -- For ultisnips users.
       -- { name = 'snippy' }, -- For snippy users.
     }, {
-      { name = "path" },
+      { name = 'path' },
       { name = 'buffer' },
     }),
     formatting = {
-      fields = { "kind", "abbr", "menu" },
+      fields = { 'kind', 'abbr', 'menu' },
       format = function(_, vim_item)
         local icons_ = options.cmp_kind_use_codicons and codicons or icons
         vim_item.menu = vim_item.kind
@@ -180,8 +180,8 @@ function configs.cmp()
   cmp.setup.cmdline('/', {
     mapping = cmp.mapping.preset.cmdline(),
     sources = {
-      { name = 'buffer' }
-    }
+      { name = 'buffer' },
+    },
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
@@ -197,7 +197,7 @@ end
 function configs.autopairs()
   local autopairs = require('nvim-autopairs')
   autopairs.setup({
-    disable_filetype = { "TelescopePrompt", "vim" },
+    disable_filetype = { 'TelescopePrompt', 'vim' },
   })
 end
 

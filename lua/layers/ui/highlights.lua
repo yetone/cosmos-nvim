@@ -1,7 +1,7 @@
-local override = require("layers.ui.options").hl_override
-local colors = require("layers.ui.colors").get().base_30
-local theme = require("layers.ui.colors").get().base_16
-local ui = require("layers.ui.options")
+local override = require('layers.ui.options').hl_override
+local colors = require('layers.ui.colors').get().base_30
+local theme = require('layers.ui.colors').get().base_16
+local ui = require('layers.ui.options')
 
 local black = colors.black
 local black2 = colors.black2
@@ -50,7 +50,7 @@ local highlights = {
 
   Define = {
     fg = theme.base0E,
-    sp = "none",
+    sp = 'none',
   },
 
   Delimiter = {
@@ -67,7 +67,7 @@ local highlights = {
 
   Identifier = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   Include = {
@@ -88,7 +88,7 @@ local highlights = {
 
   Operator = {
     fg = theme.base05,
-    sp = "none",
+    sp = 'none',
   },
 
   PreProc = {
@@ -134,7 +134,7 @@ local highlights = {
 
   Type = {
     fg = theme.base0A,
-    sp = "none",
+    sp = 'none',
   },
 
   Typedef = {
@@ -219,7 +219,7 @@ local highlights = {
   Substitute = {
     fg = theme.base01,
     bg = theme.base0A,
-    sp = "none",
+    sp = 'none',
   },
 
   SpecialKey = {
@@ -253,11 +253,11 @@ local highlights = {
 
   Title = {
     fg = theme.base0D,
-    sp = "none",
+    sp = 'none',
   },
 
   Conceal = {
-    bg = "NONE",
+    bg = 'NONE',
   },
 
   Cursor = {
@@ -271,38 +271,38 @@ local highlights = {
 
   SignColumn = {
     fg = theme.base03,
-    sp = "NONE",
+    sp = 'NONE',
   },
 
   ColorColumn = {
     bg = theme.base01,
-    sp = "none",
+    sp = 'none',
   },
 
   CursorColumn = {
     bg = theme.base01,
-    sp = "none",
+    sp = 'none',
   },
 
   CursorLine = {
     bg = black2,
-    sp = "none",
+    sp = 'none',
   },
 
   CursorLineNr = {
     fg = white,
     bg = theme.base00,
-    sp = "none",
+    sp = 'none',
   },
 
   QuickFixLine = {
     bg = theme.base01,
-    sp = "none",
+    sp = 'none',
   },
 
   StatusLine = {
-    bg = "NONE",
-    sp = "none",
+    bg = 'NONE',
+    sp = 'none',
   },
 
   -- spell
@@ -335,15 +335,15 @@ local highlights = {
 
   -- same it bg, so it doesn't appear
   EndOfBuffer = {
-    fg = black
+    fg = black,
   },
 
   -- For floating windows
   FloatBorder = {
-    fg = blue
+    fg = blue,
   },
   NormalFloat = {
-    bg = darker_black
+    bg = darker_black,
   },
 
   -- Pmenu i.e completion menu
@@ -353,16 +353,16 @@ local highlights = {
   PmenuThumb = { bg = grey },
 
   CmpItemAbbr = {
-    fg = white
+    fg = white,
   },
   CmpItemAbbrMatch = {
     fg = white,
   },
   CmpItemKind = {
-    fg = white
+    fg = white,
   },
   CmpItemMenu = {
-    fg = white
+    fg = white,
   },
 
   -- inactive statuslines as thin lines
@@ -371,7 +371,7 @@ local highlights = {
     underline = true,
   },
   LineNr = {
-    fg = grey
+    fg = grey,
   },
   NvimInternalError = {
     fg = red,
@@ -742,32 +742,32 @@ local highlights = {
   CmpItemKindOperator = { fg = theme.base05 },
   CmpItemKindTypeParameter = { fg = theme.base08 },
 
-  DevIconc = { bg = "NONE", fg = colors.blue },
-  DevIconcss = { bg = "NONE", fg = colors.blue },
-  DevIcondeb = { bg = "NONE", fg = colors.cyan },
-  DevIconDockerfile = { bg = "NONE", fg = colors.cyan },
-  DevIconhtml = { bg = "NONE", fg = colors.baby_pink },
-  DevIconjpeg = { bg = "NONE", fg = colors.dark_purple },
-  DevIconjpg = { bg = "NONE", fg = colors.dark_purple },
-  DevIconjs = { bg = "NONE", fg = colors.sun },
-  DevIconkt = { bg = "NONE", fg = colors.orange },
-  DevIconlock = { bg = "NONE", fg = colors.red },
-  DevIconlua = { bg = "NONE", fg = colors.blue },
-  DevIconmp3 = { bg = "NONE", fg = colors.white },
-  DevIconmp4 = { bg = "NONE", fg = colors.white },
-  DevIconout = { bg = "NONE", fg = colors.white },
-  DevIconpng = { bg = "NONE", fg = colors.dark_purple },
-  DevIconpy = { bg = "NONE", fg = colors.cyan },
-  DevIcontoml = { bg = "NONE", fg = colors.blue },
-  DevIconts = { bg = "NONE", fg = colors.teal },
-  DevIconttf = { bg = "NONE", fg = colors.white },
-  DevIconrb = { bg = "NONE", fg = colors.pink },
-  DevIconrpm = { bg = "NONE", fg = colors.orange },
-  DevIconvue = { bg = "NONE", fg = colors.vibrant_green },
-  DevIconwoff = { bg = "NONE", fg = colors.white },
-  DevIconwoff2 = { bg = "NONE", fg = colors.white },
-  DevIconxz = { bg = "NONE", fg = colors.sun },
-  DevIconzip = { bg = "NONE", fg = colors.sun },
+  DevIconc = { bg = 'NONE', fg = colors.blue },
+  DevIconcss = { bg = 'NONE', fg = colors.blue },
+  DevIcondeb = { bg = 'NONE', fg = colors.cyan },
+  DevIconDockerfile = { bg = 'NONE', fg = colors.cyan },
+  DevIconhtml = { bg = 'NONE', fg = colors.baby_pink },
+  DevIconjpeg = { bg = 'NONE', fg = colors.dark_purple },
+  DevIconjpg = { bg = 'NONE', fg = colors.dark_purple },
+  DevIconjs = { bg = 'NONE', fg = colors.sun },
+  DevIconkt = { bg = 'NONE', fg = colors.orange },
+  DevIconlock = { bg = 'NONE', fg = colors.red },
+  DevIconlua = { bg = 'NONE', fg = colors.blue },
+  DevIconmp3 = { bg = 'NONE', fg = colors.white },
+  DevIconmp4 = { bg = 'NONE', fg = colors.white },
+  DevIconout = { bg = 'NONE', fg = colors.white },
+  DevIconpng = { bg = 'NONE', fg = colors.dark_purple },
+  DevIconpy = { bg = 'NONE', fg = colors.cyan },
+  DevIcontoml = { bg = 'NONE', fg = colors.blue },
+  DevIconts = { bg = 'NONE', fg = colors.teal },
+  DevIconttf = { bg = 'NONE', fg = colors.white },
+  DevIconrb = { bg = 'NONE', fg = colors.pink },
+  DevIconrpm = { bg = 'NONE', fg = colors.orange },
+  DevIconvue = { bg = 'NONE', fg = colors.vibrant_green },
+  DevIconwoff = { bg = 'NONE', fg = colors.white },
+  DevIconwoff2 = { bg = 'NONE', fg = colors.white },
+  DevIconxz = { bg = 'NONE', fg = colors.sun },
+  DevIconzip = { bg = 'NONE', fg = colors.sun },
 
   -- git commits
   gitcommitOverflow = {
@@ -866,120 +866,119 @@ local highlights = {
     fg = theme.base0D,
   },
 
-
   TSAnnotation = {
     fg = theme.base0F,
-    sp = "none",
+    sp = 'none',
   },
 
   TSAttribute = {
     fg = theme.base0A,
-    sp = "none",
+    sp = 'none',
   },
 
   TSCharacter = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSConstBuiltin = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
   },
 
   TSConstMacro = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSError = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSException = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSFloat = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
   },
 
   TSFuncBuiltin = {
     fg = theme.base0D,
-    sp = "none",
+    sp = 'none',
   },
 
   TSFuncMacro = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSKeywordOperator = {
     fg = theme.base0E,
-    sp = "none",
+    sp = 'none',
   },
 
   TSMethod = {
     fg = theme.base0D,
-    sp = "none",
+    sp = 'none',
   },
 
   TSNamespace = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSNone = {
     fg = theme.base05,
-    sp = "none",
+    sp = 'none',
   },
 
   TSParameter = {
     fg = theme.base08,
-    sp = "none",
+    sp = 'none',
   },
 
   TSParameterReference = {
     fg = theme.base05,
-    sp = "none",
+    sp = 'none',
   },
 
   TSPunctDelimiter = {
     fg = theme.base0F,
-    sp = "none",
+    sp = 'none',
   },
 
   TSPunctSpecial = {
     fg = theme.base05,
-    sp = "none",
+    sp = 'none',
   },
 
   TSStringRegex = {
     fg = theme.base0C,
-    sp = "none",
+    sp = 'none',
   },
 
   TSStringEscape = {
     fg = theme.base0C,
-    sp = "none",
+    sp = 'none',
   },
 
   TSSymbol = {
     fg = theme.base0B,
-    sp = "none",
+    sp = 'none',
   },
 
   TSTagDelimiter = {
     fg = theme.base0F,
-    sp = "none",
+    sp = 'none',
   },
 
   TSText = {
     fg = theme.base05,
-    sp = "none",
+    sp = 'none',
   },
 
   TSStrong = {
@@ -988,34 +987,34 @@ local highlights = {
 
   TSEmphasis = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
   },
 
   TSStrike = {
     fg = theme.base00,
-    sp = "none",
+    sp = 'none',
     strikethrough = true,
   },
 
   TSLiteral = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
   },
 
   TSURI = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
     underline = true,
   },
 
   TSTypeBuiltin = {
     fg = theme.base0A,
-    sp = "none",
+    sp = 'none',
   },
 
   TSVariableBuiltin = {
     fg = theme.base09,
-    sp = "none",
+    sp = 'none',
   },
 
   TSDefinition = {
@@ -1034,14 +1033,14 @@ local highlights = {
 }
 
 if ui.transparency then
-  highlights["Normal"] = {
-    bg = "NONE",
+  highlights['Normal'] = {
+    bg = 'NONE',
   }
-  highlights["Folded"] = {
-    fg = "NONE",
-    bg = "NONE",
+  highlights['Folded'] = {
+    fg = 'NONE',
+    bg = 'NONE',
   }
-  highlights["Comment"] = {
+  highlights['Comment'] = {
     fg = grey,
   }
 end
@@ -1056,7 +1055,7 @@ local section_title_colors = {
   orange,
 }
 for i, color in ipairs(section_title_colors) do
-  highlights["CheatsheetTitle" .. i] = {
+  highlights['CheatsheetTitle' .. i] = {
     fg = black,
     bg = color,
   }
@@ -1064,49 +1063,49 @@ end
 
 -- Disable some highlight in nvim tree if transparency enabled
 if ui.transparency then
-  highlights["NormalFloat"] = {
-    bg = "NONE",
+  highlights['NormalFloat'] = {
+    bg = 'NONE',
   }
-  highlights["NvimTreeNormal"] = {
-    bg = "NONE",
+  highlights['NvimTreeNormal'] = {
+    bg = 'NONE',
   }
-  highlights["NvimTreeNormalNC"] = {
-    bg = "NONE",
+  highlights['NvimTreeNormalNC'] = {
+    bg = 'NONE',
   }
-  highlights["NvimTreeStatusLineNC"] = {
-    bg = "NONE",
+  highlights['NvimTreeStatusLineNC'] = {
+    bg = 'NONE',
   }
-  highlights["NvimTreeVertSplit"] = {
+  highlights['NvimTreeVertSplit'] = {
     fg = grey,
-    bg = "NONE",
+    bg = 'NONE',
   }
 
   -- telescope
-  highlights["TelescopeBorder"] = {
-    bg = "NONE",
+  highlights['TelescopeBorder'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopePrompt"] = {
-    bg = "NONE",
+  highlights['TelescopePrompt'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopeResults"] = {
-    bg = "NONE",
+  highlights['TelescopeResults'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopePromptBorder"] = {
-    bg = "NONE",
+  highlights['TelescopePromptBorder'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopePromptNormal"] = {
-    bg = "NONE",
+  highlights['TelescopePromptNormal'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopeNormal"] = {
-    bg = "NONE",
+  highlights['TelescopeNormal'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopePromptPrefix"] = {
-    bg = "NONE",
+  highlights['TelescopePromptPrefix'] = {
+    bg = 'NONE',
   }
-  highlights["TelescopeBorder"] = {
+  highlights['TelescopeBorder'] = {
     fg = one_bg,
   }
-  highlights["TelescopeResultsTitle"] = {
+  highlights['TelescopeResultsTitle'] = {
     fg = black,
     bg = blue,
   }
@@ -1116,22 +1115,22 @@ for hl, col in pairs(highlights) do
   vim.api.nvim_set_hl(0, hl, col)
 end
 
-vim.g.terminal_color_0 = "#" .. theme.base00
-vim.g.terminal_color_1 = "#" .. theme.base08
-vim.g.terminal_color_2 = "#" .. theme.base0B
-vim.g.terminal_color_3 = "#" .. theme.base0A
-vim.g.terminal_color_4 = "#" .. theme.base0D
-vim.g.terminal_color_5 = "#" .. theme.base0E
-vim.g.terminal_color_6 = "#" .. theme.base0C
-vim.g.terminal_color_7 = "#" .. theme.base05
-vim.g.terminal_color_8 = "#" .. theme.base03
-vim.g.terminal_color_9 = "#" .. theme.base08
-vim.g.terminal_color_10 = "#" .. theme.base0B
-vim.g.terminal_color_11 = "#" .. theme.base0A
-vim.g.terminal_color_12 = "#" .. theme.base0D
-vim.g.terminal_color_13 = "#" .. theme.base0E
-vim.g.terminal_color_14 = "#" .. theme.base0C
-vim.g.terminal_color_15 = "#" .. theme.base07
+vim.g.terminal_color_0 = '#' .. theme.base00
+vim.g.terminal_color_1 = '#' .. theme.base08
+vim.g.terminal_color_2 = '#' .. theme.base0B
+vim.g.terminal_color_3 = '#' .. theme.base0A
+vim.g.terminal_color_4 = '#' .. theme.base0D
+vim.g.terminal_color_5 = '#' .. theme.base0E
+vim.g.terminal_color_6 = '#' .. theme.base0C
+vim.g.terminal_color_7 = '#' .. theme.base05
+vim.g.terminal_color_8 = '#' .. theme.base03
+vim.g.terminal_color_9 = '#' .. theme.base08
+vim.g.terminal_color_10 = '#' .. theme.base0B
+vim.g.terminal_color_11 = '#' .. theme.base0A
+vim.g.terminal_color_12 = '#' .. theme.base0D
+vim.g.terminal_color_13 = '#' .. theme.base0E
+vim.g.terminal_color_14 = '#' .. theme.base0C
+vim.g.terminal_color_15 = '#' .. theme.base07
 
 if #override ~= 0 then
   require(override)
