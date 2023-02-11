@@ -1,6 +1,7 @@
 local utils = require('core.utils')
 local cosmos = require('core.cosmos')
 local options = require('layers.editor.options')
+local core_options = require('core.options')
 
 cosmos.add_leader_keymapping(
   'n|bb',
@@ -159,3 +160,89 @@ utils.set_keymap(
 utils.set_keymap('n', '<leader>;;', 'gcc', {})
 utils.set_keymap('v', '<leader>;', 'gcc<esc>', {})
 utils.set_keymap('t', '<A-d>', '<Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>', {})
+
+local function goto_prev_node()
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    return
+  end
+  local dest_node = ts_utils.get_previous_node(node, true, true)
+  if not dest_node then
+    local cur_node = node:parent()
+    while cur_node do
+      dest_node = ts_utils.get_previous_node(cur_node, false, false)
+      if dest_node then
+        break
+      end
+      cur_node = cur_node:parent()
+    end
+  end
+  if not dest_node then
+    return
+  end
+  ts_utils.goto_node(dest_node)
+end
+
+local function goto_next_node()
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    return
+  end
+  local dest_node = ts_utils.get_next_node(node, true, true)
+  if not dest_node then
+    local cur_node = node:parent()
+    while cur_node do
+      dest_node = ts_utils.get_next_node(cur_node, false, false)
+      if dest_node then
+        break
+      end
+      cur_node = cur_node:parent()
+    end
+  end
+  if not dest_node then
+    return
+  end
+  ts_utils.goto_node(dest_node)
+end
+
+local function goto_parent_node()
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    return
+  end
+  local dest_node = node:parent()
+  if not dest_node then
+    return
+  end
+  ts_utils.goto_node(dest_node)
+end
+
+local function goto_child_node()
+  local ts_utils = require('nvim-treesitter.ts_utils')
+  local node = ts_utils.get_node_at_cursor()
+  if not node then
+    return
+  end
+  local dest_node = ts_utils.get_named_children(node)[1]
+  if not dest_node then
+    return
+  end
+  ts_utils.goto_node(dest_node)
+end
+
+local keyopts = { noremap = true, silent = true }
+
+if core_options.helix_mode then
+  vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-o>', goto_parent_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-i>', goto_child_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-n>', goto_next_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-p>', goto_prev_node, keyopts)
+else
+  vim.keymap.set({ 'n', 'v', 'o' }, 'H', goto_parent_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o' }, 'L', goto_child_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o' }, 'J', goto_next_node, keyopts)
+  vim.keymap.set({ 'n', 'v', 'o' }, 'K', goto_prev_node, keyopts)
+end

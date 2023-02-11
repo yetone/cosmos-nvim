@@ -5,4 +5,6 @@ return {
   cosmos_configs_root = stdpath('config'),
 
   python3_host_prog = '~/.pyenv/versions/nvim-py3/bin/python',
+
+  helix_mode = false,
 }
