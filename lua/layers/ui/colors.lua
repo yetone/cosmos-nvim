@@ -1,7 +1,7 @@
 local M = {}
 
 -- if theme given, load given theme if given, otherwise nvchad_theme
-M.init = function()
+M.setup = function()
   vim.cmd('hi clear')
   if vim.fn.exists('syntax_on') then
     vim.cmd('syntax reset')
@@ -13,7 +13,7 @@ M.init = function()
   -- unload to force reload
   package.loaded['layers.ui.highlights' or false] = nil
   -- then load the highlights
-  require('layers.ui.highlights')
+  require('layers.ui.highlights').setup()
 end
 
 -- returns a table of colors for given or current theme

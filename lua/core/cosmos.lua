@@ -148,6 +148,9 @@ local default_leader_keymapping_group_names = {
   s = {
     name = '+Search/Symbols',
   },
+  t = {
+    name = '+Toggle/Themes',
+  },
   g = {
     name = '+Git',
   },

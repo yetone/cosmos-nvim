@@ -13,6 +13,8 @@
 
 If you want the power of **VSCode**, the interactivity of **Spacemacs**, and the text-objects of **Vim**, I highly recommend you try this configuration.
 
+The <kbd>leader<kbd> key is the spacebar
+
 <p align="center">
     <img width="800" src="https://rawcdn.githack.com/yetone/figure_bed/master/nvim_screenshots/dashboard6.gif" >
 </p>
@@ -122,6 +124,8 @@ return {
 cosmos-nvim theme colors and highlights are copied from [NvChad/base46](https://github.com/NvChad/base46) project, because [NvChad/base46](https://github.com/NvChad/base46) can't be used alone, so I can only copy the code, please tell me if there is something wrong with this way of using, many thanks to the author [siduck](https://github.com/siduck)! His [NvChad](https://github.com/NvChad/NvChad) neovim distribution is also very impressive!
 
 All available themes are in this directory: [lua/layers/ui/themes](https://github.com/yetone/cosmos-nvim/tree/main/lua/layers/ui/themes).
+
+You can preview themes by shortcut <kbd>leader</kbd> - <kbd>t</kbd> - <kbd>p</kbd>
 
 You can switch themes in this way:
 

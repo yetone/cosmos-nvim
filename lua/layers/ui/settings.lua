@@ -56,4 +56,4 @@ vim.api.nvim_create_autocmd({
   end,
 })
 
-require('layers.ui.colors').init()
+require('layers.ui.colors').setup()
