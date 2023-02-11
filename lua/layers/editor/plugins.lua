@@ -134,29 +134,48 @@ cosmos.add_plugin('tami5/lspsaga.nvim', {
 })
 
 cosmos.add_plugin('nvim-telescope/telescope.nvim', {
-  dependencies = { { 'nvim-lua/plenary.nvim', lazy = true } },
+  dependencies = {
+    {
+      'nvim-telescope/telescope-dap.nvim',
+      dependencies = { 'mfussenegger/nvim-dap' },
+      event = 'BufRead',
+      config = configs.telescope_dap,
+    },
+    { 'nvim-lua/plenary.nvim', lazy = true },
+  },
   config = configs.telescope,
 })
 
 cosmos.add_plugin('nvim-telescope/telescope-fzf-native.nvim', {
   build = 'make',
+  dependencies = { 'nvim-telescope/telescope.nvim' },
+  config = configs.telescope_fzf,
+})
+
+cosmos.add_plugin('nvim-telescope/telescope-frecency.nvim', {
+  dependencies = { 'nvim-telescope/telescope.nvim', 'kkharji/sqlite.lua' },
+  config = configs.telescope_frecency,
+})
+
+cosmos.add_plugin('nvim-telescope/telescope-project.nvim', {
+  dependencies = { 'nvim-telescope/telescope.nvim' },
+  config = configs.telescope_project,
 })
 
 cosmos.add_plugin('nvim-telescope/telescope-file-browser.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
+  config = configs.telescope_file_browser,
 })
 
 cosmos.add_plugin('nvim-telescope/telescope-media-files.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
-})
-
-cosmos.add_plugin('nvim-telescope/telescope-dap.nvim', {
-  dependencies = { 'nvim-telescope/telescope.nvim' },
-  event = 'BufRead',
+  config = configs.telescope_media_files,
 })
 
 cosmos.add_plugin('nvim-telescope/telescope-ui-select.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
+  event = 'BufRead',
+  config = configs.telescope_ui_select,
 })
 
 cosmos.add_plugin('dstein64/vim-startuptime')

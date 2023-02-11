@@ -6,8 +6,9 @@ M.init = function()
   if vim.fn.exists('syntax_on') then
     vim.cmd('syntax reset')
   end
+  local options = require('layers.ui.options')
   vim.o.termguicolors = true
-  vim.g.colors_name = 'onedark'
+  vim.g.colors_name = options.theme
 
   -- unload to force reload
   package.loaded['layers.ui.highlights' or false] = nil

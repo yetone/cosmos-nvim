@@ -16,4 +16,8 @@ function configs.gitsigns()
   })
 end
 
+function configs.telescope_github()
+  require('telescope').load_extension('gh')
+end
+
 return configs

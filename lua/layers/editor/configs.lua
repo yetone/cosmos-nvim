@@ -483,11 +483,6 @@ function configs.telescope()
   })
 
   telescope.load_extension('projects')
-  telescope.load_extension('file_browser')
-  telescope.load_extension('dap')
-  telescope.load_extension('media_files')
-  telescope.load_extension('ui-select')
-  telescope.load_extension('fzf')
 end
 
 configs.dap = function()
@@ -788,6 +783,38 @@ end
 
 function configs.guess_indent()
   require('guess-indent').setup()
+end
+
+function configs.telescope_fzf()
+  require('telescope').load_extension('fzf')
+end
+
+function configs.telescope_frecency()
+  require('telescope').load_extension('frecency')
+end
+
+function configs.telescope_media_files()
+  require('telescope').load_extension('media_files')
+end
+
+function configs.telescope_project()
+  require('telescope').load_extension('project')
+end
+
+function configs.telescope_file_browser()
+  require('telescope').load_extension('file_browser')
+end
+
+function configs.telescope_zoxide()
+  require('telescope').load_extension('zoxide')
+end
+
+function configs.telescope_dap()
+  require('telescope').load_extension('dap')
+end
+
+function configs.telescope_ui_select()
+  require('telescope').load_extension('ui-select')
 end
 
 return configs

@@ -11,3 +11,8 @@ cosmos.add_plugin('lewis6991/gitsigns.nvim', {
   config = configs.gitsigns,
   event = { 'BufRead', 'BufNewFile' },
 })
+
+cosmos.add_plugin('nvim-telescope/telescope-github.nvim', {
+  dependencies = { 'nvim-telescope/telescope.nvim' },
+  config = configs.telescope_github,
+})
