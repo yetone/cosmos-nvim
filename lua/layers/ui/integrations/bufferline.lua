@@ -3,12 +3,7 @@ local colors = require('base46').get_theme_tb('base_30')
 return {
 
   BufferLineBackground = {
-    fg = colors.light_grey,
-    bg = colors.black2,
-  },
-
-  BufferlineIndicatorVisible = {
-    fg = colors.black2,
+    fg = colors.grey_fg,
     bg = colors.black2,
   },
 
@@ -24,6 +19,34 @@ return {
   },
 
   -- for diagnostics = "nvim_lsp"
+  BufferLineHint = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineHintVisible = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineHintDiagnostic = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineHintDiagnosticVisible = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineInfo = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineInfoDiagnostic = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineInfoDiagnosticVisible = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
   BufferLineError = {
     fg = colors.light_grey,
     bg = colors.black2,
@@ -31,6 +54,35 @@ return {
   BufferLineErrorDiagnostic = {
     fg = colors.light_grey,
     bg = colors.black2,
+  },
+  BufferLineErrorDiagnosticVisible = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineWarning = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineWarningDiagnostic = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  BufferLineWarningDiagnosticVisible = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+
+  BufferLineDuplicate = {
+    fg = colors.light_grey,
+    bg = colors.black2,
+  },
+  -- BufferLineDuplicateSelected = {
+  --   fg = colors.red,
+  --   bg = colors.black,
+  -- },
+  BufferLineDuplicateVisible = {
+    fg = colors.light_grey,
+    bg = colors.black,
   },
 
   -- close buttons
@@ -48,6 +100,10 @@ return {
   },
   BufferLineFill = {
     fg = colors.grey_fg,
+    bg = colors.black2,
+  },
+  BufferlineIndicatorVisible = {
+    fg = colors.black2,
     bg = colors.black2,
   },
   BufferlineIndicatorSelected = {
@@ -97,33 +153,34 @@ return {
     bg = colors.black,
   },
 
-  BufferLineDevIconDefaultSelected = {
-    bg = 'none',
-  },
-
-  BufferLineDevIconDefaultInactive = {
-    bg = 'none',
-  },
-
-  BufferLineDuplicate = {
-    fg = 'NONE',
-    bg = colors.black2,
-  },
-  BufferLineDuplicateSelected = {
-    fg = colors.red,
-    bg = colors.black,
-  },
-  BufferLineDuplicateVisible = {
-    fg = colors.blue,
+  BufferLineDevIconLua = {
+    fg = colors.grey_fg,
     bg = colors.black2,
   },
 
-  -- custom area
-  BufferLineRightCustomAreaText1 = {
-    fg = colors.white,
+  BufferLineDevIconLuaInactive = {
+    fg = colors.grey_fg,
+    bg = colors.black2,
   },
 
-  BufferLineRightCustomAreaText2 = {
-    fg = colors.red,
+  BufferLineDevIconluaSelected = {
+    bg = 'none',
   },
+
+  -- BufferLineDevIconDefaultSelected = {
+  --   bg = 'none',
+  -- },
+
+  -- BufferLineDevIconDefaultInactive = {
+  --   bg = 'none',
+  -- },
+
+  -- -- custom area
+  -- BufferLineRightCustomAreaText1 = {
+  --   fg = colors.white,
+  -- },
+
+  -- BufferLineRightCustomAreaText2 = {
+  --   fg = colors.red,
+  -- },
 }
