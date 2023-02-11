@@ -43,12 +43,14 @@ function M.pick_theme(opts)
           options.theme = selection.value
           package.loaded['layers.ui.colors' or false] = nil
           require('layers.ui.colors').setup()
+          require('lualine.highlight').create_highlight_groups(require('layers.ui.highlights').get_lualine_theme())
         end,
         teardown = function(self)
           local options = require('layers.ui.options')
           options.theme = current_theme
           package.loaded['layers.ui.colors' or false] = nil
           require('layers.ui.colors').setup()
+          require('lualine.highlight').create_highlight_groups(require('layers.ui.highlights').get_lualine_theme())
         end,
         preview_fn = function(self, entry) end,
       }),
@@ -60,6 +62,7 @@ function M.pick_theme(opts)
           options.theme = selection.value
           package.loaded['layers.ui.colors' or false] = nil
           require('layers.ui.colors').setup()
+          require('lualine.highlight').create_highlight_groups(require('layers.ui.highlights').get_lualine_theme())
         end)
         return true
       end,

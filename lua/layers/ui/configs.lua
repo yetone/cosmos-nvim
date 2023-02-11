@@ -253,32 +253,11 @@ function configs.lualine()
     return vim.api.nvim_win_get_number(0)
   end
 
-  local colors = require('layers.ui.colors').get().base_30
-  local theme = {
-    normal = {
-      a = { fg = colors.one_bg, bg = colors.green, gui = 'bold' },
-      b = { fg = colors.white, bg = colors.one_bg2 },
-      c = { fg = colors.light_grey, bg = colors.one_bg },
-    },
-    command = { a = { fg = colors.one_bg, bg = colors.yellow, gui = 'bold' } },
-    insert = { a = { fg = colors.one_bg, bg = colors.blue, gui = 'bold' } },
-    visual = { a = { fg = colors.one_bg, bg = colors.dark_purple, gui = 'bold' } },
-    terminal = { a = { fg = colors.one_bg, bg = colors.cyan, gui = 'bold' } },
-    replace = { a = { fg = colors.one_bg, bg = colors.red, gui = 'bold' } },
-    inactive = {
-      a = { fg = colors.light_grey, bg = colors.one_bg, gui = 'bold' },
-      b = { fg = colors.light_grey, bg = colors.one_bg },
-      c = { fg = colors.light_grey, bg = colors.one_bg2 },
-    },
-  }
-
-  -- auto_theme.normal.c.bg = auto_theme.normal.a.fg
-
   local config = {
     options = {
       disabled_filetypes = options.statusline_filetype_exclude,
       icons_enabled = true,
-      theme = theme,
+      theme = require('layers.ui.highlights').get_lualine_theme(),
       component_separators = '|',
       section_separators = { left = '', right = '' },
       globalstatus = true,
