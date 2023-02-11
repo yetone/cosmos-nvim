@@ -26,7 +26,7 @@ g.python3_host_prog = options.python3_host_prog
 vim.cmd('set nocompatible')
 
 opt.complete = ''
-opt.background = 'dark'
+-- opt.background = 'dark'
 vim.cmd('syntax on')
 vim.cmd('filetype plugin indent on')
 
