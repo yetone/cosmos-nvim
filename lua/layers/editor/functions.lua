@@ -8,10 +8,12 @@ function M.find_current_directory_files()
   if dir == '' then
     dir = vim.fn.getcwd()
   end
-  local telescope = require('telescope.builtin')
-  telescope.find_files({
-    search_dirs = { dir },
+  local opts = require('telescope.themes').get_ivy({})
+  opts = vim.tbl_extend('force', opts, {
+    path = dir,
+    prompt_title = 'Files in ' .. dir,
   })
+  require('telescope').extensions.file_browser.file_browser(opts)
 end
 
 function M.edit_neovim()
