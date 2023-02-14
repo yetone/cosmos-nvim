@@ -143,6 +143,11 @@ cosmos.add_leader_keymapping('n|<Space>', {
   name = 'Commands',
 })
 
+cosmos.add_leader_keymapping(
+  'n|lr',
+  { ':lua require("layers.editor.functions").open_lua_repl()<CR>', name = 'Open Lua REPL' }
+)
+
 utils.nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 utils.nmap('gD', ':Lspsaga preview_definition<CR>')
 utils.set_keymap(

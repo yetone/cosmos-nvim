@@ -231,3 +231,5 @@ cosmos.add_plugin('yorickpeterse/nvim-window', {
   url = 'https://gitlab.com/yorickpeterse/nvim-window.git',
   config = configs.nvim_window,
 })
+
+cosmos.add_plugin('ii14/neorepl.nvim')

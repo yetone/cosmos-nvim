@@ -40,33 +40,33 @@ function M.pick_theme(opts)
   local current_theme = vim.g.colors_name
 
   pickers
-      .new(opts, {
-        prompt_title = 'Pick Theme',
-        finder = finders.new_table({
-          results = themes,
-        }),
-        default_selection_index = default_selection_index,
-        sorter = conf.generic_sorter(opts),
-        previewer = Previewer:new({
-          setup = function(self)
-            local selection = action_state.get_selected_entry()
-            M.preview_theme(selection.value)
-          end,
-          teardown = function(self)
-            M.preview_theme(current_theme)
-          end,
-          preview_fn = function(self, entry) end,
-        }),
-        attach_mappings = function(prompt_bufnr, map)
-          actions.select_default:replace(function()
-            actions.close(prompt_bufnr)
-            local selection = action_state.get_selected_entry()
-            M.preview_theme(selection.value)
-          end)
-          return true
+    .new(opts, {
+      prompt_title = 'Pick Theme',
+      finder = finders.new_table({
+        results = themes,
+      }),
+      default_selection_index = default_selection_index,
+      sorter = conf.generic_sorter(opts),
+      previewer = Previewer:new({
+        setup = function(self)
+          local selection = action_state.get_selected_entry()
+          M.preview_theme(selection.value)
         end,
-      })
-      :find()
+        teardown = function(self)
+          M.preview_theme(current_theme)
+        end,
+        preview_fn = function(self, entry) end,
+      }),
+      attach_mappings = function(prompt_bufnr, map)
+        actions.select_default:replace(function()
+          actions.close(prompt_bufnr)
+          local selection = action_state.get_selected_entry()
+          M.preview_theme(selection.value)
+        end)
+        return true
+      end,
+    })
+    :find()
 end
 
 return M

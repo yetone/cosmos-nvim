@@ -136,11 +136,14 @@ local default_leader_keymapping_group_names = {
       name = 'Config files',
     },
   },
-  p = {
-    name = '+Projects',
-  },
   j = {
     name = '+Jump',
+  },
+  l = {
+    name = '+Lua',
+  },
+  p = {
+    name = '+Projects',
   },
   r = {
     name = '+Resume',
