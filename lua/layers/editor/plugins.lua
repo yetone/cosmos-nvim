@@ -28,8 +28,10 @@ cosmos.add_plugin('kyazdani42/nvim-tree.lua', {
 cosmos.add_plugin('tpope/vim-surround', {
   event = 'BufRead',
 })
-cosmos.add_plugin('tpope/vim-commentary', {
+
+cosmos.add_plugin('numToStr/Comment.nvim', {
   event = 'BufRead',
+  config = configs.comment,
 })
 
 cosmos.add_plugin('phaazon/hop.nvim', {

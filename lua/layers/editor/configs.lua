@@ -817,4 +817,8 @@ function configs.telescope_ui_select()
   require('telescope').load_extension('ui-select')
 end
 
+function configs.comment()
+  require('Comment').setup()
+end
+
 return configs
