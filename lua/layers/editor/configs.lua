@@ -235,20 +235,20 @@ function configs.treesitter()
       enable = true,
       keymaps = {
         init_selection = 'gnn',
-        node_incremental = 'grn',
+        node_incremental = '.',
         scope_incremental = 'grc',
-        node_decremental = 'grm',
+        node_decremental = ',',
       },
     },
 
-    textsubjects = {
-      enable = true,
-      prev_selection = ',', -- (Optional) keymap to select the previous selection
-      keymaps = {
-        ['.'] = 'textsubjects-smart',
-        -- [';'] = 'textsubjects-container-outer',
-      },
-    },
+    -- textsubjects = {
+    --   enable = true,
+    --   prev_selection = ',', -- (Optional) keymap to select the previous selection
+    --   keymaps = {
+    --     ['.'] = 'textsubjects-smart',
+    --     -- [';'] = 'textsubjects-container-outer',
+    --   },
+    -- },
 
     textobjects = {
       select = {
