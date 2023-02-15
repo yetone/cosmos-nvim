@@ -2,24 +2,17 @@ local colors = require('base46').get_theme_tb('base_30')
 
 return {
   -- LspSaga
-  LspSagaDiagnosticBorder = {
+  SagaNormal = {
+    bg = colors.darker_black,
+  },
+  SagaBorder = {
     fg = colors.darker_black,
     bg = colors.darker_black,
   },
-  LspSagaDiagnosticTruncateLine = {
-    fg = colors.darker_black,
-    bg = colors.darker_black,
+  CodeActionText = {
+    link = 'Normal',
   },
-  LspSagaRenameBorder = {
-    fg = colors.darker_black,
-    bg = colors.darker_black,
-  },
-  LspSagaHoverBorder = {
-    fg = colors.darker_black,
-    bg = colors.darker_black,
-  },
-  LspSagaDefPreviewBorder = {
-    fg = colors.darker_black,
-    bg = colors.darker_black,
+  CodeActionNumber = {
+    fg = colors.green,
   },
 }

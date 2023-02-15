@@ -148,13 +148,42 @@ end
 
 function configs.lspsaga()
   local saga = require('lspsaga')
-  saga.init_lsp_saga({
-    code_action_prompt = { enable = false },
-    code_action_keys = {
-      quit = { 'q', '<ESC>' },
+  local ui_options = require('layers.ui.options')
+  saga.setup({
+    ui = {
+      winblend = ui_options.transparency,
     },
-    rename_action_keys = {
-      quit = { 'q', '<ESC>' },
+    lightbulb = {
+      enable = false,
+    },
+    symbol_in_winbar = {
+      enable = false,
+    },
+    diagnostic = {
+      border_follow = false,
+      keys = {
+        exec_action = 'o',
+        quit = 'q',
+        go_action = 'g',
+      },
+    },
+    finder = {
+      keys = {
+        quit = { 'q', '<ESC>' },
+      },
+    },
+    code_action = {
+      show_server_name = true,
+      keys = {
+        quit = { 'q', '<ESC>' },
+        exec = '<CR>',
+      },
+    },
+    rename = {
+      in_select = false,
+      quit = '<ESC>',
+      exec = '<CR>',
+      confirm = '<CR>',
     },
   })
 end
@@ -543,6 +572,19 @@ configs.dap_virtual_text = function()
 end
 
 configs.trouble = function()
+  local signs = {
+    -- icons / text used for a diagnostic
+    error = '',
+    warning = '',
+    -- for vim.fn.sign_define
+    warn = '',
+    hint = '',
+    information = '',
+    -- for vim.fn.sign_define
+    info = '',
+    other = '﫠',
+  }
+
   local trouble = require('trouble')
   trouble.setup({
     position = 'bottom', -- position of the list can be: bottom, top, left, right
@@ -581,16 +623,14 @@ configs.trouble = function()
     auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
     auto_fold = false, -- automatically fold a file trouble list at creation
     auto_jump = { 'lsp_definitions' }, -- for the given modes, automatically jump if there is only a single result
-    signs = {
-      -- icons / text used for a diagnostic
-      error = '',
-      warning = '',
-      hint = '',
-      information = '',
-      other = '﫠',
-    },
+    signs = signs,
     use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
   })
+
+  for type, icon in pairs(signs) do
+    local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+  end
 end
 
 configs.nvimtree = function()

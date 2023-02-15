@@ -129,9 +129,13 @@ cosmos.add_plugin('ojroques/nvim-lspfuzzy', {
   },
 })
 
-cosmos.add_plugin('tami5/lspsaga.nvim', {
+cosmos.add_plugin('glepnir/lspsaga.nvim', {
   config = configs.lspsaga,
-  dependencies = { 'neovim/nvim-lspconfig' },
+  dependencies = {
+    { 'kyazdani42/nvim-web-devicons' },
+    --Please make sure you install markdown and markdown_inline parser
+    { 'nvim-treesitter/nvim-treesitter' },
+  },
   event = 'BufRead',
 })
 

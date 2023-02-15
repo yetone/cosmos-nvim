@@ -49,23 +49,14 @@ cosmos.add_leader_keymapping(
   { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to symbol' }
 )
 
-cosmos.add_leader_keymapping('n|se', { ':Lspsaga rename<CR>', name = 'Edit symbol' })
+cosmos.add_leader_keymapping('n|se', { ':Lspsaga rename ++project<CR>', name = 'Edit symbol' })
 cosmos.add_leader_keymapping('n|ss', {
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find { fuzzy = false, case_mode = 'ignore_case' }<cr>",
   name = 'Search current buffer',
 })
-cosmos.add_leader_keymapping(
-  'n|sh',
-  { "<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>", name = 'Hover symbol' }
-)
-cosmos.add_leader_keymapping(
-  'n|sp',
-  { "<cmd>lua require'lspsaga.provider'.preview_definition()<CR>", name = 'Preview symbol' }
-)
-cosmos.add_leader_keymapping(
-  'n|sH',
-  { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>", name = 'Show symbol signature' }
-)
+cosmos.add_leader_keymapping('n|sh', { '<cmd>Lspsaga hover_doc<CR>', name = 'Hover symbol' })
+cosmos.add_leader_keymapping('n|sp', { '<cmd>Lspsaga peek_definition<CR>', name = 'Peek symbol definition' })
+cosmos.add_leader_keymapping('n|sH', { '<cmd>lua vim.lsp.buf.signature_help()<CR>', name = 'Show symbol signature' })
 
 cosmos.add_leader_keymapping('n|el', { '<cmd>TroubleToggle document_diagnostics<cr>', name = 'List errors' })
 cosmos.add_leader_keymapping('n|eL', { '<cmd>TroubleToggle workspace_diagnostics<cr>', name = 'List workspace errors' })
@@ -150,19 +141,7 @@ cosmos.add_leader_keymapping(
 )
 
 utils.nmap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-utils.nmap('gD', ':Lspsaga preview_definition<CR>')
-utils.set_keymap(
-  'n',
-  '<C-f>',
-  "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>",
-  { noremap = true, silent = true }
-)
-utils.set_keymap(
-  'n',
-  '<C-b>',
-  "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>",
-  { noremap = true, silent = true }
-)
+utils.nmap('gD', ':Lspsaga peek_definition<CR>')
 utils.set_keymap('n', '<leader>;;', 'gcc', {})
 utils.set_keymap('v', '<leader>;', 'gcc<esc>', {})
 utils.set_keymap('t', '<A-d>', '<Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>', {})
