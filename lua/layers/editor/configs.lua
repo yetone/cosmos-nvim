@@ -171,20 +171,15 @@ function configs.treesitter()
     autotag = {
       enable = true,
     },
-
     indent = {
       enable = false,
     },
-
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = 'all',
-
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
-
     -- List of parsers to ignore installing
     ignore_install = {},
-
     playground = {
       enable = true,
       disable = {},
@@ -203,7 +198,6 @@ function configs.treesitter()
         show_help = '?',
       },
     },
-
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
@@ -217,7 +211,6 @@ function configs.treesitter()
       -- Instead of true it can also be a list of languages
       additional_vim_regex_highlighting = false,
     },
-
     rainbow = {
       enable = ui_options.enable_rainbow,
       -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
@@ -226,11 +219,9 @@ function configs.treesitter()
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     },
-
     context_commentstring = {
       enable = true,
     },
-
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -240,7 +231,6 @@ function configs.treesitter()
         node_decremental = ',',
       },
     },
-
     -- textsubjects = {
     --   enable = true,
     --   prev_selection = ',', -- (Optional) keymap to select the previous selection
@@ -767,15 +757,12 @@ function configs.nvim_window()
       '9',
       '0',
     },
-
     -- A group to use for overwriting the Normal highlight group in the floating
     -- window. This can be used to change the background color.
     normal_hl = 'BlackOnLightYellow',
-
     -- The highlight group to apply to the line that contains the hint characters.
     -- This is used to make them stand out more.
     hint_hl = 'Bold',
-
     -- The border style to use for the floating window.
     border = 'none',
   })
@@ -795,10 +782,6 @@ end
 
 function configs.telescope_media_files()
   require('telescope').load_extension('media_files')
-end
-
-function configs.telescope_project()
-  require('telescope').load_extension('project')
 end
 
 function configs.telescope_file_browser()

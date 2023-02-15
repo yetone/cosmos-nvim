@@ -159,11 +159,6 @@ cosmos.add_plugin('nvim-telescope/telescope-frecency.nvim', {
   config = configs.telescope_frecency,
 })
 
-cosmos.add_plugin('nvim-telescope/telescope-project.nvim', {
-  dependencies = { 'nvim-telescope/telescope.nvim' },
-  config = configs.telescope_project,
-})
-
 cosmos.add_plugin('nvim-telescope/telescope-file-browser.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
   config = configs.telescope_file_browser,

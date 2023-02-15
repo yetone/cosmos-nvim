@@ -67,7 +67,7 @@ local function list_layer_module_names(filename)
       list[#list + 1] = {
         ---@diagnostic disable-next-line: undefined-field
         layer_name = layer.name,
-        module_name = m:sub(0, #m - 4),
+        module_name = m:sub(2, #m - 4):gsub('/', '.'),
       }
       ::continue::
     end
