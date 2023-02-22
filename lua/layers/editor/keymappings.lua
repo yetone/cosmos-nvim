@@ -122,10 +122,7 @@ cosmos.add_leader_keymapping(
 cosmos.add_leader_keymapping('v|;;', { 'gcc<Esc>', name = 'Comment line', noremap = false })
 
 cosmos.add_leader_keymapping("n|'", { '<Cmd>exe v:count1 . "ToggleTerm"<CR>', name = 'Open shell' })
-cosmos.add_leader_keymapping(
-  'n|*',
-  { "<cmd>lua require('telescope.builtin').lsp_references()<cr>", name = 'Search reference in current project' }
-)
+cosmos.add_leader_keymapping('n|*', { '<CMD>Glance references<CR>', name = 'Search reference in current project' })
 cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search text in current project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
 cosmos.add_leader_keymapping('n|<Space>', {

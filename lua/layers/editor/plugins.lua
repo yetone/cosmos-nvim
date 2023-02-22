@@ -232,3 +232,8 @@ cosmos.add_plugin('yorickpeterse/nvim-window', {
 })
 
 cosmos.add_plugin('ii14/neorepl.nvim')
+
+cosmos.add_plugin('dnlhc/glance.nvim', {
+  config = configs.glance,
+  event = 'BufRead',
+})
