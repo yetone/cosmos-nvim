@@ -153,7 +153,7 @@ cosmos.add_plugin('nvim-telescope/telescope.nvim', {
 })
 
 cosmos.add_plugin('nvim-telescope/telescope-fzf-native.nvim', {
-  build = 'make',
+  build = 'make -C ~/.local/share/nvim/lazy/telescope-fzf-native.nvim',
   dependencies = { 'nvim-telescope/telescope.nvim' },
   config = configs.telescope_fzf,
 })
