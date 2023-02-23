@@ -59,10 +59,6 @@ docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
 
 Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched fonts you are currently using.
 
-### Git LFS
-
-Since it relies on git-lfs to save dashboard gif files, you need to install [git-lfs](https://git-lfs.github.com/)
-
 ### iTerm2 colorscheme [Optional]
 
 If you are using iTerm2 and expect the iTerm colors to blend well with cosmos-nvim colors, it is highly recommended to install and use this [colorscheme](https://github.com/yetone/cosmos-nvim/blob/main/colorschemes/doomone-yetone.itermcolors) for iTerm2.
@@ -70,10 +66,9 @@ If you are using iTerm2 and expect the iTerm colors to blend well with cosmos-nv
 ## 2. Install my configuration
 
 ```bash
-mv ~/.config/nvim{,.yetone-backup} || true
+rm -rf ~/.config/nvim.yetone-backup; mv ~/.config/nvim{,.yetone-backup} || true
 
 git clone --depth 1 https://github.com/yetone/cosmos-nvim.git ~/.config/nvim
-cd ~/.config/nvim && git lfs install && git lfs fetch --all && git lfs pull
 ```
 
 ## 3. Install your language lsp server in your nvim
