@@ -59,6 +59,10 @@ docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
 
 Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched fonts you are currently using.
 
+### Chafa
+
+My configuration use [Chafa](https://github.com/hpjansson/chafa) to render GIF, you can install it by homebrew: `brew install chafa`
+
 ### iTerm2 colorscheme [Optional]
 
 If you are using iTerm2 and expect the iTerm colors to blend well with cosmos-nvim colors, it is highly recommended to install and use this [colorscheme](https://github.com/yetone/cosmos-nvim/blob/main/colorschemes/doomone-yetone.itermcolors) for iTerm2.
