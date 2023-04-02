@@ -94,21 +94,21 @@ function configs.mason()
     -- local opts = { noremap=true, silent=true }
     -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
     -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    if client.supports_method('textDocument/formatting') then
-      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-          if vim.fn.has('nvim-0.8') == 1 then
-            vim.lsp.buf.format({ bufnr = bufnr })
-          else
-            vim.lsp.buf.formatting_sync()
-          end
-        end,
-      })
-    end
+  --   if client.supports_method('textDocument/formatting') then
+  --     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+  --     vim.api.nvim_create_autocmd('BufWritePre', {
+  --       group = augroup,
+  --       buffer = bufnr,
+  --       callback = function()
+  --         -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+  --         if vim.fn.has('nvim-0.8') == 1 then
+  --           vim.lsp.buf.format({ bufnr = bufnr })
+  --         else
+  --           vim.lsp.buf.formatting_sync()
+  --         end
+  --       end,
+  --     })
+  --   end
   end
 
   local default_opt = {
