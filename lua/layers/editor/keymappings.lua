@@ -150,9 +150,4 @@ if core_options.helix_mode then
   vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-i>', functions.goto_child_node, keyopts)
   vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-n>', functions.goto_next_node, keyopts)
   vim.keymap.set({ 'n', 'v', 'o', 'i' }, '<A-p>', functions.goto_prev_node, keyopts)
-else
-  vim.keymap.set({ 'n', 'v', 'o' }, 'H', functions.goto_parent_node, keyopts)
-  vim.keymap.set({ 'n', 'v', 'o' }, 'L', functions.goto_child_node, keyopts)
-  vim.keymap.set({ 'n', 'v', 'o' }, 'J', functions.goto_next_node, keyopts)
-  vim.keymap.set({ 'n', 'v', 'o' }, 'K', functions.goto_prev_node, keyopts)
 end
