@@ -6,7 +6,7 @@ return {
   enable_todo_comments = true,
   enable_colorizer = true,
   enable_scrollbar = true,
-  enable_gps = true,
+  enable_navic = true,
   illuminate_delay = 100,
   illuminate_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'lazy', 'startuptime' },
   indentline_filetype_exclude = { 'dashboard', 'alpha', 'NvimTree', 'Trouble', 'lazy', 'startuptime' },

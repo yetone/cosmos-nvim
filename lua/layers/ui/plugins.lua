@@ -82,7 +82,7 @@ cosmos.add_plugin('petertriho/nvim-scrollbar', {
 })
 
 cosmos.add_plugin('SmiteshP/nvim-navic', {
-  enabled = options.enable_gps,
+  enabled = options.enable_navic,
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
   config = configs.navic,
   event = 'BufRead',
