@@ -290,9 +290,9 @@ function configs.lualine()
     extensions = {},
   }
 
-  local has_gps, gps = pcall(require, 'nvim-gps')
-  if has_gps then
-    local component = { gps.get_location, cond = gps.is_available }
+  local has_navic = pcall(require, 'nvim-navic')
+  if has_navic then
+    local component = { 'navic' }
     if require('core.utils').index_of(config.sections.lualine_b, component) < 0 then
       table.insert(config.sections.lualine_b, component)
     end
@@ -608,9 +608,13 @@ function configs.scrollbar()
   scrollbar.setup()
 end
 
-function configs.gps()
-  local gps = require('nvim-gps')
-  gps.setup()
+function configs.navic()
+  local navic = require('nvim-navic')
+  navic.setup({
+    lsp = {
+      auto_attach = true
+    }
+  })
 end
 
 return configs

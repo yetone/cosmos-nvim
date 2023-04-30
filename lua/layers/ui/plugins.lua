@@ -29,7 +29,7 @@ cosmos.add_plugin('p00f/nvim-ts-rainbow', {
 })
 
 cosmos.add_plugin('nvim-lualine/lualine.nvim', {
-  dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-gps' },
+  dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-navic' },
   config = configs.lualine,
   event = { 'BufRead', 'VimEnter' },
 })
@@ -81,9 +81,9 @@ cosmos.add_plugin('petertriho/nvim-scrollbar', {
   config = configs.scrollbar,
 })
 
-cosmos.add_plugin('SmiteshP/nvim-gps', {
+cosmos.add_plugin('SmiteshP/nvim-navic', {
   enabled = options.enable_gps,
   dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
-  config = configs.gps,
+  config = configs.navic,
   event = 'BufRead',
 })

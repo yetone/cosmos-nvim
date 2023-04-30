@@ -32,7 +32,7 @@ function configs.mason()
     automatic_setup = true,
   })
   require('null-ls').setup()
-  require('mason-null-ls').setup_handlers()
+  -- require('mason-null-ls').setup_handlers()
 
   require('mason-lspconfig').setup()
   require('neodev').setup({
