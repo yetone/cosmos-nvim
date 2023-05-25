@@ -11,20 +11,20 @@ g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
 
 opt.cursorline = true
 
-vim.api.nvim_create_autocmd('WinEnter', {
-  pattern = '*',
-  callback = function(_)
-    if not vim.bo.filetype ~= 'alpha' and not vim.bo.filetype ~= 'dashboard' then
-      vim.o.cursorline = true
-    end
-  end,
-})
-vim.api.nvim_create_autocmd('WinLeave', {
-  pattern = '*',
-  callback = function(_)
-    vim.o.cursorline = false
-  end,
-})
+-- vim.api.nvim_create_autocmd('WinEnter', {
+--   pattern = '*',
+--   callback = function(_)
+--     if not vim.bo.filetype ~= 'alpha' and not vim.bo.filetype ~= 'dashboard' then
+--       vim.o.cursorline = true
+--     end
+--   end,
+-- })
+-- vim.api.nvim_create_autocmd('WinLeave', {
+--   pattern = '*',
+--   callback = function(_)
+--     vim.o.cursorline = false
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd('VimEnter', {
   group = vim.api.nvim_create_augroup('illuminate_augroup', { clear = true }),

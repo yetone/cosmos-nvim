@@ -87,3 +87,7 @@ cosmos.add_plugin('SmiteshP/nvim-navic', {
   config = configs.navic,
   event = 'BufRead',
 })
+
+cosmos.add_plugin('yamatsum/nvim-cursorline', {
+  config = configs.cursorline,
+})

@@ -617,4 +617,19 @@ function configs.navic()
   })
 end
 
+function configs.cursorline()
+  require('nvim-cursorline').setup {
+    cursorline = {
+      enable = true,
+      timeout = 500,
+      number = false,
+    },
+    cursorword = {
+      enable = false,
+      min_length = 3,
+      hl = { underline = true },
+    }
+  }
+end
+
 return configs
