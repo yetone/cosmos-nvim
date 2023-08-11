@@ -883,7 +883,7 @@ function configs.glance()
 end
 
 function configs.readline()
-  local readline = require 'readline'
+  local readline = require('readline')
   vim.keymap.set('!', '<M-f>', readline.forward_word)
   vim.keymap.set('!', '<M-b>', readline.backward_word)
   vim.keymap.set('!', '<C-a>', readline.beginning_of_line)
