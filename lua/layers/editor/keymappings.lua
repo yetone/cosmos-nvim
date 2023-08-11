@@ -94,6 +94,10 @@ cosmos.add_leader_keymapping(
   { "<CMD>lua require('dap').step_out()<CR>", name = 'Step out', silent = true, noremap = true }
 )
 cosmos.add_leader_keymapping(
+  'n|dl',
+  { "<CMD>lua require('dap.ext.vscode').load_launchjs()<CR>", name = 'Load launch.json', silent = true, noremap = true }
+)
+cosmos.add_leader_keymapping(
   'n|dc',
   { "<CMD>lua require('dap').continue()<CR>", name = 'Continue', silent = true, noremap = true }
 )
