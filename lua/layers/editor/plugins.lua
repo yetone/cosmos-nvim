@@ -237,3 +237,7 @@ cosmos.add_plugin('dnlhc/glance.nvim', {
   config = configs.glance,
   event = 'BufRead',
 })
+
+cosmos.add_plugin('linty-org/readline.nvim', {
+  config = configs.readline,
+})

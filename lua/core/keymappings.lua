@@ -19,33 +19,3 @@ cosmos.add_leader_keymapping('n|wh', { '<C-w>h', name = 'Go to the left window' 
 cosmos.add_leader_keymapping('n|wl', { '<C-w>l', name = 'Go to the right window' })
 cosmos.add_leader_keymapping('n|wd', { '<C-w>c', name = 'Delete window' })
 cosmos.add_leader_keymapping('n|wm', { '<C-w>o', name = 'Maximize window' })
-
--- Setup for emacs keybindings
--- insert mode
-utils.set_keymap('i', '<C-b>', '<Left>', {})
-utils.set_keymap('i', '<C-f>', '<Right>', {})
-utils.set_keymap('i', '<C-a>', '<Home>', {})
-utils.set_keymap('i', '<C-e>', '<End>', {})
-utils.set_keymap('i', '<C-d>', '<Del>', {})
-utils.set_keymap('i', '<C-h>', '<BS>', {})
-utils.set_keymap('i', '<C-k>', '<C-r>=KillLine()<CR>', {})
-utils.set_keymap('i', '<C-p>', '<Up>', {})
-utils.set_keymap('i', '<C-n>', '<Down>', {})
-utils.set_keymap('i', '<A-f>', '<Esc>lWi', {})
-utils.set_keymap('i', '<A-b>', '<Esc>Bi', {})
-
--- normal mode
-utils.set_keymap('n', '<C-p>', '<Up>', {})
-utils.set_keymap('n', '<C-n>', '<Down>', {})
-
--- command line mode
-utils.set_keymap('c', '<C-p>', '<Up>', {})
-utils.set_keymap('c', '<C-n>', '<Down>', {})
-utils.set_keymap('c', '<C-b>', '<Left>', {})
-utils.set_keymap('c', '<C-f>', '<Right>', {})
-utils.set_keymap('c', '<C-a>', '<Home>', {})
-utils.set_keymap('c', '<C-e>', '<End>', {})
-utils.set_keymap('c', '<C-d>', '<Del>', {})
-utils.set_keymap('c', '<C-h>', '<BS>', { noremap = true })
-utils.set_keymap('c', '<C-k>', '<C-f>D<C-c><C-c>:<Up>', { noremap = true })
--- End of setup for emacs keybindings
