@@ -77,8 +77,6 @@ function configs.mason()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   ---@diagnostic disable-next-line: unused-local
@@ -125,6 +123,9 @@ function configs.mason()
     },
   }
 
+  -- Package installation folder
+  local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+
   require('mason-lspconfig').setup_handlers({
     -- The first entry (without a key) will be the default handler
     -- and will be called for each installed server that doesn't have
@@ -133,6 +134,41 @@ function configs.mason()
       local opt = servers[server_name] or {}
       opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
       lspconfig[server_name].setup(opt)
+    end,
+    -- The following handlers will be called for the specified servers
+    -- and will override the default handler for those servers.
+    -- If a handler is not specified for a server, the default handler
+    -- will be used.
+    ['rust_analyzer'] = function()
+      local opt = servers['rust_analyzer'] or {}
+      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+
+      -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
+      local extension_path = install_root_dir .. "/packages/codelldb/extension/"
+      local codelldb_path = extension_path .. "adapter/codelldb"
+      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+      local ih = require "inlay-hints"
+      require("rust-tools").setup {
+        tools = {
+          hover_actions = { border = "solid" },
+          on_initialized = function()
+            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
+              pattern = { "*.rs" },
+              callback = function()
+                vim.lsp.codelens.refresh()
+              end,
+            })
+            ih.set_all()
+          end,
+          inlay_hints = {
+            auto = false,
+          },
+        },
+        server = opt,
+        dap = {
+          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
+      }
     end,
   })
 end
@@ -893,6 +929,10 @@ function configs.readline()
   vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
   vim.keymap.set('!', '<C-k>', readline.kill_line)
   vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
+end
+
+function configs.inlay_hints()
+  require("inlay-hints").setup()
 end
 
 return configs
