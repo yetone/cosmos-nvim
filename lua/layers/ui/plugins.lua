@@ -23,10 +23,10 @@ cosmos.add_plugin('folke/todo-comments.nvim', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('p00f/nvim-ts-rainbow', {
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = 'BufRead',
-})
+-- cosmos.add_plugin('p00f/nvim-ts-rainbow', {
+--   dependencies = { 'nvim-treesitter/nvim-treesitter' },
+--   event = 'BufRead',
+-- })
 
 cosmos.add_plugin('nvim-lualine/lualine.nvim', {
   dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-navic' },
