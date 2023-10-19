@@ -124,7 +124,7 @@ function configs.mason()
   }
 
   -- Package installation folder
-  local install_root_dir = vim.fn.stdpath "data" .. "/mason"
+  local install_root_dir = vim.fn.stdpath('data') .. '/mason'
 
   require('mason-lspconfig').setup_handlers({
     -- The first entry (without a key) will be the default handler
@@ -144,16 +144,16 @@ function configs.mason()
       opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
 
       -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
-      local extension_path = install_root_dir .. "/packages/codelldb/extension/"
-      local codelldb_path = extension_path .. "adapter/codelldb"
-      local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
-      local ih = require "inlay-hints"
-      require("rust-tools").setup {
+      local extension_path = install_root_dir .. '/packages/codelldb/extension/'
+      local codelldb_path = extension_path .. 'adapter/codelldb'
+      local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+      local ih = require('inlay-hints')
+      require('rust-tools').setup({
         tools = {
-          hover_actions = { border = "solid" },
+          hover_actions = { border = 'solid' },
           on_initialized = function()
-            vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter", "CursorHold", "InsertLeave" }, {
-              pattern = { "*.rs" },
+            vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+              pattern = { '*.rs' },
               callback = function()
                 vim.lsp.codelens.refresh()
               end,
@@ -166,9 +166,9 @@ function configs.mason()
         },
         server = opt,
         dap = {
-          adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
+          adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
         },
-      }
+      })
     end,
   })
 end
@@ -932,7 +932,7 @@ function configs.readline()
 end
 
 function configs.inlay_hints()
-  require("inlay-hints").setup()
+  require('inlay-hints').setup()
 end
 
 return configs
