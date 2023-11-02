@@ -59,7 +59,7 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'make',
   command = 'set noexpandtab',
 })
-vim.api.nvim_create_autocmd('BufNewFile,BufRead', {
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
   pattern = '*.go',
   command = 'setlocal noet ts=4 sw=4 sts=4',
 })
