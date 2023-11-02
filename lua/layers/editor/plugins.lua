@@ -240,6 +240,6 @@ cosmos.add_plugin('dnlhc/glance.nvim', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('linty-org/readline.nvim', {
+cosmos.add_plugin('sysedwinistrator/readline.nvim', {
   config = configs.readline,
 })
