@@ -160,10 +160,10 @@ cosmos.add_plugin('nvim-telescope/telescope-fzf-native.nvim', {
   config = configs.telescope_fzf,
 })
 
-cosmos.add_plugin('nvim-telescope/telescope-frecency.nvim', {
-  dependencies = { 'nvim-telescope/telescope.nvim', 'kkharji/sqlite.lua' },
-  config = configs.telescope_frecency,
-})
+-- cosmos.add_plugin('nvim-telescope/telescope-frecency.nvim', {
+--   dependencies = { 'nvim-telescope/telescope.nvim', 'kkharji/sqlite.lua' },
+--   config = configs.telescope_frecency,
+-- })
 
 cosmos.add_plugin('nvim-telescope/telescope-file-browser.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
