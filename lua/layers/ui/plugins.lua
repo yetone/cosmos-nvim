@@ -91,3 +91,7 @@ cosmos.add_plugin('SmiteshP/nvim-navic', {
 cosmos.add_plugin('yamatsum/nvim-cursorline', {
   config = configs.cursorline,
 })
+
+cosmos.add_plugin('tzachar/highlight-undo.nvim', {
+  config = configs.highlight_undo,
+})
