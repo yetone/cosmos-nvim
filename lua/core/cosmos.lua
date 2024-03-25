@@ -121,6 +121,9 @@ local function load_layer_plugins()
 end
 
 local default_leader_keymapping_group_names = {
+  m = {
+    name = '+Marks',
+  },
   w = {
     name = '+Windows',
   },

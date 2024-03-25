@@ -935,4 +935,10 @@ function configs.inlay_hints()
   require('inlay-hints').setup()
 end
 
+function configs.bookmarks()
+  require("bookmarks").setup( {
+    json_db_path = vim.fs.normalize(vim.fn.stdpath("config") .. "/bookmarks.db.json"),
+  })
+end
+
 return configs

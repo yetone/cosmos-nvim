@@ -243,3 +243,8 @@ cosmos.add_plugin('dnlhc/glance.nvim', {
 cosmos.add_plugin('sysedwinistrator/readline.nvim', {
   config = configs.readline,
 })
+
+cosmos.add_plugin('LintaoAmons/bookmarks.nvim', {
+  dependencies = { 'stevearc/dressing.nvim' },
+  config = configs.bookmarks,
+})
