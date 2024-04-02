@@ -158,4 +158,7 @@ end
 
 cosmos.add_leader_keymapping('n|mm', { '<cmd>BookmarksMark<cr>', name = 'Mark current line', noremap = false })
 cosmos.add_leader_keymapping('n|mo', { '<cmd>BookmarksGoto<cr>', name = 'Go to bookmark', noremap = false })
-cosmos.add_leader_keymapping('n|ma', { '<cmd>BookmarksCommands<cr>', name = 'Find and trigger a bookmark command', noremap = false })
+cosmos.add_leader_keymapping(
+  'n|ma',
+  { '<cmd>BookmarksCommands<cr>', name = 'Find and trigger a bookmark command', noremap = false }
+)
