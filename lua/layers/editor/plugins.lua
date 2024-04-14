@@ -35,7 +35,7 @@ cosmos.add_plugin('numToStr/Comment.nvim', {
 })
 
 cosmos.add_plugin('folke/flash.nvim', {
-  event = "VeryLazy",
+  event = 'VeryLazy',
   ---@type Flash.Config
   opts = {},
   -- stylua: ignore
