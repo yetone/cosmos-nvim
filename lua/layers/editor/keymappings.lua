@@ -41,12 +41,12 @@ cosmos.add_leader_keymapping(
 )
 cosmos.add_leader_keymapping('n|pf', { '<cmd>Telescope find_files<CR>', name = 'Find project files' })
 
-cosmos.add_leader_keymapping('n|jj', { '<cmd>lua require("flash").remote()<cr>', name = 'Jump to char' })
+cosmos.add_leader_keymapping('n|jj', { '<cmd>lua require("flash").remote()<cr>', name = 'Jump to a char' })
 utils.set_keymap('v', '<leader>jj', '<cmd>lua require("flash").remote()<cr>', {})
-cosmos.add_leader_keymapping('n|jl', { '<cmd>lua require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" })<cr>', name = 'Jump to line' })
+cosmos.add_leader_keymapping('n|jl', { '<cmd>lua require("flash").jump({ search = { mode = "search", max_length = 0 }, label = { after = { 0, 0 } }, pattern = "^" })<cr>', name = 'Jump to a line' })
 cosmos.add_leader_keymapping(
   'n|ji',
-  { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to symbol' }
+  { "<cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>", name = 'Jump to a symbol' }
 )
 
 cosmos.add_leader_keymapping('n|se', { ':Lspsaga rename ++project<CR>', name = 'Edit symbol' })
