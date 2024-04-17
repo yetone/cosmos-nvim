@@ -250,3 +250,8 @@ cosmos.add_plugin('LintaoAmons/bookmarks.nvim', {
   dependencies = { 'stevearc/dressing.nvim' },
   config = configs.bookmarks,
 })
+
+cosmos.add_plugin('ThePrimeagen/refactoring.nvim', {
+  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
+  config = configs.refactoring,
+})

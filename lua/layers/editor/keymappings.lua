@@ -165,3 +165,20 @@ cosmos.add_leader_keymapping(
   'n|ma',
   { '<cmd>BookmarksCommands<cr>', name = 'Find and trigger a bookmark command', noremap = false }
 )
+
+cosmos.add_leader_keymapping('x|ref', { ':Refactor extract', name = 'Refactor extract to function', noremap = false })
+cosmos.add_leader_keymapping(
+  'x|reF',
+  { ':Refactor extract_to_file', name = 'Refactor extract to file', noremap = false }
+)
+cosmos.add_leader_keymapping('x|rev', { ':Refactor extract_var', name = 'Refactor extract variable', noremap = false })
+cosmos.add_leader_keymapping(
+  'n|rebf',
+  { ':Refactor extract_block', name = 'Refactor extract block to function', noremap = false }
+)
+cosmos.add_leader_keymapping(
+  'n|rebF',
+  { ':Refactor extract_block_to_file', name = 'Refactor extract block to file', noremap = false }
+)
+cosmos.add_leader_keymapping('n,x|riv', { ':Refactor inline_var', name = 'Refactor inline variable', noremap = false })
+cosmos.add_leader_keymapping('n|rif', { ':Refactor inline_func', name = 'Refactor inline function', noremap = false })

@@ -149,7 +149,16 @@ local default_leader_keymapping_group_names = {
     name = '+Projects',
   },
   r = {
-    name = '+Resume',
+    name = '+Resume/Refactoring',
+    e = {
+      name = 'Extract',
+      b = {
+        name = 'Block',
+      },
+    },
+    i = {
+      name = 'Inline',
+    },
   },
   s = {
     name = '+Search/Symbols',
@@ -177,41 +186,43 @@ function M.setup_keymappings(enable_which_key)
   load_layer_keymappings()
   local _leader_keymappings = {}
   for shortcut, opts in pairs(leader_keymappings) do
-    local mode, keymap = shortcut:match('([^|]*)|?(.*)')
-    if not enable_which_key then
-      utils.set_keymap(mode, keymap, opts[1], opts)
-      goto continue
-    end
-    opts.mode = mode
-    local keys = {}
-    local chars = vim.split(keymap, '')
-    local in_special_key = false
-    local special_key_start_at = 0
-    for idx, char in ipairs(chars) do
-      if char == '<' then
-        in_special_key = true
-        special_key_start_at = idx
-      elseif char == '>' then
-        in_special_key = false
-        keys[#keys + 1] = table.concat(chars, '', special_key_start_at, idx)
-      elseif not in_special_key then
-        keys[#keys + 1] = char
+    local modes, keymap = shortcut:match('([^|]*)|?(.*)')
+    for _, mode in ipairs(vim.split(modes, ',')) do
+      if not enable_which_key then
+        utils.set_keymap(mode, keymap, opts[1], opts)
+        goto continue
       end
-    end
-    local group = _leader_keymappings
-    local name_group = default_leader_keymapping_group_names
-    for idx, key in ipairs(keys) do
-      local current_group = group[key] or {}
-      local current_name_group = name_group[key] or {}
-      current_group.name = current_group.name or current_name_group.name
-      if idx == #keys then
-        current_group = opts
-        current_group[2] = current_group.name
-        current_group.name = nil
+      opts.mode = mode
+      local keys = {}
+      local chars = vim.split(keymap, '')
+      local in_special_key = false
+      local special_key_start_at = 0
+      for idx, char in ipairs(chars) do
+        if char == '<' then
+          in_special_key = true
+          special_key_start_at = idx
+        elseif char == '>' then
+          in_special_key = false
+          keys[#keys + 1] = table.concat(chars, '', special_key_start_at, idx)
+        elseif not in_special_key then
+          keys[#keys + 1] = char
+        end
       end
-      group[key] = current_group
-      group = current_group
-      name_group = current_name_group
+      local group = _leader_keymappings
+      local name_group = default_leader_keymapping_group_names
+      for idx, key in ipairs(keys) do
+        local current_group = group[key] or {}
+        local current_name_group = name_group[key] or {}
+        current_group.name = current_group.name or current_name_group.name
+        if idx == #keys then
+          current_group = opts
+          current_group[2] = current_group.name
+          current_group.name = nil
+        end
+        group[key] = current_group
+        group = current_group
+        name_group = current_name_group
+      end
     end
     ::continue::
   end

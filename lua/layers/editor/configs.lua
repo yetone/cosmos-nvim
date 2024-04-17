@@ -941,4 +941,8 @@ function configs.bookmarks()
   })
 end
 
+function configs.refactoring()
+  require('refactoring').setup()
+end
+
 return configs
