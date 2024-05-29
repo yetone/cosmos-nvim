@@ -23,6 +23,8 @@ cosmos.add_plugin('hrsh7th/nvim-cmp', {
         },
       },
       config = configs.luasnip,
+      version = 'v2.3.0',
+      build = 'make install_jsregexp',
       lazy = true,
     },
   },
