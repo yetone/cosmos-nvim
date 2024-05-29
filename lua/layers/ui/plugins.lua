@@ -2,12 +2,13 @@ local cosmos = require('core.cosmos')
 local options = require('layers.ui.options')
 local configs = require('layers.ui.configs')
 
-cosmos.add_plugin('kyazdani42/nvim-web-devicons', {
+cosmos.add_plugin('nvim-tree/nvim-web-devicons', {
   config = configs.web_devicons,
 })
 
-cosmos.add_plugin('glepnir/dashboard-nvim', {
-  dependencies = { 'kyazdani42/nvim-web-devicons' },
+cosmos.add_plugin('nvimdev/dashboard-nvim', {
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  event = 'VimEnter',
   config = configs.dashboard,
 })
 
@@ -29,7 +30,7 @@ cosmos.add_plugin('folke/todo-comments.nvim', {
 -- })
 
 cosmos.add_plugin('nvim-lualine/lualine.nvim', {
-  dependencies = { 'kyazdani42/nvim-web-devicons', 'SmiteshP/nvim-navic' },
+  dependencies = { 'nvim-tree/nvim-web-devicons', 'SmiteshP/nvim-navic' },
   config = configs.lualine,
   event = { 'BufRead', 'VimEnter' },
 })
@@ -41,7 +42,7 @@ cosmos.add_plugin('j-hui/fidget.nvim', {
 })
 
 cosmos.add_plugin('akinsho/bufferline.nvim', {
-  dependencies = { 'kyazdani42/nvim-web-devicons' },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   branch = 'main',
   config = configs.bufferline,
   event = 'BufRead',
@@ -83,7 +84,7 @@ cosmos.add_plugin('petertriho/nvim-scrollbar', {
 
 cosmos.add_plugin('SmiteshP/nvim-navic', {
   enabled = options.enable_navic,
-  dependencies = { 'nvim-treesitter/nvim-treesitter', 'kyazdani42/nvim-web-devicons' },
+  dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' },
   config = configs.navic,
   event = 'BufRead',
 })

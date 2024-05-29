@@ -159,37 +159,45 @@ end
 function configs.dashboard()
   local home = os.getenv('HOME')
   local db = require('dashboard')
-  db.session_directory = home .. '/.cache/nvim/session'
-  db.preview_command = 'chafa -s 70x70 -c full --fg-only --symbols braille --clear'
-  db.preview_file_path = '$(ls ' .. home .. '/.config/nvim/static/*.gif | sort -R)'
-  db.preview_file_height = 30
-  db.preview_file_width = 70
-  db.custom_center = {
-    {
-      icon = '  ',
-      desc = 'List Projects                           ',
-      action = 'Telescope projects',
-      shortcut = 'SPC p p',
+  db.setup({
+    theme = 'doom',
+    config = {
+      center = {
+        {
+          icon = '  ',
+          desc = 'List Projects',
+          action = 'Telescope projects',
+          shortcut = 'SPC p p',
+        },
+        {
+          icon = '  ',
+          desc = 'Recent Files',
+          -- action = 'Telescope old_files',
+          action = "lua require('layers.editor.functions').find_current_directory_files()",
+          shortcut = 'SPC f f',
+        },
+        {
+          icon = '  ',
+          desc = 'Find File',
+          action = 'Telescope find_files',
+          shortcut = 'SPC f f',
+        },
+        {
+          icon = '  ',
+          desc = 'Find Text',
+          action = 'Telescope live_grep',
+          shortcut = 'SPC /  ',
+        },
+      },
     },
-    {
-      icon = '  ',
-      desc = 'Recent Files                            ',
-      action = 'Telescope old_files',
-      shortcut = 'SPC f f',
+    preview = {
+      command = 'chafa -s 60x60 -c full --fg-only --symbols braille --clear',
+      -- file_path = '$(ls ' .. home .. '/.config/nvim/static/*.gif | sort -R)',
+      file_path = home .. '/.config/nvim/static/dashboard.gif',
+      file_height = 24,
+      file_width = 64,
     },
-    {
-      icon = '  ',
-      desc = 'Find File                               ',
-      action = 'Telescope find_files',
-      shortcut = 'SPC f f',
-    },
-    {
-      icon = '  ',
-      desc = 'Find Text                               ',
-      action = 'Telescope live_grep',
-      shortcut = 'SPC /  ',
-    },
-  }
+  })
 end
 
 function configs.alpha()

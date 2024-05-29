@@ -13,7 +13,7 @@
   "cmp-path": { "branch": "main", "commit": "91ff86cd9c29299a64f968ebb45846c485725f23" },
   "cmp_luasnip": { "branch": "master", "commit": "18095520391186d634a0045dacaa346291096566" },
   "copilot.vim": { "branch": "release", "commit": "324ec9eb69e20971b58340d0096c3caac7bc2089" },
-  "dashboard-nvim": { "branch": "master", "commit": "f7d623457d6621b25a1292b24e366fae40cb79ab" },
+  "dashboard-nvim": { "branch": "master", "commit": "681300934baf36f6184ca41f0b26aed22056d4ee" },
   "dressing.nvim": { "branch": "master", "commit": "18e5beb3845f085b6a33c24112b37988f3f93c06" },
   "editorconfig-vim": { "branch": "master", "commit": "1953c0f2541446e8a56ba4e2f4477e91e78f6d13" },
   "fidget.nvim": { "branch": "main", "commit": "44585a0c0085765195e6961c15529ba6c5a2a13b" },

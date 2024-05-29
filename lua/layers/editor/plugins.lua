@@ -19,10 +19,10 @@ cosmos.add_plugin('ahmedkhalf/project.nvim', {
   config = configs.project,
 })
 
-cosmos.add_plugin('kyazdani42/nvim-tree.lua', {
+cosmos.add_plugin('nvim-tree/nvim-tree.lua', {
   config = configs.nvimtree,
   dependencies = {
-    'kyazdani42/nvim-web-devicons', -- optional, for file icon
+    'nvim-tree/nvim-web-devicons', -- optional, for file icon
   },
 })
 cosmos.add_plugin('tpope/vim-surround', {
@@ -136,7 +136,7 @@ cosmos.add_plugin('ojroques/nvim-lspfuzzy', {
 cosmos.add_plugin('glepnir/lspsaga.nvim', {
   config = configs.lspsaga,
   dependencies = {
-    { 'kyazdani42/nvim-web-devicons' },
+    { 'nvim-tree/nvim-web-devicons' },
     --Please make sure you install markdown and markdown_inline parser
     { 'nvim-treesitter/nvim-treesitter' },
   },
@@ -219,7 +219,7 @@ cosmos.add_plugin('theHamsta/nvim-dap-virtual-text', {
 })
 
 cosmos.add_plugin('folke/trouble.nvim', {
-  dependencies = { 'kyazdani42/nvim-web-devicons' },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = configs.trouble,
   event = 'BufRead',
 })
