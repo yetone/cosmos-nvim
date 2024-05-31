@@ -255,3 +255,12 @@ cosmos.add_plugin('ThePrimeagen/refactoring.nvim', {
   dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
   config = configs.refactoring,
 })
+
+cosmos.add_plugin('danielfalk/smart-open.nvim', {
+  branch = '0.2.x',
+  dependencies = {
+    'kkharji/sqlite.lua',
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  },
+  config = configs.smart_open,
+})

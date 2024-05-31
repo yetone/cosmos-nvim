@@ -945,4 +945,8 @@ function configs.refactoring()
   require('refactoring').setup()
 end
 
+function configs.smart_open()
+  require('telescope').load_extension('smart_open')
+end
+
 return configs

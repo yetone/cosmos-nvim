@@ -133,10 +133,8 @@ cosmos.add_leader_keymapping('n|*', { '<CMD>Glance references<CR>', name = 'Sear
 cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search text in current project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
 cosmos.add_leader_keymapping('n|<Space>', {
-  "<cmd>lua require('layers.editor.functions').commands(require('telescope.themes').get_"
-    .. options.telescope_theme
-    .. '({}))<CR>',
-  name = 'Commands',
+  ':Telescope smart_open<CR>',
+  name = 'Smart Open',
 })
 
 cosmos.add_leader_keymapping(
