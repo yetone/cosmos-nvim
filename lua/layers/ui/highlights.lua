@@ -49,7 +49,8 @@ function M.get_lualine_theme()
     normal = {
       a = { fg = colors.one_bg, bg = colors.green, gui = 'bold' },
       b = { fg = colors.white, bg = colors.one_bg2 },
-      c = { fg = colors.light_grey, bg = colors.one_bg },
+      c = { guibg = 'NONE' },
+      x = { guibg = 'NONE' },
     },
     command = { a = { fg = colors.one_bg, bg = colors.yellow, gui = 'bold' } },
     insert = { a = { fg = colors.one_bg, bg = colors.blue, gui = 'bold' } },
