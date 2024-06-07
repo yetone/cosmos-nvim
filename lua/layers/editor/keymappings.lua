@@ -61,8 +61,8 @@ cosmos.add_leader_keymapping('n|sh', { '<cmd>Lspsaga hover_doc<CR>', name = 'Hov
 cosmos.add_leader_keymapping('n|sp', { '<cmd>Lspsaga peek_definition<CR>', name = 'Peek symbol definition' })
 cosmos.add_leader_keymapping('n|sH', { '<cmd>lua vim.lsp.buf.signature_help()<CR>', name = 'Show symbol signature' })
 
-cosmos.add_leader_keymapping('n|el', { '<cmd>TroubleToggle document_diagnostics<cr>', name = 'List errors' })
-cosmos.add_leader_keymapping('n|eL', { '<cmd>TroubleToggle workspace_diagnostics<cr>', name = 'List workspace errors' })
+cosmos.add_leader_keymapping('n|el', { '<cmd>Trouble diagnostics toggle filter.buf=0<cr>', name = 'List errors' })
+cosmos.add_leader_keymapping('n|eL', { '<cmd>Trouble diagnostics toggle<cr>', name = 'List workspace errors' })
 cosmos.add_leader_keymapping('n|en', { ':Lspsaga diagnostic_jump_next<CR>', name = 'Next error' })
 cosmos.add_leader_keymapping('n|ep', { ':Lspsaga diagnostic_jump_prev<CR>', name = 'Previous error' })
 cosmos.add_leader_keymapping('n|ef', { ':lua vim.lsp.buf.code_action()<CR>', name = 'Fix error' })

@@ -65,6 +65,7 @@ function configs.mason()
           'hbs',
           'handlebars',
         },
+        ---@diagnostic disable-next-line: unused-local
         root_dir = function(fname)
           return vim.loop.cwd()
         end,
@@ -555,48 +556,7 @@ configs.dapui = function()
   vim.fn.sign_define('DapBreakpoint', { text = '🛑', texthl = '', linehl = '', numhl = '' })
   vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
   local dapui = require('dapui')
-  dapui.setup({
-    icons = { expanded = '▾', collapsed = '▸' },
-    mappings = {
-      -- Use a table to apply multiple mappings
-      expand = { '<tab>', '<2-LeftMouse>' },
-      open = 'o',
-      remove = 'd',
-      edit = 'e',
-      repl = 'r',
-    },
-    layouts = {
-      {
-        -- You can change the order of elements in the sidebar
-        elements = {
-          -- Provide as ID strings or tables with "id" and "size" keys
-          {
-            id = 'scopes',
-            size = 0.25, -- Can be float or integer > 1
-          },
-          { id = 'breakpoints', size = 0.25 },
-          { id = 'stacks', size = 0.25 },
-          { id = 'watches', size = 00.25 },
-        },
-        size = 40,
-        position = 'left', -- Can be "left", "right", "top", "bottom"
-      },
-      {
-        elements = { 'repl' },
-        size = 10,
-        position = 'bottom', -- Can be "left", "right", "top", "bottom"
-      },
-    },
-    floating = {
-      max_height = nil, -- These can be integers or a float between 0 and 1.
-      max_width = nil, -- Floats will be treated as percentage of your screen.
-      border = 'single', -- Border style. Can be "single", "double" or "rounded"
-      mappings = {
-        close = { 'q', '<Esc>' },
-      },
-    },
-    windows = { indent = 1 },
-  })
+  dapui.setup()
 end
 
 configs.dap_virtual_text = function()
@@ -619,46 +579,7 @@ configs.trouble = function()
   }
 
   local trouble = require('trouble')
-  trouble.setup({
-    position = 'bottom', -- position of the list can be: bottom, top, left, right
-    height = 10, -- height of the trouble list when position is top or bottom
-    width = 50, -- width of the list when position is left or right
-    icons = true, -- use devicons for filenames
-    mode = 'workspace_diagnostics', -- "workspace_diagnostics", "document_diagnostics", "quickfix", "lsp_references", "loclist"
-    fold_open = '', -- icon used for open folds
-    fold_closed = '', -- icon used for closed folds
-    group = true, -- group results by file
-    padding = true, -- add an extra new line on top of the list
-    action_keys = { -- key mappings for actions in the trouble list
-      -- map to {} to remove a mapping, for example:
-      -- close = {},
-      close = '<esc>', -- close the list
-      cancel = 'q', -- cancel the preview and get back to your last window / buffer / cursor
-      refresh = 'r', -- manually refresh
-      jump = { '<cr>', '<tab>' }, -- jump to the diagnostic or open / close folds
-      open_split = { '<c-x>' }, -- open buffer in new split
-      open_vsplit = { '<c-v>' }, -- open buffer in new vsplit
-      open_tab = { '<c-t>' }, -- open buffer in new tab
-      jump_close = { 'o' }, -- jump to the diagnostic and close the list
-      toggle_mode = 'm', -- toggle between "workspace" and "document" diagnostics mode
-      toggle_preview = 'P', -- toggle auto_preview
-      hover = 'K', -- opens a small popup with the full multiline message
-      preview = 'p', -- preview the diagnostic location
-      close_folds = { 'zM', 'zm' }, -- close all folds
-      open_folds = { 'zR', 'zr' }, -- open all folds
-      toggle_fold = { 'zA', 'za' }, -- toggle fold of current file
-      previous = 'k', -- preview item
-      next = 'j', -- next item
-    },
-    indent_lines = true, -- add an indent guide below the fold icons
-    auto_open = false, -- automatically open the list when you have diagnostics
-    auto_close = false, -- automatically close the list when you have no diagnostics
-    auto_preview = true, -- automatically preview the location of the diagnostic. <esc> to close preview and go back to last window
-    auto_fold = false, -- automatically fold a file trouble list at creation
-    auto_jump = { 'lsp_definitions' }, -- for the given modes, automatically jump if there is only a single result
-    signs = signs,
-    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
-  })
+  trouble.setup({})
 
   for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)

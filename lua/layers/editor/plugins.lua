@@ -36,7 +36,6 @@ cosmos.add_plugin('numToStr/Comment.nvim', {
 
 cosmos.add_plugin('folke/flash.nvim', {
   event = 'VeryLazy',
-  ---@type Flash.Config
   opts = {},
   -- stylua: ignore
   keys = {
@@ -221,6 +220,8 @@ cosmos.add_plugin('theHamsta/nvim-dap-virtual-text', {
 
 cosmos.add_plugin('folke/trouble.nvim', {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  opts = {},
+  cmd = 'Trouble',
   config = configs.trouble,
   event = 'BufRead',
 })
