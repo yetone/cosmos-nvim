@@ -312,8 +312,13 @@ end
 function configs.fidget()
   local fidget = require('fidget')
   fidget.setup({
-    text = {
-      spinner = 'moon',
+    progress = {
+      display = {
+        progress_icon = {
+          pattern = 'moon',
+          period = 1,
+        },
+      },
     },
   })
 end
@@ -576,21 +581,20 @@ function configs.doom_one()
 end
 
 function configs.indent_blankline()
-  local indent_blankline = require('indent_blankline')
+  local ibl = require('ibl')
   local options = require('layers.ui.options')
 
-  indent_blankline.setup({
-    filetype_exclude = options.indentline_filetype_exclude,
-    space_char_blankline = ' ',
-    show_current_context = true,
-    show_current_context_start = false,
-    context_highlight_list = {
-      'IndentBlanklineIndent1',
-      'IndentBlanklineIndent2',
-      'IndentBlanklineIndent3',
-      'IndentBlanklineIndent4',
-      'IndentBlanklineIndent5',
-      'IndentBlanklineIndent6',
+  ibl.setup({
+    exclude = {
+      filetypes = options.indent_blankline_filetype_exclude,
+    },
+    scope = {
+      enabled = true,
+      show_start = false,
+      highlight = { 'IndentBlanklineContextChar' },
+    },
+    indent = {
+      highlight = { 'IndentBlanklineChar' },
     },
   })
 end

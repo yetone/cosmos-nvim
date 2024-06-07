@@ -284,9 +284,6 @@ function configs.treesitter()
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     },
-    context_commentstring = {
-      enable = true,
-    },
     incremental_selection = {
       enable = true,
       keymaps = {
@@ -678,6 +675,7 @@ configs.nvimtree = function()
       add_trailing = false,
       highlight_git = false,
       highlight_opened_files = 'none',
+      root_folder_label = false,
       root_folder_modifier = table.concat({ ':t:gs?$?/..', string.rep(' ', 1000), '?:gs?^??' }),
       icons = {
         show = {
@@ -716,7 +714,7 @@ configs.nvimtree = function()
     },
     disable_netrw = true,
     hijack_netrw = true,
-    ignore_ft_on_setup = { 'dashboard' },
+    -- ignore_ft_on_setup = { 'dashboard' },
     open_on_tab = false,
     hijack_cursor = true,
     hijack_unnamed_buffer_when_opening = false,
@@ -743,7 +741,6 @@ configs.nvimtree = function()
     view = {
       side = 'left',
       width = 30,
-      hide_root_folder = true,
     },
     actions = {
       open_file = {
@@ -947,6 +944,10 @@ end
 
 function configs.smart_open()
   require('telescope').load_extension('smart_open')
+end
+
+function configs.ts_context_commentstring()
+  require('ts_context_commentstring').setup()
 end
 
 return configs

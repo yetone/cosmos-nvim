@@ -81,6 +81,7 @@ cosmos.add_plugin('RRethy/nvim-treesitter-textsubjects', {
 cosmos.add_plugin('JoosepAlviste/nvim-ts-context-commentstring', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   event = 'BufRead',
+  config = configs.ts_context_commentstring,
 })
 
 cosmos.add_plugin('windwp/nvim-ts-autotag', {
@@ -207,7 +208,7 @@ cosmos.add_plugin('leoluz/nvim-dap-go', {
 })
 
 cosmos.add_plugin('rcarriga/nvim-dap-ui', {
-  dependencies = { 'mfussenegger/nvim-dap' },
+  dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
   config = configs.dapui,
   event = 'BufRead',
 })

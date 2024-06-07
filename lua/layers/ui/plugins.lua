@@ -14,6 +14,8 @@ cosmos.add_plugin('nvimdev/dashboard-nvim', {
 
 cosmos.add_plugin('lukas-reineke/indent-blankline.nvim', {
   config = configs.indent_blankline,
+  main = 'ibl',
+  opts = {},
   event = 'BufRead',
 })
 
