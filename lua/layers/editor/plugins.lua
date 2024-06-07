@@ -133,7 +133,7 @@ cosmos.add_plugin('ojroques/nvim-lspfuzzy', {
   },
 })
 
-cosmos.add_plugin('glepnir/lspsaga.nvim', {
+cosmos.add_plugin('nvimdev/lspsaga.nvim', {
   config = configs.lspsaga,
   dependencies = {
     { 'nvim-tree/nvim-web-devicons' },

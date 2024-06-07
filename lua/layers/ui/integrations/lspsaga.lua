@@ -5,6 +5,10 @@ return {
   SagaNormal = {
     bg = colors.darker_black,
   },
+  FloatBorder = {
+    fg = colors.darker_black,
+    bg = colors.darker_black,
+  },
   SagaBorder = {
     fg = colors.darker_black,
     bg = colors.darker_black,
