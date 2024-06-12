@@ -571,11 +571,11 @@ configs.trouble = function()
     warning = '',
     -- for vim.fn.sign_define
     warn = '',
-    hint = '',
+    hint = '',
     information = '',
     -- for vim.fn.sign_define
     info = '',
-    other = '﫠',
+    other = '',
   }
 
   local trouble = require('trouble')

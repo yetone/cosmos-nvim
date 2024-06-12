@@ -40,17 +40,17 @@ function configs.web_devicons()
         name = 'html',
       },
       jpeg = {
-        icon = '',
+        icon = '',
         color = colors.dark_purple,
         name = 'jpeg',
       },
       jpg = {
-        icon = '',
+        icon = '',
         color = colors.dark_purple,
         name = 'jpg',
       },
       js = {
-        icon = '',
+        icon = '',
         color = colors.sun,
         name = 'js',
       },
@@ -70,7 +70,7 @@ function configs.web_devicons()
         name = 'lua',
       },
       mp3 = {
-        icon = '',
+        icon = '',
         color = colors.white,
         name = 'mp3',
       },
@@ -85,7 +85,7 @@ function configs.web_devicons()
         name = 'out',
       },
       png = {
-        icon = '',
+        icon = '󰉏',
         color = colors.dark_purple,
         name = 'png',
       },
@@ -125,7 +125,7 @@ function configs.web_devicons()
         name = 'rpm',
       },
       vue = {
-        icon = '﵂',
+        icon = '',
         color = colors.vibrant_green,
         name = 'vue',
       },
@@ -170,7 +170,7 @@ function configs.dashboard()
           shortcut = 'SPC p p',
         },
         {
-          icon = '  ',
+          icon = '  ',
           desc = 'Recent Files',
           -- action = 'Telescope old_files',
           action = "lua require('layers.editor.functions').find_current_directory_files()",
@@ -183,7 +183,7 @@ function configs.dashboard()
           shortcut = 'SPC f f',
         },
         {
-          icon = '  ',
+          icon = '󰊄  ',
           desc = 'Find Text',
           action = 'Telescope live_grep',
           shortcut = 'SPC /  ',
@@ -198,59 +198,6 @@ function configs.dashboard()
       file_width = 64,
     },
   })
-end
-
-function configs.alpha()
-  local alpha = require('alpha')
-  math.randomseed(os.time())
-  local colors = { 'white' }
-  local function random_colors(color_lst)
-    return color_lst[math.random(1, #color_lst)]
-  end
-
-  vim.cmd(string.format('highlight dashboard guifg=%s guibg=bg', random_colors(colors)))
-
-  local dashboard = require('alpha.themes.dashboard')
-
-  local header = {
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣷⣶⣦⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⠋⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡿⣹⣿⢹⣿⣿⣿⢿⣟⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠃⡿⡇⢸⠛⣿⣿⠸⠇⣀⣀⣠⠌⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠠⣁⣥⡀⠀⠈⠃⠀⠈⠺⠿⠇⠀⠀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⡀⠸⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⠿⠿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⡇⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠏⠃⢌⠀⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠠⠃⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠀⠀⠀⠒⣒⡁⠂ ⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣾⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠣⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⣿⣿⣿⣿⢿⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⡿⠋⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⢄⣀⣀⡀⠤⠐⠂⠉⠁⠀⠀⢐⣿⠋⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠈⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀ ⠀⠀⠀⠀⠀⠀⢰⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⡠⠚⠀⠉⠒⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡔⠀ ⠀⠀⡠⠔⠁⠀⠀ ⠀⢀⠔⠉⠉⠒⠒⠒⠒⠒⠒⢤⡀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡤⠊⠀⠀⠀⠤⠂⠀ ⠀⠀⠀⠀⡠⠁⠀⠀⠀⠀⠀⡠⠊⠀⠀⠀⠙⢆⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢔⡁⢄⠀⠀⣄⡘⠈⠆⠀⠀⠀⠀⠀⡔⠀⠀⠀⠀⠀⠀⡐⠀⠀⠀⠀⠀⠀⠀⢣]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠼⠋⠁⢠⠃⢠⠁⠀⠀⣀⠌⢆⠀⠀⠀⡜⠀⠀⠀⠀⠀⠀⠰⠁⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⠤⠒⠁⠀⠀⠀⠀⢆⠸⠀⠀⠊⠀⠀⠀⠑⠤⠊⠀⠀⠀⠀⠀⠀⢠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡪⠀⠀⠀⠀⠀⠀⠀⠀⠈⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠃⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀]],
-  }
-
-  dashboard.section.header.val = header
-  dashboard.section.header.opts.hl = 'dashboard'
-
-  dashboard.section.buttons.val = {
-    dashboard.button('e', '  New File    ', ':enew<CR>', nil),
-    dashboard.button('f', '  Find File   ', ':Telescope find_files<CR>', nil),
-    dashboard.button('t', '  Find Text   ', ':Telescope live_grep<CR>', nil),
-    dashboard.button('c', '  NVIM Config ', ':e ~/.config/nvim/init.lua<CR>:Telescope find_files<CR>', nil),
-    dashboard.button('q', '  Quit        ', ':qa<CR>', nil),
-  }
-  alpha.setup(dashboard.opts)
 end
 
 function configs.lualine()
@@ -335,7 +282,7 @@ function configs.get_bufferline_options()
       diagnostics_indicator = function(count, level, diagnostics_dict, context)
         local s = ' '
         for e, n in pairs(diagnostics_dict) do
-          local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or ' ')
+          local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or ' ')
           s = s .. n .. sym
         end
         return s
