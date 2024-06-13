@@ -538,6 +538,7 @@ function configs.indent_blankline()
     scope = {
       enabled = true,
       show_start = false,
+      show_end = false,
       highlight = { 'IndentBlanklineContextChar' },
     },
     indent = {
