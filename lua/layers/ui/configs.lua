@@ -191,7 +191,7 @@ function configs.dashboard()
       },
     },
     preview = {
-      command = 'chafa -s 60x60 -c full --fg-only --symbols braille --clear',
+      command = 'chafa --passthrough tmux -f symbols -s 60x60 -c full --fg-only --symbols braille --clear',
       -- file_path = '$(ls ' .. home .. '/.config/nvim/static/*.gif | sort -R)',
       file_path = home .. '/.config/nvim/static/dashboard.gif',
       file_height = 24,
