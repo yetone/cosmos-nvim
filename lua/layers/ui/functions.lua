@@ -15,6 +15,7 @@ function M.preview_theme(theme)
   require('bufferline.config').setup(require('layers.ui.configs').get_bufferline_options())
   require('bufferline.highlights').reset_icon_hl_cache()
   require('bufferline.highlights').set_all(require('bufferline.config').update_highlights())
+  vim.opt.bg = require('layers.ui.colors').get().type
 end
 
 function M.pick_theme(opts)
