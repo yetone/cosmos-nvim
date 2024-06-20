@@ -1,3 +1,6 @@
+-- credits to original theme https://github.com/FrenzyExists/aquarium-vim
+-- This is just a modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -52,7 +55,7 @@ M.base_16 = {
   base0F = '#eAc1c1',
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'aquarium')
 

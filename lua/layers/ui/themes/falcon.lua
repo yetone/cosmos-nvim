@@ -7,9 +7,9 @@ M.base_30 = {
   white = '#F8F8FF',
   white2 = '#DFDFE5',
   tan = '#CFC1B2',
-  darker_black = '#000015',
+  darker_black = '#0c0c2d',
   black = '#020222', --  nvim bg
-  black2 = '#0b0b2b',
+  black2 = '#1A1A3A',
   one_bg = '#161636',
   one_bg2 = '#202040',
   one_bg3 = '#2a2a4a',
@@ -58,15 +58,20 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  Statement = { fg = M.base_30.purple },
-  Type = { fg = M.base_30.white2 },
-  Include = { fg = M.base_30.tan },
-  Keyword = { fg = M.base_16.base0D },
-  Operator = { fg = M.base_30.red },
-  ['@keyword'] = { fg = M.base_16.base0D },
+  syntax = {
+    Statement = { fg = M.base_30.purple },
+    Type = { fg = M.base_30.white2 },
+    Include = { fg = M.base_30.tan },
+    Keyword = { fg = M.base_16.base0D },
+    Operator = { fg = M.base_30.red },
+  },
+
+  treesitter = {
+    ['@keyword'] = { fg = M.base_16.base0D },
+  },
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'falcon')
 

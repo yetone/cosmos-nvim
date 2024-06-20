@@ -4,6 +4,7 @@ M.base_30 = {
   white = '#edeff0',
   darker_black = '#060809',
   black = '#0c0e0f', --  nvim bg
+  black2 = '#141617',
   lighter_black = '#121415',
   one_bg = '#161819',
   one_bg2 = '#1f2122',
@@ -52,7 +53,7 @@ M.base_16 = {
   base0F = '#e8646a',
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'yoru')
 

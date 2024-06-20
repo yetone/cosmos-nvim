@@ -1,3 +1,6 @@
+-- Credits to original https://github.com/one-dark
+-- This is modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -43,7 +46,7 @@ M.base_16 = {
   base06 = '#202227',
   base07 = '#090a0b',
   base08 = '#d84a3d',
-  base09 = '#a626a4',
+  base09 = '#d75f00',
   base0A = '#c18401',
   base0B = '#50a14f',
   base0C = '#0070a8',
@@ -52,18 +55,33 @@ M.base_16 = {
   base0F = '#986801',
 }
 
-vim.opt.bg = 'light'
+M.type = 'light'
 
 M.polish_hl = {
-  TelescopePromptPrefix = { fg = M.base_30.white },
-  TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.white },
-  ['@punctuation.bracket'] = { fg = M.base_30.nord_blue },
-  FloatBorder = { fg = M.base_16.base05 },
-  DiffAdd = { fg = M.base_16.base05 },
-  TbLineThemeToggleBtn = { bg = M.base_30.one_bg3 },
-  WhichKeyDesc = { fg = M.base_30.white },
-  Pmenu = { bg = M.base_30.black2 },
-  St_pos_text = { fg = M.base_30.white },
+  telescope = {
+    TelescopePromptPrefix = { fg = M.base_30.white },
+    TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.white },
+  },
+
+  treesitter = {
+    ['@punctuation.bracket'] = { fg = M.base_30.nord_blue },
+  },
+
+  defaults = {
+    FloatBorder = { fg = M.base_16.base05 },
+    Pmenu = { bg = M.base_30.black2 },
+  },
+
+  git = {
+    DiffAdd = { fg = M.base_16.base05 },
+  },
+
+  tbline = {
+    TbLineThemeToggleBtn = { bg = M.base_30.one_bg3 },
+  },
+
+  whichkey = { WhichKeyDesc = { fg = M.base_30.white } },
+  statusline = { St_pos_text = { fg = M.base_30.white } },
 }
 
 M = require('base46').override_theme(M, 'one_light')

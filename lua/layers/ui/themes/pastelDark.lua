@@ -52,8 +52,8 @@ M.base_16 = {
   base06 = '#d3d9e4',
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
-M = require('base46').override_theme(M, 'javacafe')
+M = require('base46').override_theme(M, 'pastelDark')
 
 return M

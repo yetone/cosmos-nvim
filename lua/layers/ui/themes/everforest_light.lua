@@ -1,17 +1,20 @@
+-- Credits to original https://github.com/sainnhe/everforest
+-- This is modified version of it
+
 local M = {}
 
 M.base_30 = {
   white = '#272f35',
   darker_black = '#f5efde',
   black = '#fff9e8', --  nvim bg
-  black2 = '#ebe5d4',
-  one_bg = '#c6c2aa',
-  one_bg2 = '#b6b29a',
-  one_bg3 = '#a6a28a',
-  grey = '#a6b0a0',
-  grey_fg = '#939f91',
-  grey_fg2 = '#829181',
-  light_grey = '#798878',
+  black2 = '#F0EAD9',
+  one_bg = '#E0DAC9',
+  one_bg2 = '#D1CBBA',
+  one_bg3 = '#C2BCAB',
+  grey = '#B3AD9C',
+  grey_fg = '#A39D8C',
+  grey_fg2 = '#948E7D',
+  light_grey = '#857F6E',
   red = '#c85552',
   baby_pink = '#ce8196',
   pink = '#ef6590',
@@ -26,7 +29,7 @@ M.base_30 = {
   dark_purple = '#966986',
   teal = '#69a59d',
   orange = '#F7954F',
-  cyan = '#7521e9',
+  cyan = '#89bfdc',
   statusline_bg = '#ede7d6',
   lightbg = '#d3cdbc',
   pmenu_bg = '#5f9b93',
@@ -53,21 +56,41 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  DiffAdd = { fg = M.base_30.green },
-  WhichKeyDesc = { fg = M.base_30.white },
-  WhichKey = { fg = M.base_30.white },
-  NvimTreeFolderName = { fg = '#4e565c' },
-  TbLineThemeToggleBtn = { bg = M.base_30.one_bg },
-  Pmenu = { bg = M.base_30.black2 },
-  IndentBlanklineContextStart = { bg = M.base_30.black2 },
-  St_pos_text = { fg = M.base_30.white },
-  ['@tag'] = { fg = M.base_30.orange },
-  ['@field'] = { fg = M.base_16.base05 },
-  ['@include'] = { fg = M.base_16.base08 },
-  ['@constructor'] = { fg = M.base_30.blue },
+  git = {
+    DiffAdd = { fg = M.base_30.green },
+  },
+
+  whichkey = {
+    WhichKeyDesc = { fg = M.base_30.white },
+    WhichKey = { fg = M.base_30.white },
+  },
+
+  nvimtree = {
+    NvimTreeFolderName = { fg = '#4e565c' },
+  },
+
+  tbline = {
+    TbLineThemeToggleBtn = { bg = M.base_30.one_bg },
+  },
+
+  defaults = {
+    Pmenu = { bg = M.base_30.black2 },
+  },
+  -- IndentBlanklineContextStart = { bg = M.base_30.black2 },
+
+  statusline = {
+    St_pos_text = { fg = M.base_30.white },
+  },
+
+  treesitter = {
+    ['@tag'] = { fg = M.base_30.orange },
+    ['@variable.member'] = { fg = M.base_16.base05 },
+    ['@keyword.import'] = { fg = M.base_16.base08 },
+    ['@constructor'] = { fg = M.base_30.blue },
+  },
 }
 
-vim.opt.bg = 'light'
+M.type = 'light'
 
 M = require('base46').override_theme(M, 'everforest_light')
 

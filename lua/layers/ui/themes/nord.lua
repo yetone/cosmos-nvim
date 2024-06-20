@@ -1,3 +1,6 @@
+-- Credits to original https://github.com/arcticicestudio/nord-vim
+-- This is modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -53,10 +56,12 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  ['@punctuation.bracket'] = { fg = M.base_30.white },
-  ['@punctuation.delimiter'] = { fg = M.base_30.white },
+  treesitter = {
+    ['@punctuation.bracket'] = { fg = M.base_30.white },
+    ['@punctuation.delimiter'] = { fg = M.base_30.white },
+  },
 }
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'nord')
 

@@ -53,18 +53,33 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  WhichKeyDesc = { fg = M.base_30.white },
-  WhichKey = { fg = M.base_30.white },
-  TelescopePromptPrefix = { fg = M.base_30.white },
-  TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.white },
-  ['@punctuation.bracket'] = { fg = M.base_30.nord_blue },
-  FloatBorder = { fg = M.base_16.base05 },
-  DiffAdd = { fg = M.base_16.base05 },
-  St_pos_text = { fg = M.base_30.white },
+  whichkey = {
+    WhichKeyDesc = { fg = M.base_30.white },
+    WhichKey = { fg = M.base_30.white },
+  },
+
+  telescope = {
+    TelescopePromptPrefix = { fg = M.base_30.white },
+    TelescopeSelection = { bg = M.base_30.one_bg, fg = M.base_30.white },
+  },
+
+  treesitter = {
+    ['@punctuation.bracket'] = { fg = M.base_30.nord_blue },
+  },
+
+  defaults = { FloatBorder = { fg = M.base_16.base05 } },
+
+  statusline = {
+    St_pos_text = { fg = M.base_30.white },
+  },
+
+  git = {
+    DiffAdd = { fg = M.base_16.base05 },
+  },
 }
 
 M = require('base46').override_theme(M, 'onenord_light')
 
-vim.opt.bg = 'light'
+M.type = 'light'
 
 return M

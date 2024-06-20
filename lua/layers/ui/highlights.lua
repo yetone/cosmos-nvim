@@ -7,6 +7,7 @@ local M = {}
 function M.setup()
   local override = require('layers.ui.options').hl_override
   local theme = require('layers.ui.colors').get().base_16
+  vim.opt.bg = require('layers.ui.colors').get().type
   local highlights = {}
   local hl_files = vim.fn.stdpath('config') .. '/lua/layers/ui/integrations'
 

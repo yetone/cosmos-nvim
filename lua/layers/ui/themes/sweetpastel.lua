@@ -1,3 +1,6 @@
+-- Credits to original https://github.com/SweetPastel/pastel
+-- This is modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -52,7 +55,7 @@ M.base_16 = {
   base0F = '#e5a3a1',
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'sweetpastel')
 

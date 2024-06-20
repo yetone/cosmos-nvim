@@ -1,3 +1,6 @@
+-- credit to original theme for existing : https://github.com/mountain-theme/Mountain
+-- NOTE: This is a modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -53,10 +56,12 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  ['@variable'] = { fg = M.base_16.base05 },
+  treesitter = {
+    ['@variable'] = { fg = M.base_16.base05 },
+  },
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'mountain')
 

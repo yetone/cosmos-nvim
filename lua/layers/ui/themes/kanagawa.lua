@@ -1,3 +1,6 @@
+-- Credits to original https://github.com/rebelot/kanagawa.nvim
+-- This is modified version of it
+
 local M = {}
 
 M.base_30 = {
@@ -53,15 +56,21 @@ M.base_16 = {
 }
 
 M.polish_hl = {
-  ['@include'] = { fg = M.base_30.purple },
-  ['@uri'] = { fg = M.base_30.blue },
-  ['@tag.delimiter'] = { fg = M.base_30.red },
-  Number = {
-    fg = M.base_30.baby_pink,
+  treesitter = {
+    ['@keyword.import'] = { fg = M.base_30.purple },
+    ['@uri'] = { fg = M.base_30.blue },
+    ['@tag.delimiter'] = { fg = M.base_30.red },
+    ['@variable.member.key'] = { fg = M.base_30.white },
+    ['@punctuation.bracket'] = { fg = M.base_30.pmenu_bg },
+    ['@punctuation.delimiter'] = { fg = M.base_30.white },
+  },
+
+  syntax = {
+    Number = { fg = M.base_30.baby_pink },
   },
 }
 
-vim.opt.bg = 'dark'
+M.type = 'dark'
 
 M = require('base46').override_theme(M, 'kanagawa')
 
