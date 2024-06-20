@@ -126,7 +126,10 @@ cosmos-nvim theme colors and highlights are copied from [NvChad/base46](https://
 
 All available themes are in this directory: [lua/layers/ui/themes](https://github.com/yetone/cosmos-nvim/tree/main/lua/layers/ui/themes).
 
-You can preview themes by shortcut <kbd>leader</kbd> - <kbd>t</kbd> - <kbd>p</kbd>
+You can preview themes by shortcut <kbd>leader</kbd> - <kbd>t</kbd> - <kbd>p</kbd>, Or directly visit [NvChad's themes page](https://nvchad.com/themes) to preview the themes:
+
+![image](https://github.com/yetone/cosmos-nvim/assets/1206493/640441e4-c971-4886-9d2e-aab5448cd292)
+
 
 You can switch themes in this way:
 
