@@ -12,7 +12,7 @@ function M.preview_theme(theme)
   package.loaded['layers.ui.colors' or false] = nil
   require('layers.ui.colors').setup()
   require('lualine.highlight').create_highlight_groups(require('layers.ui.highlights').get_lualine_theme())
-  require('bufferline.config').set(require('layers.ui.configs').get_bufferline_options())
+  require('bufferline.config').setup(require('layers.ui.configs').get_bufferline_options())
   require('bufferline.highlights').reset_icon_hl_cache()
   require('bufferline.highlights').set_all(require('bufferline.config').update_highlights())
 end
