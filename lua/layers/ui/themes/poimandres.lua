@@ -94,17 +94,6 @@ M.polish_hl = {
   },
 }
 
-local StTheme = require('nvconfig').ui.statusline.theme
-
-if StTheme == 'vscode_colored' then
-  M.base_30.one_bg3 = M.base_30.line
-  M.polish_hl.St_CommandMode = { fg = M.base_30.teal }
-end
-
-if StTheme == 'vscode' then
-  M.base_30.one_bg3 = M.base_30.line
-end
-
 M.type = 'dark'
 
 M = require('base46').override_theme(M, 'poimandres')
