@@ -166,10 +166,12 @@ function configs.cmp()
     }),
     formatting = {
       fields = { 'kind', 'abbr', 'menu' },
-      format = function(_, vim_item)
+      format = function(idx, vim_item)
         local icons_ = options.cmp_kind_use_codicons and codicons or icons
         vim_item.menu = vim_item.kind
         vim_item.kind = icons_[vim_item.kind]
+
+        vim_item = require('tailwind-tools.cmp').lspkind_format(idx, vim_item)
 
         return vim_item
       end,

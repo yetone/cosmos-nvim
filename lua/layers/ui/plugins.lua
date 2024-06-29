@@ -98,3 +98,8 @@ cosmos.add_plugin('yamatsum/nvim-cursorline', {
 cosmos.add_plugin('tzachar/highlight-undo.nvim', {
   config = configs.highlight_undo,
 })
+
+cosmos.add_plugin('luckasRanarison/tailwind-tools.nvim', {
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  opts = {},
+})
