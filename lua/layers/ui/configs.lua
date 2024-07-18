@@ -95,7 +95,7 @@ function configs.web_devicons()
         name = 'py',
       },
       ['robots.txt'] = {
-        icon = 'ﮧ',
+        icon = '󰚩',
         color = colors.red,
         name = 'robots',
       },
@@ -105,7 +105,7 @@ function configs.web_devicons()
         name = 'toml',
       },
       ts = {
-        icon = 'ﯤ',
+        icon = '󰛦',
         color = colors.teal,
         name = 'ts',
       },

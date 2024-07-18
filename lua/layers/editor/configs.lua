@@ -575,7 +575,7 @@ end
 configs.trouble = function()
   local signs = {
     -- icons / text used for a diagnostic
-    error = '',
+    error = '󰅚',
     warning = '',
     -- for vim.fn.sign_define
     warn = '',
