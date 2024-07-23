@@ -1,3 +1,4 @@
+local utils = require('layers.ui.utils')
 local configs = {}
 
 function configs.web_devicons()
@@ -162,6 +163,7 @@ function configs.dashboard()
   db.setup({
     theme = 'doom',
     config = {
+      footer = { utils.get_quote() },
       center = {
         {
           icon = '  ',
