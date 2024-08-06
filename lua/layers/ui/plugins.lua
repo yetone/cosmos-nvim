@@ -103,3 +103,10 @@ cosmos.add_plugin('luckasRanarison/tailwind-tools.nvim', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {},
 })
+
+cosmos.add_plugin('razak17/tailwind-fold.nvim', {
+  opts = {},
+  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
+  config = configs.tailwind_fold,
+})

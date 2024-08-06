@@ -615,4 +615,24 @@ function configs.highlight_undo()
   })
 end
 
+function configs.tailwind_fold()
+  require('tailwind-fold').setup({
+    enabled = true,
+    symbol = '󱏿', -- 󱏿
+    highlight = {
+      fg = '#38BDF8', -- [[ symbol color ]]
+    },
+    ft = {
+      'html',
+      'svelte',
+      'astro',
+      'vue',
+      'tsx',
+      'php',
+      'blade',
+      'eruby',
+    },
+  })
+end
+
 return configs
