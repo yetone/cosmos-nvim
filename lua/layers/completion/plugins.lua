@@ -39,3 +39,14 @@ cosmos.add_plugin('hrsh7th/cmp-cmdline', { dependencies = { 'hrsh7th/nvim-cmp' }
 cosmos.add_plugin('dmitmel/cmp-cmdline-history', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 
 cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
+
+cosmos.add_plugin('jackMort/ChatGPT.nvim', {
+  event = 'VeryLazy',
+  config = configs.chatgpt,
+  dependencies = {
+    'MunifTanjim/nui.nvim',
+    'nvim-lua/plenary.nvim',
+    'folke/trouble.nvim',
+    'nvim-telescope/telescope.nvim',
+  },
+})
