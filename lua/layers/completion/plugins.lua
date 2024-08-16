@@ -50,3 +50,23 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
     'nvim-telescope/telescope.nvim',
   },
 })
+
+cosmos.add_plugin('yetone/avante.nvim', {
+  event = 'VeryLazy',
+  opts = {
+    provider = 'openai',
+  },
+  build = 'make',
+  dir = '~/workspace/projects/avante.nvim',
+  dependencies = {
+    'nvim-tree/nvim-web-devicons',
+    {
+      'grapp-dev/nui-components.nvim',
+      dependencies = {
+        'MunifTanjim/nui.nvim',
+      },
+    },
+    'nvim-lua/plenary.nvim',
+    'MeanderingProgrammer/render-markdown.nvim',
+  },
+})
