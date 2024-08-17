@@ -52,9 +52,10 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
 })
 
 cosmos.add_plugin('yetone/avante.nvim', {
+  dev = true,
   event = 'VeryLazy',
   opts = {
-    provider = 'openai',
+    provider = 'claude',
   },
   build = 'make',
   dir = '~/workspace/projects/avante.nvim',
@@ -67,6 +68,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     'nvim-lua/plenary.nvim',
-    'MeanderingProgrammer/render-markdown.nvim',
+    {
+      'MeanderingProgrammer/render-markdown.nvim',
+      opts = {
+        file_types = { 'markdown', 'Avante' },
+      },
+      ft = { 'markdown', 'Avante' },
+    },
   },
 })

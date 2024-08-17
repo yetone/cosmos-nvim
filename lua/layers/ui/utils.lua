@@ -23,30 +23,31 @@ end
 ---Make a HTTP request to https://zenquotes.io to get a random quote
 ---@return string
 M.get_quote = function()
-  local found_curl, curl = pcall(require, 'plenary.curl')
-  if not found_curl then
-    error('plenary not found')
-    return ''
-  end
-
-  local response = curl.get('https://zenquotes.io/api/random', {
-    headers = {
-      ['User-Agent'] = 'curl/7.68.0',
-    },
-  })
-
-  if response.status ~= 200 then
-    error('Http failed with ' .. response.status, 1)
-    return ''
-  end
-
-  local json_data = vim.json.decode(response.body, {})
-  if json_data == {} or json_data == nil then
-    error('empty json from quotes API decoded')
-    return ''
-  end
-
-  return '󰟶 ' .. json_data[1].q .. ' - ' .. json_data[1].a
+  return 'xixi'
+  -- local found_curl, curl = pcall(require, 'plenary.curl')
+  -- if not found_curl then
+  --   error('plenary not found')
+  --   return ''
+  -- end
+  --
+  -- local response = curl.get('https://zenquotes.io/api/random', {
+  --   headers = {
+  --     ['User-Agent'] = 'curl/7.68.0',
+  --   },
+  -- })
+  --
+  -- if response.status ~= 200 then
+  --   error('Http failed with ' .. response.status, 1)
+  --   return ''
+  -- end
+  --
+  -- local json_data = vim.json.decode(response.body, {})
+  -- if json_data == {} or json_data == nil then
+  --   error('empty json from quotes API decoded')
+  --   return ''
+  -- end
+  --
+  -- return '󰟶 ' .. json_data[1].q .. ' - ' .. json_data[1].a
 end
 
 return M
