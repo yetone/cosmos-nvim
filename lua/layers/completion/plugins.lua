@@ -55,7 +55,10 @@ cosmos.add_plugin('yetone/avante.nvim', {
   dev = true,
   event = 'VeryLazy',
   opts = {
-    provider = 'openai',
+    provider = 'claude',
+    openai = {
+      model = 'gpt-4o',
+    },
     windows = {
       wrap_line = true,
     },
