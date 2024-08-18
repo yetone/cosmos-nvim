@@ -2,7 +2,8 @@ local cosmos = require('core.cosmos')
 local configs = require('layers.git.configs')
 
 cosmos.add_plugin('TimUntersberger/neogit', {
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = { 'nvim-lua/plenary.nvim', 'sindrets/diffview.nvim' },
+  config = true,
 })
 
 cosmos.add_plugin('lewis6991/gitsigns.nvim', {

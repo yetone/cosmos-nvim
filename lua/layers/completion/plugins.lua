@@ -55,19 +55,23 @@ cosmos.add_plugin('yetone/avante.nvim', {
   dev = true,
   event = 'VeryLazy',
   opts = {
-    provider = 'claude',
+    provider = 'openai',
+    windows = {
+      wrap_line = true,
+    },
   },
   build = 'make',
   dir = '~/workspace/projects/avante.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
+    'stevearc/dressing.nvim',
+    'nvim-lua/plenary.nvim',
     {
       'grapp-dev/nui-components.nvim',
       dependencies = {
         'MunifTanjim/nui.nvim',
       },
     },
-    'nvim-lua/plenary.nvim',
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {

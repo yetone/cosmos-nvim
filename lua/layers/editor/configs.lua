@@ -142,7 +142,7 @@ function configs.mason()
               vim.fn.expand('$VIMRUNTIME/lua'),
               vim.fn.expand('$VIMRUNTIME/lua/vim/lsp'),
               vim.fn.stdpath('data') .. '/lazy/lazy.nvim/lua/lazy',
-              vim.fn.expand('$HOME/workspace/projects'), -- parent/avante.nvim
+              -- vim.fn.expand('$HOME/workspace/projects'), -- parent/avante.nvim
               '${3rd}/luv/library',
             },
           },
