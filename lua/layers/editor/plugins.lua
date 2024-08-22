@@ -266,3 +266,8 @@ cosmos.add_plugin('danielfalk/smart-open.nvim', {
   },
   config = configs.smart_open,
 })
+
+cosmos.add_plugin('folke/edgy.nvim', {
+  event = 'VeryLazy',
+  opts = {},
+})

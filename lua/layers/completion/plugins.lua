@@ -51,8 +51,33 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
   },
 })
 
+cosmos.add_plugin('olimorris/codecompanion.nvim', {
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-telescope/telescope.nvim', -- Optional
+    {
+      'stevearc/dressing.nvim', -- Optional: Improves the default Neovim UI
+      opts = {},
+    },
+  },
+  config = function()
+    require('codecompanion').setup({
+      adapters = {
+        anthropic = function()
+          return require('codecompanion.adapters').extend('anthropic', {
+            env = {
+              api_key = 'ANTHROPIC_API_KEY',
+            },
+          })
+        end,
+      },
+    })
+  end,
+})
+
 cosmos.add_plugin('yetone/avante.nvim', {
-  dev = true,
+  -- dev = true,
   event = 'VeryLazy',
   opts = {
     provider = 'claude',
@@ -60,21 +85,52 @@ cosmos.add_plugin('yetone/avante.nvim', {
       model = 'gpt-4o',
     },
     windows = {
-      wrap_line = true,
+      wrap = true,
+      sidebar_header = {
+        align = 'center',
+        rounded = true,
+      },
+    },
+    vendors = {
+      ---@type AvanteProvider
+      perplexity = {
+        endpoint = 'https://api.perplexity.ai/chat/completions',
+        model = 'llama-3.1-sonar-large-128k-online',
+        api_key_name = 'PPLX_API_KEY',
+        --- this function below will be used to parse in cURL arguments.
+        parse_curl_args = function(opts, code_opts)
+          local Llm = require('avante.llm')
+          return {
+            url = opts.endpoint,
+            headers = {
+              ['Accept'] = 'application/json',
+              ['Content-Type'] = 'application/json',
+              ['Authorization'] = 'Bearer ' .. os.getenv(opts.api_key_name),
+            },
+            body = {
+              model = opts.model,
+              messages = Llm.make_openai_message(code_opts), -- you can make your own message, but this is very advanced
+              temperature = 0,
+              max_tokens = 8192,
+              stream = true, -- this will be set by default.
+            },
+          }
+        end,
+        -- The below function is used if the vendors has specific SSE spec that is not claude or openai.
+        parse_response_data = function(data_stream, opts)
+          local Llm = require('avante.llm')
+          Llm.parse_openai_response(data_stream, opts)
+        end,
+      },
     },
   },
   build = 'make',
-  dir = '~/workspace/projects/avante.nvim',
+  -- dir = '~/workspace/projects/avante.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
-    {
-      'grapp-dev/nui-components.nvim',
-      dependencies = {
-        'MunifTanjim/nui.nvim',
-      },
-    },
+    'MunifTanjim/nui.nvim',
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
