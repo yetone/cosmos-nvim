@@ -8,6 +8,7 @@ vim.api.nvim_set_hl(0, 'PmenuSel', { blend = 0 })
 opt.termguicolors = true
 g.Illuminate_delay = options.illuminate_delay
 g.Illuminate_ftblacklist = options.illuminate_filetype_exclude
+g.neovide_floating_shadow = false
 
 opt.cursorline = true
 

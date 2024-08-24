@@ -77,7 +77,8 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('yetone/avante.nvim', {
-  -- dev = true,
+  dev = true,
+  dir = '~/workspace/projects/avante.nvim',
   event = 'VeryLazy',
   opts = {
     provider = 'claude',
@@ -125,7 +126,6 @@ cosmos.add_plugin('yetone/avante.nvim', {
     },
   },
   build = 'make',
-  -- dir = '~/workspace/projects/avante.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'stevearc/dressing.nvim',
