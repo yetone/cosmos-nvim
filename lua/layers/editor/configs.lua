@@ -35,9 +35,9 @@ function configs.mason()
   -- require('mason-null-ls').setup_handlers()
 
   require('mason-lspconfig').setup()
-  require('neodev').setup({
-    library = { plugins = { 'nvim-dap-ui' }, types = true },
-  })
+  -- require('neodev').setup({
+  --   library = { plugins = { 'nvim-dap-ui' }, types = true },
+  -- })
 
   local lspconfig = require('lspconfig')
   local lspconfig_configs = require('lspconfig.configs')

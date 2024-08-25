@@ -114,7 +114,7 @@ cosmos.add_plugin('williamboman/mason.nvim', {
     { 'williamboman/mason-lspconfig.nvim', lazy = true },
     { 'neovim/nvim-lspconfig', lazy = true },
     { 'hrsh7th/cmp-nvim-lsp', lazy = true, dependencies = { 'hrsh7th/nvim-cmp' } },
-    { 'folke/neodev.nvim', lazy = true },
+    -- { 'folke/neodev.nvim', lazy = true },
     { 'nvimtools/none-ls.nvim', lazy = true, event = { 'BufReadPost', 'BufNewFile' } },
     { 'jay-babu/mason-null-ls.nvim', lazy = true },
     { 'simrat39/inlay-hints.nvim', lazy = true, config = configs.inlay_hints },
@@ -270,4 +270,24 @@ cosmos.add_plugin('danielfalk/smart-open.nvim', {
 cosmos.add_plugin('folke/edgy.nvim', {
   event = 'VeryLazy',
   opts = {},
+})
+
+cosmos.add_plugin('folke/lazydev.nvim', {
+  ft = 'lua',
+  cmd = 'LazyDev',
+  dependencies = {
+    -- Manage libuv types with lazy. Plugin will never be loaded
+    { 'Bilal2453/luvit-meta', lazy = true },
+  },
+  opts = {
+    library = {
+      { path = '~/workspace/projects/avante.nvim/lua', words = { 'avante' } },
+      { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+      { path = 'lazy.nvim', words = { 'Util' } },
+    },
+  },
+})
+
+cosmos.add_plugin('Bilal2453/luvit-meta', {
+  lazy = true,
 })
