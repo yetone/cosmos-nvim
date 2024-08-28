@@ -77,14 +77,20 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('yetone/avante.nvim', {
-  dev = true,
-  dir = '~/workspace/projects/avante.nvim',
+  -- dev = true,
+  -- dir = '~/workspace/projects/avante.nvim',
   event = 'VeryLazy',
   opts = {
     provider = 'claude',
     openai = {
       model = 'gpt-4o',
     },
+    -- mappings = {
+    --     submit = {
+    --       normal = "<CR>",
+    --       insert = "<C-x>",
+    --     },
+    -- },
     windows = {
       wrap = true,
       sidebar_header = {
