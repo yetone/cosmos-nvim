@@ -77,8 +77,8 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('yetone/avante.nvim', {
-  -- dev = true,
-  -- dir = '~/workspace/projects/avante.nvim',
+  dev = true,
+  dir = '~/workspace/projects/avante.nvim',
   event = 'VeryLazy',
   opts = {
     provider = 'claude',
