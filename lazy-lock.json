@@ -3,7 +3,6 @@
   "ChatGPT.nvim": { "branch": "main", "commit": "4d9d297c2409c8ebc715da7f1d7705a221564555" },
   "Comment.nvim": { "branch": "master", "commit": "e30b7f2008e52442154b66f7c519bfd2f1e32acb" },
   "LuaSnip": { "branch": "master", "commit": "03c8e67eb7293c404845b3982db895d59c0d1538" },
-  "avante.nvim": { "branch": "main", "commit": "1f0395ccd0fd54a98009eacf629f7fae429fb632" },
   "beacon.nvim": { "branch": "master", "commit": "098ff96c33874339d5e61656f3050dbd587d6bd5" },
   "bookmarks.nvim": { "branch": "main", "commit": "67610c62c8bb9b7799afd8a307b8727143bc097b" },
   "bufferline.nvim": { "branch": "main", "commit": "0b2fd861eee7595015b6561dade52fb060be10c4" },
@@ -32,4 +31,3 @@
   "highlight-undo.nvim": { "branch": "main", "commit": "1ea1c79372d7d93c88fd97543880927b7635e3d2" },
   "indent-blankline.nvim": { "branch": "master", "commit": "db926997af951da38e5004ec7b9fbdc480b48f5d" },
   "inlay-hints.nvim": { "branch": "main", "commit": "006b0898f5d3874e8e528352103733142e705834" },
-  "kubectl.nvim": { "branch": "main", "commit": "cf0ddcc9413047495960c265e50a27ae1684e19e" },

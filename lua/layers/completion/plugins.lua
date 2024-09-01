@@ -3,7 +3,6 @@ local configs = require('layers.completion.configs')
 
 cosmos.add_plugin('github/copilot.vim', {
   dependencies = { 'hrsh7th/nvim-cmp' },
-  event = 'BufRead',
 })
 
 cosmos.add_plugin('hrsh7th/nvim-cmp', {
@@ -85,12 +84,6 @@ cosmos.add_plugin('yetone/avante.nvim', {
     openai = {
       model = 'gpt-4o',
     },
-    -- mappings = {
-    --     submit = {
-    --       normal = "<CR>",
-    --       insert = "<C-x>",
-    --     },
-    -- },
     windows = {
       wrap = true,
       sidebar_header = {
@@ -99,7 +92,6 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     vendors = {
-      ---@type AvanteProvider
       perplexity = {
         endpoint = 'https://api.perplexity.ai/chat/completions',
         model = 'llama-3.1-sonar-large-128k-online',
