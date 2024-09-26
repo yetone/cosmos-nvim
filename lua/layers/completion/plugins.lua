@@ -1,9 +1,9 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
-cosmos.add_plugin('github/copilot.vim', {
-  dependencies = { 'hrsh7th/nvim-cmp' },
-})
+-- cosmos.add_plugin('github/copilot.vim', {
+--   dependencies = { 'hrsh7th/nvim-cmp' },
+-- })
 
 cosmos.add_plugin('hrsh7th/nvim-cmp', {
   dependencies = {
@@ -75,14 +75,28 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
   end,
 })
 
+cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
+  config = function()
+    require('supermaven-nvim').setup({})
+  end,
+})
+
 cosmos.add_plugin('yetone/avante.nvim', {
   dev = true,
   dir = '~/workspace/projects/avante.nvim',
   event = 'VeryLazy',
+  build = 'make',
   opts = {
-    provider = 'claude',
+    debug = true,
+    provider = 'openai',
+    auto_suggestions_provider = 'openai',
     openai = {
-      model = 'gpt-4o',
+      endpoint = 'https://aihubmix.com/v1',
+      model = 'claude-3-5-sonnet-20240620',
+    },
+    behaviour = {
+      auto_suggestions = false,
+      minimize_diff = true,
     },
     windows = {
       wrap = true,
@@ -121,12 +135,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
   },
-  build = 'make',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
+    -- "zbirenbaum/copilot.lua",
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {

@@ -79,10 +79,16 @@ function configs.cmp()
   end
 
   local tab_complete = function(fallback)
-    local copilot_keys = vim.fn['copilot#Accept']()
+    -- local copilot_keys = vim.fn['copilot#Accept']()
+    -- local avante_suggestion = require('avante.api').get_suggestion()
+    local suggestion = require('supermaven-nvim.completion_preview')
     if options.tab_complete_copilot_first then
-      if copilot_keys ~= '' then
-        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+      -- if copilot_keys ~= '' then
+      --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+      -- if avante_suggestion and avante_suggestion:is_visible() then
+      --   avante_suggestion:accept()
+      if suggestion.has_suggestion() then
+        suggestion.on_accept_suggestion()
       elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
