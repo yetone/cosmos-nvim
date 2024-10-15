@@ -155,6 +155,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
       minimize_diff = true,
     },
     windows = {
+      position = 'smart',
+      height = 46,
       wrap = true,
       sidebar_header = {
         align = 'center',

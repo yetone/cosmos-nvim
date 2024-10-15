@@ -147,12 +147,13 @@ function configs.cmp()
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
         i = function(fallback)
-          local copilot_keys = vim.fn['copilot#Accept']()
-          if copilot_keys ~= '' then
-            vim.api.nvim_feedkeys(copilot_keys, 'i', true)
-          else
-            cmp.mapping.abort()(fallback)
-          end
+          -- local copilot_keys = vim.fn['copilot#Accept']()
+          -- if copilot_keys ~= '' then
+          --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+          -- else
+          --   cmp.mapping.abort()(fallback)
+          -- end
+          cmp.mapping.abort()(fallback)
         end,
         c = cmp.mapping.close(),
       }),
