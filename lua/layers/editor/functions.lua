@@ -298,7 +298,9 @@ function M.pick_window()
   if not winid then
     return
   end
-  vim.api.nvim_set_current_win(winid)
+  if vim.api.nvim_win_is_valid(winid) then
+    vim.api.nvim_set_current_win(winid)
+  end
 end
 
 return M
