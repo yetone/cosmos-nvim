@@ -76,7 +76,7 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
-  enabled = false,
+  enabled = true,
   config = function()
     require('supermaven-nvim').setup({})
   end,
@@ -102,7 +102,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       ollama = {
         ['local'] = true,
         endpoint = '127.0.0.1:11434/v1',
-        model = 'deepseek-coder-v2',
+        model = 'codegemma',
         parse_curl_args = function(opts, code_opts)
           return {
             url = opts.endpoint .. '/chat/completions',
@@ -112,7 +112,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
             },
             body = {
               model = opts.model,
-              messages = require('avante.providers').copilot.parse_message(code_opts), -- you can make your own message, but this is very advanced
+              messages = require('avante.providers').openai.parse_message(code_opts), -- you can make your own message, but this is very advanced
               max_tokens = 2048,
               stream = true,
             },
@@ -151,14 +151,16 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     behaviour = {
-      auto_suggestions = true,
+      auto_suggestions = false,
       minimize_diff = true,
     },
     windows = {
       wrap = true,
       sidebar_header = {
         align = 'center',
-        rounded = true,
+      },
+      ask = {
+        floating = false,
       },
     },
   },
