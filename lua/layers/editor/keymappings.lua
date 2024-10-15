@@ -22,7 +22,7 @@ cosmos.add_leader_keymapping('n|ft', { '<cmd>NvimTreeToggle<cr>', name = 'File t
 
 cosmos.add_leader_keymapping(
   'n|wp',
-  { "<cmd>lua require('nvim-window').pick()<cr>", name = 'Pick Window', noremap = true }
+  { "<cmd>lua require('layers.editor.functions').pick_window()<cr>", name = 'Pick Window', noremap = true }
 )
 
 cosmos.add_leader_keymapping('n|fed', { '<cmd>e ~/.cosmos-nvim.lua<CR>', name = 'Open cosmos configuration file' })

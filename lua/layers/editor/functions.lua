@@ -293,4 +293,12 @@ function M.goto_child_node()
   ts_utils.goto_node(dest_node)
 end
 
+function M.pick_window()
+  local winid = require('window-picker').pick_window()
+  if not winid then
+    return
+  end
+  vim.api.nvim_set_current_win(winid)
+end
+
 return M

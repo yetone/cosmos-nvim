@@ -232,9 +232,11 @@ cosmos.add_plugin('Pocco81/auto-save.nvim', {
   enabled = options.enable_autosave,
 })
 
-cosmos.add_plugin('yorickpeterse/nvim-window', {
-  url = 'https://gitlab.com/yorickpeterse/nvim-window.git',
-  config = configs.nvim_window,
+cosmos.add_plugin('s1n7ax/nvim-window-picker', {
+  name = 'window-picker',
+  event = 'VeryLazy',
+  version = '2.*',
+  config = configs.window_picker,
 })
 
 cosmos.add_plugin('ii14/neorepl.nvim')
