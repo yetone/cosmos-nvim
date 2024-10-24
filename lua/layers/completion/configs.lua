@@ -101,8 +101,8 @@ function configs.cmp()
     else
       if cmp.visible() then
         cmp.select_next_item()
-      elseif copilot_keys ~= '' then
-        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+      -- elseif copilot_keys ~= '' then
+      --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
       elseif luasnip.expand_or_jumpable() then
         vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
       elseif check_backspace() then
