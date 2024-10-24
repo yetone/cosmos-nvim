@@ -110,3 +110,5 @@ cosmos.add_plugin('razak17/tailwind-fold.nvim', {
   ft = { 'html', 'svelte', 'astro', 'vue', 'typescriptreact', 'php', 'blade' },
   config = configs.tailwind_fold,
 })
+
+cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
