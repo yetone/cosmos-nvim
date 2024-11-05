@@ -51,6 +51,8 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
 })
 
 cosmos.add_plugin('olimorris/codecompanion.nvim', {
+  dev = true,
+  dir = '~/workspace/projects/codecompanion.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
@@ -62,6 +64,7 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
   },
   config = function()
     require('codecompanion').setup({
+      log_level = 'DEBUG',
       adapters = {
         anthropic = function()
           return require('codecompanion.adapters').extend('anthropic', {
