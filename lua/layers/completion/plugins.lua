@@ -50,9 +50,12 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
   },
 })
 
+local local_codecompanion_dir = os.getenv('HOME') .. '/workspace/projects/codecompanion.nvim'
+local local_codecompanion_dir_exists = vim.fn.isdirectory(local_codecompanion_dir) == 1
+
 cosmos.add_plugin('olimorris/codecompanion.nvim', {
-  dev = true,
-  dir = '~/workspace/projects/codecompanion.nvim',
+  dev = local_codecompanion_dir_exists,
+  dir = local_codecompanion_dir_exists and local_codecompanion_dir or nil,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
@@ -87,9 +90,12 @@ cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
   end,
 })
 
+local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
+local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
+
 cosmos.add_plugin('yetone/avante.nvim', {
-  dev = true,
-  dir = '~/workspace/projects/avante.nvim',
+  dev = local_avante_dir_exists,
+  dir = local_avante_dir_exists and local_avante_dir or nil,
   event = 'VeryLazy',
   build = 'make',
   opts = {
