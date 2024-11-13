@@ -81,7 +81,9 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
   enabled = true,
   config = function()
-    require('supermaven-nvim').setup({})
+    require('supermaven-nvim').setup({
+      ignore_filetypes = { 'Avante', 'TelescopePrompt' },
+    })
   end,
 })
 

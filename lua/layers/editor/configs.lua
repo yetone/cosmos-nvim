@@ -879,4 +879,9 @@ function configs.ts_context_commentstring()
   require('ts_context_commentstring').setup()
 end
 
+function configs.telescope_undo(_, opts)
+  require('telescope').setup(opts)
+  require('telescope').load_extension('undo')
+end
+
 return configs

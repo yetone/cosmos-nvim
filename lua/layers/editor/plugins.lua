@@ -162,6 +162,25 @@ cosmos.add_plugin('nvim-telescope/telescope-fzf-native.nvim', {
   config = configs.telescope_fzf,
 })
 
+cosmos.add_plugin('debugloop/telescope-undo.nvim', {
+  dependencies = { -- note how they're inverted to above example
+    {
+      'nvim-telescope/telescope.nvim',
+      dependencies = { 'nvim-lua/plenary.nvim' },
+    },
+  },
+  opts = {
+    -- don't use `defaults = { }` here, do this in the main telescope spec
+    extensions = {
+      undo = {
+        -- telescope-undo.nvim config, see below
+      },
+      -- no other extensions here, they can have their own spec too
+    },
+  },
+  config = configs.telescope_undo,
+})
+
 -- cosmos.add_plugin('nvim-telescope/telescope-frecency.nvim', {
 --   dependencies = { 'nvim-telescope/telescope.nvim', 'kkharji/sqlite.lua' },
 --   config = configs.telescope_frecency,

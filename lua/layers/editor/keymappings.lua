@@ -152,7 +152,7 @@ cosmos.add_leader_keymapping('n|*', { '<CMD>Glance references<CR>', name = 'Sear
 cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search text in current project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
 cosmos.add_leader_keymapping('n|<Space>', {
-  ':Telescope smart_open<CR>',
+  ':Telescope smart_open theme=' .. options.telescope_theme .. '<CR>',
   name = 'Smart Open',
 })
 
@@ -199,3 +199,7 @@ cosmos.add_leader_keymapping(
 )
 cosmos.add_leader_keymapping('n,x|riv', { ':Refactor inline_var', name = 'Refactor inline variable', noremap = false })
 cosmos.add_leader_keymapping('n|rif', { ':Refactor inline_func', name = 'Refactor inline function', noremap = false })
+cosmos.add_leader_keymapping(
+  'n|au',
+  { '<cmd>Telescope undo theme=' .. options.telescope_theme .. '<CR>', name = 'Undo history' }
+)
