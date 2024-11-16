@@ -111,54 +111,34 @@ cosmos.add_plugin('yetone/avante.nvim', {
     },
     vendors = {
       ollama = {
-        ['local'] = true,
-        endpoint = '127.0.0.1:11434/v1',
+        __inherited_from = 'openai',
+        api_key_name = '',
+        endpoint = 'http://127.0.0.1:11434/v1',
         model = 'codegemma',
-        parse_curl_args = function(opts, code_opts)
-          return {
-            url = opts.endpoint .. '/chat/completions',
-            headers = {
-              ['Accept'] = 'application/json',
-              ['Content-Type'] = 'application/json',
-            },
-            body = {
-              model = opts.model,
-              messages = require('avante.providers').openai.parse_message(code_opts), -- you can make your own message, but this is very advanced
-              max_tokens = 2048,
-              stream = true,
-            },
-          }
-        end,
-        parse_response_data = function(data_stream, event_state, opts)
-          require('avante.providers').openai.parse_response(data_stream, event_state, opts)
-        end,
+      },
+      groq = {
+        __inherited_from = 'openai',
+        api_key_name = 'GROQ_API_KEY',
+        endpoint = 'https://api.groq.com/openai/v1/',
+        model = 'llama-3.1-70b-versatile',
       },
       perplexity = {
-        endpoint = 'https://api.perplexity.ai/chat/completions',
-        model = 'llama-3.1-sonar-large-128k-online',
+        __inherited_from = 'openai',
         api_key_name = 'PPLX_API_KEY',
-        --- this function below will be used to parse in cURL arguments.
-        parse_curl_args = function(opts, code_opts)
-          return {
-            url = opts.endpoint,
-            headers = {
-              ['Accept'] = 'application/json',
-              ['Content-Type'] = 'application/json',
-              ['Authorization'] = 'Bearer ' .. os.getenv(opts.api_key_name),
-            },
-            body = {
-              model = opts.model,
-              messages = require('avante.providers').openai.parse_message(code_opts), -- you can make your own message, but this is very advanced
-              temperature = 0,
-              max_tokens = 8192,
-              stream = true, -- this will be set by default.
-            },
-          }
-        end,
-        -- The below function is used if the vendors has specific SSE spec that is not claude or openai.
-        parse_response_data = function(data_stream, event_state, opts)
-          require('avante.providers').openai.parse_response(data_stream, event_state, opts)
-        end,
+        endpoint = 'https://api.perplexity.ai',
+        model = 'llama-3.1-sonar-large-128k-online',
+      },
+      deepseek = {
+        __inherited_from = 'openai',
+        api_key_name = 'DEEPSEEK_API_KEY',
+        endpoint = 'https://api.deepseek.com',
+        model = 'deepseek-coder',
+      },
+      qianwen = {
+        __inherited_from = 'openai',
+        api_key_name = 'DASHSCOPE_API_KEY',
+        endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
+        model = 'qwen-coder-plus-latest',
       },
     },
     behaviour = {
