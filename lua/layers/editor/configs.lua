@@ -41,6 +41,17 @@ function configs.mason()
 
   local lspconfig = require('lspconfig')
   local lspconfig_configs = require('lspconfig.configs')
+  if not lspconfig_configs.golangcilsp then
+    lspconfig_configs.golangcilsp = {
+      default_config = {
+        cmd = { 'golangci-lint-langserver' },
+        root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+        init_options = {
+          command = { 'golangci-lint', 'run', '--out-format', 'json', '--issues-exit-code=1' },
+        },
+      },
+    }
+  end
   if not lspconfig_configs.ls_emmet then
     lspconfig_configs.ls_emmet = {
       default_config = {
@@ -120,7 +131,7 @@ function configs.mason()
 
   local util = require('lspconfig.util')
 
-  local servers = {
+  local server_opts = {
     tsserver = {
       root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json', '.git'),
     },
@@ -129,6 +140,9 @@ function configs.mason()
         local root = util.root_pattern('biome.json', 'biome.jsonc')(fname)
         return root
       end,
+    },
+    golangci_lint_ls = {
+      filetypes = { 'go', 'gomod' },
     },
     lua_ls = {
       settings = {
@@ -159,7 +173,7 @@ function configs.mason()
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-      local opt = servers[server_name] or {}
+      local opt = server_opts[server_name] or {}
       opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
       lspconfig[server_name].setup(opt)
     end,
@@ -168,7 +182,7 @@ function configs.mason()
     -- If a handler is not specified for a server, the default handler
     -- will be used.
     ['rust_analyzer'] = function()
-      local opt = servers['rust_analyzer'] or {}
+      local opt = server_opts['rust_analyzer'] or {}
       opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
 
       -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience

@@ -82,7 +82,7 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
-  enabled = true,
+  enabled = false,
   config = function()
     require('supermaven-nvim').setup({
       ignore_filetypes = { 'Avante', 'TelescopePrompt' },
@@ -100,7 +100,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'claude',
+    provider = 'copilot',
     auto_suggestions_provider = 'claude',
     openai = {
       -- endpoint = 'https://aihubmix.com/v1',
@@ -162,7 +162,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
-    -- "zbirenbaum/copilot.lua",
+    {
+      'zbirenbaum/copilot.lua',
+      config = function()
+        require('copilot').setup({})
+      end,
+    },
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
