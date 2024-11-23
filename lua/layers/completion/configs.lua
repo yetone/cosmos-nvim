@@ -79,16 +79,19 @@ function configs.cmp()
   end
 
   local tab_complete = function(fallback)
-    -- local copilot_keys = vim.fn['copilot#Accept']()
+    local copilot_keys = vim.fn['copilot#Accept']()
     -- local avante_suggestion = require('avante.api').get_suggestion()
-    local suggestion = require('supermaven-nvim.completion_preview')
+    -- local suggestion = require('supermaven-nvim.completion_preview')
+    -- local copilot_is_visible = require("copilot.suggestion").is_visible()
     if options.tab_complete_copilot_first then
-      -- if copilot_keys ~= '' then
-      --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+      if copilot_keys ~= '' then
+        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
       -- if avante_suggestion and avante_suggestion:is_visible() then
       --   avante_suggestion:accept()
-      if suggestion.has_suggestion() then
-        suggestion.on_accept_suggestion()
+      -- if suggestion.has_suggestion() then
+      --   suggestion.on_accept_suggestion()
+      -- if copilot_is_visible then
+      --   require("copilot.suggestion").accept_line()
       elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -101,8 +104,8 @@ function configs.cmp()
     else
       if cmp.visible() then
         cmp.select_next_item()
-      -- elseif copilot_keys ~= '' then
-      --   vim.api.nvim_feedkeys(copilot_keys, 'i', true)
+      elseif copilot_keys ~= '' then
+        vim.api.nvim_feedkeys(copilot_keys, 'i', true)
       elseif luasnip.expand_or_jumpable() then
         vim.fn.feedkeys(replace_termcodes('<Plug>luasnip-expand-or-jump'), '')
       elseif check_backspace() then

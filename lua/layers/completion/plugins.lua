@@ -1,9 +1,9 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
--- cosmos.add_plugin('github/copilot.vim', {
---   dependencies = { 'hrsh7th/nvim-cmp' },
--- })
+cosmos.add_plugin('github/copilot.vim', {
+  dependencies = { 'hrsh7th/nvim-cmp' },
+})
 
 cosmos.add_plugin('hrsh7th/nvim-cmp', {
   dependencies = {
@@ -100,8 +100,11 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'copilot',
-    auto_suggestions_provider = 'claude',
+    provider = 'claude',
+    auto_suggestions_provider = 'copilot',
+    copilot = {
+      model = 'claude-3.5-sonnet',
+    },
     openai = {
       -- endpoint = 'https://aihubmix.com/v1',
       -- model = 'claude-3-5-sonnet-20240620',
@@ -113,8 +116,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
       ollama = {
         __inherited_from = 'openai',
         api_key_name = '',
-        endpoint = 'http://127.0.0.1:11434/v1',
-        model = 'codegemma',
+        endpoint = 'http://yetones-MacBook-Pro:11434/v1',
+        model = 'qwen2.5-coder:14b',
       },
       groq = {
         __inherited_from = 'openai',
@@ -162,12 +165,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
-    {
-      'zbirenbaum/copilot.lua',
-      config = function()
-        require('copilot').setup({})
-      end,
-    },
+    -- {
+    --   'zbirenbaum/copilot.lua',
+    --   config = function()
+    --     require('copilot').setup({})
+    --   end,
+    -- },
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
