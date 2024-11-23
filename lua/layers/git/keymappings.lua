@@ -26,3 +26,17 @@ cosmos.add_leader_keymapping('n|gw', {
     .. '({}))<cr>',
   name = 'GitHub workflows',
 })
+cosmos.add_leader_keymapping('n|gp', {
+  function()
+    local gitportal = require('gitportal')
+    gitportal.open_file_in_browser()
+  end,
+  name = 'Open GitHub URL',
+})
+cosmos.add_leader_keymapping('v|gp', {
+  function()
+    local gitportal = require('gitportal')
+    gitportal.open_file_in_browser()
+  end,
+  name = 'Open GitHub URL',
+})

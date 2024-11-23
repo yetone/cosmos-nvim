@@ -18,4 +18,11 @@ function configs.telescope_github()
   require('telescope').load_extension('gh')
 end
 
+function configs.gitportal()
+  require('gitportal').setup({
+    always_include_current_line = true,
+    browser_command = 'xopen',
+  })
+end
+
 return configs

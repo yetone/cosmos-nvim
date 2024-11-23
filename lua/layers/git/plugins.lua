@@ -17,3 +17,7 @@ cosmos.add_plugin('nvim-telescope/telescope-github.nvim', {
   dependencies = { 'nvim-telescope/telescope.nvim' },
   config = configs.telescope_github,
 })
+
+cosmos.add_plugin('trevorhauter/gitportal.nvim', {
+  config = configs.gitportal,
+})
