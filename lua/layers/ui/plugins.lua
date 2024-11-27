@@ -112,3 +112,9 @@ cosmos.add_plugin('razak17/tailwind-fold.nvim', {
 })
 
 cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
+
+cosmos.add_plugin('jonahgoldwastaken/copilot-status.nvim', {
+  dependencies = { 'copilot.lua' },
+  lazy = true,
+  event = 'BufReadPost',
+})

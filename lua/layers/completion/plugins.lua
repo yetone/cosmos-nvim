@@ -1,8 +1,16 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
-cosmos.add_plugin('github/copilot.vim', {
-  dependencies = { 'hrsh7th/nvim-cmp' },
+-- cosmos.add_plugin('github/copilot.vim', {
+--   dependencies = { 'hrsh7th/nvim-cmp' },
+-- })
+
+cosmos.add_plugin('zbirenbaum/copilot.lua', {
+  cmd = 'Copilot',
+  event = 'InsertEnter',
+  config = function()
+    require('copilot').setup({})
+  end,
 })
 
 cosmos.add_plugin('hrsh7th/nvim-cmp', {

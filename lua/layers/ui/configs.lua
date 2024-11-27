@@ -226,7 +226,30 @@ function configs.lualine()
       lualine_b = { 'branch', 'diff', 'diagnostics', 'filename' },
       lualine_c = {},
       lualine_x = {},
-      lualine_y = { 'encoding', 'fileformat', 'filetype', 'progress' },
+      lualine_y = {
+        {
+          function()
+            local ok, copilot_status = pcall(require, 'copilot_status')
+
+            if not ok then
+              return ''
+            end
+
+            return copilot_status.status_string()
+          end,
+          cnd = function()
+            local ok, copilot_status = pcall(require, 'copilot_status')
+            if not ok then
+              return false
+            end
+            return copilot_status.enabled()
+          end,
+        },
+        'encoding',
+        'fileformat',
+        'filetype',
+        'progress',
+      },
       lualine_z = {
         { 'location', separator = { left = '', right = '' }, left_padding = 2 },
       },
