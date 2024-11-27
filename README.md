@@ -39,14 +39,6 @@ Each of our shortcut keys has a friendly text description and guide after you pr
 
 3. Looking forward to your continued exploration, [there are some screenshots](#some-screenshots)
 
-# Get A Taste Of
-
-If you're worried about breaking your current vim configuration but want to try it out for yourself, you can use docker to give it a quick try in an isolated environment:
-
-```bash
-docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
-```
-
 # Install
 
 ## 1. Requirements
@@ -59,13 +51,13 @@ docker run -it -w /root/.config/nvim yetone/cosmos-nvim nvim
 
 Go to [Nerd Fonts homepage](https://www.nerdfonts.com/) to download the patched fonts you are currently using.
 
+### ripgrep
+
+Us [ripgrep](https://github.com/BurntSushi/ripgrep#installation) to search files.
+
 ### Chafa
 
 My configuration use [Chafa](https://github.com/hpjansson/chafa) to render GIF, you can install it by homebrew: `brew install chafa`
-
-### iTerm2 colorscheme [Optional]
-
-If you are using iTerm2 and expect the iTerm colors to blend well with cosmos-nvim colors, it is highly recommended to install and use this [colorscheme](https://github.com/yetone/cosmos-nvim/blob/main/colorschemes/doomone-yetone.itermcolors) for iTerm2.
 
 ## 2. Install my configuration
 
