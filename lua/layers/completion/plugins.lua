@@ -59,23 +59,17 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
-    'nvim-telescope/telescope.nvim', -- Optional
-    {
-      'stevearc/dressing.nvim', -- Optional: Improves the default Neovim UI
-      opts = {},
-    },
+    { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'markdown', 'codecompanion' } },
   },
   config = function()
     require('codecompanion').setup({
-      log_level = 'DEBUG',
-      adapters = {
-        anthropic = function()
-          return require('codecompanion.adapters').extend('anthropic', {
-            env = {
-              api_key = 'ANTHROPIC_API_KEY',
-            },
-          })
-        end,
+      display = {
+        diff = {
+          provider = 'mini_diff',
+        },
+      },
+      opts = {
+        log_level = 'DEBUG',
       },
     })
   end,
@@ -88,6 +82,18 @@ cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
       ignore_filetypes = { 'Avante', 'TelescopePrompt' },
     })
   end,
+})
+
+cosmos.add_plugin('CopilotC-Nvim/CopilotChat.nvim', {
+  branch = 'canary',
+  dependencies = {
+    { 'github/copilot.vim' }, -- or zbirenbaum/copilot.lua
+    { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
+  },
+  build = 'make tiktoken', -- Only on MacOS or Linux
+  opts = {
+    -- See Configuration section for options
+  },
 })
 
 local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
