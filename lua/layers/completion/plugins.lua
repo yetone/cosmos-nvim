@@ -1,15 +1,16 @@
 local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
--- cosmos.add_plugin('github/copilot.vim', {
---   dependencies = { 'hrsh7th/nvim-cmp' },
--- })
-
 cosmos.add_plugin('zbirenbaum/copilot.lua', {
+  enabled = false,
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = function()
-    require('copilot').setup({})
+    require('copilot').setup({
+      suggestion = {
+        auto_trigger = true,
+      },
+    })
   end,
 })
 
@@ -84,7 +85,7 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
-  enabled = false,
+  enabled = true,
   config = function()
     require('supermaven-nvim').setup({
       ignore_filetypes = { 'Avante', 'TelescopePrompt' },
@@ -93,9 +94,10 @@ cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
 })
 
 cosmos.add_plugin('CopilotC-Nvim/CopilotChat.nvim', {
+  enabled = false,
   branch = 'canary',
   dependencies = {
-    { 'github/copilot.vim' }, -- or zbirenbaum/copilot.lua
+    { 'zbirenbaum/copilot.lua' }, -- or zbirenbaum/copilot.lua
     { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
   },
   build = 'make tiktoken', -- Only on MacOS or Linux
@@ -114,7 +116,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'claude',
+    provider = 'copilot',
     auto_suggestions_provider = 'copilot',
     copilot = {
       model = 'claude-3.5-sonnet',
@@ -130,7 +132,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       ollama = {
         __inherited_from = 'openai',
         api_key_name = '',
-        endpoint = 'http://yetones-MacBook-Pro:11434/v1',
+        endpoint = 'http://yetone-mac-mini:11434/v1',
         model = 'qwen2.5-coder:14b',
       },
       groq = {

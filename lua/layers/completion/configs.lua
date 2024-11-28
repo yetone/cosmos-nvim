@@ -79,19 +79,30 @@ function configs.cmp()
   end
 
   local tab_complete = function(fallback)
-    local copilot_keys = vim.fn['copilot#Accept']()
-    -- local avante_suggestion = require('avante.api').get_suggestion()
-    -- local suggestion = require('supermaven-nvim.completion_preview')
-    -- local copilot_is_visible = require("copilot.suggestion").is_visible()
+    local copilot_accept = vim.fn['copilot#Accept']
+    local copilot_keys = ''
+    if copilot_accept then
+      local ok, copilot_keys_ = pcall(copilot_accept)
+      if ok then
+        copilot_keys = copilot_keys_
+      end
+    end
+    local has_avante, avante_api = pcall(require, 'avante.api')
+    local avante_suggestion = nil
+    if has_avante then
+      avante_suggestion = avante_api.get_suggestion()
+    end
+    local has_supermaven, supermaven_suggestion = pcall(require, 'supermaven-nvim.completion_preview')
+    local has_copilot_lua, copilot_lua_suggestion = pcall(require, 'copilot.suggestion')
     if options.tab_complete_copilot_first then
       if copilot_keys ~= '' then
         vim.api.nvim_feedkeys(copilot_keys, 'i', true)
-      -- if avante_suggestion and avante_suggestion:is_visible() then
-      --   avante_suggestion:accept()
-      -- if suggestion.has_suggestion() then
-      --   suggestion.on_accept_suggestion()
-      -- if copilot_is_visible then
-      --   require("copilot.suggestion").accept_line()
+      elseif avante_suggestion and avante_suggestion:is_visible() then
+        avante_suggestion:accept()
+      elseif has_supermaven and supermaven_suggestion.has_suggestion() then
+        supermaven_suggestion.on_accept_suggestion()
+      elseif has_copilot_lua and copilot_lua_suggestion.is_visible() then
+        copilot_lua_suggestion.accept_line()
       elseif cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
