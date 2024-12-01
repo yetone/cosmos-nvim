@@ -898,4 +898,8 @@ function configs.telescope_undo(_, opts)
   require('telescope').load_extension('undo')
 end
 
+function configs.surround()
+  require('nvim-surround').setup()
+end
+
 return configs

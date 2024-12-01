@@ -25,8 +25,10 @@ cosmos.add_plugin('nvim-tree/nvim-tree.lua', {
     'nvim-tree/nvim-web-devicons', -- optional, for file icon
   },
 })
-cosmos.add_plugin('tpope/vim-surround', {
-  event = 'BufRead',
+cosmos.add_plugin('kylechui/nvim-surround', {
+  version = '*', -- Use for stability; omit to use `main` branch for the latest features
+  event = 'VeryLazy',
+  config = configs.surround,
 })
 
 cosmos.add_plugin('numToStr/Comment.nvim', {
@@ -313,4 +315,13 @@ cosmos.add_plugin('folke/lazydev.nvim', {
 
 cosmos.add_plugin('Bilal2453/luvit-meta', {
   lazy = true,
+})
+
+cosmos.add_plugin('chrisgrieser/nvim-spider', {
+  lazy = true,
+})
+
+cosmos.add_plugin('chrisgrieser/nvim-various-textobjs', {
+  event = 'VeryLazy',
+  opts = { useDefaultKeymaps = true },
 })
