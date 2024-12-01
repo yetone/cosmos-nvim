@@ -21,3 +21,8 @@ cosmos.add_plugin('nvim-telescope/telescope-github.nvim', {
 cosmos.add_plugin('trevorhauter/gitportal.nvim', {
   config = configs.gitportal,
 })
+
+cosmos.add_plugin('FabijanZulj/blame.nvim', {
+  lazy = false,
+  config = configs.blame,
+})

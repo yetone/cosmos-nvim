@@ -25,4 +25,8 @@ function configs.gitportal()
   })
 end
 
+function configs.blame()
+  require('blame').setup({})
+end
+
 return configs

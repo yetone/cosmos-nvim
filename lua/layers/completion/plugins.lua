@@ -80,6 +80,17 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
       opts = {
         log_level = 'DEBUG',
       },
+      strategies = {
+        chat = {
+          slash_commands = {
+            ['file'] = {
+              opts = {
+                provider = 'default',
+              },
+            },
+          },
+        },
+      },
     })
   end,
 })
@@ -134,6 +145,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = '',
         endpoint = 'http://yetone-mac-mini:11434/v1',
         model = 'qwen2.5-coder:14b',
+      },
+      mlc = {
+        __inherited_from = 'openai',
+        api_key_name = '',
+        endpoint = 'http://yetone-mac-mini:8000/v1',
+        model = 'qwen2.5-coder:32b',
       },
       groq = {
         __inherited_from = 'openai',

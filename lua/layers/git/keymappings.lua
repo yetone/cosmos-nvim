@@ -40,3 +40,8 @@ cosmos.add_leader_keymapping('v|gp', {
   end,
   name = 'Open GitHub URL',
 })
+
+cosmos.add_leader_keymapping('n|gb', {
+  ':BlameToggle window<CR>',
+  name = 'Blame',
+})
