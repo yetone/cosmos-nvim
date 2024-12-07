@@ -56,9 +56,10 @@ cosmos.add_plugin('karb94/neoscroll.nvim', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('danilamihailov/beacon.nvim', {
+cosmos.add_plugin('sphamba/smear-cursor.nvim', {
   enabled = options.enable_beacon,
   event = 'BufRead',
+  opts = {},
 })
 
 cosmos.add_plugin('RRethy/vim-illuminate', {

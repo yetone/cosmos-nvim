@@ -127,7 +127,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'copilot',
+    provider = 'claude',
     auto_suggestions_provider = 'copilot',
     copilot = {
       model = 'claude-3.5-sonnet',
