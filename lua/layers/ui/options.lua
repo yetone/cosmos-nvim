@@ -1,5 +1,5 @@
 return {
-  enable_beacon = true,
+  enable_beacon = false,
   enable_smooth_scrolling = true,
   enable_rainbow = true,
   enable_illuminate = true,
