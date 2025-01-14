@@ -96,7 +96,7 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
 })
 
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
-  enabled = true,
+  enabled = false,
   config = function()
     require('supermaven-nvim').setup({
       ignore_filetypes = { 'Avante', 'TelescopePrompt' },
@@ -128,9 +128,13 @@ cosmos.add_plugin('yetone/avante.nvim', {
   opts = {
     debug = true,
     provider = 'claude',
-    auto_suggestions_provider = 'copilot',
+    auto_suggestions_provider = 'claude',
     copilot = {
       model = 'claude-3.5-sonnet',
+    },
+    gemini = {
+      model = 'gemini-2.0-flash-exp',
+      -- model = 'gemini-2.0-flash-thinking-exp-1219',
     },
     openai = {
       -- endpoint = 'https://aihubmix.com/v1',
@@ -139,12 +143,23 @@ cosmos.add_plugin('yetone/avante.nvim', {
       -- model = "o1-preview",
       -- timeout = 120000,
     },
+    file_selector = {
+      provider = 'telescope',
+      -- Options override for custom providers
+      provider_opts = {},
+    },
     vendors = {
+      openrouter = {
+        __inherited_from = 'openai',
+        endpoint = 'https://openrouter.ai/api/v1',
+        api_key_name = 'OPENROUTER_API_KEY',
+        model = '',
+      },
       ollama = {
         __inherited_from = 'openai',
         api_key_name = '',
         endpoint = 'http://yetone-mac-mini:11434/v1',
-        model = 'qwen2.5-coder:14b',
+        model = 'phi4',
       },
       mlc = {
         __inherited_from = 'openai',
@@ -178,7 +193,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     behaviour = {
-      auto_suggestions = false,
+      auto_focus_sidebar = true,
+      auto_suggestions = true,
       minimize_diff = true,
     },
     windows = {
@@ -198,6 +214,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
     'stevearc/dressing.nvim',
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
+    'ibhagwan/fzf-lua',
     -- {
     --   'zbirenbaum/copilot.lua',
     --   config = function()
