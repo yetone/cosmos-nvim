@@ -749,13 +749,6 @@ configs.numb = function()
   numb.setup()
 end
 
-configs.spellsitter = function()
-  local spellsitter = require('spellsitter')
-  spellsitter.setup({
-    enable = true,
-  })
-end
-
 function configs.osc52()
   local function copy(lines, _)
     require('osc52').copy(table.concat(lines, '\n'))

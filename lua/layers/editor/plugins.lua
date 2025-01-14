@@ -105,12 +105,6 @@ cosmos.add_plugin('nacro90/numb.nvim', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('lewis6991/spellsitter.nvim', {
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  config = configs.spellsitter,
-  event = 'BufRead',
-})
-
 cosmos.add_plugin('williamboman/mason.nvim', {
   dependencies = {
     { 'williamboman/mason-lspconfig.nvim', lazy = true },
