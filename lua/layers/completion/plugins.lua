@@ -95,8 +95,10 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
   end,
 })
 
+local use_avante_auto_suggestions = false
+
 cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
-  enabled = false,
+  enabled = not use_avante_auto_suggestions,
   config = function()
     require('supermaven-nvim').setup({
       ignore_filetypes = { 'Avante', 'TelescopePrompt' },
@@ -127,7 +129,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'claude',
+    provider = 'groq',
     auto_suggestions_provider = 'claude',
     copilot = {
       model = 'claude-3.5-sonnet',
@@ -149,6 +151,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
       provider_opts = {},
     },
     vendors = {
+      mistral = {
+        __inherited_from = 'openai',
+        endpoint = 'https://api.mistral.ai/v1',
+        api_key_name = 'MISTRAL_API_KEY',
+        model = 'codestral-latest',
+      },
       openrouter = {
         __inherited_from = 'openai',
         endpoint = 'https://openrouter.ai/api/v1',
@@ -159,7 +167,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         __inherited_from = 'openai',
         api_key_name = '',
         endpoint = 'http://yetone-mac-mini:11434/v1',
-        model = 'phi4',
+        model = 'phi4:14b-fp16',
       },
       mlc = {
         __inherited_from = 'openai',
@@ -171,7 +179,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         __inherited_from = 'openai',
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
-        model = 'llama-3.1-70b-versatile',
+        model = 'deepseek-r1-distill-llama-70b',
       },
       perplexity = {
         __inherited_from = 'openai',
@@ -183,7 +191,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         __inherited_from = 'openai',
         api_key_name = 'DEEPSEEK_API_KEY',
         endpoint = 'https://api.deepseek.com',
-        model = 'deepseek-coder',
+        model = 'deepseek-reasoner',
       },
       qianwen = {
         __inherited_from = 'openai',
@@ -193,8 +201,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     behaviour = {
-      auto_focus_sidebar = true,
-      auto_suggestions = true,
+      auto_suggestions = use_avante_auto_suggestions,
       minimize_diff = true,
     },
     windows = {
@@ -215,6 +222,28 @@ cosmos.add_plugin('yetone/avante.nvim', {
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
     'ibhagwan/fzf-lua',
+    'echasnovski/mini.pick',
+    -- {
+    --     "folke/snacks.nvim",
+    --     priority = 1000,
+    --     lazy = false,
+    --     ---@type snacks.Config
+    --     opts = {
+    --         -- your configuration comes here
+    --         -- or leave it empty to use the default settings
+    --         -- refer to the configuration section below
+    --         bigfile = { enabled = true },
+    --         dashboard = { enabled = true },
+    --         indent = { enabled = true },
+    --         input = { enabled = true },
+    --         picker = { enabled = true },
+    --         notifier = { enabled = true },
+    --         quickfile = { enabled = true },
+    --         scroll = { enabled = true },
+    --         statuscolumn = { enabled = true },
+    --         words = { enabled = true },
+    --     },
+    -- },
     -- {
     --   'zbirenbaum/copilot.lua',
     --   config = function()
