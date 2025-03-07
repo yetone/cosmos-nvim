@@ -319,3 +319,5 @@ cosmos.add_plugin('chrisgrieser/nvim-various-textobjs', {
   event = 'VeryLazy',
   opts = { keymaps = { useDefaults = true } },
 })
+
+cosmos.add_plugin('rafcamlet/nvim-luapad')

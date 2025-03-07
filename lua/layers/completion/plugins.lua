@@ -70,29 +70,22 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
     'nvim-treesitter/nvim-treesitter',
     { 'MeanderingProgrammer/render-markdown.nvim', ft = { 'markdown', 'codecompanion' } },
   },
-  config = function()
-    require('codecompanion').setup({
-      display = {
-        diff = {
-          provider = 'mini_diff',
-        },
+  opts = {
+    display = {
+      diff = {
+        enabled = true,
+        provider = 'default',
       },
-      opts = {
-        log_level = 'DEBUG',
+    },
+    opts = {
+      log_level = 'DEBUG',
+    },
+    strategies = {
+      chat = {
+        adapter = 'anthropic',
       },
-      strategies = {
-        chat = {
-          slash_commands = {
-            ['file'] = {
-              opts = {
-                provider = 'default',
-              },
-            },
-          },
-        },
-      },
-    })
-  end,
+    },
+  },
 })
 
 local use_avante_auto_suggestions = false
@@ -129,19 +122,50 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
-    provider = 'groq',
-    auto_suggestions_provider = 'claude',
+    web_search_engine = {
+      provider = 'serpapi',
+    },
+    rag_service = {
+      enabled = true, -- Enables the rag service, requires OPENAI_API_KEY to be set
+      provider = 'ollama',
+      llm_model = 'llama3.2',
+      embed_model = 'nomic-embed-text',
+      endpoint = 'http://10.0.0.249:11434',
+    },
+    provider = 'claude',
+    claude = {
+      temperature = 1,
+      max_tokens = 20000,
+      -- thinking = {
+      --     type = 'enabled',
+      --     budget_tokens = 16000,
+      -- },
+    },
+    auto_suggestions_provider = 'ollama',
+    cursor_applying_provider = 'groq',
+    memory_summary_provider = 'openai-gpt-4o-mini',
+    -- highlights = {
+    --     diff = {
+    --         current = "DiffText",
+    --         incoming = "DiffAdd",
+    --     },
+    -- },
     copilot = {
       model = 'claude-3.5-sonnet',
     },
     gemini = {
-      model = 'gemini-2.0-flash-exp',
+      model = 'gemini-2.0-flash',
+      -- model = 'gemini-2.0-flash-exp',
+      -- model = 'gemini-2.0-pro-exp',
       -- model = 'gemini-2.0-flash-thinking-exp-1219',
     },
     openai = {
+      -- endpoint = 'https://api.gptsapi.net/v1',
       -- endpoint = 'https://aihubmix.com/v1',
       -- model = 'claude-3-5-sonnet-20240620',
       model = 'gpt-4o',
+      -- model = 'o3-mini',
+      -- api_key_name = 'GPTSAPI_API_KEY',
       -- model = "o1-preview",
       -- timeout = 120000,
     },
@@ -151,6 +175,20 @@ cosmos.add_plugin('yetone/avante.nvim', {
       provider_opts = {},
     },
     vendors = {
+      together = {
+        __inherited_from = 'openai',
+        endpoint = 'https://api.together.xyz/v1',
+        api_key_name = 'TOGETHER_API_KEY',
+        model = 'deepseek-ai/DeepSeek-R1',
+        disable_tools = true,
+      },
+      siliconflow = {
+        __inherited_from = 'openai',
+        endpoint = 'https://api.siliconflow.cn/v1',
+        api_key_name = 'SILICONFLOW_API_KEY',
+        model = 'Pro/deepseek-ai/DeepSeek-R1',
+        disable_tools = true,
+      },
       mistral = {
         __inherited_from = 'openai',
         endpoint = 'https://api.mistral.ai/v1',
@@ -161,13 +199,25 @@ cosmos.add_plugin('yetone/avante.nvim', {
         __inherited_from = 'openai',
         endpoint = 'https://openrouter.ai/api/v1',
         api_key_name = 'OPENROUTER_API_KEY',
-        model = '',
+        -- model = 'deepseek/deepseek-r1',
+        -- model = 'anthropic/claude-3.5-sonnet',
+        model = 'openai/gpt-4o',
+        disable_tools = true,
       },
       ollama = {
         __inherited_from = 'openai',
         api_key_name = '',
-        endpoint = 'http://yetone-mac-mini:11434/v1',
-        model = 'phi4:14b-fp16',
+        endpoint = 'http://yetone-mac-mini.local:11434/v1',
+        -- model = 'deepseek-r1:7b',
+        model = 'qwen2.5-coder:14b',
+        -- model = 'llama3.2:latest',
+      },
+      fastapply = {
+        __inherited_from = 'openai',
+        api_key_name = '',
+        endpoint = 'http://yetone-mac-mini.local:11434/v1',
+        model = 'hf.co/Kortix/FastApply-7B-v1.0_GGUF:Q4_K_M',
+        -- model = 'hf.co/Kortix/FastApply-1.5B-v1.0_GGUF:F16',
       },
       mlc = {
         __inherited_from = 'openai',
@@ -175,11 +225,21 @@ cosmos.add_plugin('yetone/avante.nvim', {
         endpoint = 'http://yetone-mac-mini:8000/v1',
         model = 'qwen2.5-coder:32b',
       },
+      groq_deepseek = {
+        __inherited_from = 'openai',
+        api_key_name = 'GROQ_API_KEY',
+        endpoint = 'https://api.groq.com/openai/v1/',
+        model = 'deepseek-r1-distill-qwen-32b',
+        -- model = 'qwen-2.5-coder-32b',
+      },
       groq = {
         __inherited_from = 'openai',
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
-        model = 'deepseek-r1-distill-llama-70b',
+        -- model = 'deepseek-r1-distill-llama-70b',
+        -- model = 'qwen-2.5-coder-32b',
+        model = 'llama-3.3-70b-versatile',
+        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
       },
       perplexity = {
         __inherited_from = 'openai',
@@ -192,6 +252,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = 'DEEPSEEK_API_KEY',
         endpoint = 'https://api.deepseek.com',
         model = 'deepseek-reasoner',
+        disable_tools = true,
       },
       qianwen = {
         __inherited_from = 'openai',
@@ -201,8 +262,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
       },
     },
     behaviour = {
+      auto_focus_sidebar = true,
       auto_suggestions = use_avante_auto_suggestions,
       minimize_diff = true,
+      enable_token_counting = true,
+      enable_cursor_planning_mode = true,
+      use_cwd_as_project_root = true,
     },
     windows = {
       position = 'smart',
@@ -233,7 +298,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
     --         -- or leave it empty to use the default settings
     --         -- refer to the configuration section below
     --         bigfile = { enabled = true },
-    --         dashboard = { enabled = true },
+    --         dashboard = { enabled = false },
     --         indent = { enabled = true },
     --         input = { enabled = true },
     --         picker = { enabled = true },
