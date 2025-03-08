@@ -132,7 +132,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       embed_model = 'nomic-embed-text',
       endpoint = 'http://10.0.0.249:11434',
     },
-    provider = 'claude',
+    provider = 'bedrock',
     claude = {
       temperature = 1,
       max_tokens = 20000,
