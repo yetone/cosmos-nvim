@@ -63,8 +63,8 @@ local local_codecompanion_dir = os.getenv('HOME') .. '/workspace/projects/codeco
 local local_codecompanion_dir_exists = vim.fn.isdirectory(local_codecompanion_dir) == 1
 
 cosmos.add_plugin('olimorris/codecompanion.nvim', {
-  dev = local_codecompanion_dir_exists,
-  dir = local_codecompanion_dir_exists and local_codecompanion_dir or nil,
+  -- dev = local_codecompanion_dir_exists,
+  -- dir = local_codecompanion_dir_exists and local_codecompanion_dir or nil,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
