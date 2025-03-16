@@ -100,8 +100,8 @@ cosmos.add_plugin('supermaven-inc/supermaven-nvim', {
 })
 
 cosmos.add_plugin('CopilotC-Nvim/CopilotChat.nvim', {
-  enabled = false,
-  branch = 'canary',
+  enabled = true,
+  branch = 'main',
   dependencies = {
     { 'zbirenbaum/copilot.lua' }, -- or zbirenbaum/copilot.lua
     { 'nvim-lua/plenary.nvim' }, -- for curl, log wrapper
@@ -114,6 +114,37 @@ cosmos.add_plugin('CopilotC-Nvim/CopilotChat.nvim', {
 
 local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
 local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
+
+cosmos.add_plugin('ravitemer/mcphub.nvim', {
+  dev = true,
+  dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
+  dependencies = {
+    'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
+  },
+  build = 'npm install -g mcp-hub@latest', -- Installs required mcp-hub npm module
+  config = function()
+    require('mcphub').setup({
+      -- Required options
+      port = 3001, -- Port for MCP Hub server
+      config = vim.fn.expand('~/mcpservers.json'), -- Absolute path to config file
+
+      -- Optional options
+      on_ready = function(hub)
+        -- Called when hub is ready
+      end,
+      on_error = function(err)
+        -- Called on errors
+      end,
+      shutdown_delay = 0, -- Wait 0ms before shutting down server after last client exits
+      log = {
+        level = vim.log.levels.WARN,
+        to_file = false,
+        file_path = nil,
+        prefix = 'MCPHub',
+      },
+    })
+  end,
+})
 
 cosmos.add_plugin('yetone/avante.nvim', {
   dev = local_avante_dir_exists,
@@ -132,10 +163,50 @@ cosmos.add_plugin('yetone/avante.nvim', {
       embed_model = 'nomic-embed-text',
       endpoint = 'http://10.0.0.249:11434',
     },
-    provider = 'bedrock',
+    -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
+    system_prompt = function()
+      local system_prompt = [[
+Follow these steps for each interaction:
+
+1. User Identification:
+   - You should assume that you are interacting with default_user
+   - If you have not identified default_user, proactively try to do so.
+
+2. Memory Retrieval:
+   - Always begin your chat by saying only "Remembering..." and retrieve all relevant information from your knowledge graph
+   - Always refer to your knowledge graph as your "memory"
+
+3. Memory
+   - While conversing with the user, be attentive to any new information that falls into these categories:
+     a) Basic Identity (age, gender, location, job title, education level, etc.)
+     b) Behaviors (interests, habits, etc.)
+     c) Preferences (communication style, preferred language, etc.)
+     d) Goals (goals, targets, aspirations, etc.)
+     e) Relationships (personal and professional relationships up to 3 degrees of separation)
+
+4. Memory Update:
+   - If any new information was gathered during the interaction, update your memory as follows:
+     a) Create entities for recurring organizations, people, and significant events
+     b) Connect them to the current entities using relations
+     b) Store facts about them as observations
+        ]]
+      local hub = require('mcphub').get_hub_instance()
+      return system_prompt .. '\n\n' .. hub:get_active_servers_prompt()
+    end,
+    -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+    custom_tools = function()
+      return {
+        require('mcphub.extensions.avante').mcp_tool(),
+      }
+    end,
+    provider = 'claude',
+    ollama = {
+      endpoint = 'http://10.0.0.249:11434',
+      model = 'qwq:32b',
+    },
     claude = {
-      temperature = 1,
-      max_tokens = 20000,
+      -- temperature = 1,
+      -- max_tokens = 20000,
       -- thinking = {
       --     type = 'enabled',
       --     budget_tokens = 16000,
@@ -175,6 +246,29 @@ cosmos.add_plugin('yetone/avante.nvim', {
       provider_opts = {},
     },
     vendors = {
+      claude_3_5_sonnet = {
+        __inherited_from = 'claude',
+        model = 'claude-3-5-sonnet-20241022',
+        max_tokens = 8192,
+      },
+      copilot_claude = {
+        __inherited_from = 'copilot',
+        model = 'claude-3.7-sonnet',
+      },
+      copilot_claude_thought = {
+        __inherited_from = 'copilot',
+        model = 'claude-3.7-sonnet-thought',
+        temperature = 1,
+        max_tokens = 20000,
+      },
+      copilot_openai = {
+        __inherited_from = 'copilot',
+        model = 'gpt-4o',
+      },
+      copilot_gemini = {
+        __inherited_from = 'copilot',
+        model = 'gemini-2.0-flash-001',
+      },
       together = {
         __inherited_from = 'openai',
         endpoint = 'https://api.together.xyz/v1',
@@ -200,17 +294,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
         endpoint = 'https://openrouter.ai/api/v1',
         api_key_name = 'OPENROUTER_API_KEY',
         -- model = 'deepseek/deepseek-r1',
-        -- model = 'anthropic/claude-3.5-sonnet',
-        model = 'openai/gpt-4o',
-        disable_tools = true,
-      },
-      ollama = {
-        __inherited_from = 'openai',
-        api_key_name = '',
-        endpoint = 'http://yetone-mac-mini.local:11434/v1',
-        -- model = 'deepseek-r1:7b',
-        model = 'qwen2.5-coder:14b',
-        -- model = 'llama3.2:latest',
+        model = 'anthropic/claude-3.5-sonnet',
+        -- model = 'openai/gpt-4o',
       },
       fastapply = {
         __inherited_from = 'openai',
@@ -240,6 +325,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         -- model = 'qwen-2.5-coder-32b',
         model = 'llama-3.3-70b-versatile',
         max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        disable_tools = true,
       },
       perplexity = {
         __inherited_from = 'openai',
@@ -259,14 +345,15 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = 'DASHSCOPE_API_KEY',
         endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
         model = 'qwen-coder-plus-latest',
+        -- hide_in_model_selector = true,
       },
     },
     behaviour = {
       auto_focus_sidebar = true,
       auto_suggestions = use_avante_auto_suggestions,
       minimize_diff = true,
-      enable_token_counting = true,
-      enable_cursor_planning_mode = true,
+      enable_token_counting = false,
+      enable_cursor_planning_mode = false,
       use_cwd_as_project_root = true,
     },
     windows = {
