@@ -18,11 +18,16 @@ cosmos.add_plugin('nvimdev/dashboard-nvim', {
 --   event = 'BufRead',
 -- })
 
--- cosmos.add_plugin('echasnovski/mini.indentscope', {
---   version = false,
--- })
+cosmos.add_plugin('echasnovski/mini.indentscope', {
+  version = false,
+  opts = {
+    symbol = '│',
+    -- symbol = '▎',
+  },
+})
 
 cosmos.add_plugin('huy-hng/anyline.nvim', {
+  enabled = false,
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
     indent_char = '▎',

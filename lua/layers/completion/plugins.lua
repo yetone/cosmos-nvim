@@ -116,8 +116,8 @@ local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
 local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
 
 cosmos.add_plugin('ravitemer/mcphub.nvim', {
-  dev = true,
-  dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
+  -- dev = true,
+  -- dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
   },
@@ -204,6 +204,7 @@ Follow these steps for each interaction:
       endpoint = 'http://10.0.0.249:11434',
       model = 'qwq:32b',
     },
+    disabled_tools = { 'git_commit', 'git_diff' },
     claude = {
       -- temperature = 1,
       -- max_tokens = 20000,
@@ -221,9 +222,9 @@ Follow these steps for each interaction:
     --         incoming = "DiffAdd",
     --     },
     -- },
-    copilot = {
-      model = 'claude-3.5-sonnet',
-    },
+    -- copilot = {
+    --   model = 'claude-3.5-sonnet',
+    -- },
     gemini = {
       model = 'gemini-2.0-flash',
       -- model = 'gemini-2.0-flash-exp',
@@ -354,6 +355,7 @@ Follow these steps for each interaction:
       minimize_diff = true,
       enable_token_counting = false,
       enable_cursor_planning_mode = false,
+      enable_claude_text_editor_tool_mode = true,
       use_cwd_as_project_root = true,
     },
     windows = {

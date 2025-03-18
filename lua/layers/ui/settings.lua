@@ -58,3 +58,6 @@ vim.api.nvim_create_autocmd({
 })
 
 require('layers.ui.colors').setup()
+
+vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'IndentBlanklineContextChar' })
+vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { link = 'IndentBlanklineChar' })
