@@ -19,6 +19,7 @@ cosmos.add_plugin('nvimdev/dashboard-nvim', {
 -- })
 
 cosmos.add_plugin('echasnovski/mini.indentscope', {
+  enabled = false,
   version = false,
   opts = {
     symbol = '│',
@@ -27,7 +28,7 @@ cosmos.add_plugin('echasnovski/mini.indentscope', {
 })
 
 cosmos.add_plugin('huy-hng/anyline.nvim', {
-  enabled = false,
+  enabled = true,
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
     indent_char = '▎',
