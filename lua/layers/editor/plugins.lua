@@ -148,6 +148,7 @@ cosmos.add_plugin('nvim-telescope/telescope.nvim', {
       config = configs.telescope_dap,
     },
     { 'nvim-lua/plenary.nvim', lazy = true },
+    'jonarrien/telescope-cmdline.nvim',
   },
   config = configs.telescope,
 })

@@ -577,6 +577,7 @@ function configs.telescope()
   })
 
   telescope.load_extension('projects')
+  telescope.load_extension('cmdline')
 end
 
 configs.dap = function()
