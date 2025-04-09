@@ -116,8 +116,8 @@ local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
 local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
 
 cosmos.add_plugin('ravitemer/mcphub.nvim', {
-  -- dev = true,
-  -- dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
+  dev = true,
+  dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
   },
@@ -157,7 +157,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       provider = 'serpapi',
     },
     rag_service = {
-      enabled = true, -- Enables the rag service, requires OPENAI_API_KEY to be set
+      enabled = false, -- Enables the rag service, requires OPENAI_API_KEY to be set
       provider = 'ollama',
       llm_model = 'llama3.2',
       embed_model = 'nomic-embed-text',
@@ -199,7 +199,7 @@ Follow these steps for each interaction:
         require('mcphub.extensions.avante').mcp_tool(),
       }
     end,
-    provider = 'claude',
+    provider = 'copilot_claude',
     ollama = {
       endpoint = 'http://10.0.0.249:11434',
       model = 'qwq:32b',
@@ -246,7 +246,30 @@ Follow these steps for each interaction:
       -- Options override for custom providers
       provider_opts = {},
     },
+    history = {
+      -- carried_entry_count = 3,
+    },
     vendors = {
+      ark = {
+        __inherited_from = 'openai',
+        api_key_name = 'ARK_API_KEY',
+        endpoint = 'https://ark.cn-beijing.volces.com/api/v3',
+        model = 'deepseek-v3-250324',
+      },
+      cursor_claude_3_5_sonnet = {
+        __inherited_from = 'openai',
+        api_key_name = 'CURSOR_REVERSE_API_KEY',
+        endpoint = 'http://localhost:9999/v1',
+        model = 'cursor/claude-3-5-sonnet-20241022',
+      },
+      cursor_deepseek_v3 = {
+        __inherited_from = 'openai',
+        api_key_name = 'CURSOR_REVERSE_API_KEY',
+        endpoint = 'http://localhost:9999/v1',
+        model = 'cursor/deepseek-v3',
+        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        disable_tools = true,
+      },
       claude_3_5_sonnet = {
         __inherited_from = 'claude',
         model = 'claude-3-5-sonnet-20241022',
@@ -325,6 +348,14 @@ Follow these steps for each interaction:
         -- model = 'deepseek-r1-distill-llama-70b',
         -- model = 'qwen-2.5-coder-32b',
         model = 'llama-3.3-70b-versatile',
+        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        disable_tools = true,
+      },
+      groq_qwq = {
+        __inherited_from = 'openai',
+        api_key_name = 'GROQ_API_KEY',
+        endpoint = 'https://api.groq.com/openai/v1/',
+        model = 'qwen-qwq-32b',
         max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
         disable_tools = true,
       },

@@ -269,7 +269,7 @@ cosmos.add_plugin('sysedwinistrator/readline.nvim', {
 cosmos.add_plugin('LintaoAmons/bookmarks.nvim', {
   enabled = false,
   tag = 'v1.4.2',
-  dependencies = { 'stevearc/dressing.nvim' },
+  -- dependencies = { 'stevearc/dressing.nvim' },
   config = configs.bookmarks,
 })
 

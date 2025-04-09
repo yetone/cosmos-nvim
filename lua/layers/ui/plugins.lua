@@ -12,11 +12,11 @@ cosmos.add_plugin('nvimdev/dashboard-nvim', {
   config = configs.dashboard,
 })
 
--- cosmos.add_plugin('lukas-reineke/indent-blankline.nvim', {
---   config = configs.indent_blankline,
---   main = 'ibl',
---   event = 'BufRead',
--- })
+cosmos.add_plugin('lukas-reineke/indent-blankline.nvim', {
+  config = configs.indent_blankline,
+  main = 'ibl',
+  event = 'BufRead',
+})
 
 cosmos.add_plugin('echasnovski/mini.indentscope', {
   enabled = false,
@@ -28,7 +28,7 @@ cosmos.add_plugin('echasnovski/mini.indentscope', {
 })
 
 cosmos.add_plugin('huy-hng/anyline.nvim', {
-  enabled = true,
+  enabled = false,
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   opts = {
     indent_char = '▎',
