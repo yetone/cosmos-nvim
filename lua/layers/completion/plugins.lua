@@ -146,6 +146,8 @@ cosmos.add_plugin('ravitemer/mcphub.nvim', {
   end,
 })
 
+-- cosmos.add_plugin('augmentcode/augment.vim')
+
 cosmos.add_plugin('yetone/avante.nvim', {
   dev = local_avante_dir_exists,
   dir = local_avante_dir_exists and local_avante_dir or nil,
@@ -164,42 +166,18 @@ cosmos.add_plugin('yetone/avante.nvim', {
       endpoint = 'http://10.0.0.249:11434',
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
-    system_prompt = function()
-      local system_prompt = [[
-Follow these steps for each interaction:
-
-1. User Identification:
-   - You should assume that you are interacting with default_user
-   - If you have not identified default_user, proactively try to do so.
-
-2. Memory Retrieval:
-   - Always begin your chat by saying only "Remembering..." and retrieve all relevant information from your knowledge graph
-   - Always refer to your knowledge graph as your "memory"
-
-3. Memory
-   - While conversing with the user, be attentive to any new information that falls into these categories:
-     a) Basic Identity (age, gender, location, job title, education level, etc.)
-     b) Behaviors (interests, habits, etc.)
-     c) Preferences (communication style, preferred language, etc.)
-     d) Goals (goals, targets, aspirations, etc.)
-     e) Relationships (personal and professional relationships up to 3 degrees of separation)
-
-4. Memory Update:
-   - If any new information was gathered during the interaction, update your memory as follows:
-     a) Create entities for recurring organizations, people, and significant events
-     b) Connect them to the current entities using relations
-     b) Store facts about them as observations
-        ]]
-      local hub = require('mcphub').get_hub_instance()
-      return system_prompt .. '\n\n' .. hub:get_active_servers_prompt()
-    end,
-    -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
-    custom_tools = function()
-      return {
-        require('mcphub.extensions.avante').mcp_tool(),
-      }
-    end,
-    provider = 'copilot_claude',
+    -- system_prompt = function()
+    --   local hub = require('mcphub').get_hub_instance()
+    --   return hub:get_active_servers_prompt()
+    -- end,
+    -- -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+    -- custom_tools = function()
+    --   return {
+    --     require('mcphub.extensions.avante').mcp_tool(),
+    --   }
+    -- end,
+    -- provider = 'copilot_claude',
+    provider = 'gemini',
     ollama = {
       endpoint = 'http://10.0.0.249:11434',
       model = 'qwq:32b',
@@ -214,8 +192,8 @@ Follow these steps for each interaction:
       -- },
     },
     auto_suggestions_provider = 'ollama',
-    cursor_applying_provider = 'groq',
-    memory_summary_provider = 'openai-gpt-4o-mini',
+    -- cursor_applying_provider = 'groq',
+    -- memory_summary_provider = 'openai-gpt-4o-mini',
     -- highlights = {
     --     diff = {
     --         current = "DiffText",
@@ -226,7 +204,8 @@ Follow these steps for each interaction:
     --   model = 'claude-3.5-sonnet',
     -- },
     gemini = {
-      model = 'gemini-2.0-flash',
+      model = 'gemini-2.5-pro-preview-03-25',
+      -- model = 'gemini-2.5-pro-exp-03-25',
       -- model = 'gemini-2.0-flash-exp',
       -- model = 'gemini-2.0-pro-exp',
       -- model = 'gemini-2.0-flash-thinking-exp-1219',
@@ -241,10 +220,8 @@ Follow these steps for each interaction:
       -- model = "o1-preview",
       -- timeout = 120000,
     },
-    file_selector = {
+    selector = {
       provider = 'telescope',
-      -- Options override for custom providers
-      provider_opts = {},
     },
     history = {
       -- carried_entry_count = 3,
@@ -255,6 +232,7 @@ Follow these steps for each interaction:
         api_key_name = 'ARK_API_KEY',
         endpoint = 'https://ark.cn-beijing.volces.com/api/v3',
         model = 'deepseek-v3-250324',
+        max_completion_tokens = 12288,
       },
       cursor_claude_3_5_sonnet = {
         __inherited_from = 'openai',
@@ -278,6 +256,10 @@ Follow these steps for each interaction:
       copilot_claude = {
         __inherited_from = 'copilot',
         model = 'claude-3.7-sonnet',
+      },
+      copilot_claude_3_5 = {
+        __inherited_from = 'copilot',
+        model = 'claude-3.5-sonnet',
       },
       copilot_claude_thought = {
         __inherited_from = 'copilot',
@@ -384,9 +366,7 @@ Follow these steps for each interaction:
       auto_focus_sidebar = true,
       auto_suggestions = use_avante_auto_suggestions,
       minimize_diff = true,
-      enable_token_counting = false,
-      enable_cursor_planning_mode = false,
-      enable_claude_text_editor_tool_mode = true,
+      enable_token_counting = true,
       use_cwd_as_project_root = true,
     },
     windows = {
@@ -407,28 +387,28 @@ Follow these steps for each interaction:
     'nvim-lua/plenary.nvim',
     'MunifTanjim/nui.nvim',
     'ibhagwan/fzf-lua',
-    'echasnovski/mini.pick',
-    -- {
-    --     "folke/snacks.nvim",
-    --     priority = 1000,
-    --     lazy = false,
-    --     ---@type snacks.Config
-    --     opts = {
-    --         -- your configuration comes here
-    --         -- or leave it empty to use the default settings
-    --         -- refer to the configuration section below
-    --         bigfile = { enabled = true },
-    --         dashboard = { enabled = false },
-    --         indent = { enabled = true },
-    --         input = { enabled = true },
-    --         picker = { enabled = true },
-    --         notifier = { enabled = true },
-    --         quickfile = { enabled = true },
-    --         scroll = { enabled = true },
-    --         statuscolumn = { enabled = true },
-    --         words = { enabled = true },
-    --     },
-    -- },
+    { 'echasnovski/mini.pick', config = true },
+    {
+      'folke/snacks.nvim',
+      priority = 1000,
+      lazy = false,
+      ---@type snacks.Config
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        bigfile = { enabled = false },
+        dashboard = { enabled = false },
+        indent = { enabled = true },
+        input = { enabled = false },
+        picker = { enabled = true },
+        notifier = { enabled = false },
+        quickfile = { enabled = false },
+        scroll = { enabled = false },
+        statuscolumn = { enabled = false },
+        words = { enabled = false },
+      },
+    },
     -- {
     --   'zbirenbaum/copilot.lua',
     --   config = function()
