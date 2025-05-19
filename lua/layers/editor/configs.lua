@@ -208,7 +208,7 @@ function configs.mason()
       'lua_ls',
       'pyright',
       'tsserver',
-      'golangci_lint_ls',
+      'golangci-lint-langserver',
       'rust_analyzer',
       'biome',
     },
