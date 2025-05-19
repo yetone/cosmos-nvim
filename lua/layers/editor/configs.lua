@@ -33,8 +33,6 @@ function configs.mason()
   })
   require('null-ls').setup()
   -- require('mason-null-ls').setup_handlers()
-
-  require('mason-lspconfig').setup()
   -- require('neodev').setup({
   --   library = { plugins = { 'nvim-dap-ui' }, types = true },
   -- })
@@ -168,51 +166,56 @@ function configs.mason()
   -- Package installation folder
   local install_root_dir = vim.fn.stdpath('data') .. '/mason'
 
-  require('mason-lspconfig').setup_handlers({
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-      local opt = server_opts[server_name] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
-      lspconfig[server_name].setup(opt)
-    end,
-    -- The following handlers will be called for the specified servers
-    -- and will override the default handler for those servers.
-    -- If a handler is not specified for a server, the default handler
-    -- will be used.
-    ['rust_analyzer'] = function()
-      local opt = server_opts['rust_analyzer'] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
+  -- ========================
+  -- Neovim 0.11+ LSP configs
+  -- ========================
+  -- Register per‑server configurations with the new vim.lsp.config() API
+  local servers = { 'lua_ls', 'pyright', 'ts_ls', 'golangci_lint_ls', 'biome' }
+  for _, server_name in ipairs(servers) do
+    local opt = vim.tbl_deep_extend('force', {}, default_opt, server_opts[server_name] or {})
+    vim.lsp.config(server_name, opt)
+  end
 
-      -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
-      local extension_path = install_root_dir .. '/packages/codelldb/extension/'
-      local codelldb_path = extension_path .. 'adapter/codelldb'
-      local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
-      local ih = require('inlay-hints')
-      require('rust-tools').setup({
-        tools = {
-          hover_actions = { border = 'solid' },
-          on_initialized = function()
-            vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-              pattern = { '*.rs' },
-              callback = function()
-                vim.lsp.codelens.refresh()
-              end,
-            })
-            ih.set_all()
+  -- rust‑analyzer is driven through rust‑tools.nvim
+  local rust_opt = vim.tbl_deep_extend('force', {}, default_opt, server_opts['rust_analyzer'] or {})
+  local extension_path = install_root_dir .. '/packages/codelldb/extension/'
+  local codelldb_path = extension_path .. 'adapter/codelldb'
+  local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
+  local ih_ok, ih = pcall(require, 'inlay-hints')
+  require('rust-tools').setup({
+    tools = {
+      hover_actions = { border = 'solid' },
+      on_initialized = function()
+        vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+          pattern = { '*.rs' },
+          callback = function()
+            vim.lsp.codelens.refresh()
           end,
-          inlay_hints = {
-            auto = false,
-          },
-        },
-        server = opt,
-        dap = {
-          adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
-      })
-    end,
+        })
+        if ih_ok then ih.set_all() end
+      end,
+      inlay_hints = { auto = false },
+    },
+    server = rust_opt,
+    dap = {
+      adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
+    },
   })
+
+  -- Initialize mason‑lspconfig with automatic_enable (default true)
+  require('mason-lspconfig').setup({
+    ensure_installed = {
+      'lua_ls',
+      'pyright',
+      'ts_ls',
+      'golangci_lint_ls',
+      'rust_analyzer',
+      'biome',
+    },
+    automatic_installation = false,
+    -- automatic_enable = true, -- default
+  })
+
 end
 
 function configs.project()
