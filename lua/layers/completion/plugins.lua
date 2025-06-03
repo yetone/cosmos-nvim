@@ -2,13 +2,13 @@ local cosmos = require('core.cosmos')
 local configs = require('layers.completion.configs')
 
 cosmos.add_plugin('zbirenbaum/copilot.lua', {
-  enabled = false,
+  enabled = true,
   cmd = 'Copilot',
   event = 'InsertEnter',
   config = function()
     require('copilot').setup({
       suggestion = {
-        auto_trigger = true,
+        auto_trigger = false,
       },
     })
   end,
@@ -63,8 +63,8 @@ local local_codecompanion_dir = os.getenv('HOME') .. '/workspace/projects/codeco
 local local_codecompanion_dir_exists = vim.fn.isdirectory(local_codecompanion_dir) == 1
 
 cosmos.add_plugin('olimorris/codecompanion.nvim', {
-  -- dev = local_codecompanion_dir_exists,
-  -- dir = local_codecompanion_dir_exists and local_codecompanion_dir or nil,
+  dev = local_codecompanion_dir_exists,
+  dir = local_codecompanion_dir_exists and local_codecompanion_dir or nil,
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-treesitter/nvim-treesitter',
@@ -80,9 +80,42 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
     opts = {
       log_level = 'DEBUG',
     },
+    adapters = {
+      openai = function()
+        return require('codecompanion.adapters').extend('openai', {
+          schema = {
+            model = {
+              default = 'gpt-4o',
+            },
+          },
+        })
+      end,
+      ollama = function()
+        return require('codecompanion.adapters').extend('ollama', {
+          env = {
+            url = 'http://10.0.0.207:11434',
+            -- api_key = "OLLAMA_API_KEY",
+          },
+          headers = {
+            ['Content-Type'] = 'application/json',
+            -- ["Authorization"] = "Bearer ${api_key}",
+          },
+          schema = {
+            model = {
+              default = 'devstral:24b',
+            },
+          },
+          parameters = {
+            sync = true,
+          },
+        })
+      end,
+    },
     strategies = {
       chat = {
-        adapter = 'anthropic',
+        -- adapter = 'anthropic',
+        -- adapter = 'openai',
+        adapter = 'ollama',
       },
     },
   },
@@ -155,6 +188,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     debug = true,
+    mode = 'agentic',
     web_search_engine = {
       provider = 'serpapi',
     },
@@ -163,7 +197,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       provider = 'ollama',
       llm_model = 'llama3.2',
       embed_model = 'nomic-embed-text',
-      endpoint = 'http://10.0.0.249:11434',
+      endpoint = 'http://10.0.0.244:11434',
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
     -- system_prompt = function()
@@ -176,63 +210,59 @@ cosmos.add_plugin('yetone/avante.nvim', {
     --     require('mcphub.extensions.avante').mcp_tool(),
     --   }
     -- end,
-    -- provider = 'copilot_claude',
-    provider = 'gemini',
-    ollama = {
-      endpoint = 'http://10.0.0.249:11434',
-      model = 'qwq:32b',
-    },
-    disabled_tools = { 'git_commit', 'git_diff' },
-    claude = {
-      -- temperature = 1,
-      -- max_tokens = 20000,
-      -- thinking = {
-      --     type = 'enabled',
-      --     budget_tokens = 16000,
-      -- },
-    },
-    auto_suggestions_provider = 'ollama',
-    -- cursor_applying_provider = 'groq',
-    -- memory_summary_provider = 'openai-gpt-4o-mini',
-    -- highlights = {
-    --     diff = {
-    --         current = "DiffText",
-    --         incoming = "DiffAdd",
-    --     },
-    -- },
-    -- copilot = {
-    --   model = 'claude-3.5-sonnet',
-    -- },
-    gemini = {
-      model = 'gemini-2.5-pro-preview-03-25',
-      -- model = 'gemini-2.5-pro-exp-03-25',
-      -- model = 'gemini-2.0-flash-exp',
-      -- model = 'gemini-2.0-pro-exp',
-      -- model = 'gemini-2.0-flash-thinking-exp-1219',
-    },
-    openai = {
-      -- endpoint = 'https://api.gptsapi.net/v1',
-      -- endpoint = 'https://aihubmix.com/v1',
-      -- model = 'claude-3-5-sonnet-20240620',
-      model = 'gpt-4o',
-      -- model = 'o3-mini',
-      -- api_key_name = 'GPTSAPI_API_KEY',
-      -- model = "o1-preview",
-      -- timeout = 120000,
-    },
+    provider = 'copilot_gemini',
+    -- provider = 'copilot_gemini',
+    -- provider = 'copilot_openai',
+    -- provider = 'copilot:gpt-4.1',
+    -- provider = 'openai-gpt-4o-mini',
     selector = {
       provider = 'telescope',
     },
     history = {
       -- carried_entry_count = 3,
     },
-    vendors = {
+    providers = {
+      ollama = {
+        -- endpoint = 'http://10.0.0.244:11434',
+        -- endpoint = 'http://10.0.0.207:11434',
+        endpoint = 'http://100.92.182.127:11434',
+        -- model = 'qwen3:14b',
+        -- model = 'qwen2.5-coder:14b',
+        -- model = 'hhao/qwen2.5-coder-tools:14b',
+        model = 'devstral:24b',
+      },
+      aihubmix = {
+        model = 'o3',
+      },
+      gemini = {
+        -- model = 'gemini-2.5-pro-preview-05-06',
+        model = 'gemini-2.5-flash-preview-04-17',
+        api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
+      },
+      ['gemini-2.0-flash'] = {
+        __inherited_from = 'copilot',
+        display_name = 'copilot/gemini-2.0-flash',
+        model = 'gemini-2.0-flash-001',
+        disable_tools = true,
+      },
+      ['copilot:gpt-4.1'] = {
+        __inherited_from = 'copilot',
+        model = 'gpt-4.1',
+      },
+      ['gemini_2.5_pro'] = {
+        __inherited_from = 'openai',
+        api_key_name = 'GEMINI_API_KEY',
+        endpoint = 'https://generativelanguage.googleapis.com/v1beta',
+        model = 'gemini-2.5-pro-exp-03-25',
+      },
       ark = {
         __inherited_from = 'openai',
         api_key_name = 'ARK_API_KEY',
         endpoint = 'https://ark.cn-beijing.volces.com/api/v3',
         model = 'deepseek-v3-250324',
-        max_completion_tokens = 12288,
+        extra_request_body = {
+          max_completion_tokens = 12288,
+        },
       },
       cursor_claude_3_5_sonnet = {
         __inherited_from = 'openai',
@@ -245,13 +275,24 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = 'CURSOR_REVERSE_API_KEY',
         endpoint = 'http://localhost:9999/v1',
         model = 'cursor/deepseek-v3',
-        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        extra_request_body = {
+          max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        },
         disable_tools = true,
       },
       claude_3_5_sonnet = {
         __inherited_from = 'claude',
         model = 'claude-3-5-sonnet-20241022',
-        max_tokens = 8192,
+        extra_request_body = {
+          max_tokens = 8192,
+        },
+      },
+      claude_sonnet_4 = {
+        __inherited_from = 'claude',
+        model = 'claude-sonnet-4-20250514',
+        extra_request_body = {
+          max_tokens = 8192,
+        },
       },
       copilot_claude = {
         __inherited_from = 'copilot',
@@ -264,16 +305,25 @@ cosmos.add_plugin('yetone/avante.nvim', {
       copilot_claude_thought = {
         __inherited_from = 'copilot',
         model = 'claude-3.7-sonnet-thought',
-        temperature = 1,
-        max_tokens = 20000,
+        extra_request_body = {
+          temperature = 1,
+          max_tokens = 20000,
+        },
       },
       copilot_openai = {
         __inherited_from = 'copilot',
-        model = 'gpt-4o',
+        model = 'gpt-4o-2024-11-20',
+        extra_request_body = {
+          max_tokens = 12333,
+        },
       },
       copilot_gemini = {
         __inherited_from = 'copilot',
-        model = 'gemini-2.0-flash-001',
+        model = 'gemini-2.5-pro-preview-05-06',
+      },
+      copilot_o3_mini = {
+        __inherited_from = 'copilot',
+        model = 'o3-mini',
       },
       together = {
         __inherited_from = 'openai',
@@ -320,7 +370,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         __inherited_from = 'openai',
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
-        model = 'deepseek-r1-distill-qwen-32b',
+        model = 'deepseek-r1-distill-llama-70b',
         -- model = 'qwen-2.5-coder-32b',
       },
       groq = {
@@ -330,7 +380,9 @@ cosmos.add_plugin('yetone/avante.nvim', {
         -- model = 'deepseek-r1-distill-llama-70b',
         -- model = 'qwen-2.5-coder-32b',
         model = 'llama-3.3-70b-versatile',
-        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        extra_request_body = {
+          max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        },
         disable_tools = true,
       },
       groq_qwq = {
@@ -338,7 +390,9 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = 'GROQ_API_KEY',
         endpoint = 'https://api.groq.com/openai/v1/',
         model = 'qwen-qwq-32b',
-        max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        extra_request_body = {
+          max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+        },
         disable_tools = true,
       },
       perplexity = {
@@ -352,7 +406,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
         api_key_name = 'DEEPSEEK_API_KEY',
         endpoint = 'https://api.deepseek.com',
         model = 'deepseek-reasoner',
-        disable_tools = true,
+        disable_tools = false,
       },
       qianwen = {
         __inherited_from = 'openai',
