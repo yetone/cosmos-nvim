@@ -248,7 +248,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       gemini = {
         model = 'gemini-2.5-pro-preview-06-05',
         -- model = 'gemini-2.5-flash-preview-04-17',
-        api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
+        -- api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
       },
       ['gemini-2.0-flash'] = {
         __inherited_from = 'copilot',

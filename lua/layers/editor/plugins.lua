@@ -16,6 +16,7 @@ cosmos.add_plugin('iamcco/markdown-preview.nvim', {
 })
 
 cosmos.add_plugin('ahmedkhalf/project.nvim', {
+  enabled = false,
   config = configs.project,
 })
 
@@ -322,3 +323,8 @@ cosmos.add_plugin('chrisgrieser/nvim-various-textobjs', {
 })
 
 cosmos.add_plugin('rafcamlet/nvim-luapad')
+
+cosmos.add_plugin('mrcjkb/rustaceanvim', {
+  version = '^6', -- Recommended
+  lazy = false, -- This plugin is already lazy
+})

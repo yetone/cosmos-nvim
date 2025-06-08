@@ -165,54 +165,15 @@ function configs.mason()
     },
   }
 
+  for server_name, server_opt in pairs(server_opts) do
+    vim.lsp.config(server_name, server_opt)
+  end
+
+
   -- Package installation folder
   local install_root_dir = vim.fn.stdpath('data') .. '/mason'
 
-  require('mason-lspconfig').setup_handlers({
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-      local opt = server_opts[server_name] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
-      lspconfig[server_name].setup(opt)
-    end,
-    -- The following handlers will be called for the specified servers
-    -- and will override the default handler for those servers.
-    -- If a handler is not specified for a server, the default handler
-    -- will be used.
-    ['rust_analyzer'] = function()
-      local opt = server_opts['rust_analyzer'] or {}
-      opt = vim.tbl_deep_extend('force', {}, default_opt, opt)
-
-      -- DAP settings - https://github.com/simrat39/rust-tools.nvim#a-better-debugging-experience
-      local extension_path = install_root_dir .. '/packages/codelldb/extension/'
-      local codelldb_path = extension_path .. 'adapter/codelldb'
-      local liblldb_path = extension_path .. 'lldb/lib/liblldb.so'
-      local ih = require('inlay-hints')
-      require('rust-tools').setup({
-        tools = {
-          hover_actions = { border = 'solid' },
-          on_initialized = function()
-            vim.api.nvim_create_autocmd({ 'BufWritePost', 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-              pattern = { '*.rs' },
-              callback = function()
-                vim.lsp.codelens.refresh()
-              end,
-            })
-            ih.set_all()
-          end,
-          inlay_hints = {
-            auto = false,
-          },
-        },
-        server = opt,
-        dap = {
-          adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path),
-        },
-      })
-    end,
-  })
+  require('mason-lspconfig').setup()
 end
 
 function configs.project()
@@ -286,7 +247,7 @@ function configs.treesitter()
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
     -- List of parsers to ignore installing
-    ignore_install = {},
+    ignore_install = { 'ipkg' },
     playground = {
       enable = true,
       disable = {},
@@ -576,7 +537,7 @@ function configs.telescope()
     },
   })
 
-  telescope.load_extension('projects')
+  -- telescope.load_extension('projects')
   telescope.load_extension('cmdline')
 end
 
