@@ -210,18 +210,29 @@ cosmos.add_plugin('yetone/avante.nvim', {
     --     require('mcphub.extensions.avante').mcp_tool(),
     --   }
     -- end,
-    provider = 'copilot_gemini',
     -- provider = 'copilot_gemini',
     -- provider = 'copilot_openai',
     -- provider = 'copilot:gpt-4.1',
     -- provider = 'openai-gpt-4o-mini',
     selector = {
-      provider = 'telescope',
+      provider = 'snacks',
     },
     history = {
       -- carried_entry_count = 3,
     },
+    provider = 'gemini',
     providers = {
+      gemini_flash = {
+        __inherited_from = 'gemini',
+        model = 'gemini-2.5-flash-preview-05-20',
+        timeout = 30000,
+        extra_request_body = {
+          generationConfig = {
+            temperature = 0,
+            -- max_tokens = 65536
+          },
+        },
+      },
       ollama = {
         -- endpoint = 'http://10.0.0.244:11434',
         -- endpoint = 'http://10.0.0.207:11434',
@@ -235,8 +246,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
         model = 'o3',
       },
       gemini = {
-        -- model = 'gemini-2.5-pro-preview-05-06',
-        model = 'gemini-2.5-flash-preview-04-17',
+        model = 'gemini-2.5-pro-preview-06-05',
+        -- model = 'gemini-2.5-flash-preview-04-17',
         api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
       },
       ['gemini-2.0-flash'] = {
@@ -422,6 +433,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
       minimize_diff = true,
       enable_token_counting = true,
       use_cwd_as_project_root = true,
+      auto_check_diagnostics = false,
     },
     windows = {
       position = 'smart',
