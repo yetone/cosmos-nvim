@@ -182,6 +182,36 @@ local default_leader_keymapping_group_names = {
   ['<Space>'] = { name = 'Commands' },
 }
 
+local function flatten_wk_config(key_prefix, nested_config)
+  local flat_config = {}
+  local first_item_type = type(nested_config[1])
+  if first_item_type == 'string' or first_item_type == 'function' then
+    local config = {
+      key_prefix,
+      nested_config[1],
+      desc = nested_config[2],
+      mode = nested_config.mode,
+      noremap = nested_config.noremap,
+    }
+    table.insert(flat_config, config)
+  else
+    for key, value in pairs(nested_config) do
+      if key == 'name' then
+        table.insert(flat_config, { key_prefix, group = value })
+      end
+    end
+    for key, group in pairs(nested_config) do
+      if key ~= 'name' then
+        local flat_config_ = flatten_wk_config(key_prefix .. key, group)
+        for _, config in ipairs(flat_config_) do
+          table.insert(flat_config, config)
+        end
+      end
+    end
+  end
+  return flat_config
+end
+
 function M.setup_keymappings(enable_which_key)
   load_layer_keymappings()
   local _leader_keymappings = {}
@@ -229,7 +259,10 @@ function M.setup_keymappings(enable_which_key)
   if enable_which_key then
     local has_wk, wk = pcall(require, 'which-key')
     if has_wk then
-      wk.register(_leader_keymappings, { prefix = '<leader>' })
+      local flat_config = flatten_wk_config('<leader>', _leader_keymappings)
+      -- vim.print(flat_config)
+      wk.add(flat_config)
+      -- wk.register(_leader_keymappings, { prefix = '<leader>' })
     else
       print('which-key not installed')
     end
@@ -248,7 +281,7 @@ local function setup_plugins()
       '--filter=blob:none',
       '--depth=1',
       'https://github.com/folke/lazy.nvim.git',
-      '--branch=stable', -- latest stable release
+      '--branch=main', -- latest stable release
       lazypath,
     })
     print('installing lazy.nvim...done')
@@ -342,7 +375,7 @@ local function setup()
   execute_layer_settings()
 
   M.add_plugin('folke/which-key.nvim', {
-    tag = 'v2.1.0',
+    -- tag = 'v2.1.0',
     config = function()
       require('which-key').setup({
         plugins = {
@@ -363,12 +396,7 @@ local function setup()
           separator = '➜', -- symbol used between a key and it's label
           group = '+', -- symbol prepended to a group
         },
-        key_labels = {
-          ['<space>'] = 'SPC',
-          ['<cr>'] = 'RET',
-          ['<tab>'] = 'TAB',
-        },
-        window = {
+        win = {
           padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
           border = 'none',
         },
@@ -377,19 +405,7 @@ local function setup()
           spacing = 3,
           align = 'left',
         },
-        ignore_missing = true,
-        hidden = {
-          '<silent>',
-          '<Cmd>',
-          '<cmd>',
-          '<Plug>',
-          'call',
-          'lua',
-          '^:',
-          '^ ',
-        }, -- hide mapping boilerplate
         show_help = true, -- show help message on the command line when the popup is visible
-        triggers = 'auto', -- automatically setup triggers
       })
       require('core.cosmos').setup_keymappings(true)
     end,
