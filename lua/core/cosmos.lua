@@ -121,6 +121,9 @@ local function load_layer_plugins()
 end
 
 local default_leader_keymapping_group_names = {
+  a = {
+    name = '+Avante',
+  },
   m = {
     name = '+Marks',
   },
@@ -189,7 +192,7 @@ local function flatten_wk_config(key_prefix, nested_config)
     local config = {
       key_prefix,
       nested_config[1],
-      desc = nested_config[2],
+      desc = nested_config.name or nested_config[2],
       mode = nested_config.mode,
       noremap = nested_config.noremap,
     }
@@ -375,12 +378,19 @@ local function setup()
   execute_layer_settings()
 
   M.add_plugin('folke/which-key.nvim', {
-    -- tag = 'v2.1.0',
     config = function()
       require('which-key').setup({
+        delay = 200,
+        defer = function(ctx)
+          return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
+        end,
         plugins = {
           marks = false,
           registers = false,
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
           presets = {
             operators = false,
             motions = true,
