@@ -419,14 +419,22 @@ local function setup()
           breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
           separator = '➜', -- symbol used between a key and it's label
           group = '+', -- symbol prepended to a group
+          mappings = false,
+          colors = false,
         },
         win = {
+          no_overlap = true,
           padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+          title = false,
           border = 'none',
+          wo = {
+            winblend = 0,
+          },
         },
         layout = {
-          height = { min = 1, max = 10 }, -- min and max height of the columns
-          spacing = 3,
+          height = { min = 1, max = 10 },
+          width = { min = 30, max = 30 },
+          spacing = 5,
           align = 'left',
         },
         show_help = true, -- show help message on the command line when the popup is visible
