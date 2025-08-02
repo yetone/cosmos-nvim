@@ -384,6 +384,20 @@ local function setup()
         defer = function(ctx)
           return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
         end,
+        notify = true,
+        filter = function(mapping)
+          return mapping.desc and mapping.desc ~= ""
+        end,
+        triggers = {
+          { "<auto>", mode = "nixsotc" },
+          { "<leader>", mode = { "n", "v" } },
+        },
+        sort = { "local", "order", "group", "alphanum", "mod" },
+        expand = 0,
+        keys = {
+          scroll_down = "<c-d>",
+          scroll_up = "<c-u>",
+        },
         plugins = {
           marks = false,
           registers = false,
