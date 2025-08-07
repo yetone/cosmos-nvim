@@ -380,7 +380,9 @@ local function setup()
   M.add_plugin('folke/which-key.nvim', {
     config = function()
       require('which-key').setup({
-        delay = 200,
+        delay = function(ctx)
+          return ctx.plugin and 0 or 400
+        end,
         defer = function(ctx)
           return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
         end,

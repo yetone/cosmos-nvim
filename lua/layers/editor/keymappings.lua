@@ -151,10 +151,7 @@ cosmos.add_leader_keymapping("n|'", { '<Cmd>exe v:count1 . "ToggleTerm"<CR>', na
 cosmos.add_leader_keymapping('n|*', { '<CMD>Glance references<CR>', name = 'Search reference in current project' })
 cosmos.add_leader_keymapping('n|/', { ':Telescope live_grep<CR>', name = 'Search text in current project' })
 cosmos.add_leader_keymapping('n|<Tab>', { ':b#<CR>', name = 'Last buffer' })
-cosmos.add_leader_keymapping('n|<Space>', {
-  ':Telescope smart_open theme=' .. options.telescope_theme .. '<CR>',
-  name = 'Smart Open',
-})
+utils.set_keymap('n', '<Space><Space>', ':Telescope smart_open theme=' .. options.telescope_theme .. '<CR>', { desc = 'Smart Open' })
 
 cosmos.add_leader_keymapping(
   'n|lr',
