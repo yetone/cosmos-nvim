@@ -5,15 +5,15 @@ local M = {}
 
 M.base_30 = {
   white = '#F9F9FA',
-  darker_black = '#292A30', --  nvim bg
-  black = '#292A30',        -- 标签高亮组
+  darker_black = '#292A30', -- Normal.bg
+  black = '#292A30',        -- nvim bg
   black2 = '#393A42',       --tree文件 选中行
   one_bg = '#303138',       -- 第一层内容背景（选中行、代码块）
   one_bg2 = '#43454F',      -- 状态栏 StatusBar (filename)
-  one_bg3 = '#A5A9C2',
+  one_bg3 = '#5B5D6B',
   grey = '#51525E',  --行号
   grey_fg = '#5B5D6B', -- 代码注释加上 treefold 箭头折叠
-  grey_fg2 = '#FF645A',
+  grey_fg2 = '#8D91A6',
   light_grey = '#A5A9C2',
   red = '#FF645A',
   baby_pink = '#F29AB5',
@@ -31,10 +31,10 @@ M.base_30 = {
   orange = '#E8AB72',
   cyan = '#5EC8D6',
  -- UI 特殊元素
-  statusline_bg = "#333945",        -- 派生 base01/02 中间值
+  statusline_bg = "#303138",        -- 派生 base01/02 中间值
   lightbg       = "#75798A",        -- 弹窗背景（base01 再亮一点）
   pmenu_bg      = "#98C379",        -- 补全选中（与字符串同色）
-  folder_bg     = "#95B7FF",        -- 文件夹图标颜色（函数蓝）,
+  folder_bg     = "#ACDFFA",        -- 文件夹图标颜色（函数蓝）,
 }
 
 M.base_16 = {
@@ -100,6 +100,6 @@ M.base_16 = {
 -- }
 M.type = 'dark'
 
-M = require('base46').override_theme(M, 'nord')
+M = require('base46').override_theme(M, 'classic')
 
 return M
