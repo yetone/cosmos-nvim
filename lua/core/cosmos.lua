@@ -381,7 +381,7 @@ local function setup()
     config = function()
       require('which-key').setup({
         delay = function(ctx)
-          return ctx.plugin and 0 or 400
+          return ctx.plugin and 0 or 200
         end,
         defer = function(ctx)
           return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
