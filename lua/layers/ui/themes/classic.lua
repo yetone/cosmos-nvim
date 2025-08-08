@@ -91,6 +91,26 @@ M.base_16 = {
 --   base0F = '#C7B09E',
 -- }
 
+-- scheme: "Basalt AAA"
+-- author: "you + chatgpt"
+-- base00: "#292A30"  # 背景
+-- base01: "#30323A"  # 次级背景 / 边界
+-- base02: "#3A3D45"  # 行高亮/选区背景
+-- base03: "#B6BBC4"  # 注释（AAA）
+-- base04: "#C8CAD1"  # 次级文本/弱分隔
+-- base05: "#DCDDE2"  # 正文/默认前景（AAA）
+-- base06: "#EEF0F3"  # 强前景
+-- base07: "#FAFBFC"  # 最高亮度
+-- base08: "#E2A7A7"  # 红（errors）
+-- base09: "#D9B08C"  # 橙（numbers/attrs）
+-- base0A: "#C7B857"  # 黄（const/decoration）
+-- base0B: "#62CB74"  # 绿（strings/success，视觉休息）
+-- base0C: "#75C2D1"  # 青（regex/special）
+-- base0D: "#A3B8E0"  # 蓝（keywords/types）
+-- base0E: "#C7ABE3"  # 紫（functions/classes）
+-- base0F: "#DDAC98"  # 褐（特殊/语义外扩）
+
+M = require('base46').override_theme(M, 'gruvbox')
 -- M.polish_hl = {
 --   treesitter = {
 --     ['@punctuation.bracket'] = { fg = M.base_30.white },
