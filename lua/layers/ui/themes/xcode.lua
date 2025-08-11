@@ -8,10 +8,12 @@ local X = {
   main_function = "#60E4FC", -- main color
 
   type1 = "#FCA760", -- 设计原理是函数的补色(与函数相近)
-  string1 = "#A2E474", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
-
+  string1 = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
+  macoro = "#FD8F3F",
+  constructor = "#67B7A4", -- 构造器/类名
+  property = "#FC6A5D",
   string = "#FC6A5D",
-  char   = "#D0BF69",
+  char   = "#D4D5D9",
   number = "#D0BF69",
 
   regex         = "#FC6A5D",
@@ -52,8 +54,8 @@ local X = {
   selection   = "#3C3D47", -- 选区/Visual 背景
   git_add     = "#98C379",
   git_change  = "#E0BB36",
-  git_delete  = "#FF645A",
-  error       = "#FC6860",
+  git_delete  = "#FC6860",
+  error       = "#FF645A",
 }
 
 -- ===== UI: base_30（保留你当前深色 UI，插件友好） =====
@@ -104,8 +106,8 @@ M.base_16 = {
   base07 = '#F9F9FA',
   base08 = X.error,    -- Red    - 错误/删除
   base09 = X.main_literals,  -- Orange - 数字/布尔/字面量
-  base0A = X.operator,  -- Yellow - 常量/宏/标签
-  base0B = X.string1,  -- Green  - 字符串/成功
+  base0A = X.macoro,  -- Yellow - 常量/宏/标签
+  base0B = X.string,  -- Green  - 字符串/成功
   base0C = X.type1,  -- Cyan   - 类型/结构/构造器
   base0D = X.main_function,  -- Blue   - 函数/方法/链接
   base0E = X.main_keyword,   -- Purple - 关键字/控制流
@@ -115,13 +117,34 @@ M.base_16 = {
 M.type = 'dark'
 
 -- ===== polish_hl：按 Treesitter/LSP 语义映射到 X 方案 =====
--- M.polish_hl = {
+M.polish_hl = {
 
---     treesitter = {
---   -- Treesitter groups (Treesitter 语法高亮)
---   -- Strings / numbers
---     -- ===== Tree-sitter: 通用 =====
---
+    treesitter = {
+  -- Treesitter groups (Treesitter 语法高亮)
+  -- Strings / numbers
+    -- ===== Tree-sitter: 通用 =====
+    -- 传入参数变量
+    --  ["@variable.parameter"] = { fg = X.type_decl, italic = true },
+    --  ["@variable.builtin"] = { fg = X.type_decl, italic = true },
+    --  ["@keyword.this"] = { fg = X.type_decl, italic = true },
+
+    ["@property"] = { fg = X.property },     -- 对象/字典属性名
+    ["@field"]    = { fg = X.property },     -- 结构体字段
+
+    -- val: string
+    ["@string"]   = { fg = X.string1 },   -- 普通字符串
+    ["@uri"]      = { fg = X.url },      -- URL、路径
+
+    -- val: number
+    ["@number"]   = { fg = X.number },   -- 数字
+    ["@float"]    = { fg = X.number },   -- 浮点数
+
+    -- val: boolean/null
+    ["@boolean"]  = { fg = X.keyword, italic = true }, -- true/false
+    ["@constant.builtin"] = { fg = X.keyword, italic = true }, -- null/undefined
+
+
+  ["@keyword.repeat"]                   = { fg = X.lib_func, italic = true },
 --   -- ===== Tree-sitter: 通用 =====
 --   ["@boolean"]                      = { fg = X.number },
 --   ["@define"]                       = { fg = X.preproc },
@@ -134,7 +157,7 @@ M.type = 'dark'
 --
 --   ["@markup.list"]                  = { fg = X.text },
 --
---   ["@constant"]                     = { fg = X.other_decl, bold = true },
+  -- ["@constant"]                     = { fg = X.main_function, bold = true },
 --   ["@definition.constant"]          = { fg = X.other_decl, bold = true },
 --   ["@constant.builtin"]             = { fg = X.lib_const },
 --
@@ -142,14 +165,14 @@ M.type = 'dark'
 --   ["@character"]                    = { fg = X.char },
 --   ["@number"]                       = { fg = X.number },
 --
---   ["@namespace"]                    = { fg = X.type_decl },
---   ["@module"]                       = { fg = X.type_decl },
+  -- ["@namespace"]                    = { fg = X.type_decl },
+  ["@module"]                       = { fg = X.type_decl },
 --
---   ["@func.builtin"]                 = { fg = X.lib_func },
---   ["@function"]                     = { fg = X.proj_func },
---   ["@function.call"]                = { fg = X.proj_func },
---   ["@function.builtin"]             = { fg = X.lib_func },
---   ["@func.macro"]                   = { fg = X.proj_macro },
+  -- ["@func.builtin"]                 = { fg = X.lib_func },
+  -- ["@function"]                     = { fg = X.proj_func },
+  -- ["@function.call"]                = { fg = X.proj_func },
+  -- ["@function.builtin"]             = { fg = X.lib_func },
+  -- ["@func.macro"]                   = { fg = X.proj_macro },
 --
 --   ["@parameter"]                    = { fg = X.other_decl, nocombine = true },
 --   ["@variable.parameter"]           = { fg = X.other_decl, nocombine = true },
@@ -164,7 +187,7 @@ M.type = 'dark'
 --   ["@variable.member"]              = { fg = X.proj_prop },
 --   ["@property"]                     = { fg = X.proj_prop },
 --
---   ["@constructor"]                  = { fg = X.proj_type, nocombine = true },
+  ["@constructor"]                  = { fg = X.constructor, nocombine = true },
 --
 --   ["@conditional"]                  = { fg = X.keyword },
 --   ["@keyword.conditional"]          = { fg = X.keyword },
@@ -190,8 +213,8 @@ M.type = 'dark'
 --   ["@keyword.storage.lifetime"]     = { fg = X.keyword },
 --   ["@structure"]                    = { fg = X.other_decl },
 --
---   ["@variable"]                     = { fg = X.char },
---   ["@variable.builtin"]             = { fg = X.lib_const },
+  ["@variable"]                     = { fg = X.char },
+  ["@variable.builtin"]             = { fg = X.lib_const },
 --
 --   -- ===== 文本/标记 =====
 --   ["@text"]                         = { fg = X.text },
@@ -397,8 +420,8 @@ M.type = 'dark'
 --   Underlined                        = { fg = X.url, underline = true },
 --   ["@variable.cpp"]                 = { fg = X.text },
 --
--- },
--- }
+},
+}
 
 -- 如果你使用 NvChad/base46，需要注册主题名：
 M = require('base46').override_theme(M, 'xcode')
