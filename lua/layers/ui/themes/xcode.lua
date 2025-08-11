@@ -160,72 +160,72 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
-  ["@variable"]                     = { fg = X.char },         -- 普通变量/标识符
+  ["@variable"]                     = { fg = X.other_decl },         -- 普通变量/标识符
   ["@variable.builtin"]             = { fg = X.other_const },    -- 内置变量（如 this/self/arguments）
-  ["@variable.parameter"]           = { fg = X.param },        -- 函数/方法参数
+  ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
   ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
-  ["@variable.member"]              = { fg = X.field },        -- 成员/字段（obj.field）
+  ["@variable.member"]              = { fg = X.preproc },        -- 成员/字段（obj.field）
 
-  ["@constant"]                     = { fg = X.constant },     -- 常量名（不可变标识符）
+  ["@constant"]                     = { fg = X.proj_const },     -- 常量名（不可变标识符）
   ["@constant.builtin"]             = { fg = X.other_const },    -- 内置常量（nil/None/true/false 等）
   ["@constant.macro"]               = { fg = X.macro },        -- 宏常量（C/CPP 等宏）
 
-  ["@module"]                       = { fg = X.module, italic = true }, -- 模块/命名空间
-  ["@module.builtin"]               = { fg = X.module_builtin },              -- 内置模块/命名空间
-  ["@label"]                        = { fg = X.label },       -- 标签（如 C 的 label: 或 heredoc 标签）
+  ["@module"]                       = { fg = X.other_class, italic = true }, -- 模块/命名空间
+  ["@module.builtin"]               = { fg = X.other_class },              -- 内置模块/命名空间
+  ["@label"]                        = { fg = X.attribute },       -- 标签（如 C 的 label: 或 heredoc 标签）
 
   ---------------------------------------------------------------------------
   -- 字面量（Literals）
   ---------------------------------------------------------------------------
   ["@string"]                       = { fg = X.c_string },       -- 普通字符串
   ["@string.documentation"]         = { fg = X.c_string },       -- 文档字符串（docstring）
-  ["@string.regexp"]                = { fg = X.string_regex }, -- 正则字面量
-  ["@string.escape"]                = { fg = X.escape },       -- 字符串转义（\n、\t 等）
+  ["@string.regexp"]                = { fg = X.regex }, -- 正则字面量
+  ["@string.escape"]                = { fg = X.attribute },       -- 字符串转义（\n、\t 等）
   ["@string.special"]               = { fg = X.c_string },       -- 其他特殊字符串（日期等）
-  ["@string.special.symbol"]        = { fg = X.constant },     -- 符号/原子（如 :atom）
+  ["@string.special.symbol"]        = { fg = X.proj_const },     -- 符号/原子（如 :atom）
   ["@string.special.url"]           = { fg = X.url, underline = true, italic = true }, -- URL/链接
   ["@string.special.path"]          = { fg = X.c_string },       -- 文件路径
 
-  ["@character"]                    = { fg = X.c_string },       -- 字符字面量
-  ["@character.special"]            = { fg = X.escape },       -- 特殊字符（通配符等）
+  ["@character"]                    = { fg = X.char },       -- 字符字面量
+  ["@character.special"]            = { fg = X.attribute },       -- 特殊字符（通配符等）
 
-  ["@boolean"]                      = { fg = X.boolean },      -- 布尔字面量
+  ["@boolean"]                      = { fg = X.keyword },      -- 布尔字面量
   ["@number"]                       = { fg = X.number },       -- 数字
   ["@number.float"]                 = { fg = X.number },       -- 浮点数
 
   ---------------------------------------------------------------------------
   -- 类型与属性（Types & Attributes）
   ---------------------------------------------------------------------------
-  ["@type"]                         = { fg = X.type },         -- 类型/类定义与注解
+  ["@type"]                         = { fg = X.type_decl },         -- 类型/类定义与注解
   ["@type.builtin"]                 = { fg = X.other_const },    -- 内置类型（如 int/string）
-  ["@type.definition"]              = { fg = X.type },         -- 类型定义中的标识符
+  ["@type.definition"]              = { fg = X.proj_class },         -- 类型定义中的标识符
   ["@attribute"]                    = { fg = X.attribute },    -- 属性/注解（Python 装饰器、Rust lifetime）
   ["@attribute.builtin"]            = { fg = X.other_const },    -- 内置属性/注解
-  ["@property"]                     = { fg = X.property },     -- 键/值对中的键（JSON/YAML 等）
+  ["@property"]                     = { fg = X.c_property },     -- 键/值对中的键（JSON/YAML 等）
 
   ---------------------------------------------------------------------------
   -- 函数（Functions）
   ---------------------------------------------------------------------------
-  ["@function"]                     = { fg = X.func },         -- 函数定义/引用
-  ["@function.builtin"]             = { fg = X.func_builtin }, -- 内置函数
-  ["@function.call"]                = { fg = X.func },         -- 函数调用
-  ["@function.macro"]               = { fg = X.macro },        -- 宏函数（定义与调用）
+  ["@function"]                     = { fg = X.main_function },         -- 函数定义/引用
+  ["@function.builtin"]             = { fg = X.other_func }, -- 内置函数
+  ["@function.call"]                = { fg = X.main_function },         -- 函数调用
+  ["@function.macro"]               = { fg = X.preproc },        -- 宏函数（定义与调用）
 
-  ["@function.method"]              = { fg = X.func },         -- 方法定义
-  ["@function.method.call"]         = { fg = X.func },         -- 方法调用
-  ["@constructor"]                  = { fg = X.ctor },         -- 构造器调用/定义
-  ["@operator"]                     = { fg = X.op },           -- 运算符（+ - * / -> 等）
+  ["@function.method"]              = { fg = X.proj_func },         -- 方法定义
+  ["@function.method.call"]         = { fg = X.proj_func },         -- 方法调用
+  ["@constructor"]                  = { fg = X.c_constructor },         -- 构造器调用/定义
+  ["@operator"]                     = { fg = X.operator },           -- 运算符（+ - * / -> 等）
 
   ---------------------------------------------------------------------------
   -- 关键字（Keywords）
   ---------------------------------------------------------------------------
   ["@keyword"]                      = { fg = X.keyword },           -- 关键字（通用）
-  ["@keyword.coroutine"]            = { fg = X.keyword },           -- 协程相关（go/async/await）
+  ["@keyword.coroutine"]            = { fg = X.keyword, italic = true },           -- 协程相关（go/async/await）
   ["@keyword.function"]             = { fg = X.keyword },           -- 定义函数相关（def/func）
   ["@keyword.operator"]             = { fg = X.keyword },           -- 词法运算符（and/or/sizeof 等）
   ["@keyword.import"]               = { fg = X.keyword },           -- 导入/导出（import/from/use）
   ["@keyword.type"]                 = { fg = X.keyword },           -- 类型/结构定义（struct/enum）
-  ["@keyword.modifier"]             = { fg = X.keyword },           -- 修饰符（const/static/public 等）
+  ["@keyword.modifier"]             = { fg = X.keyword, italic = true },           -- 修饰符（const/static/public 等）
   ["@keyword.repeat"]               = { fg = X.keyword },           -- 循环（for/while）
   ["@keyword.return"]               = { fg = X.keyword },           -- 返回（return/yield）
   ["@keyword.debug"]                = { fg = X.keyword },           -- 调试相关
@@ -238,42 +238,42 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- 标点（Punctuation）
   ---------------------------------------------------------------------------
-  ["@punctuation.delimiter"]        = { fg = X.punct },        -- 分隔符（, . ; : 等）
-  ["@punctuation.bracket"]          = { fg = X.punct },        -- 括号（() {} []）
-  ["@punctuation.special"]          = { fg = X.punct },        -- 特殊标点（内插花括号等）
+  ["@punctuation.delimiter"]        = { fg = X.punctuation },        -- 分隔符（, . ; : 等）
+  ["@punctuation.bracket"]          = { fg = X.punctuation },        -- 括号（() {} []）
+  ["@punctuation.special"]          = { fg = X.punctuation },        -- 特殊标点（内插花括号等）
 
   ---------------------------------------------------------------------------
   -- 注释（Comments）
   ---------------------------------------------------------------------------
   ["@comment"]                      = { fg = X.comment, italic = true }, -- 普通注释
   ["@comment.documentation"]        = { fg = X.comment, italic = true }, -- 文档注释
-  ["@comment.error"]                = { fg = X.diff_del },     -- 标注错误类注释（ERROR/FIXME）
-  ["@comment.warning"]              = { fg = X.diff_delta },   -- 标注警告类注释（WARNING/HACK）
-  ["@comment.todo"]                 = { fg = X.diff_add },     -- TODO/WIP
-  ["@comment.note"]                 = { fg = X.boolean },      -- NOTE/INFO/XXX
+  ["@comment.error"]                = { fg = X.error, bold = true },     -- 标注错误类注释（ERROR/FIXME）
+  ["@comment.warning"]              = { fg = X.git_change, bold = true },   -- 标注警告类注释（WARNING/HACK）
+  ["@comment.todo"]                 = { fg = X.git_add, bold = true },     -- TODO/WIP
+  ["@comment.note"]                 = { fg = X.main_function, bold = true },      -- NOTE/INFO/XXX
 
   ---------------------------------------------------------------------------
   -- Markup / 文本标记（Markdown/LaTeX 等）
   ---------------------------------------------------------------------------
-  ["@markup.strong"]                = { fg = X.heading, bold = true },       -- 粗体
-  ["@markup.italic"]                = { fg = X.heading, italic = true },     -- 斜体
-  ["@markup.strikethrough"]         = { fg = X.diff_del, strikethrough = true }, -- 删除线
+  ["@markup.strong"]                = { fg = X.strong, bold = true },       -- 粗体
+  ["@markup.italic"]                = { fg = X.emphasis, italic = true },     -- 斜体
+  ["@markup.strikethrough"]         = { fg = X.git_delete, strikethrough = true }, -- 删除线
   ["@markup.underline"]             = { fg = X.url, underline = true },      -- 下划线（仅文字下划线）
   ["@markup.heading"]               = { fg = X.heading, bold = true },       -- 标题（总类）
-  ["@markup.quote"]                 = { fg = X.quote },                              -- 引用块
-  ["@markup.math"]                  = { fg = X.math },                               -- 数学环境
+  ["@markup.quote"]                 = { fg = X.other_type, italic = true },                              -- 引用块
+  ["@markup.math"]                  = { fg = X.attribute },                               -- 数学环境
   ["@markup.link"]                  = { fg = X.url, underline = true },      -- 链接（引用文本）
-  ["@markup.link.label"]            = { fg = X.tag },                                -- 链接描述/脚注
+  ["@markup.link.label"]            = { fg = X.attribute },                                -- 链接描述/脚注
   ["@markup.link.url"]              = { fg = X.url, italic = true, underline = true }, -- URL
-  ["@markup.raw"]                   = { fg = X.char, italic = true },        -- 行内代码/原文
-  ["@markup.raw.block"]             = { fg = X.char },                               -- 代码块
+  ["@markup.raw"]                   = { fg = X.raw, italic = true },        -- 行内代码/原文
+  ["@markup.raw.block"]             = { fg = X.raw },                               -- 代码块
 
   ---------------------------------------------------------------------------
   -- Diff（差异）
   ---------------------------------------------------------------------------
   ["@diff.plus"]                    = { fg = X.diff_add },      -- 新增
-  ["@diff.minus"]                   = { fg = X.diff_del },      -- 删除
-  ["@diff.delta"]                   = { fg = X.diff_delta },    -- 变更
+  ["@diff.minus"]                   = { fg = X.git_delete },      -- 删除
+  ["@diff.delta"]                   = { fg = X.git_change },    -- 变更
 
   ---------------------------------------------------------------------------
   -- 标签/HTML/XML
