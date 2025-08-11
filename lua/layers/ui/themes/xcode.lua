@@ -1,7 +1,7 @@
 -- layers/ui/themes/xcode_xoce.lua
 local M = {}
 
--- ===== Xcode 风格的语义色（供 polish_hl 使用）=====
+-- ===== Xcode 风格的语义色（使用颜色的层级来突出代码） =====
 local X = {
   main_keyword  = "#FC5FA3", --start point
   main_literals = "#FCED60",
@@ -167,7 +167,7 @@ M.polish_hl = {
   ["@variable.member"]              = { fg = X.preproc },        -- 成员/字段（obj.field）
 
   ["@constant"]                     = { fg = X.proj_const },     -- 常量名（不可变标识符）
-  ["@constant.builtin"]             = { fg = X.other_const },    -- 内置常量（nil/None/true/false 等）
+  ["@constant.builtin"]             = { fg = X.other_const, bold = true },    -- 内置常量（nil/None/true/false 等）
   ["@constant.macro"]               = { fg = X.macro },        -- 宏常量（C/CPP 等宏）
 
   ["@module"]                       = { fg = X.other_class, italic = true }, -- 模块/命名空间
@@ -189,7 +189,7 @@ M.polish_hl = {
   ["@character"]                    = { fg = X.char },       -- 字符字面量
   ["@character.special"]            = { fg = X.attribute },       -- 特殊字符（通配符等）
 
-  ["@boolean"]                      = { fg = X.keyword },      -- 布尔字面量
+  ["@boolean"]                      = { fg = X.keyword, bold = true },      -- 布尔字面量
   ["@number"]                       = { fg = X.number },       -- 数字
   ["@number.float"]                 = { fg = X.number },       -- 浮点数
 
@@ -278,10 +278,10 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- 标签/HTML/XML
   ---------------------------------------------------------------------------
-  ["@tag"]                          = { fg = X.tag },           -- 标签名
-  ["@tag.builtin"]                  = { fg = X.tag },           -- 内置标签名（如 HTML5 标签）
-  ["@tag.attribute"]                = { fg = X.tag_attr },      -- 标签属性名
-  ["@tag.delimiter"]                = { fg = X.punct },         -- 标签分隔符（< > /）
+  ["@tag"]                          = { fg = X.keyword },           -- 标签名
+  ["@tag.builtin"]                  = { fg = X.keyword },           -- 内置标签名（如 HTML5 标签）
+  ["@tag.attribute"]                = { fg = X.attribute },      -- 标签属性名
+  ["@tag.delimiter"]                = { fg = X.punctuation },         -- 标签分隔符（< > /）
 
   ---------------------------------------------------------------------------
   -- 非高亮捕获（控制用）
