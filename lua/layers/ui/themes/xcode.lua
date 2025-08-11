@@ -7,11 +7,12 @@ local X = {
   main_literals = "#FCED60",
   main_function = "#60E4FC", -- main color
 
-  c_type = "#FCA760", -- 设计原理是函数的补色(与函数相近)
+  c_type = "#5DD8FF", -- 设计原理是类型、构造器与函数保持同色相或近邻色、靠明度/样式区分(与函数相近)
   c_string = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
   c_macro = "#FD8F3F",
-  c_constructor = "#67B7A4", -- 构造器/类名
+  c_constructor = "#60FCE1", -- 构造器/类名
   c_property = "#FC6A5D", -- 键值对 属性
+  c_doc = "#A2E474", -- 文档
 
   string           = "#FC6A5D",
   char             = "#D0BF69",
@@ -20,7 +21,7 @@ local X = {
   regex_number     = "#D0BF69",
   regex_capture    = "#67B7A4",
   regex_class      = "#A167E6",
-  regex_op         = "#FFFFFF",
+  regex_op         = "#DEDEE1",
   keyword          = "#FC5FA3",
   preproc          = "#FD8F3F",
   url              = "#5482FF",
@@ -44,10 +45,10 @@ local X = {
 
   heading          = "#AA0D91",
     -- 这些是高亮表需要补齐的语义键（先放占位，按需替换）
-  text        = "#D4D5D9", -- 默认前景
+  text        = "#DEDEE1", -- 默认前景
   comment     = "#6C7986", -- 注释
   punctuation = "#D4D5D9", -- 括号/逗号等
-  operator    = "#FFFFFF", -- 常规运算符（也可等于 regex_op）
+  operator    = "#DEDEE1", -- 常规运算符（也可等于 regex_op）
   emphasis    = "#FC5FA3", -- 斜体强调
   strong      = "#FC5FA3", -- 粗体强调
   raw         = "#FC6A5D", -- 行内代码/原始文本
@@ -101,7 +102,8 @@ M.base_16 = {
   base02 = '#4F5057',
   base03 = '#6C7986', -- 注释
   base04 = '#8D91A6', -- 次级文本
-  base05 = '#D9D9DB', -- 正文/变量（AAA）
+  -- base05 = '#D9D9DB', -- 正文/变量（AAA）
+  base05 = X.text, -- 正文/变量（AAA）
   base06 = '#E8E9EC',
   base07 = '#F9F9FA',
   base08 = X.error,    -- Red    - 错误/删除
@@ -160,11 +162,11 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
-  ["@variable"]                     = { fg = X.other_decl },         -- 普通变量/标识符
+  ["@variable"]                     = { fg = X.text },         -- 普通变量/标识符
   ["@variable.builtin"]             = { fg = X.other_const },    -- 内置变量（如 this/self/arguments）
   ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
   ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
-  ["@variable.member"]              = { fg = X.preproc },        -- 成员/字段（obj.field）
+  ["@variable.member"]              = { fg = X.c_property },        -- 成员/字段（obj.field）
 
   ["@constant"]                     = { fg = X.proj_const },     -- 常量名（不可变标识符）
   ["@constant.builtin"]             = { fg = X.other_const, bold = true },    -- 内置常量（nil/None/true/false 等）
@@ -178,7 +180,7 @@ M.polish_hl = {
   -- 字面量（Literals）
   ---------------------------------------------------------------------------
   ["@string"]                       = { fg = X.c_string },       -- 普通字符串
-  ["@string.documentation"]         = { fg = X.c_string },       -- 文档字符串（docstring）
+  ["@string.documentation"]         = { fg = X.c_doc },       -- 文档字符串（docstring）
   ["@string.regexp"]                = { fg = X.regex }, -- 正则字面量
   ["@string.escape"]                = { fg = X.attribute },       -- 字符串转义（\n、\t 等）
   ["@string.special"]               = { fg = X.c_string },       -- 其他特殊字符串（日期等）
@@ -189,7 +191,7 @@ M.polish_hl = {
   ["@character"]                    = { fg = X.char },       -- 字符字面量
   ["@character.special"]            = { fg = X.attribute },       -- 特殊字符（通配符等）
 
-  ["@boolean"]                      = { fg = X.keyword, bold = true },      -- 布尔字面量
+  ["@boolean"]                      = { fg = X.number },      -- 布尔字面量
   ["@number"]                       = { fg = X.number },       -- 数字
   ["@number.float"]                 = { fg = X.number },       -- 浮点数
 
@@ -197,10 +199,10 @@ M.polish_hl = {
   -- 类型与属性（Types & Attributes）
   ---------------------------------------------------------------------------
   ["@type"]                         = { fg = X.type_decl },         -- 类型/类定义与注解
-  ["@type.builtin"]                 = { fg = X.other_const },    -- 内置类型（如 int/string）
-  ["@type.definition"]              = { fg = X.proj_class },         -- 类型定义中的标识符
+  ["@type.builtin"]                 = { fg = X.other_type },    -- 内置类型（如 int/string）
+  ["@type.definition"]              = { link = "@type", bold = true},         -- 类型定义中的标识符
   ["@attribute"]                    = { fg = X.attribute },    -- 属性/注解（Python 装饰器、Rust lifetime）
-  ["@attribute.builtin"]            = { fg = X.other_const },    -- 内置属性/注解
+  ["@attribute.builtin"]            = { fg = X.other_type },    -- 内置属性/注解
   ["@property"]                     = { fg = X.c_property },     -- 键/值对中的键（JSON/YAML 等）
 
   ---------------------------------------------------------------------------
@@ -213,7 +215,7 @@ M.polish_hl = {
 
   ["@function.method"]              = { fg = X.proj_func },         -- 方法定义
   ["@function.method.call"]         = { fg = X.proj_func },         -- 方法调用
-  ["@constructor"]                  = { fg = X.c_constructor },         -- 构造器调用/定义
+  ["@constructor"]                  = { fg = X.c_constructor, bold = true },         -- 构造器调用/定义
   ["@operator"]                     = { fg = X.operator },           -- 运算符（+ - * / -> 等）
 
   ---------------------------------------------------------------------------
@@ -278,11 +280,17 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- 标签/HTML/XML
   ---------------------------------------------------------------------------
-  ["@tag"]                          = { fg = X.keyword },           -- 标签名
-  ["@tag.builtin"]                  = { fg = X.keyword },           -- 内置标签名（如 HTML5 标签）
+  ["@tag"]                          = { link = "@type" },           -- 标签名
+  ["@tag.builtin"]                  = { link = "@type" },           -- 内置标签名（如 HTML5 标签）
   ["@tag.attribute"]                = { fg = X.attribute },      -- 标签属性名
   ["@tag.delimiter"]                = { fg = X.punctuation },         -- 标签分隔符（< > /）
 
+  ---------------------------------------------------------------------------
+  -- LSP 语义对齐
+  ---------------------------------------------------------------------------
+  -- PATCH #5: 命名空间当模块处理，便于统一风格
+  ["@lsp.type.namespace"]           = { link = "@module" },
+  
   ---------------------------------------------------------------------------
   -- 非高亮捕获（控制用）
   ---------------------------------------------------------------------------
