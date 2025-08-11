@@ -7,27 +7,26 @@ local X = {
   main_literals = "#FCED60",
   main_function = "#60E4FC", -- main color
 
-  type1 = "#FCA760", -- 设计原理是函数的补色(与函数相近)
-  string1 = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
-  macoro = "#FD8F3F",
-  constructor = "#67B7A4", -- 构造器/类名
-  property = "#FC6A5D",
-  string = "#FC6A5D",
-  char   = "#D4D5D9",
-  number = "#D0BF69",
+  c_type = "#FCA760", -- 设计原理是函数的补色(与函数相近)
+  c_string = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
+  c_macro = "#FD8F3F",
+  c_constructor = "#67B7A4", -- 构造器/类名
+  c_property = "#FC6A5D", -- 键值对 属性
 
-  regex         = "#FC6A5D",
-  regex_number  = "#D0BF69",
-  regex_capture = "#67B7A4",
-  regex_class   = "#A167E6",
-  regex_op      = "#FFFFFF",
-
-  keyword   = "#FC5FA3",
-  preproc   = "#FD8F3F",
-  url       = "#5482FF",
-  attr      = "#BF8555",
-  type_decl = "#5DD8FF",
-  other_decl= "#41A1C0",
+  string           = "#FC6A5D",
+  char             = "#D0BF69",
+  number           = "#D0BF69",
+  regex            = "#FC6A5D",
+  regex_number     = "#D0BF69",
+  regex_capture    = "#67B7A4",
+  regex_class      = "#A167E6",
+  regex_op         = "#FFFFFF",
+  keyword          = "#FC5FA3",
+  preproc          = "#FD8F3F",
+  url              = "#5482FF",
+  attribute        = "#BF8555",
+  type_decl        = "#5DD8FF",
+  other_decl       = "#41A1C0",
 
   proj_class       = "#9EF1DD",
   proj_func        = "#67B7A4",
@@ -43,10 +42,10 @@ local X = {
   other_prop       = "#A167E6",
   other_macro      = "#FD8F3F",
 
-  heading = "#AA0D91",
+  heading          = "#AA0D91",
     -- 这些是高亮表需要补齐的语义键（先放占位，按需替换）
   text        = "#D4D5D9", -- 默认前景
-  comment     = "#75798A", -- 注释
+  comment     = "#6C7986", -- 注释
   punctuation = "#D4D5D9", -- 括号/逗号等
   operator    = "#FFFFFF", -- 常规运算符（也可等于 regex_op）
   emphasis    = "#FC5FA3", -- 斜体强调
@@ -100,16 +99,16 @@ M.base_16 = {
   base00 = '#292A30',
   base01 = '#3C3D47',
   base02 = '#4F5057',
-  base03 = '#75798A', -- 注释
+  base03 = '#6C7986', -- 注释
   base04 = '#8D91A6', -- 次级文本
   base05 = '#D9D9DB', -- 正文/变量（AAA）
   base06 = '#E8E9EC',
   base07 = '#F9F9FA',
   base08 = X.error,    -- Red    - 错误/删除
   base09 = X.main_literals,  -- Orange - 数字/布尔/字面量
-  base0A = X.macoro,  -- Yellow - 常量/宏/标签
-  base0B = X.string,  -- Green  - 字符串/成功
-  base0C = X.type1,  -- Cyan   - 类型/结构/构造器
+  base0A = X.c_macro,  -- Yellow - 常量/宏/标签
+  base0B = X.c_string,  -- Green  - 字符串/成功
+  base0C = X.c_type,  -- Cyan   - 类型/结构/构造器
   base0D = X.main_function,  -- Blue   - 函数/方法/链接
   base0E = X.main_keyword,   -- Purple - 关键字/控制流
   base0F = '#BE8A70',     -- Brown  - 分隔符/杂项
@@ -121,6 +120,177 @@ M.type = 'dark'
 M.polish_hl = {
 
     treesitter = {
+-- 假设你已有一套调色板 X（示例，仅占位）
+-- local X = {
+--   char = "#A6B7CC",           -- 普通变量/标识符
+--   other_const = "#D19A66",      -- 内置实体（如 this/self、nil/None 等）
+--   param = "#E5C07B",          -- 函数参数
+--   field = "#56B6C2",          -- 成员/属性
+--   constant = "#E5C07B",       -- 常量
+--   module = "#D2A8FF",         -- 模块/命名空间
+--   module_builtin = "#BD93F9", -- 内置模块
+--   label = "#C678DD",          -- 标签名
+--   string = "#98C379",         -- 字符串
+--   string_regex = "#C678DD",   -- 正则
+--   escape = "#E5C07B",         -- 转义序列
+--   url = "#61AFEF",            -- URL 链接
+--   number = "#D19A66",         -- 数字/浮点
+--   boolean = "#56B6C2",        -- 布尔
+--   type = "#56B6C2",           -- 类型/类名
+--   attribute = "#D19A66",      -- 注解/属性（如装饰器、lifetime）
+--   property = "#56B6C2",       -- 键名/属性键
+--   func = "#61AFEF",           -- 函数/方法
+--   func_builtin = "#E06C75",   -- 内置函数
+--   macro = "#E06C75",          -- 宏
+--   ctor = "#61AFEF",           -- 构造器
+--   op = "#ABB2BF",             -- 运算符
+--   kw = "#C678DD",             -- 关键字（大类）
+--   punct = "#ABB2BF",          -- 标点类
+--   comment = "#5C6370",        -- 注释
+--   heading = "#E5C07B",        -- 标题/强调
+--   quote = "#98C379",          -- 引用
+--   math = "#D19A66",           -- 数学环境
+--   diff_add = "#98C379",       -- diff 新增
+--   diff_del = "#E06C75",       -- diff 删除
+--   diff_delta = "#E5C07B",     -- diff 变更
+--   tag = "#E06C75",            -- 标签名（HTML/XML）
+--   tag_attr = "#56B6C2",       -- 标签属性名
+-- }
+
+  ---------------------------------------------------------------------------
+  -- 标识符（Identifier）
+  ---------------------------------------------------------------------------
+  ["@variable"]                     = { fg = X.char },         -- 普通变量/标识符
+  ["@variable.builtin"]             = { fg = X.other_const },    -- 内置变量（如 this/self/arguments）
+  ["@variable.parameter"]           = { fg = X.param },        -- 函数/方法参数
+  ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
+  ["@variable.member"]              = { fg = X.field },        -- 成员/字段（obj.field）
+
+  ["@constant"]                     = { fg = X.constant },     -- 常量名（不可变标识符）
+  ["@constant.builtin"]             = { fg = X.other_const },    -- 内置常量（nil/None/true/false 等）
+  ["@constant.macro"]               = { fg = X.macro },        -- 宏常量（C/CPP 等宏）
+
+  ["@module"]                       = { fg = X.module, italic = true }, -- 模块/命名空间
+  ["@module.builtin"]               = { fg = X.module_builtin },              -- 内置模块/命名空间
+  ["@label"]                        = { fg = X.label },       -- 标签（如 C 的 label: 或 heredoc 标签）
+
+  ---------------------------------------------------------------------------
+  -- 字面量（Literals）
+  ---------------------------------------------------------------------------
+  ["@string"]                       = { fg = X.c_string },       -- 普通字符串
+  ["@string.documentation"]         = { fg = X.c_string },       -- 文档字符串（docstring）
+  ["@string.regexp"]                = { fg = X.string_regex }, -- 正则字面量
+  ["@string.escape"]                = { fg = X.escape },       -- 字符串转义（\n、\t 等）
+  ["@string.special"]               = { fg = X.c_string },       -- 其他特殊字符串（日期等）
+  ["@string.special.symbol"]        = { fg = X.constant },     -- 符号/原子（如 :atom）
+  ["@string.special.url"]           = { fg = X.url, underline = true, italic = true }, -- URL/链接
+  ["@string.special.path"]          = { fg = X.c_string },       -- 文件路径
+
+  ["@character"]                    = { fg = X.c_string },       -- 字符字面量
+  ["@character.special"]            = { fg = X.escape },       -- 特殊字符（通配符等）
+
+  ["@boolean"]                      = { fg = X.boolean },      -- 布尔字面量
+  ["@number"]                       = { fg = X.number },       -- 数字
+  ["@number.float"]                 = { fg = X.number },       -- 浮点数
+
+  ---------------------------------------------------------------------------
+  -- 类型与属性（Types & Attributes）
+  ---------------------------------------------------------------------------
+  ["@type"]                         = { fg = X.type },         -- 类型/类定义与注解
+  ["@type.builtin"]                 = { fg = X.other_const },    -- 内置类型（如 int/string）
+  ["@type.definition"]              = { fg = X.type },         -- 类型定义中的标识符
+  ["@attribute"]                    = { fg = X.attribute },    -- 属性/注解（Python 装饰器、Rust lifetime）
+  ["@attribute.builtin"]            = { fg = X.other_const },    -- 内置属性/注解
+  ["@property"]                     = { fg = X.property },     -- 键/值对中的键（JSON/YAML 等）
+
+  ---------------------------------------------------------------------------
+  -- 函数（Functions）
+  ---------------------------------------------------------------------------
+  ["@function"]                     = { fg = X.func },         -- 函数定义/引用
+  ["@function.builtin"]             = { fg = X.func_builtin }, -- 内置函数
+  ["@function.call"]                = { fg = X.func },         -- 函数调用
+  ["@function.macro"]               = { fg = X.macro },        -- 宏函数（定义与调用）
+
+  ["@function.method"]              = { fg = X.func },         -- 方法定义
+  ["@function.method.call"]         = { fg = X.func },         -- 方法调用
+  ["@constructor"]                  = { fg = X.ctor },         -- 构造器调用/定义
+  ["@operator"]                     = { fg = X.op },           -- 运算符（+ - * / -> 等）
+
+  ---------------------------------------------------------------------------
+  -- 关键字（Keywords）
+  ---------------------------------------------------------------------------
+  ["@keyword"]                      = { fg = X.keyword },           -- 关键字（通用）
+  ["@keyword.coroutine"]            = { fg = X.keyword },           -- 协程相关（go/async/await）
+  ["@keyword.function"]             = { fg = X.keyword },           -- 定义函数相关（def/func）
+  ["@keyword.operator"]             = { fg = X.keyword },           -- 词法运算符（and/or/sizeof 等）
+  ["@keyword.import"]               = { fg = X.keyword },           -- 导入/导出（import/from/use）
+  ["@keyword.type"]                 = { fg = X.keyword },           -- 类型/结构定义（struct/enum）
+  ["@keyword.modifier"]             = { fg = X.keyword },           -- 修饰符（const/static/public 等）
+  ["@keyword.repeat"]               = { fg = X.keyword },           -- 循环（for/while）
+  ["@keyword.return"]               = { fg = X.keyword },           -- 返回（return/yield）
+  ["@keyword.debug"]                = { fg = X.keyword },           -- 调试相关
+  ["@keyword.exception"]            = { fg = X.keyword },           -- 异常（try/throw/catch）
+  ["@keyword.conditional"]          = { fg = X.keyword },           -- 条件（if/else/switch）
+  ["@keyword.conditional.ternary"]  = { fg = X.keyword },           -- 三目（?:）
+  ["@keyword.directive"]            = { fg = X.keyword },           -- 预处理/指令（#if/#include/#!/usr/bin/env）
+  ["@keyword.directive.define"]     = { fg = X.keyword },           -- 预处理定义（#define）
+
+  ---------------------------------------------------------------------------
+  -- 标点（Punctuation）
+  ---------------------------------------------------------------------------
+  ["@punctuation.delimiter"]        = { fg = X.punct },        -- 分隔符（, . ; : 等）
+  ["@punctuation.bracket"]          = { fg = X.punct },        -- 括号（() {} []）
+  ["@punctuation.special"]          = { fg = X.punct },        -- 特殊标点（内插花括号等）
+
+  ---------------------------------------------------------------------------
+  -- 注释（Comments）
+  ---------------------------------------------------------------------------
+  ["@comment"]                      = { fg = X.comment, italic = true }, -- 普通注释
+  ["@comment.documentation"]        = { fg = X.comment, italic = true }, -- 文档注释
+  ["@comment.error"]                = { fg = X.diff_del },     -- 标注错误类注释（ERROR/FIXME）
+  ["@comment.warning"]              = { fg = X.diff_delta },   -- 标注警告类注释（WARNING/HACK）
+  ["@comment.todo"]                 = { fg = X.diff_add },     -- TODO/WIP
+  ["@comment.note"]                 = { fg = X.boolean },      -- NOTE/INFO/XXX
+
+  ---------------------------------------------------------------------------
+  -- Markup / 文本标记（Markdown/LaTeX 等）
+  ---------------------------------------------------------------------------
+  ["@markup.strong"]                = { fg = X.heading, bold = true },       -- 粗体
+  ["@markup.italic"]                = { fg = X.heading, italic = true },     -- 斜体
+  ["@markup.strikethrough"]         = { fg = X.diff_del, strikethrough = true }, -- 删除线
+  ["@markup.underline"]             = { fg = X.url, underline = true },      -- 下划线（仅文字下划线）
+  ["@markup.heading"]               = { fg = X.heading, bold = true },       -- 标题（总类）
+  ["@markup.quote"]                 = { fg = X.quote },                              -- 引用块
+  ["@markup.math"]                  = { fg = X.math },                               -- 数学环境
+  ["@markup.link"]                  = { fg = X.url, underline = true },      -- 链接（引用文本）
+  ["@markup.link.label"]            = { fg = X.tag },                                -- 链接描述/脚注
+  ["@markup.link.url"]              = { fg = X.url, italic = true, underline = true }, -- URL
+  ["@markup.raw"]                   = { fg = X.char, italic = true },        -- 行内代码/原文
+  ["@markup.raw.block"]             = { fg = X.char },                               -- 代码块
+
+  ---------------------------------------------------------------------------
+  -- Diff（差异）
+  ---------------------------------------------------------------------------
+  ["@diff.plus"]                    = { fg = X.diff_add },      -- 新增
+  ["@diff.minus"]                   = { fg = X.diff_del },      -- 删除
+  ["@diff.delta"]                   = { fg = X.diff_delta },    -- 变更
+
+  ---------------------------------------------------------------------------
+  -- 标签/HTML/XML
+  ---------------------------------------------------------------------------
+  ["@tag"]                          = { fg = X.tag },           -- 标签名
+  ["@tag.builtin"]                  = { fg = X.tag },           -- 内置标签名（如 HTML5 标签）
+  ["@tag.attribute"]                = { fg = X.tag_attr },      -- 标签属性名
+  ["@tag.delimiter"]                = { fg = X.punct },         -- 标签分隔符（< > /）
+
+  ---------------------------------------------------------------------------
+  -- 非高亮捕获（控制用）
+  ---------------------------------------------------------------------------
+  ["@none"]                         = { },                      -- 关闭此捕获的高亮
+  ["@conceal"]                      = { },                      -- 仅用于隐藏/遮蔽
+  ["@spell"]                        = { },                      -- 拼写检查开启区
+  ["@nospell"]                      = { },                      -- 拼写检查关闭区
+
   -- Treesitter groups (Treesitter 语法高亮)
   -- Strings / numbers
     -- ===== Tree-sitter: 通用 =====
@@ -129,23 +299,23 @@ M.polish_hl = {
     --  ["@variable.builtin"] = { fg = X.type_decl, italic = true },
     --  ["@keyword.this"] = { fg = X.type_decl, italic = true },
 
-    ["@property"] = { fg = X.property },     -- 对象/字典属性名
-    ["@field"]    = { fg = X.property },     -- 结构体字段
+  --   ["@property"] = { fg = X.property },     -- 对象/字典属性名
+  --   ["@field"]    = { fg = X.property },     -- 结构体字段
 
-    -- val: string
-    ["@string"]   = { fg = X.string1 },   -- 普通字符串
-    ["@uri"]      = { fg = X.url },      -- URL、路径
+  --   -- val: string
+  --   ["@string"]   = { fg = X.string1 },   -- 普通字符串
+  --   ["@uri"]      = { fg = X.url },      -- URL、路径
 
-    -- val: number
-    ["@number"]   = { fg = X.number },   -- 数字
-    ["@float"]    = { fg = X.number },   -- 浮点数
+  --   -- val: number
+  --   ["@number"]   = { fg = X.number },   -- 数字
+  --   ["@float"]    = { fg = X.number },   -- 浮点数
 
-    -- val: boolean/null
-    ["@boolean"]  = { fg = X.keyword, italic = true }, -- true/false
-    ["@constant.builtin"] = { fg = X.keyword, italic = true }, -- null/undefined
+  --   -- val: boolean/null
+  --   ["@boolean"]  = { fg = X.keyword, italic = true }, -- true/false
+  --   ["@constant.builtin"] = { fg = X.keyword, italic = true }, -- null/undefined
 
 
-  ["@keyword.repeat"]                   = { fg = X.lib_func, italic = true },
+  -- ["@keyword.repeat"]                   = { fg = X.keyword, italic = true },
 --   -- ===== Tree-sitter: 通用 =====
 --   ["@boolean"]                      = { fg = X.number },
 --   ["@define"]                       = { fg = X.preproc },
@@ -160,14 +330,14 @@ M.polish_hl = {
 --
   -- ["@constant"]                     = { fg = X.main_function, bold = true },
 --   ["@definition.constant"]          = { fg = X.other_decl, bold = true },
---   ["@constant.builtin"]             = { fg = X.lib_const },
+--   ["@constant.builtin"]             = { fg = X.other_const },
 --
 --   ["@string"]                       = { fg = X.string },
 --   ["@character"]                    = { fg = X.char },
 --   ["@number"]                       = { fg = X.number },
 --
-  -- ["@namespace"]                    = { fg = X.type_decl },
-  ["@module"]                       = { fg = X.type_decl },
+  -- -- ["@namespace"]                    = { fg = X.type_decl },
+  -- ["@module"]                       = { fg = X.type_decl },
 --
   -- ["@func.builtin"]                 = { fg = X.lib_func },
   -- ["@function"]                     = { fg = X.proj_func },
@@ -188,7 +358,7 @@ M.polish_hl = {
 --   ["@variable.member"]              = { fg = X.proj_prop },
 --   ["@property"]                     = { fg = X.proj_prop },
 --
-  ["@constructor"]                  = { fg = X.constructor, nocombine = true },
+  -- ["@constructor"]                  = { fg = X.constructor, nocombine = true },
 --
 --   ["@conditional"]                  = { fg = X.keyword },
 --   ["@keyword.conditional"]          = { fg = X.keyword },
@@ -214,8 +384,8 @@ M.polish_hl = {
 --   ["@keyword.storage.lifetime"]     = { fg = X.keyword },
 --   ["@structure"]                    = { fg = X.other_decl },
 --
-  ["@variable"]                     = { fg = X.char },
-  ["@variable.builtin"]             = { fg = X.lib_const },
+  -- ["@variable"]                     = { fg = X.char },
+  -- ["@variable.builtin"]             = { fg = X.other_const },
 --
 --   -- ===== 文本/标记 =====
 --   ["@text"]                         = { fg = X.text },
