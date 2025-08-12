@@ -13,6 +13,7 @@ local X = {
   c_constructor = "#60FCE1", -- 构造器/类名
   c_property = "#FC6A5D", -- 键值对 属性
   c_doc = "#A2E474", -- 文档
+  c_function = "#50C4EB", -- 函数
 
   string           = "#FC6A5D",
   char             = "#D0BF69",
@@ -163,17 +164,17 @@ M.polish_hl = {
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
   ["@variable"]                     = { fg = X.text },         -- 普通变量/标识符
-  ["@variable.builtin"]             = { fg = X.other_const },    -- 内置变量（如 this/self/arguments）
+  ["@variable.builtin"]             = { fg = X.c_constructor },    -- 内置变量（如 this/self/arguments）
   ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
   ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
-  ["@variable.member"]              = { fg = X.c_property },        -- 成员/字段（obj.field）
+  ["@variable.member"]              = { fg = X.proj_prop },        -- 成员/字段（obj.field）
 
   ["@constant"]                     = { fg = X.proj_const },     -- 常量名（不可变标识符）
   ["@constant.builtin"]             = { fg = X.other_const, bold = true },    -- 内置常量（nil/None/true/false 等）
   ["@constant.macro"]               = { fg = X.macro },        -- 宏常量（C/CPP 等宏）
 
-  ["@module"]                       = { fg = X.other_class, italic = true }, -- 模块/命名空间
-  ["@module.builtin"]               = { fg = X.other_class },              -- 内置模块/命名空间
+  ["@module"]                       = { fg = X.type_decl, italic = true }, -- 模块/命名空间
+  ["@module.builtin"]               = { fg = X.type_decl },              -- 内置模块/命名空间
   ["@label"]                        = { fg = X.attribute },       -- 标签（如 C 的 label: 或 heredoc 标签）
 
   ---------------------------------------------------------------------------
@@ -184,14 +185,14 @@ M.polish_hl = {
   ["@string.regexp"]                = { fg = X.regex }, -- 正则字面量
   ["@string.escape"]                = { fg = X.attribute },       -- 字符串转义（\n、\t 等）
   ["@string.special"]               = { fg = X.c_string },       -- 其他特殊字符串（日期等）
-  ["@string.special.symbol"]        = { fg = X.proj_const },     -- 符号/原子（如 :atom）
+  ["@string.special.symbol"]        = { fg = X.main_literals },     -- 符号/原子（如 :atom）
   ["@string.special.url"]           = { fg = X.url, underline = true, italic = true }, -- URL/链接
   ["@string.special.path"]          = { fg = X.c_string },       -- 文件路径
 
   ["@character"]                    = { fg = X.char },       -- 字符字面量
   ["@character.special"]            = { fg = X.attribute },       -- 特殊字符（通配符等）
 
-  ["@boolean"]                      = { fg = X.number },      -- 布尔字面量
+  ["@boolean"]                      = { fg = X.main_literals },      -- 布尔字面量
   ["@number"]                       = { fg = X.number },       -- 数字
   ["@number.float"]                 = { fg = X.number },       -- 浮点数
 
@@ -209,13 +210,13 @@ M.polish_hl = {
   -- 函数（Functions）
   ---------------------------------------------------------------------------
   ["@function"]                     = { fg = X.main_function },         -- 函数定义/引用
-  ["@function.builtin"]             = { fg = X.other_func }, -- 内置函数
+  ["@function.builtin"]             = { fg = X.other_func }, -- 内置函数  例如 python print list
   ["@function.call"]                = { fg = X.main_function },         -- 函数调用
   ["@function.macro"]               = { fg = X.preproc },        -- 宏函数（定义与调用）
 
-  ["@function.method"]              = { fg = X.proj_func },         -- 方法定义
-  ["@function.method.call"]         = { fg = X.proj_func },         -- 方法调用
-  ["@constructor"]                  = { fg = X.c_constructor, bold = true },         -- 构造器调用/定义
+  ["@function.method"]              = { fg = X.c_function },         -- 方法定义
+  ["@function.method.call"]         = { fg = X.c_function },         -- 方法调用
+  ["@constructor"]                  = { fg = X.proj_type, bold = true },         -- 构造器调用/定义
   ["@operator"]                     = { fg = X.operator },           -- 运算符（+ - * / -> 等）
 
   ---------------------------------------------------------------------------
@@ -290,7 +291,17 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   -- PATCH #5: 命名空间当模块处理，便于统一风格
   ["@lsp.type.namespace"]           = { link = "@module" },
+  -- 用 LSP 语义令牌区分“声明的键”和“被访问的成员”
+  ["@lsp.typemod.property.declaration"] = { link = "@property" }, -- 声明的键
+  ["@lsp.type.property"]                 = { link = "@variable.member" }, -- 被访问的成员
+
+  ["@lsp.typemod.namespace.defaultLibrary"] = { link = "@module.builtin" }, -- 标准库命名空间（如 window/document）按内置模块配色,
+  ["@lsp.typemod.variable.defaultLibrary"]  = { link = "@variable.builtin" }, -- 标准库变量（如 console）按内置变量配色,
+  ["@lsp.typemod.method.defaultLibrary"]    = { link = "@function.builtin" }, -- 标准库方法（如 console.log）按内置函数配色,
+  ["@lsp.typemod.property.defaultLibrary"]  = { link = "@variable.member" }, -- 标准库属性（如 document.body）按成员配色,
   
+  ["@lsp.type.method"]   = { link = "@function" }, -- LSP 方法类型回退到函数色,
+  ["@lsp.type.property"] = { link = "@variable.member" }, -- LSP 属性类型回退到成员色,
   ---------------------------------------------------------------------------
   -- 非高亮捕获（控制用）
   ---------------------------------------------------------------------------
@@ -298,6 +309,16 @@ M.polish_hl = {
   ["@conceal"]                      = { },                      -- 仅用于隐藏/遮蔽
   ["@spell"]                        = { },                      -- 拼写检查开启区
   ["@nospell"]                      = { },                      -- 拼写检查关闭区
+  ---------------------------------------------------------------------------
+  -- typescript 
+  ---------------------------------------------------------------------------
+  -- ["@variable.declaration"]              = { fg = X.other_decl },  --类型组件声明 一般为const SceneCard: React.FC<{ }
+["@lsp.typemod.variable.declaration"]  = { fg = X.proj_type }, --类型组件声明 一般为const SceneCard: React.FC<{ }
+-- ["@variable.parameter"] = { fg = X.c_doc } --参数名在声明位置”的着色——也就是函数/方法/箭头函数的形参名字
+["@lsp.typemod.parameter.declaration"] = { link = "@variable.parameter" },  --参数名在声明位置”的着色——也就是函数/方法/箭头函数的形参名字
+    -- ["@lsp.type.function"] = { link = "@function" },
+    --   ["@lsp.type.variable"] = { link = "@variable" }, -- 基本回退
+
 
   -- Treesitter groups (Treesitter 语法高亮)
   -- Strings / numbers
