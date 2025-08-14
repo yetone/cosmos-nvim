@@ -121,6 +121,9 @@ local function load_layer_plugins()
 end
 
 local default_leader_keymapping_group_names = {
+  a = {
+    name = '+Avante',
+  },
   m = {
     name = '+Marks',
   },
@@ -189,7 +192,7 @@ local function flatten_wk_config(key_prefix, nested_config)
     local config = {
       key_prefix,
       nested_config[1],
-      desc = nested_config[2],
+      desc = nested_config.name or nested_config[2],
       mode = nested_config.mode,
       noremap = nested_config.noremap,
     }
@@ -375,12 +378,35 @@ local function setup()
   execute_layer_settings()
 
   M.add_plugin('folke/which-key.nvim', {
-    -- tag = 'v2.1.0',
     config = function()
       require('which-key').setup({
+        delay = function(ctx)
+          return ctx.plugin and 0 or 200
+        end,
+        defer = function(ctx)
+          return ctx.mode == "v" or ctx.mode == "V" or ctx.mode == "<C-V>"
+        end,
+        notify = true,
+        filter = function(mapping)
+          return mapping.desc and mapping.desc ~= ""
+        end,
+        triggers = {
+          { "<auto>", mode = "nixsotc" },
+          { "<leader>", mode = { "n", "v" } },
+        },
+        sort = { "local", "order", "group", "alphanum", "mod" },
+        expand = 0,
+        keys = {
+          scroll_down = "<c-d>",
+          scroll_up = "<c-u>",
+        },
         plugins = {
           marks = false,
           registers = false,
+          spelling = {
+            enabled = true,
+            suggestions = 20,
+          },
           presets = {
             operators = false,
             motions = true,
@@ -395,14 +421,22 @@ local function setup()
           breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
           separator = '➜', -- symbol used between a key and it's label
           group = '+', -- symbol prepended to a group
+          mappings = false,
+          colors = false,
         },
         win = {
+          no_overlap = true,
           padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+          title = false,
           border = 'none',
+          wo = {
+            winblend = 0,
+          },
         },
         layout = {
-          height = { min = 1, max = 10 }, -- min and max height of the columns
-          spacing = 3,
+          height = { min = 1, max = 10 },
+          width = { min = 30, max = 30 },
+          spacing = 5,
           align = 'left',
         },
         show_help = true, -- show help message on the command line when the popup is visible

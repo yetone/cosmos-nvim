@@ -1,5 +1,5 @@
 vim.cmd([[
-command Format :lua vim.lsp.buf.formatting()
+command Format :lua vim.lsp.buf.format()
 ]])
 
 vim.wo.foldmethod = 'expr'
