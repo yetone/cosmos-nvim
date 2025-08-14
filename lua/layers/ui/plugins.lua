@@ -13,6 +13,7 @@ cosmos.add_plugin('nvimdev/dashboard-nvim', {
 })
 
 cosmos.add_plugin('lukas-reineke/indent-blankline.nvim', {
+  enabled = false,
   config = configs.indent_blankline,
   main = 'ibl',
   event = 'BufRead',
@@ -141,6 +142,7 @@ cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
 
 cosmos.add_plugin('folke/noice.nvim', {
   event = 'VeryLazy',
+  enabled = false,
   opts = {
     lsp = {
       -- override markdown rendering so that **cmp** and other plugins use **Treesitter**

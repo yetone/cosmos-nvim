@@ -1,6 +1,6 @@
 return {
   enable_beacon = false,
-  enable_smooth_scrolling = true,
+  enable_smooth_scrolling = false,
   enable_rainbow = true,
   enable_illuminate = true,
   enable_todo_comments = true,

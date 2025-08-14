@@ -169,6 +169,7 @@ cosmos.add_plugin('ravitemer/mcphub.nvim', {
         -- Called on errors
       end,
       shutdown_delay = 0, -- Wait 0ms before shutting down server after last client exits
+      auto_approve = true,
       log = {
         level = vim.log.levels.WARN,
         to_file = false,
@@ -187,6 +188,7 @@ cosmos.add_plugin('yetone/avante.nvim', {
   event = 'VeryLazy',
   build = 'make',
   opts = {
+    disabled_tools = { 'run_python' },
     debug = true,
     mode = 'agentic',
     web_search_engine = {
@@ -200,16 +202,16 @@ cosmos.add_plugin('yetone/avante.nvim', {
       endpoint = 'http://10.0.0.244:11434',
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
-    -- system_prompt = function()
-    --   local hub = require('mcphub').get_hub_instance()
-    --   return hub:get_active_servers_prompt()
-    -- end,
-    -- -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
-    -- custom_tools = function()
-    --   return {
-    --     require('mcphub.extensions.avante').mcp_tool(),
-    --   }
-    -- end,
+    system_prompt = function()
+      local hub = require('mcphub').get_hub_instance()
+      return hub:get_active_servers_prompt()
+    end,
+    -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
+    custom_tools = function()
+      return {
+        require('mcphub.extensions.avante').mcp_tool(),
+      }
+    end,
     -- provider = 'copilot_gemini',
     -- provider = 'copilot_openai',
     -- provider = 'copilot:gpt-4.1',
@@ -222,6 +224,32 @@ cosmos.add_plugin('yetone/avante.nvim', {
     },
     provider = 'claude',
     providers = {
+      moonshot = {
+        use_ReAct_prompt = true,
+        model = 'kimi-k2-turbo-preview',
+      },
+      ['moonshot-claude'] = {
+        __inherited_from = 'claude',
+        endpoint = 'https://api.moonshot.ai/anthropic',
+        api_key_name = 'MOONSHOT_API_KEY',
+        model = 'kimi-k2-0711-preview',
+      },
+      -- claude = {
+      -- endpoint = 'https://anyrouter.top',
+      -- },
+      openai = {
+        model = 'o3-mini',
+      },
+      copilot = {
+        -- use_ReAct_prompt = true,
+        is_env_set = function()
+          return true
+        end,
+      },
+      ['gemini_2_0_flash'] = {
+        __inherited_from = 'gemini',
+        model = 'gemini-2.0-flash',
+      },
       gemini_flash = {
         __inherited_from = 'gemini',
         model = 'gemini-2.5-flash-preview-05-20',
@@ -242,10 +270,14 @@ cosmos.add_plugin('yetone/avante.nvim', {
         -- model = 'hhao/qwen2.5-coder-tools:14b',
         model = 'devstral:24b',
       },
+      ['aihubmix-claude'] = {
+        model = 'claude-sonnet-4-20250514',
+      },
       aihubmix = {
-        model = 'o3',
+        model = 'gpt-5',
       },
       gemini = {
+        use_ReAct_prompt = true,
         model = 'gemini-2.5-pro-preview-06-05',
         -- model = 'gemini-2.5-flash-preview-04-17',
         -- api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
@@ -361,7 +393,8 @@ cosmos.add_plugin('yetone/avante.nvim', {
         endpoint = 'https://openrouter.ai/api/v1',
         api_key_name = 'OPENROUTER_API_KEY',
         -- model = 'deepseek/deepseek-r1',
-        model = 'anthropic/claude-3.5-sonnet',
+        model = 'moonshotai/kimi-k2:free',
+        use_ReAct_prompt = true,
         -- model = 'openai/gpt-4o',
       },
       fastapply = {
@@ -390,11 +423,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
         endpoint = 'https://api.groq.com/openai/v1/',
         -- model = 'deepseek-r1-distill-llama-70b',
         -- model = 'qwen-2.5-coder-32b',
-        model = 'llama-3.3-70b-versatile',
+        -- model = 'llama-3.3-70b-versatile',
+        model = 'moonshotai/kimi-k2-instruct',
         extra_request_body = {
-          max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
+          max_completion_tokens = 16384, -- remember to increase this value, otherwise it will stop generating halfway
         },
-        disable_tools = true,
+        -- disable_tools = true,
       },
       groq_qwq = {
         __inherited_from = 'openai',
@@ -426,14 +460,18 @@ cosmos.add_plugin('yetone/avante.nvim', {
         model = 'qwen-coder-plus-latest',
         -- hide_in_model_selector = true,
       },
+      morph = {
+        model = 'auto',
+      },
     },
     behaviour = {
       auto_focus_sidebar = true,
-      auto_suggestions = use_avante_auto_suggestions,
+      auto_suggestions = false,
       minimize_diff = true,
       enable_token_counting = true,
       use_cwd_as_project_root = true,
       auto_check_diagnostics = false,
+      enable_fastapply = false,
     },
     windows = {
       position = 'smart',
@@ -458,24 +496,56 @@ cosmos.add_plugin('yetone/avante.nvim', {
       'folke/snacks.nvim',
       priority = 1000,
       lazy = false,
-      ---@type snacks.Config
-      opts = {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-        bigfile = { enabled = false },
-        dashboard = { enabled = false },
-        explorer = { enabled = false },
-        indent = { enabled = true },
-        input = { enabled = false },
-        picker = { enabled = true },
-        notifier = { enabled = false },
-        quickfile = { enabled = false },
-        scope = { enabled = false },
-        scroll = { enabled = false },
-        statuscolumn = { enabled = false },
-        words = { enabled = false },
+      opts = function()
+        -- Toggle the profiler
+        Snacks.toggle.profiler():map('<leader>pk')
+        -- Toggle the profiler highlights
+        Snacks.toggle.profiler_highlights():map('<leader>ph')
+        return {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+          bigfile = { enabled = false },
+          dashboard = { enabled = false },
+          explorer = { enabled = false },
+          indent = { enabled = true },
+          input = { enabled = false },
+          picker = { enabled = true },
+          notifier = { enabled = false },
+          quickfile = { enabled = false },
+          scope = { enabled = false },
+          scroll = { enabled = false },
+          statuscolumn = { enabled = false },
+          words = { enabled = false },
+        }
+      end,
+      keys = {
+        {
+          '<leader>ps',
+          function()
+            Snacks.profiler.scratch()
+          end,
+          desc = 'Profiler Scratch Bufer',
+        },
       },
+      ---@type snacks.Config
+      -- opts = {
+      --   -- your configuration comes here
+      --   -- or leave it empty to use the default settings
+      --   -- refer to the configuration section below
+      --   bigfile = { enabled = false },
+      --   dashboard = { enabled = false },
+      --   explorer = { enabled = false },
+      --   indent = { enabled = true },
+      --   input = { enabled = false },
+      --   picker = { enabled = true },
+      --   notifier = { enabled = false },
+      --   quickfile = { enabled = false },
+      --   scope = { enabled = false },
+      --   scroll = { enabled = false },
+      --   statuscolumn = { enabled = false },
+      --   words = { enabled = false },
+      -- },
     },
     -- {
     --   'zbirenbaum/copilot.lua',
@@ -486,9 +556,9 @@ cosmos.add_plugin('yetone/avante.nvim', {
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
-        file_types = { 'markdown', 'Avante' },
+        file_types = { 'markdown' },
       },
-      ft = { 'markdown', 'Avante' },
+      ft = { 'markdown' },
     },
   },
 })

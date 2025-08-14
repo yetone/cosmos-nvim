@@ -59,13 +59,14 @@ cosmos.add_plugin('editorconfig/editorconfig-vim', {
 })
 
 cosmos.add_plugin('nvim-treesitter/nvim-treesitter', {
+  branch = 'master',
+  lazy = false,
   build = function()
     if #vim.api.nvim_list_uis() ~= 0 then
       vim.cmd('TSUpdate')
     end
   end,
   config = configs.treesitter,
-  event = { 'BufRead', 'BufNewFile' },
 })
 cosmos.add_plugin('nvim-treesitter/playground', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
