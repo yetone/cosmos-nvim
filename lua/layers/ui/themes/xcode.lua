@@ -164,7 +164,7 @@ M.polish_hl = {
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
   ["@variable"]                     = { fg = X.text },         -- 普通变量/标识符
-  ["@variable.builtin"]             = { fg = X.c_constructor },    -- 内置变量（如 this/self/arguments）
+  ["@variable.builtin"]             = { fg = X.other_func },    -- 内置变量（如 this/self/arguments）
   ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
   ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
   ["@variable.member"]              = { fg = X.proj_prop },        -- 成员/字段（obj.field）
