@@ -5,12 +5,12 @@ local M = {}
 local X = {
   main_keyword  = "#FC5FA3", --start point
   main_literals = "#FCED60",
-  main_function = "#60E4FC", -- main color
+  main_function = "#41A1C0", -- main color
 
-  c_type = "#5DD8FF", -- 设计原理是类型、构造器与函数保持同色相或近邻色、靠明度/样式区分(与函数相近)
+  c_type = "#60E4FC", -- 设计原理是类型、构造器与函数保持同色相或近邻色、靠明度/样式区分(与函数相近)
   c_string = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
   c_macro = "#FD8F3F",
-  c_constructor = "#60FCE1", -- 构造器/类名
+  c_constructor = "#60E4FC", -- 构造器/类名
   c_property = "#FC6A5D", -- 键值对 属性
   c_doc = "#A2E474", -- 文档
   c_function = "#50C4EB", -- 函数
@@ -46,7 +46,7 @@ local X = {
 
   heading          = "#AA0D91",
     -- 这些是高亮表需要补齐的语义键（先放占位，按需替换）
-  text        = "#DEDEE1", -- 默认前景
+  text        = "#C9C9C9", -- 默认前景
   comment     = "#6C7986", -- 注释
   punctuation = "#D4D5D9", -- 括号/逗号等
   operator    = "#DEDEE1", -- 常规运算符（也可等于 regex_op）
@@ -62,7 +62,7 @@ local X = {
 
 -- ===== UI: base_30（保留你当前深色 UI，插件友好） =====
 M.base_30 = {
-  white = '#F9F9FA',
+  white = '#C9C9C9',
   darker_black = '#292A30', -- Normal.bg
   black = '#292A30',        -- nvim bg
   black2 = '#393A42',       --tree文件 选中行
@@ -92,7 +92,7 @@ M.base_30 = {
   statusline_bg = "#303138",        -- 派生 base01/02 中间值
   lightbg       = "#75798A",        -- 弹窗背景（base01 再亮一点）
   pmenu_bg      = "#98C379",        -- 补全选中（与字符串同色）
-  folder_bg     = "#ACDFFA",        -- 文件夹图标颜色（函数蓝）,
+  folder_bg     = "#9EF1DD",        -- 文件夹图标颜色（函数蓝）,
 }
 
 
@@ -164,7 +164,7 @@ M.polish_hl = {
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
   ["@variable"]                     = { fg = X.text },         -- 普通变量/标识符
-  ["@variable.builtin"]             = { fg = X.c_constructor },    -- 内置变量（如 this/self/arguments）
+  ["@variable.builtin"]             = { fg = X.other_func },    -- 内置变量（如 this/self/arguments）
   ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
   ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
   ["@variable.member"]              = { fg = X.proj_prop },        -- 成员/字段（obj.field）
