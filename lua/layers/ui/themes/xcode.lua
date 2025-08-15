@@ -111,7 +111,7 @@ M.base_16 = {
   base09 = X.main_literals,  -- Orange - 数字/布尔/字面量
   base0A = X.c_macro,  -- Yellow - 常量/宏/标签
   base0B = X.c_string,  -- Green  - 字符串/成功
-  base0C = X.c_type,  -- Cyan   - 类型/结构/构造器
+  base0C = '',  -- Cyan   - 类型/结构/构造器
   base0D = X.main_function,  -- Blue   - 函数/方法/链接
   base0E = X.main_keyword,   -- Purple - 关键字/控制流
   base0F = '#BE8A70',     -- Brown  - 分隔符/杂项
@@ -174,7 +174,7 @@ M.polish_hl = {
   ---------------------------------------------------------------------------
   ["@function"]                     = { fg = X.other_decl },         -- 函数定义/引用
   ["@function.builtin"]             = { fg = X.other_func }, -- 内置函数  例如 python print list
-  ["@function.call"]                = { fg = X.heading },         -- 函数调用
+  ["@function.call"]                = { fg = X.proj_func },         -- 函数调用
   ["@function.macro"]               = { fg = X.preproc },        -- 宏函数（定义与调用）
 
   ["@function.method"]              = { fg = X.c_function },         -- 方法定义
@@ -256,13 +256,13 @@ M.polish_hl = {
   ["@lsp.type.namespace"]           = { link = "@module" },
   -- 用 LSP 语义令牌区分“声明的键”和“被访问的成员”
   ["@lsp.typemod.property.declaration"] = { link = "@property" }, -- 声明的键
-  ["@lsp.type.property"]                 = { link = "@variable.member" }, -- 被访问的成员
+  -- ["@lsp.type.property"]                 = { link = "@variable.member" }, -- 被访问的成员
 
   ["@lsp.typemod.namespace.defaultLibrary"] = { link = "@module.builtin" }, -- 标准库命名空间（如 window/document）按内置模块配色,
   ["@lsp.typemod.variable.defaultLibrary"]  = { link = "@variable.builtin" }, -- 标准库变量（如 console）按内置变量配色,
   ["@lsp.typemod.method.defaultLibrary"]    = { link = "@function.builtin" }, -- 标准库方法（如 console.log）按内置函数配色,
   ["@lsp.typemod.property.defaultLibrary"]  = { link = "@variable.member" }, -- 标准库属性（如 document.body）按成员配色,
-  
+
   ["@lsp.type.method"]   = { link = "@function" }, -- LSP 方法类型回退到函数色,
   ["@lsp.type.property"] = { link = "@variable.member" }, -- LSP 属性类型回退到成员色,
   ---------------------------------------------------------------------------
@@ -273,7 +273,7 @@ M.polish_hl = {
   ["@spell"]                        = { },                      -- 拼写检查开启区
   ["@nospell"]                      = { },                      -- 拼写检查关闭区
   ---------------------------------------------------------------------------
-  -- typescript 
+  -- typescript
   ---------------------------------------------------------------------------
   -- ["@variable.declaration"]              = { fg = X.other_decl },  --类型组件声明 一般为const SceneCard: React.FC<{ }
 ["@lsp.typemod.variable.declaration"]  = { fg = X.proj_type }, --类型组件声明 一般为const SceneCard: React.FC<{ }
