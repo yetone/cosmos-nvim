@@ -5,17 +5,61 @@ end
 local M = {}
 
 function M.setup()
-  local override = require('layers.ui.options').hl_override
-  local theme = require('layers.ui.colors').get().base_16
-  vim.opt.bg = require('layers.ui.colors').get().type
-  local highlights = {}
-  local hl_files = vim.fn.stdpath('config') .. '/lua/layers/ui/integrations'
+  local override    = require('layers.ui.options').hl_override
+  local theme_data  = require('layers.ui.colors').get()
+  local theme       = theme_data.base_16
+  vim.opt.bg        = theme_data.type or 'dark'
 
-  for _, file in ipairs(vim.fn.readdir(hl_files)) do
-    local pkg_name = 'layers.ui.integrations.' .. vim.fn.fnamemodify(file, ':r')
-    package.loaded[pkg_name or false] = nil
-    local integration = require(pkg_name)
-    highlights = merge_tb(highlights, integration)
+  local highlights = {}
+  local hl_dir = vim.fn.stdpath('config') .. '/lua/layers/ui/integrations'
+  local files = vim.fn.readdir(hl_dir)
+  table.sort(files)  -- 稳定加载顺序（可选）
+
+  for _, file in ipairs(files) do
+    if file:match('%.lua$') then
+      local pkg = 'layers.ui.integrations.' .. vim.fn.fnamemodify(file, ':r')
+      package.loaded[pkg] = nil
+      local ok, mod = pcall(require, pkg)
+      if ok and type(mod) == 'table' then
+        highlights = merge_tb(highlights, mod)
+      end
+    end
+  end
+
+  local function looks_like_opts(t)
+    if type(t) ~= 'table' then return false end
+    for k, _ in pairs(t) do
+      if k == 'fg' or k == 'bg' or k == 'sp' or k == 'link'
+         or k == 'bold' or k == 'italic' or k == 'underline'
+         or k == 'undercurl' or k == 'strikethrough' or k == 'blend'
+      then return true end
+    end
+    return false
+  end
+
+  -- apply theme-specific polish highlights if provided
+  local polish = theme_data.polish_hl
+  if type(polish) == 'table' then
+    for key, value in pairs(polish) do
+      if type(value) == 'table' then
+        if looks_like_opts(value) then
+          -- 顶层直写：String / "@string" / DiagnosticError 等
+          highlights[key] = value
+        else
+          -- 分组容器：treesitter / syntax / lsp / plugins / ...
+          for nested_key, nested_value in pairs(value) do
+            if type(nested_value) == 'table' and looks_like_opts(nested_value) then
+              highlights[nested_key] = nested_value
+            end
+          end
+        end
+      end
+    end
+  end
+
+  -- 最后再应用用户覆盖，确保最终生效
+  if type(override) == 'table' then
+    highlights = merge_tb(highlights, override)
   end
 
   for hl, col in pairs(highlights) do
