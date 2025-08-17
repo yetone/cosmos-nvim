@@ -111,8 +111,8 @@ M.polish_hl = {
   -- ['@property'] = { fg = M.base_16.base0C },
 }
 
-M.opt.bg = 'dark'
+M.type = 'dark'
 
-M = require('base46').override_theme(M, 'gruvbox_material1')
+M = require('base46').override_theme(M, 'gruvbox_material')
 
 return M

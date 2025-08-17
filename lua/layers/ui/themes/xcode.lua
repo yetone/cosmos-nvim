@@ -7,7 +7,7 @@ local X = {
   main_literals = "#FCED60",
   main_function = "#41A1C0", -- main color
 
-  c_type = "#60E4FC", -- 设计原理是类型、构造器与函数保持同色相或近邻色、靠明度/样式区分(与函数相近)
+  c_type = "#5DD8FF", -- 设计原理是类型、构造器与函数保持同色相或近邻色、靠明度/样式区分(与函数相近)
   c_string = "#73A74E", -- ? 存疑 与keyword 补色是绿,与function补色是棕色
   c_macro = "#FD8F3F",
   c_constructor = "#60E4FC", -- 构造器/类名
@@ -292,16 +292,15 @@ M.polish_hl = {
   -- PATCH #5: 命名空间当模块处理，便于统一风格
   ["@lsp.type.namespace"]           = { link = "@module" },
   -- 用 LSP 语义令牌区分“声明的键”和“被访问的成员”
-  ["@lsp.typemod.property.declaration"] = { link = "@property" }, -- 声明的键
-  ["@lsp.type.property"]                 = { link = "@variable.member" }, -- 被访问的成员
+  -- ["@lsp.typemod.property.declaration"] = { link = "@property" }, -- 声明的键
+  -- ["@lsp.type.property"]                 = { link = "@variable.member" }, -- 被访问的成员
 
   ["@lsp.typemod.namespace.defaultLibrary"] = { link = "@module.builtin" }, -- 标准库命名空间（如 window/document）按内置模块配色,
   ["@lsp.typemod.variable.defaultLibrary"]  = { link = "@variable.builtin" }, -- 标准库变量（如 console）按内置变量配色,
   ["@lsp.typemod.method.defaultLibrary"]    = { link = "@function.builtin" }, -- 标准库方法（如 console.log）按内置函数配色,
   ["@lsp.typemod.property.defaultLibrary"]  = { link = "@variable.member" }, -- 标准库属性（如 document.body）按成员配色,
-  
+
   ["@lsp.type.method"]   = { link = "@function" }, -- LSP 方法类型回退到函数色,
-  ["@lsp.type.property"] = { link = "@variable.member" }, -- LSP 属性类型回退到成员色,
   ---------------------------------------------------------------------------
   -- 非高亮捕获（控制用）
   ---------------------------------------------------------------------------
@@ -310,7 +309,7 @@ M.polish_hl = {
   ["@spell"]                        = { },                      -- 拼写检查开启区
   ["@nospell"]                      = { },                      -- 拼写检查关闭区
   ---------------------------------------------------------------------------
-  -- typescript 
+  -- typescript
   ---------------------------------------------------------------------------
   -- ["@variable.declaration"]              = { fg = X.other_decl },  --类型组件声明 一般为const SceneCard: React.FC<{ }
 ["@lsp.typemod.variable.declaration"]  = { fg = X.proj_type }, --类型组件声明 一般为const SceneCard: React.FC<{ }
