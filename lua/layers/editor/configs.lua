@@ -331,10 +331,10 @@ function configs.treesitter()
       swap = {
         enable = true,
         swap_next = {
-          ['<leader>a'] = '@parameter.inner',
+          ['<leader>sa'] = '@parameter.inner',
         },
         swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
+          ['<leader>sA'] = '@parameter.inner',
         },
       },
       move = {
@@ -671,6 +671,23 @@ configs.nvimtree = function()
         resize_window = true,
       },
     },
+    -- Keep "s" key unified for flash.nvim
+    on_attach = function(bufnr)
+      local api = require('nvim-tree.api')
+      
+      local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+      end
+
+      -- Use default key mappings
+      api.config.mappings.default_on_attach(bufnr)
+
+      -- Remove 's' key mapping to avoid conflict with flash.nvim
+      vim.keymap.del('n', 's', { buffer = bufnr })
+
+      -- Remap system open to another key
+      vim.keymap.set('n', '<C-s>', api.node.run.system, opts('System Open'))
+    end,
   })
 end
 

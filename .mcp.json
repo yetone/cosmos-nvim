@@ -1,0 +1,497 @@
+{
+  "mcpServers": {
+    "Context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+
+    "AnsiEsc.vim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/vim-scripts/AnsiEsc.vim"]
+    },
+    "ChatGPT.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/jackMort/ChatGPT.nvim"]
+    },
+    "Comment.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/numToStr/Comment.nvim"]
+    },
+    "CopilotChat.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/CopilotC-Nvim/CopilotChat.nvim"]
+    },
+    "LuaSnip": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/L3MON4D3/LuaSnip"]
+    },
+    "avante.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/yetone/avante.nvim"]
+    },
+    "blame.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/FabijanZulj/blame.nvim"]
+    },
+    "bufferline.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/akinsho/bufferline.nvim"]
+    },
+    "cmp-buffer": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/cmp-buffer"]
+    },
+    "cmp-cmdline": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/cmp-cmdline"]
+    },
+    "cmp-cmdline-history": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/dmitmel/cmp-cmdline-history"]
+    },
+    "cmp-nvim-lsp": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/cmp-nvim-lsp"]
+    },
+    "cmp-nvim-lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/cmp-nvim-lua"]
+    },
+    "cmp-path": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/cmp-path"]
+    },
+    "cmp_luasnip": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/saadparwaiz1/cmp_luasnip"]
+    },
+    "codecompanion.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/olimorris/codecompanion.nvim"]
+    },
+    "copilot.lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/zbirenbaum/copilot.lua"]
+    },
+    "dashboard-nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvimdev/dashboard-nvim"]
+    },
+    "diffview.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/sindrets/diffview.nvim"]
+    },
+    "dressing.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/stevearc/dressing.nvim"]
+    },
+    "edgy.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/edgy.nvim"]
+    },
+    "editorconfig-vim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/editorconfig/editorconfig-vim"]
+    },
+    "fidget.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/j-hui/fidget.nvim"]
+    },
+    "flash.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/flash.nvim"]
+    },
+    "friendly-snippets": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/rafamadriz/friendly-snippets"]
+    },
+    "fzf": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/junegunn/fzf"]
+    },
+    "fzf-lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/ibhagwan/fzf-lua"]
+    },
+    "fzf.vim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/junegunn/fzf.vim"]
+    },
+    "gitportal.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/trevorhauter/gitportal.nvim"]
+    },
+    "gitsigns.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/lewis6991/gitsigns.nvim"]
+    },
+    "glance.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/dnlhc/glance.nvim"]
+    },
+    "guess-indent.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/NMAC427/guess-indent.nvim"]
+    },
+    "highlight-undo.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/tzachar/highlight-undo.nvim"]
+    },
+    "indent-blankline.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/lukas-reineke/indent-blankline.nvim"
+      ]
+    },
+    "inlay-hints.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/simrat39/inlay-hints.nvim"]
+    },
+    "lazy.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/lazy.nvim"]
+    },
+    "lazydev.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/lazydev.nvim"]
+    },
+    "lspsaga.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvimdev/lspsaga.nvim"]
+    },
+    "lualine.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-lualine/lualine.nvim"]
+    },
+    "luvit-meta": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/Bilal2453/luvit-meta"]
+    },
+    "markdown-preview.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/iamcco/markdown-preview.nvim"]
+    },
+    "mason-lspconfig.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/williamboman/mason-lspconfig.nvim"
+      ]
+    },
+    "mason-null-ls.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/jay-babu/mason-null-ls.nvim"]
+    },
+    "mason.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/williamboman/mason.nvim"]
+    },
+    "mini.pick": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/echasnovski/mini.pick"]
+    },
+    "neogit": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/TimUntersberger/neogit"]
+    },
+    "neorepl.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/ii14/neorepl.nvim"]
+    },
+    "neoscroll.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/karb94/neoscroll.nvim"]
+    },
+    "noice.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/noice.nvim"]
+    },
+    "none-ls.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvimtools/none-ls.nvim"]
+    },
+    "nui.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/MunifTanjim/nui.nvim"]
+    },
+    "numb.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nacro90/numb.nvim"]
+    },
+    "nvim-autopairs": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/windwp/nvim-autopairs"]
+    },
+    "nvim-cmp": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/hrsh7th/nvim-cmp"]
+    },
+    "nvim-colorizer.lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/norcalli/nvim-colorizer.lua"]
+    },
+    "nvim-cursorline": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/yamatsum/nvim-cursorline"]
+    },
+    "nvim-dap": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/mfussenegger/nvim-dap"]
+    },
+    "nvim-dap-go": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/leoluz/nvim-dap-go"]
+    },
+    "nvim-dap-ui": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/rcarriga/nvim-dap-ui"]
+    },
+    "nvim-dap-virtual-text": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/theHamsta/nvim-dap-virtual-text"
+      ]
+    },
+    "nvim-hlslens": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/kevinhwang91/nvim-hlslens"]
+    },
+    "nvim-lspconfig": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/neovim/nvim-lspconfig"]
+    },
+    "nvim-lspfuzzy": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/ojroques/nvim-lspfuzzy"]
+    },
+    "nvim-luapad": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/rafcamlet/nvim-luapad"]
+    },
+    "nvim-navic": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/SmiteshP/nvim-navic"]
+    },
+    "nvim-nio": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-neotest/nvim-nio"]
+    },
+    "nvim-notify": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/rcarriga/nvim-notify"]
+    },
+    "nvim-osc52": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/ojroques/nvim-osc52"]
+    },
+    "nvim-scrollbar": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/petertriho/nvim-scrollbar"]
+    },
+    "nvim-spider": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/chrisgrieser/nvim-spider"]
+    },
+    "nvim-surround": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/kylechui/nvim-surround"]
+    },
+    "nvim-tree.lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-tree/nvim-tree.lua"]
+    },
+    "nvim-treesitter": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-treesitter/nvim-treesitter"
+      ]
+    },
+    "nvim-treesitter-textobjects": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-treesitter/nvim-treesitter-textobjects"
+      ]
+    },
+    "nvim-treesitter-textsubjects": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/RRethy/nvim-treesitter-textsubjects"
+      ]
+    },
+    "nvim-ts-autotag": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/windwp/nvim-ts-autotag"]
+    },
+    "nvim-ts-context-commentstring": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/JoosepAlviste/nvim-ts-context-commentstring"
+      ]
+    },
+    "nvim-various-textobjs": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/chrisgrieser/nvim-various-textobjs"
+      ]
+    },
+    "nvim-web-devicons": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-tree/nvim-web-devicons"]
+    },
+    "playground": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-treesitter/playground"]
+    },
+    "plenary.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-lua/plenary.nvim"]
+    },
+    "readline.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/sysedwinistrator/readline.nvim"]
+    },
+    "refactoring.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/ThePrimeagen/refactoring.nvim"]
+    },
+    "render-markdown.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/MeanderingProgrammer/render-markdown.nvim"
+      ]
+    },
+    "rust-tools.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/simrat39/rust-tools.nvim"]
+    },
+    "rustaceanvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/mrcjkb/rustaceanvim"]
+    },
+    "showkeys": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvchad/showkeys"]
+    },
+    "smart-open.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/danielfalk/smart-open.nvim"]
+    },
+    "snacks.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/DanilaMihailov/snacks.nvim"]
+    },
+    "sqlite.lua": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/kkharji/sqlite.lua"]
+    },
+    "supermaven-nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/supermaven-inc/supermaven-nvim"]
+    },
+    "tailwind-fold.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/razak17/tailwind-fold.nvim"]
+    },
+    "tailwind-tools.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/luckasRanarison/tailwind-tools.nvim"
+      ]
+    },
+    "targets.vim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/wellle/targets.vim"]
+    },
+    "telescope-cmdline.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/tamiryu/telescope-cmdline.nvim"]
+    },
+    "telescope-dap.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-dap.nvim"
+      ]
+    },
+    "telescope-file-browser.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-file-browser.nvim"
+      ]
+    },
+    "telescope-fzf-native.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-fzf-native.nvim"
+      ]
+    },
+    "telescope-github.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-github.nvim"
+      ]
+    },
+    "telescope-media-files.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-media-files.nvim"
+      ]
+    },
+    "telescope-ui-select.nvim": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/nvim-telescope/telescope-ui-select.nvim"
+      ]
+    },
+    "telescope-undo.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/debugloop/telescope-undo.nvim"]
+    },
+    "telescope.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/nvim-telescope/telescope.nvim"]
+    },
+    "todo-comments.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/todo-comments.nvim"]
+    },
+    "toggleterm.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/akinsho/toggleterm.nvim"]
+    },
+    "trouble.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/trouble.nvim"]
+    },
+    "vim-illuminate": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/RRethy/vim-illuminate"]
+    },
+    "vim-startuptime": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/dstein64/vim-startuptime"]
+    },
+    "which-key.nvim": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/folke/which-key.nvim"]
+    },
+    "window-picker": {
+      "command": "npx",
+      "args": ["mcp-remote", "https://gitmcp.io/s1n7ax/nvim-window-picker"]
+    }
+  }
+}
