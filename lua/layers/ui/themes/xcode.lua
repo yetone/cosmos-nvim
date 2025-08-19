@@ -1,6 +1,58 @@
 -- layers/ui/themes/xcode_xoce.lua
 local M = {}
 
+local color = {
+  -- 背景类
+  bg_dim = "#1B1B1B",
+  bg0 = "#282828",
+  bg1 = "#32302F",
+  bg2 = "#32302F",
+  bg3 = "#45403D",
+  bg4 = "#45403D",
+  bg5 = "#5A524C",
+
+  -- 状态栏 & 当前单词
+  bg_statusline1 = "#32302F",
+  bg_statusline2 = "#3A3735",
+  bg_statusline3 = "#504945",
+  bg_current_word = "#3C3836",
+
+  -- diff (版本对比)
+  bg_diff_red = "#402120",
+  bg_diff_green = "#34381B",
+  bg_diff_blue = "#0E363E",
+
+  -- Visual 模式
+  bg_visual_red = "#4C3432",
+  bg_visual_green = "#3B4439",
+  bg_visual_blue = "#374141",
+  bg_visual_yellow = "#4F422E",
+  bg_visual_purple = "#443840",
+
+  -- 前景
+  fg0 = "#D4BE98",
+  fg1 = "#DDC7A1",
+
+  -- 语义色
+  red = "#EA6962",
+  green = "#A9B665",
+  blue = "#7DAEA3",
+  yellow = "#D8A657",
+  purple = "#D3869B",
+  orange = "#E78A4E",
+  aqua = "#89B482",
+
+  -- 背景语义色
+  bg_red = "#EA6962",
+  bg_green = "#A9B665",
+  bg_yellow = "#D8A657",
+
+  -- 灰度
+  grey0 = "#7C6F64",
+  grey1 = "#928374",
+  grey2 = "#A89984",
+}
+
 -- ===== Xcode 风格的语义色（使用颜色的层级来突出代码） =====
 local X = {
   main_keyword  = "#FC5FA3", --start point
@@ -12,7 +64,7 @@ local X = {
   c_macro = "#FD8F3F",
   c_constructor = "#60E4FC", -- 构造器/类名
   c_property = "#FC6A5D", -- 键值对 属性
-  c_doc = "#A2E474", -- 文档
+  c_doc = "#73A74E", -- 文档
   c_function = "#50C4EB", -- 函数
 
   string           = "#FC6A5D",
@@ -92,7 +144,7 @@ M.base_30 = {
   statusline_bg = "#303138",        -- 派生 base01/02 中间值
   lightbg       = "#75798A",        -- 弹窗背景（base01 再亮一点）
   pmenu_bg      = "#98C379",        -- 补全选中（与字符串同色）
-  folder_bg     = "#9EF1DD",        -- 文件夹图标颜色（函数蓝）,
+  folder_bg     = color.green,        -- 文件夹图标颜色（函数蓝）
 }
 
 
@@ -101,10 +153,10 @@ M.base_16 = {
   base00 = '#292A30',
   base01 = '#3C3D47',
   base02 = '#4F5057',
-  base03 = '#6C7986', -- 注释 git
+  base03 = '#484a53', -- 注释 git
   base04 = '#8D91A6', -- 次级文本
   -- base05 = '#D9D9DB', -- 正文/变量（AAA）
-  base05 = X.text, -- 正文/变量（AAA）
+  base05 = color.fg0, -- 正文/变量（AAA）
   base06 = '#E8E9EC',
   base07 = '#F9F9FA',
   base08 = X.error,    -- Red    - 错误/删除
@@ -123,127 +175,91 @@ M.type = 'dark'
 M.polish_hl = {
 
     treesitter = {
--- 假设你已有一套调色板 X（示例，仅占位）
--- local X = {
---   char = "#A6B7CC",           -- 普通变量/标识符
---   other_const = "#D19A66",      -- 内置实体（如 this/self、nil/None 等）
---   param = "#E5C07B",          -- 函数参数
---   field = "#56B6C2",          -- 成员/属性
---   constant = "#E5C07B",       -- 常量
---   module = "#D2A8FF",         -- 模块/命名空间
---   module_builtin = "#BD93F9", -- 内置模块
---   label = "#C678DD",          -- 标签名
---   string = "#98C379",         -- 字符串
---   string_regex = "#C678DD",   -- 正则
---   escape = "#E5C07B",         -- 转义序列
---   url = "#61AFEF",            -- URL 链接
---   number = "#D19A66",         -- 数字/浮点
---   boolean = "#56B6C2",        -- 布尔
---   type = "#56B6C2",           -- 类型/类名
---   attribute = "#D19A66",      -- 注解/属性（如装饰器、lifetime）
---   property = "#56B6C2",       -- 键名/属性键
---   func = "#61AFEF",           -- 函数/方法
---   func_builtin = "#E06C75",   -- 内置函数
---   macro = "#E06C75",          -- 宏
---   ctor = "#61AFEF",           -- 构造器
---   op = "#ABB2BF",             -- 运算符
---   kw = "#C678DD",             -- 关键字（大类）
---   punct = "#ABB2BF",          -- 标点类
---   comment = "#5C6370",        -- 注释
---   heading = "#E5C07B",        -- 标题/强调
---   quote = "#98C379",          -- 引用
---   math = "#D19A66",           -- 数学环境
---   diff_add = "#98C379",       -- diff 新增
---   diff_del = "#E06C75",       -- diff 删除
---   diff_delta = "#E5C07B",     -- diff 变更
---   tag = "#E06C75",            -- 标签名（HTML/XML）
---   tag_attr = "#56B6C2",       -- 标签属性名
--- }
 
   ---------------------------------------------------------------------------
   -- 标识符（Identifier）
   ---------------------------------------------------------------------------
-  ["@variable"]                     = { fg = X.text },         -- 普通变量/标识符
-  ["@variable.builtin"]             = { fg = X.other_func },    -- 内置变量（如 this/self/arguments）
-  ["@variable.parameter"]           = { fg = X.other_decl },        -- 函数/方法参数
-  ["@variable.parameter.builtin"]   = { fg = X.other_const },    -- 特殊参数（如 ...、_ 等）
-  ["@variable.member"]              = { fg = X.proj_prop },        -- 成员/字段（obj.field）
+  ["@variable"]                     = { fg = color.fg0 },         -- 普通变量/标识符
+  ["@variable.builtin"]             = { fg = color.blue },    -- 内置变量（如 this/self/arguments）
+  ["@variable.parameter"]           = { fg = color.fg1 },        -- 函数/方法参数
+  ["@variable.parameter.builtin"]   = { fg = color.purple },    -- 特殊参数（如 ...、_ 等）
+  ["@variable.member"]              = { fg = color.blue },        -- 成员/字段（obj.field）
 
-  ["@constant"]                     = { fg = X.proj_const },     -- 常量名（不可变标识符）
-  ["@constant.builtin"]             = { fg = X.other_const, bold = true },    -- 内置常量（nil/None/true/false 等）
-  ["@constant.macro"]               = { fg = X.macro },        -- 宏常量（C/CPP 等宏）
+  ["@constant"]                     = { fg = color.bule },     -- 常量名（不可变标识符）
+  ["@constant.builtin"]             = { fg = color.bule, bold = true },    -- 内置常量（nil/None/true/false 等）
+  ["@constant.macro"]               = { fg = color.purple },        -- 宏常量（C/CPP 等宏）
 
-  ["@module"]                       = { fg = X.type_decl, italic = true }, -- 模块/命名空间
-  ["@module.builtin"]               = { fg = X.type_decl },              -- 内置模块/命名空间
-  ["@label"]                        = { fg = X.attribute },       -- 标签（如 C 的 label: 或 heredoc 标签）
+  ["@module"]                       = { fg = color.purple, italic = true }, -- 模块/命名空间
+  ["@module.builtin"]               = { fg = color.purple },              -- 内置模块/命名空间
+  ["@label"]                        = { fg = color.orange },       -- 标签（如 C 的 label: 或 heredoc 标签）
 
   ---------------------------------------------------------------------------
   -- 字面量（Literals）
   ---------------------------------------------------------------------------
-  ["@string"]                       = { fg = X.c_string },       -- 普通字符串
+  ["@string"]                       = { fg = color.aqua },       -- 普通字符串
   ["@string.documentation"]         = { fg = X.c_doc },       -- 文档字符串（docstring）
   ["@string.regexp"]                = { fg = X.regex }, -- 正则字面量
   ["@string.escape"]                = { fg = X.attribute },       -- 字符串转义（\n、\t 等）
   ["@string.special"]               = { fg = X.c_string },       -- 其他特殊字符串（日期等）
-  ["@string.special.symbol"]        = { fg = X.main_literals },     -- 符号/原子（如 :atom）
+  ["@string.special.symbol"]        = { fg = color.aqua },     -- 符号/原子（如 :atom）
   ["@string.special.url"]           = { fg = X.url, underline = true, italic = true }, -- URL/链接
   ["@string.special.path"]          = { fg = X.c_string },       -- 文件路径
 
   ["@character"]                    = { fg = X.char },       -- 字符字面量
-  ["@character.special"]            = { fg = X.attribute },       -- 特殊字符（通配符等）
+  ["@character.special"]            = { fg = color.orange },       -- 特殊字符（通配符等）
 
-  ["@boolean"]                      = { fg = X.main_literals },      -- 布尔字面量
-  ["@number"]                       = { fg = X.number },       -- 数字
-  ["@number.float"]                 = { fg = X.number },       -- 浮点数
+  ["@boolean"]                      = { fg = color.aqua },      -- 布尔字面量
+  ["@number"]                       = { fg = color.purple },       -- 数字
+  ["@number.float"]                 = { fg = color.purple },       -- 浮点数
 
   ---------------------------------------------------------------------------
   -- 类型与属性（Types & Attributes）
   ---------------------------------------------------------------------------
-  ["@type"]                         = { fg = X.type_decl },         -- 类型/类定义与注解
-  ["@type.builtin"]                 = { fg = X.other_type },    -- 内置类型（如 int/string）
+  ["@type"]                         = { fg = color.yellow },         -- 类型/类定义与注解
+  ["@type.builtin"]                 = { fg = color.aqua },    -- 内置类型（如 int/string）
   ["@type.definition"]              = { link = "@type", bold = true},         -- 类型定义中的标识符
-  ["@attribute"]                    = { fg = X.attribute },    -- 属性/注解（Python 装饰器、Rust lifetime）
-  ["@attribute.builtin"]            = { fg = X.other_type },    -- 内置属性/注解
-  ["@property"]                     = { fg = X.c_property },     -- 键/值对中的键（JSON/YAML 等）
+  ["@attribute"]                    = { fg = color.orange },    -- 属性/注解（Python 装饰器、Rust lifetime）
+  ["@attribute.builtin"]            = { fg = color.aqua },    -- 内置属性/注解
+  ["@property"]                     = { fg = color.blue },     -- 键/值对中的键（JSON/YAML 等）
 
   ---------------------------------------------------------------------------
   -- 函数（Functions）
   ---------------------------------------------------------------------------
-  ["@function"]                     = { fg = X.main_function },         -- 函数定义/引用
-  ["@function.builtin"]             = { fg = X.other_func }, -- 内置函数  例如 python print list
-  ["@function.call"]                = { fg = X.main_function },         -- 函数调用
-  ["@function.macro"]               = { fg = X.preproc },        -- 宏函数（定义与调用）
+  ["@function"]                     = { fg = color.green },         -- 函数定义/引用
+  ["@function.builtin"]             = { fg = color.green }, -- 内置函数  例如 python print list
+  ["@function.call"]                = { fg = color.green },         -- 函数调用
+  ["@function.macro"]               = { fg = color.purple },        -- 宏函数（定义与调用）
 
-  ["@function.method"]              = { fg = X.c_function },         -- 方法定义
-  ["@function.method.call"]         = { fg = X.c_function },         -- 方法调用
-  ["@constructor"]                  = { fg = X.proj_type, bold = true },         -- 构造器调用/定义
-  ["@operator"]                     = { fg = X.operator },           -- 运算符（+ - * / -> 等）
+  ["@function.method"]              = { fg = color.green },         -- 方法定义
+  ["@function.method.call"]         = { fg = color.green },         -- 方法调用
+  ["@constructor"]                  = { fg = color.yellow, bold = true },         -- 构造器调用/定义
+  ["@operator"]                     = { fg = color.orange },           -- 运算符（+ - * / -> 等）
 
   ---------------------------------------------------------------------------
   -- 关键字（Keywords）
   ---------------------------------------------------------------------------
-  ["@keyword"]                      = { fg = X.keyword },           -- 关键字（通用）
-  ["@keyword.coroutine"]            = { fg = X.keyword, italic = true },           -- 协程相关（go/async/await）
-  ["@keyword.function"]             = { fg = X.keyword },           -- 定义函数相关（def/func）
-  ["@keyword.operator"]             = { fg = X.keyword },           -- 词法运算符（and/or/sizeof 等）
-  ["@keyword.import"]               = { fg = X.keyword },           -- 导入/导出（import/from/use）
-  ["@keyword.type"]                 = { fg = X.keyword },           -- 类型/结构定义（struct/enum）
-  ["@keyword.modifier"]             = { fg = X.keyword, italic = true },           -- 修饰符（const/static/public 等）
-  ["@keyword.repeat"]               = { fg = X.keyword },           -- 循环（for/while）
-  ["@keyword.return"]               = { fg = X.keyword },           -- 返回（return/yield）
-  ["@keyword.debug"]                = { fg = X.keyword },           -- 调试相关
-  ["@keyword.exception"]            = { fg = X.keyword },           -- 异常（try/throw/catch）
-  ["@keyword.conditional"]          = { fg = X.keyword },           -- 条件（if/else/switch）
-  ["@keyword.conditional.ternary"]  = { fg = X.keyword },           -- 三目（?:）
-  ["@keyword.directive"]            = { fg = X.keyword },           -- 预处理/指令（#if/#include/#!/usr/bin/env）
-  ["@keyword.directive.define"]     = { fg = X.keyword },           -- 预处理定义（#define）
+  ["@keyword"]                      = { fg = color.red },           -- 关键字（通用）
+  ["@keyword.coroutine"]            = { fg = color.red, italic = true },           -- 协程相关（go/async/await）
+  ["@keyword.function"]             = { fg = color.red },           -- 定义函数相关（def/func）
+  ["@keyword.operator"]             = { fg = color.red },           -- 词法运算符（and/or/sizeof 等）
+  ["@keyword.import"]               = { fg = color.red },           -- 导入/导出（import/from/use）
+  ["@keyword.type"]                 = { fg = color.red },           -- 类型/结构定义（struct/enum）
+  ["@keyword.modifier"]             = { fg = color.red, italic = true },           -- 修饰符（const/static/public 等）
+  ["@keyword.repeat"]               = { fg = color.red },           -- 循环（for/while）
+  ["@keyword.return"]               = { fg = color.red },           -- 返回（return/yield）
+  ["@keyword.debug"]                = { fg = color.red },           -- 调试相关
+  ["@keyword.exception"]            = { fg = color.red },           -- 异常（try/throw/catch）
+  ["@keyword.conditional"]          = { fg = color.red },           -- 条件（if/else/switch）
+  ["@keyword.conditional.ternary"]  = { fg = color.red },           -- 三目（?:）
+  ["@keyword.directive"]            = { fg = color.red },           -- 预处理/指令（#if/#include/#!/usr/bin/env）
+  ["@keyword.directive.define"]     = { fg = color.red },           -- 预处理定义（#define）
 
   ---------------------------------------------------------------------------
   -- 标点（Punctuation）
   ---------------------------------------------------------------------------
-  ["@punctuation.delimiter"]        = { fg = X.punctuation },        -- 分隔符（, . ; : 等）
-  ["@punctuation.bracket"]          = { fg = X.punctuation },        -- 括号（() {} []）
-  ["@punctuation.special"]          = { fg = X.punctuation },        -- 特殊标点（内插花括号等）
+  ["@punctuation.delimiter"]        = { fg = color.fg0 },        -- 分隔符（, . ; : 等）
+  ["@punctuation.bracket"]          = { fg = color.fg0 },        -- 括号（() {} []）
+  ["@punctuation.special"]          = { fg = color.orange },        -- 特殊标点（内插花括号等）
 
   ---------------------------------------------------------------------------
   -- 注释（Comments）
@@ -312,9 +328,9 @@ M.polish_hl = {
   -- typescript
   ---------------------------------------------------------------------------
   -- ["@variable.declaration"]              = { fg = X.other_decl },  --类型组件声明 一般为const SceneCard: React.FC<{ }
-["@lsp.typemod.variable.declaration"]  = { fg = X.proj_type }, --类型组件声明 一般为const SceneCard: React.FC<{ }
+-- ["@lsp.typemod.variable.declaration"]  = { fg = color.yellow }, --类型组件声明 一般为const SceneCard: React.FC<{ }
 -- ["@variable.parameter"] = { fg = X.c_doc } --参数名在声明位置”的着色——也就是函数/方法/箭头函数的形参名字
-["@lsp.typemod.parameter.declaration"] = { link = "@variable.parameter" },  --参数名在声明位置”的着色——也就是函数/方法/箭头函数的形参名字
+-- ["@lsp.typemod.parameter.declaration"] = { link = "@variable.parameter" },  --参数名在声明位置”的着色——也就是函数/方法/箭头函数的形参名字
     -- ["@lsp.type.function"] = { link = "@function" },
     --   ["@lsp.type.variable"] = { link = "@variable" }, -- 基本回退
 
