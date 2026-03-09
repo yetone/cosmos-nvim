@@ -122,7 +122,11 @@ cosmos.add_plugin('tzachar/highlight-undo.nvim', {
 
 cosmos.add_plugin('luckasRanarison/tailwind-tools.nvim', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  opts = {},
+  opts = {
+    server = {
+      override = false,
+    },
+  },
 })
 
 cosmos.add_plugin('razak17/tailwind-fold.nvim', {

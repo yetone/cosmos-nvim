@@ -61,6 +61,33 @@ cosmos.add_plugin('jackMort/ChatGPT.nvim', {
 
 local local_codecompanion_dir = os.getenv('HOME') .. '/workspace/projects/codecompanion.nvim'
 local local_codecompanion_dir_exists = vim.fn.isdirectory(local_codecompanion_dir) == 1
+local local_mcphub_dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim'
+local local_mcphub_dir_exists = vim.fn.isdirectory(local_mcphub_dir) == 1
+
+local function get_mcphub_active_servers_prompt()
+  local ok, mcphub = pcall(require, 'mcphub')
+  if not ok then
+    return ''
+  end
+
+  local hub = mcphub.get_hub_instance()
+  if hub == nil or type(hub.get_active_servers_prompt) ~= 'function' then
+    return ''
+  end
+
+  return hub:get_active_servers_prompt()
+end
+
+local function get_avante_mcphub_tools()
+  local ok, extension = pcall(require, 'mcphub.extensions.avante')
+  if not ok then
+    return {}
+  end
+
+  return {
+    extension.mcp_tool(),
+  }
+end
 
 cosmos.add_plugin('olimorris/codecompanion.nvim', {
   dev = local_codecompanion_dir_exists,
@@ -81,35 +108,37 @@ cosmos.add_plugin('olimorris/codecompanion.nvim', {
       log_level = 'DEBUG',
     },
     adapters = {
-      openai = function()
-        return require('codecompanion.adapters').extend('openai', {
-          schema = {
-            model = {
-              default = 'gpt-4o',
+      http = {
+        openai = function()
+          return require('codecompanion.adapters').extend('openai', {
+            schema = {
+              model = {
+                default = 'gpt-4o',
+              },
             },
-          },
-        })
-      end,
-      ollama = function()
-        return require('codecompanion.adapters').extend('ollama', {
-          env = {
-            url = 'http://10.0.0.207:11434',
-            -- api_key = "OLLAMA_API_KEY",
-          },
-          headers = {
-            ['Content-Type'] = 'application/json',
-            -- ["Authorization"] = "Bearer ${api_key}",
-          },
-          schema = {
-            model = {
-              default = 'devstral:24b',
+          })
+        end,
+        ollama = function()
+          return require('codecompanion.adapters').extend('ollama', {
+            env = {
+              url = 'http://10.0.0.207:11434',
+              -- api_key = "OLLAMA_API_KEY",
             },
-          },
-          parameters = {
-            sync = true,
-          },
-        })
-      end,
+            headers = {
+              ['Content-Type'] = 'application/json',
+              -- ["Authorization"] = "Bearer ${api_key}",
+            },
+            schema = {
+              model = {
+                default = 'devstral:24b',
+              },
+            },
+            parameters = {
+              sync = true,
+            },
+          })
+        end,
+      },
     },
     strategies = {
       chat = {
@@ -149,8 +178,9 @@ local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
 local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
 
 cosmos.add_plugin('ravitemer/mcphub.nvim', {
-  dev = true,
-  dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
+  enabled = local_mcphub_dir_exists,
+  dev = local_mcphub_dir_exists,
+  dir = local_mcphub_dir_exists and local_mcphub_dir or nil,
   dependencies = {
     'nvim-lua/plenary.nvim', -- Required for Job and HTTP requests
   },
@@ -203,14 +233,11 @@ cosmos.add_plugin('yetone/avante.nvim', {
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
     system_prompt = function()
-      local hub = require('mcphub').get_hub_instance()
-      return hub:get_active_servers_prompt()
+      return get_mcphub_active_servers_prompt()
     end,
     -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
     custom_tools = function()
-      return {
-        require('mcphub.extensions.avante').mcp_tool(),
-      }
+      return get_avante_mcphub_tools()
     end,
     -- provider = 'copilot_gemini',
     -- provider = 'copilot_openai',
