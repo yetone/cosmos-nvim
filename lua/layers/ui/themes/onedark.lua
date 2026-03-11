@@ -55,6 +55,20 @@ M.base_16 = {
   base0F = '#be5046',
 }
 
+M.polish_hl = {
+  treesitter = {
+    ['@punctuation.bracket'] = { fg = M.base_16.base05 },
+    ['@punctuation.delimiter'] = { fg = M.base_16.base05 },
+    ['@punctuation.special'] = { fg = M.base_16.base05 },
+    ['@tag.delimiter'] = { fg = M.base_16.base05 },
+  },
+
+  syntax = {
+    Delimiter = { fg = M.base_16.base05 },
+    SpecialChar = { fg = M.base_16.base05 },
+  },
+}
+
 M.type = 'dark'
 
 M = require('base46').override_theme(M, 'onedark')

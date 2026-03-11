@@ -1,6 +1,8 @@
 local theme = require('base46').get_theme_tb('base_16')
+local polish_hl = require('layers.ui.colors').get().polish_hl or {}
+local merge_highlights = require('layers.ui.utils').merge_highlights
 
-return {
+local highlights = {
   -- `@annotation` is not one of the default capture group, should we keep it
   ['@annotation'] = {
     fg = theme.base0F,
@@ -196,3 +198,5 @@ return {
     link = 'Conditional',
   },
 }
+
+return merge_highlights(highlights, polish_hl.treesitter)

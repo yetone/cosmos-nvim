@@ -1,5 +1,24 @@
 local M = {}
 
+function M.merge_highlights(base, overrides)
+  local merged = vim.deepcopy(base or {})
+
+  for group, override in pairs(overrides or {}) do
+    local current = merged[group]
+
+    if type(override) ~= 'table' then
+      merged[group] = override
+    elseif override.link ~= nil or (type(current) == 'table' and current.link ~= nil) then
+      -- `link` cannot be merged with other attrs: replace the whole group.
+      merged[group] = vim.deepcopy(override)
+    else
+      merged[group] = vim.tbl_extend('force', current or {}, override)
+    end
+  end
+
+  return merged
+end
+
 M.hide_statusline = function()
   local hidden = require('layers.ui.options').statusline_filetype_exclude
   local shown = require('layers.ui.options').statusline_filetype_include
