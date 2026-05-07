@@ -276,7 +276,11 @@ cosmos.add_plugin('LintaoAmons/bookmarks.nvim', {
 })
 
 cosmos.add_plugin('ThePrimeagen/refactoring.nvim', {
-  dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter' },
+  dependencies = {
+    'lewis6991/async.nvim',
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
+  },
   config = configs.refactoring,
 })
 
