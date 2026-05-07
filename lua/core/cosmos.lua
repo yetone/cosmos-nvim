@@ -395,15 +395,17 @@ local function setup()
           breadcrumb = '»', -- symbol used in the command line area that shows your active key combo
           separator = '➜', -- symbol used between a key and it's label
           group = '+', -- symbol prepended to a group
+          mappings = false, -- disable mapping icons
         },
         win = {
-          padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
+          no_overlap = false,
+          padding = { 1, 1 }, -- extra window padding [top/bottom, right/left]
           border = 'none',
+          height = { min = 1, max = 10 },
         },
         layout = {
-          height = { min = 1, max = 10 }, -- min and max height of the columns
+          width = { min = 20, max = 25 }, -- keep columns compact so more columns fit
           spacing = 3,
-          align = 'left',
         },
         show_help = true, -- show help message on the command line when the popup is visible
       })
