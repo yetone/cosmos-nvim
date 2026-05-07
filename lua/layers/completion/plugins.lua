@@ -149,6 +149,7 @@ local local_avante_dir = os.getenv('HOME') .. '/workspace/projects/avante.nvim'
 local local_avante_dir_exists = vim.fn.isdirectory(local_avante_dir) == 1
 
 cosmos.add_plugin('ravitemer/mcphub.nvim', {
+  enabled = false, -- paused: do not install/start MCPHub
   dev = true,
   dir = os.getenv('HOME') .. '/workspace/projects/mcphub.nvim',
   dependencies = {
@@ -203,13 +204,21 @@ cosmos.add_plugin('yetone/avante.nvim', {
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
     system_prompt = function()
-      local hub = require('mcphub').get_hub_instance()
-      return hub:get_active_servers_prompt()
+      local ok, mcphub = pcall(require, 'mcphub')
+      if not ok then
+        return ''
+      end
+      local hub = mcphub.get_hub_instance()
+      return hub and hub:get_active_servers_prompt() or ''
     end,
     -- The custom_tools type supports both a list and a function that returns a list. Using a function here prevents requiring mcphub before it's loaded
     custom_tools = function()
+      local ok, avante_ext = pcall(require, 'mcphub.extensions.avante')
+      if not ok then
+        return {}
+      end
       return {
-        require('mcphub.extensions.avante').mcp_tool(),
+        avante_ext.mcp_tool(),
       }
     end,
     -- provider = 'copilot_gemini',
