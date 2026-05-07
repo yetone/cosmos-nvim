@@ -72,18 +72,18 @@ cosmos.add_plugin('nvim-treesitter/nvim-treesitter-textobjects', {
   branch = 'main',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   config = configs.treesitter_textobjects,
-  event = 'BufRead',
+  event = { 'BufReadPost', 'BufNewFile' },
 })
 
 cosmos.add_plugin('JoosepAlviste/nvim-ts-context-commentstring', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = 'BufRead',
+  event = { 'BufReadPost', 'BufNewFile' },
   config = configs.ts_context_commentstring,
 })
 
 cosmos.add_plugin('windwp/nvim-ts-autotag', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = 'BufRead',
+  event = { 'BufReadPre', 'BufNewFile' },
   config = configs.autotag,
 })
 

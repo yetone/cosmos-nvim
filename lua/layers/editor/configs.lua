@@ -235,7 +235,7 @@ end
 function configs.treesitter()
   local treesitter = require('nvim-treesitter')
   local install_dir = vim.fn.stdpath('data') .. '/site'
-  vim.opt.runtimepath:prepend(install_dir)
+
   treesitter.setup({
     install_dir = install_dir,
   })
@@ -264,40 +264,66 @@ function configs.treesitter()
   }
 
   if vim.fn.executable('tree-sitter') == 1 then
-    pcall(function()
-      treesitter.install(parsers)
-    end)
+    local installed = {}
+    for _, parser in ipairs(treesitter.get_installed('parsers')) do
+      installed[parser] = true
+    end
+
+    local missing = vim.tbl_filter(function(parser)
+      return not installed[parser]
+    end, parsers)
+
+    if #missing > 0 then
+      treesitter.install(missing, { summary = false })
+    end
   end
 
   vim.treesitter.language.register('bash', 'sh')
   vim.treesitter.language.register('tsx', 'typescriptreact')
   vim.treesitter.language.register('javascript', 'javascriptreact')
 
+  local filetypes = {
+    'bash',
+    'c',
+    'cpp',
+    'css',
+    'go',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'lua',
+    'markdown',
+    'python',
+    'query',
+    'rust',
+    'sh',
+    'typescript',
+    'typescriptreact',
+    'vim',
+    'vimdoc',
+    'yaml',
+  }
+
+  local function parser_available(lang)
+    return #vim.api.nvim_get_runtime_file('parser/' .. lang .. '.*', false) > 0
+  end
+
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('cosmos_treesitter', { clear = true }),
-    pattern = {
-      'bash',
-      'c',
-      'cpp',
-      'css',
-      'go',
-      'html',
-      'javascript',
-      'javascriptreact',
-      'json',
-      'lua',
-      'markdown',
-      'python',
-      'rust',
-      'sh',
-      'typescript',
-      'typescriptreact',
-      'vim',
-      'vimdoc',
-      'yaml',
-    },
+    pattern = filetypes,
     callback = function(args)
-      pcall(vim.treesitter.start, args.buf)
+      local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+      if not lang or not parser_available(lang) then
+        return
+      end
+
+      local loaded, err = vim.treesitter.language.add(lang)
+      if not loaded then
+        error(err or string.format('Failed to load treesitter parser for language "%s"', lang))
+      end
+
+      vim.treesitter.start(args.buf, lang)
     end,
   })
 end
@@ -316,75 +342,66 @@ function configs.treesitter_textobjects()
   local swap = require('nvim-treesitter-textobjects.swap')
   local move = require('nvim-treesitter-textobjects.move')
 
-  local select_keymaps = {
-    af = '@function.outer',
-    ['if'] = '@function.inner',
-    ac = '@conditional.outer',
-    ic = '@conditional.inner',
-    ai = '@call.outer',
-    ii = '@call.inner',
-    ab = '@block.outer',
-    ib = '@block.inner',
-    ['is'] = '@statement.inner',
-    ['as'] = '@statement.outer',
-    aC = '@class.outer',
-    iC = '@class.inner',
-    al = '@loop.outer',
-    il = '@loop.inner',
-  }
-
-  for lhs, query in pairs(select_keymaps) do
-    vim.keymap.set({ 'x', 'o' }, lhs, function()
-      select.select_textobject(query, 'textobjects')
-    end)
+  local function map(modes, lhs, rhs, desc)
+    vim.keymap.set(modes, lhs, rhs, {
+      desc = desc,
+      silent = true,
+    })
   end
 
-  vim.keymap.set('n', '<leader>a', function()
-    swap.swap_next('@parameter.inner')
-  end)
-  vim.keymap.set('n', '<leader>A', function()
-    swap.swap_previous('@parameter.inner')
-  end)
+  local select_keymaps = {
+    { 'af', '@function.outer', 'Select outer function' },
+    { 'if', '@function.inner', 'Select inner function' },
+    { 'ac', '@conditional.outer', 'Select outer conditional' },
+    { 'ic', '@conditional.inner', 'Select inner conditional' },
+    { 'ai', '@call.outer', 'Select outer call' },
+    { 'ii', '@call.inner', 'Select inner call' },
+    { 'ab', '@block.outer', 'Select outer block' },
+    { 'ib', '@block.inner', 'Select inner block' },
+    { 'is', '@statement.inner', 'Select inner statement' },
+    { 'as', '@statement.outer', 'Select outer statement' },
+    { 'aC', '@class.outer', 'Select outer class' },
+    { 'iC', '@class.inner', 'Select inner class' },
+    { 'al', '@loop.outer', 'Select outer loop' },
+    { 'il', '@loop.inner', 'Select inner loop' },
+  }
 
-  vim.keymap.set({ 'n', 'x', 'o' }, ']m', function()
-    move.goto_next_start('@function.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']]', function()
-    move.goto_next_start('@class.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']o', function()
-    move.goto_next_start({ '@loop.inner', '@loop.outer' }, 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']s', function()
-    move.goto_next_start('@local.scope', 'locals')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']z', function()
-    move.goto_next_start('@fold', 'folds')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']M', function()
-    move.goto_next_end('@function.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '][', function()
-    move.goto_next_end('@class.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '[m', function()
-    move.goto_previous_start('@function.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
-    move.goto_previous_start('@class.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '[M', function()
-    move.goto_previous_end('@function.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '[]', function()
-    move.goto_previous_end('@class.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, ']d', function()
-    move.goto_next('@conditional.outer', 'textobjects')
-  end)
-  vim.keymap.set({ 'n', 'x', 'o' }, '[d', function()
-    move.goto_previous('@conditional.outer', 'textobjects')
-  end)
+  for _, keymap in ipairs(select_keymaps) do
+    local lhs, query, desc = keymap[1], keymap[2], keymap[3]
+    map({ 'x', 'o' }, lhs, function()
+      select.select_textobject(query, 'textobjects')
+    end, desc)
+  end
+
+  map('n', '<leader>a', function()
+    swap.swap_next('@parameter.inner')
+  end, 'Swap with next parameter')
+  map('n', '<leader>A', function()
+    swap.swap_previous('@parameter.inner')
+  end, 'Swap with previous parameter')
+
+  local move_keymaps = {
+    { ']m', move.goto_next_start, '@function.outer', 'textobjects', 'Next function start' },
+    { ']]', move.goto_next_start, '@class.outer', 'textobjects', 'Next class start' },
+    { ']o', move.goto_next_start, { '@loop.inner', '@loop.outer' }, 'textobjects', 'Next loop start' },
+    { ']s', move.goto_next_start, '@local.scope', 'locals', 'Next scope' },
+    { ']z', move.goto_next_start, '@fold', 'folds', 'Next fold' },
+    { ']M', move.goto_next_end, '@function.outer', 'textobjects', 'Next function end' },
+    { '][', move.goto_next_end, '@class.outer', 'textobjects', 'Next class end' },
+    { '[m', move.goto_previous_start, '@function.outer', 'textobjects', 'Previous function start' },
+    { '[[', move.goto_previous_start, '@class.outer', 'textobjects', 'Previous class start' },
+    { '[M', move.goto_previous_end, '@function.outer', 'textobjects', 'Previous function end' },
+    { '[]', move.goto_previous_end, '@class.outer', 'textobjects', 'Previous class end' },
+    { ']d', move.goto_next, '@conditional.outer', 'textobjects', 'Next conditional' },
+    { '[d', move.goto_previous, '@conditional.outer', 'textobjects', 'Previous conditional' },
+  }
+
+  for _, keymap in ipairs(move_keymaps) do
+    local lhs, fn, query, query_group, desc = keymap[1], keymap[2], keymap[3], keymap[4], keymap[5]
+    map({ 'n', 'x', 'o' }, lhs, function()
+      fn(query, query_group)
+    end, desc)
+  end
 end
 
 function configs.telescope()
