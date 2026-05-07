@@ -233,149 +233,158 @@ function configs.lspfuzzy()
 end
 
 function configs.treesitter()
-  local treesitter = require('nvim-treesitter.configs')
-  local ui_options = require('layers.ui.options')
+  local treesitter = require('nvim-treesitter')
+  local install_dir = vim.fn.stdpath('data') .. '/site'
+  vim.opt.runtimepath:prepend(install_dir)
   treesitter.setup({
-    autotag = {
-      enable = true,
-    },
-    indent = {
-      enable = false,
-    },
-    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = 'all',
-    -- Install languages synchronously (only applied to `ensure_installed`)
-    sync_install = false,
-    -- List of parsers to ignore installing
-    ignore_install = { 'ipkg' },
-    playground = {
-      enable = true,
-      disable = {},
-      updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-      persist_queries = false, -- Whether the query persists across vim sessions
-      keybindings = {
-        toggle_query_editor = 'o',
-        toggle_hl_groups = 'i',
-        toggle_injected_languages = 't',
-        toggle_anonymous_nodes = 'a',
-        toggle_language_display = 'I',
-        focus_language = 'f',
-        unfocus_language = 'F',
-        update = 'R',
-        goto_node = '<cr>',
-        show_help = '?',
-      },
-    },
-    highlight = {
-      -- `false` will disable the whole extension
-      enable = true,
+    install_dir = install_dir,
+  })
 
-      -- list of language that will be disabled
-      disable = {},
+  local parsers = {
+    'bash',
+    'c',
+    'cpp',
+    'css',
+    'go',
+    'html',
+    'javascript',
+    'json',
+    'lua',
+    'luadoc',
+    'markdown',
+    'markdown_inline',
+    'python',
+    'query',
+    'rust',
+    'tsx',
+    'typescript',
+    'vim',
+    'vimdoc',
+    'yaml',
+  }
 
-      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-      -- Using this option may slow down your editor, and you may see some duplicate highlights.
-      -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
-    },
-    rainbow = {
-      enable = ui_options.enable_rainbow,
-      -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
-      extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil, -- Do not enable for files with more than n lines, int
-      -- colors = {}, -- table of hex strings
-      -- termcolors = {} -- table of colour name strings
-    },
-    incremental_selection = {
-      enable = true,
-      keymaps = {
-        init_selection = 'gnn',
-        node_incremental = '.',
-        scope_incremental = 'grc',
-        node_decremental = ',',
-      },
-    },
-    -- textsubjects = {
-    --   enable = true,
-    --   prev_selection = ',', -- (Optional) keymap to select the previous selection
-    --   keymaps = {
-    --     ['.'] = 'textsubjects-smart',
-    --     -- [';'] = 'textsubjects-container-outer',
-    --   },
-    -- },
+  if vim.fn.executable('tree-sitter') == 1 then
+    pcall(function()
+      treesitter.install(parsers)
+    end)
+  end
 
-    textobjects = {
-      select = {
-        enable = true,
-        -- Automatically jump forward to textobj, similar to targets.vim
-        lookahead = true,
-        keymaps = {
-          -- You can use the capture groups defined in textobjects.scm
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['ac'] = '@conditional.outer',
-          ['ic'] = '@conditional.inner',
-          ['ai'] = '@call.outer',
-          ['ii'] = '@call.inner',
-          ['ab'] = '@block.outer',
-          ['ib'] = '@block.inner',
-          ['is'] = '@statement.inner',
-          ['as'] = '@statement.outer',
-          ['aC'] = '@class.outer',
-          ['iC'] = '@class.inner',
-          ['al'] = '@loop.outer',
-          ['il'] = '@loop.inner',
-        },
-      },
-      swap = {
-        enable = true,
-        swap_next = {
-          ['<leader>a'] = '@parameter.inner',
-        },
-        swap_previous = {
-          ['<leader>A'] = '@parameter.inner',
-        },
-      },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          [']m'] = '@function.outer',
-          [']]'] = { query = '@class.outer', desc = 'Next class start' },
-          [']o'] = '@loop.*',
-          [']s'] = { query = '@scope', query_group = 'locals', desc = 'Next scope' },
-          [']z'] = { query = '@fold', query_group = 'folds', desc = 'Next fold' },
-        },
-        goto_next_end = {
-          [']M'] = '@function.outer',
-          [']['] = '@class.outer',
-        },
-        goto_previous_start = {
-          ['[m'] = '@function.outer',
-          ['[['] = '@class.outer',
-        },
-        goto_previous_end = {
-          ['[M'] = '@function.outer',
-          ['[]'] = '@class.outer',
-        },
-        goto_next = {
-          [']d'] = '@conditional.outer',
-        },
-        goto_previous = {
-          ['[d'] = '@conditional.outer',
-        },
-      },
-      lsp_interop = {
-        enable = true,
-        border = 'none',
-        peek_definition_code = {
-          ['<leader>sd'] = '@function.outer',
-          ['<leader>sD'] = '@class.outer',
-        },
-      },
+  vim.treesitter.language.register('bash', 'sh')
+  vim.treesitter.language.register('tsx', 'typescriptreact')
+  vim.treesitter.language.register('javascript', 'javascriptreact')
+
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('cosmos_treesitter', { clear = true }),
+    pattern = {
+      'bash',
+      'c',
+      'cpp',
+      'css',
+      'go',
+      'html',
+      'javascript',
+      'javascriptreact',
+      'json',
+      'lua',
+      'markdown',
+      'python',
+      'rust',
+      'sh',
+      'typescript',
+      'typescriptreact',
+      'vim',
+      'vimdoc',
+      'yaml',
+    },
+    callback = function(args)
+      pcall(vim.treesitter.start, args.buf)
+    end,
+  })
+end
+
+function configs.treesitter_textobjects()
+  require('nvim-treesitter-textobjects').setup({
+    select = {
+      lookahead = true,
+    },
+    move = {
+      set_jumps = true,
     },
   })
+
+  local select = require('nvim-treesitter-textobjects.select')
+  local swap = require('nvim-treesitter-textobjects.swap')
+  local move = require('nvim-treesitter-textobjects.move')
+
+  local select_keymaps = {
+    af = '@function.outer',
+    ['if'] = '@function.inner',
+    ac = '@conditional.outer',
+    ic = '@conditional.inner',
+    ai = '@call.outer',
+    ii = '@call.inner',
+    ab = '@block.outer',
+    ib = '@block.inner',
+    ['is'] = '@statement.inner',
+    ['as'] = '@statement.outer',
+    aC = '@class.outer',
+    iC = '@class.inner',
+    al = '@loop.outer',
+    il = '@loop.inner',
+  }
+
+  for lhs, query in pairs(select_keymaps) do
+    vim.keymap.set({ 'x', 'o' }, lhs, function()
+      select.select_textobject(query, 'textobjects')
+    end)
+  end
+
+  vim.keymap.set('n', '<leader>a', function()
+    swap.swap_next('@parameter.inner')
+  end)
+  vim.keymap.set('n', '<leader>A', function()
+    swap.swap_previous('@parameter.inner')
+  end)
+
+  vim.keymap.set({ 'n', 'x', 'o' }, ']m', function()
+    move.goto_next_start('@function.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']]', function()
+    move.goto_next_start('@class.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']o', function()
+    move.goto_next_start({ '@loop.inner', '@loop.outer' }, 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']s', function()
+    move.goto_next_start('@local.scope', 'locals')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']z', function()
+    move.goto_next_start('@fold', 'folds')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']M', function()
+    move.goto_next_end('@function.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '][', function()
+    move.goto_next_end('@class.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '[m', function()
+    move.goto_previous_start('@function.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '[[', function()
+    move.goto_previous_start('@class.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '[M', function()
+    move.goto_previous_end('@function.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '[]', function()
+    move.goto_previous_end('@class.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, ']d', function()
+    move.goto_next('@conditional.outer', 'textobjects')
+  end)
+  vim.keymap.set({ 'n', 'x', 'o' }, '[d', function()
+    move.goto_previous('@conditional.outer', 'textobjects')
+  end)
 end
 
 function configs.telescope()
@@ -846,6 +855,10 @@ end
 
 function configs.ts_context_commentstring()
   require('ts_context_commentstring').setup()
+end
+
+function configs.autotag()
+  require('nvim-ts-autotag').setup()
 end
 
 function configs.telescope_undo(_, opts)

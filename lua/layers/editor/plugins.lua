@@ -59,25 +59,19 @@ cosmos.add_plugin('editorconfig/editorconfig-vim', {
 })
 
 cosmos.add_plugin('nvim-treesitter/nvim-treesitter', {
-  branch = 'master',
+  branch = 'main',
   lazy = false,
   build = function()
-    if #vim.api.nvim_list_uis() ~= 0 then
+    if #vim.api.nvim_list_uis() ~= 0 and vim.fn.executable('tree-sitter') == 1 then
       vim.cmd('TSUpdate')
     end
   end,
   config = configs.treesitter,
 })
-cosmos.add_plugin('nvim-treesitter/playground', {
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = 'BufRead',
-})
 cosmos.add_plugin('nvim-treesitter/nvim-treesitter-textobjects', {
+  branch = 'main',
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  event = 'BufRead',
-})
-cosmos.add_plugin('RRethy/nvim-treesitter-textsubjects', {
-  dependencies = { 'nvim-treesitter/nvim-treesitter' },
+  config = configs.treesitter_textobjects,
   event = 'BufRead',
 })
 
@@ -90,6 +84,7 @@ cosmos.add_plugin('JoosepAlviste/nvim-ts-context-commentstring', {
 cosmos.add_plugin('windwp/nvim-ts-autotag', {
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
   event = 'BufRead',
+  config = configs.autotag,
 })
 
 cosmos.add_plugin('sheerun/vim-polyglot', {

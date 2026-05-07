@@ -221,76 +221,84 @@ function M.open_lua_repl()
   vim.cmd('resize 10 | setl winfixheight')
 end
 
+local function get_node_at_cursor()
+  return vim.treesitter.get_node()
+end
+
+local function goto_node(node)
+  local row, col = node:range()
+  vim.api.nvim_win_set_cursor(0, { row + 1, col })
+end
+
+local function previous_named_node(node)
+  local current = node
+  while current do
+    local sibling = current:prev_named_sibling()
+    if sibling then
+      return sibling
+    end
+    current = current:parent()
+  end
+end
+
+local function next_named_node(node)
+  local sibling = node:next_named_sibling()
+  if sibling then
+    return sibling
+  end
+
+  local current = node:parent()
+  while current do
+    sibling = current:next_named_sibling()
+    if sibling then
+      return sibling
+    end
+    current = current:parent()
+  end
+end
+
 function M.goto_prev_node()
-  local ts_utils = require('nvim-treesitter.ts_utils')
-  local node = ts_utils.get_node_at_cursor()
+  local node = get_node_at_cursor()
   if not node then
     return
   end
-  local dest_node = ts_utils.get_previous_node(node, true, true)
-  if not dest_node then
-    local cur_node = node:parent()
-    while cur_node do
-      dest_node = ts_utils.get_previous_node(cur_node, false, false)
-      if dest_node then
-        break
-      end
-      cur_node = cur_node:parent()
-    end
+  local dest_node = previous_named_node(node)
+  if dest_node then
+    goto_node(dest_node)
   end
-  if not dest_node then
-    return
-  end
-  ts_utils.goto_node(dest_node)
 end
 
 function M.goto_next_node()
-  local ts_utils = require('nvim-treesitter.ts_utils')
-  local node = ts_utils.get_node_at_cursor()
+  local node = get_node_at_cursor()
   if not node then
     return
   end
-  local dest_node = ts_utils.get_next_node(node, true, true)
-  if not dest_node then
-    local cur_node = node:parent()
-    while cur_node do
-      dest_node = ts_utils.get_next_node(cur_node, false, false)
-      if dest_node then
-        break
-      end
-      cur_node = cur_node:parent()
-    end
+  local dest_node = next_named_node(node)
+  if dest_node then
+    goto_node(dest_node)
   end
-  if not dest_node then
-    return
-  end
-  ts_utils.goto_node(dest_node)
 end
 
 function M.goto_parent_node()
-  local ts_utils = require('nvim-treesitter.ts_utils')
-  local node = ts_utils.get_node_at_cursor()
+  local node = get_node_at_cursor()
   if not node then
     return
   end
   local dest_node = node:parent()
-  if not dest_node then
-    return
+  if dest_node then
+    goto_node(dest_node)
   end
-  ts_utils.goto_node(dest_node)
 end
 
 function M.goto_child_node()
-  local ts_utils = require('nvim-treesitter.ts_utils')
-  local node = ts_utils.get_node_at_cursor()
+  local node = get_node_at_cursor()
   if not node then
     return
   end
-  local dest_node = ts_utils.get_named_children(node)[1]
-  if not dest_node then
-    return
+  local dest_node = node:named_child(0)
+  if dest_node then
+    goto_node(dest_node)
   end
-  ts_utils.goto_node(dest_node)
 end
 
 function M.pick_window()
