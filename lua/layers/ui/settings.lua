@@ -3,7 +3,6 @@ local g = vim.g
 local opt = vim.opt
 
 opt.pumblend = options.transparency
-vim.api.nvim_set_hl(0, 'PmenuSel', { blend = 0 })
 
 opt.termguicolors = true
 g.Illuminate_delay = options.illuminate_delay
@@ -27,23 +26,6 @@ opt.cursorline = true
 --   end,
 -- })
 
-vim.api.nvim_create_autocmd('VimEnter', {
-  group = vim.api.nvim_create_augroup('illuminate_augroup', { clear = true }),
-  pattern = '*',
-  callback = function()
-    local color = '#2d323e'
-    vim.api.nvim_set_hl(0, 'IlluminatedWordRead', {
-      bg = color,
-    })
-    vim.api.nvim_set_hl(0, 'IlluminatedWordText', {
-      bg = color,
-    })
-    vim.api.nvim_set_hl(0, 'IlluminatedWordWrite', {
-      bg = color,
-    })
-  end,
-})
-
 vim.api.nvim_create_autocmd({
   'BufEnter',
   'BufRead',
@@ -57,15 +39,23 @@ vim.api.nvim_create_autocmd({
   end,
 })
 
-require('layers.ui.colors').setup()
+vim.api.nvim_create_autocmd('ColorScheme', {
+  pattern = '*',
+  callback = function()
+    if not package.loaded['bufferline.config'] then
+      return
+    end
 
-vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbol', { link = 'IndentBlanklineContextChar' })
-vim.api.nvim_set_hl(0, 'MiniIndentscopeSymbolOff', { link = 'IndentBlanklineChar' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupBorder', { link = 'FloatBorder' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitle', { link = 'TelescopePreviewTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleLua', { link = 'NoiceCmdlinePopupTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleInput', { link = 'NoiceCmdlinePopupTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleHelp', { link = 'NoiceCmdlinePopupTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleCmdline', { link = 'NoiceCmdlinePopupTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleFilter', { link = 'NoiceCmdlinePopupTitle' })
-vim.api.nvim_set_hl(0, 'NoiceCmdlinePopupTitleCalculator', { link = 'NoiceCmdlinePopupTitle' })
+    local ok_config, bufferline_config = pcall(require, 'bufferline.config')
+    local ok_highlights, bufferline_highlights = pcall(require, 'bufferline.highlights')
+    if not ok_config or not ok_highlights then
+      return
+    end
+
+    bufferline_config.setup(require('layers.ui.configs').get_bufferline_options())
+    bufferline_highlights.reset_icon_hl_cache()
+    bufferline_highlights.set_all(bufferline_config.update_highlights())
+  end,
+})
+
+require('layers.ui.colors').setup()

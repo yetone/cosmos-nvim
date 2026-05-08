@@ -5,17 +5,39 @@ local conf = require('telescope.config').values
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
 local Previewer = require('telescope.previewers').Previewer
+local previous_theme
 
-function M.preview_theme(theme)
+function M.apply_theme(theme)
+  if not theme or theme == vim.g.colors_name then
+    return
+  end
+
+  vim.api.nvim_exec_autocmds('ColorSchemePre', { modeline = false, pattern = theme })
+
   local options = require('layers.ui.options')
   options.theme = theme
-  package.loaded['layers.ui.colors' or false] = nil
   require('layers.ui.colors').setup()
-  require('lualine.highlight').create_highlight_groups(require('layers.ui.highlights').get_lualine_theme())
-  require('bufferline.config').setup(require('layers.ui.configs').get_bufferline_options())
-  require('bufferline.highlights').reset_icon_hl_cache()
-  require('bufferline.highlights').set_all(require('bufferline.config').update_highlights())
-  vim.opt.bg = require('layers.ui.colors').get().type
+  vim.api.nvim_exec_autocmds('ColorScheme', { modeline = false, pattern = theme })
+end
+
+function M.preview_theme(theme)
+  M.apply_theme(theme)
+end
+
+function M.toggle_theme_preview(theme)
+  local current_theme = vim.g.colors_name
+
+  if current_theme == theme and previous_theme then
+    M.preview_theme(previous_theme)
+    previous_theme = nil
+    return
+  end
+
+  if current_theme ~= theme then
+    previous_theme = current_theme
+  end
+
+  M.preview_theme(theme)
 end
 
 function M.pick_theme(opts)

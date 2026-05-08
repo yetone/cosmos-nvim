@@ -11,9 +11,10 @@ M.setup = function()
   vim.g.colors_name = options.theme
 
   -- unload to force reload
-  package.loaded['layers.ui.highlights' or false] = nil
+  package.loaded['layers.ui.highlights'] = nil
   -- then load the highlights
   require('layers.ui.highlights').setup()
+  require('layers.ui.post_theme').apply()
 end
 
 -- returns a table of colors for given or current theme
