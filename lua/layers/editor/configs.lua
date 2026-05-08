@@ -169,7 +169,6 @@ function configs.mason()
     vim.lsp.config(server_name, server_opt)
   end
 
-
   -- Package installation folder
   local install_root_dir = vim.fn.stdpath('data') .. '/mason'
 

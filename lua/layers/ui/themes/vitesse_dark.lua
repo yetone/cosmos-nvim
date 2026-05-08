@@ -60,7 +60,7 @@ M.polish_hl = {
     ['@punctuation.bracket'] = { fg = M.base_30.light_grey },
     ['@punctuation.delimiter'] = { fg = M.base_30.light_grey },
   },
-  
+
   -- Additional polish for specific languages or plugins
   ['@variable'] = { fg = M.base_30.orange },
   ['@function'] = { fg = M.base_30.vibrant_green },
