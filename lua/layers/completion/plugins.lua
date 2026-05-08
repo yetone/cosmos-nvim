@@ -190,17 +190,30 @@ cosmos.add_plugin('yetone/avante.nvim', {
   build = 'make',
   opts = {
     disabled_tools = { 'run_python' },
-    debug = true,
+    debug = false,
     mode = 'agentic',
     web_search_engine = {
       provider = 'serpapi',
     },
     rag_service = {
-      enabled = false, -- Enables the rag service, requires OPENAI_API_KEY to be set
-      provider = 'ollama',
-      llm_model = 'llama3.2',
-      embed_model = 'nomic-embed-text',
-      endpoint = 'http://10.0.0.244:11434',
+      enabled = false, -- Enables the RAG service
+      host_mount = os.getenv('HOME'),
+      runner = 'docker',
+      llm = {
+        provider = 'ollama',
+        endpoint = 'http://10.0.0.244:11434',
+        api_key = '',
+        model = 'llama3.2',
+        extra = nil,
+      },
+      embed = {
+        provider = 'ollama',
+        endpoint = 'http://10.0.0.244:11434',
+        api_key = '',
+        model = 'nomic-embed-text',
+        extra = nil,
+      },
+      docker_extra_args = '',
     },
     -- The system_prompt type supports both a string and a function that returns a string. Using a function here allows dynamically updating the prompt with mcphub
     system_prompt = function()
@@ -565,9 +578,9 @@ cosmos.add_plugin('yetone/avante.nvim', {
     {
       'MeanderingProgrammer/render-markdown.nvim',
       opts = {
-        file_types = { 'markdown' },
+        file_types = { 'markdown', 'Avante' },
       },
-      ft = { 'markdown' },
+      ft = { 'markdown', 'Avante' },
     },
   },
 })
