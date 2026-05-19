@@ -104,5 +104,6 @@
   "vim-startuptime": { "branch": "master", "commit": "f10474b400c197787a0434548d842a2db583c333" },
   "vim-wakatime": { "branch": "master", "commit": "24495fb7cc9613eaf0ce45540fb8d096a30d08e9" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" }
+  "window-picker": { "branch": "main", "commit": "6382540b2ae5de6c793d4aa2e3fe6dbb518505ec" },
+  "zen-mode.nvim": { "branch": "main", "commit": "8564ce6d29ec7554eb9df578efa882d33b3c23a7" }
 }

@@ -5,3 +5,4 @@ cosmos.add_leader_keymapping(
   'n|tt',
   { ':lua require("layers.ui.functions").toggle_theme_preview("oneview")<CR>', name = 'Theme toggle' }
 )
+cosmos.add_leader_keymapping('n|z', { '<cmd>ZenMode<CR>', name = 'Zen mode' })
