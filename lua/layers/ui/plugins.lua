@@ -141,9 +141,11 @@ cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
 cosmos.add_plugin('folke/zen-mode.nvim', {
   cmd = 'ZenMode',
   opts = {
+    on_open = function() pcall(vim.cmd.ScrollbarHide) end,
+    on_close = function() pcall(vim.cmd.ScrollbarShow) end,
     window = {
-      backdrop = 0.95,
-      width = 0.68,
+      backdrop = 1,
+      width = 0.618,
       height = 1,
       options = {
         signcolumn = 'no',
