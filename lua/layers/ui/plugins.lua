@@ -141,11 +141,27 @@ cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
 cosmos.add_plugin('folke/zen-mode.nvim', {
   cmd = 'ZenMode',
   opts = {
-    on_open = function() pcall(vim.cmd.ScrollbarHide) end,
-    on_close = function() pcall(vim.cmd.ScrollbarShow) end,
+    on_open = function()
+      pcall(vim.cmd.ScrollbarHide)
+      local ok, api = pcall(require, 'nvim-tree.api')
+      if ok and api.tree.is_visible() then
+        api.tree.close()
+        vim.b.cosmos_zen_restore_tree = true
+      end
+    end,
+    on_close = function()
+      pcall(vim.cmd.ScrollbarShow)
+      if vim.b.cosmos_zen_restore_tree then
+        vim.b.cosmos_zen_restore_tree = nil
+        local ok, api = pcall(require, 'nvim-tree.api')
+        if ok then
+          api.tree.open({ focus = false })
+        end
+      end
+    end,
     window = {
       backdrop = 1,
-      width = 0.618,
+      width = 0.52,
       height = 1,
       options = {
         signcolumn = 'no',
