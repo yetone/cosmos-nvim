@@ -138,6 +138,37 @@ cosmos.add_plugin('razak17/tailwind-fold.nvim', {
 
 cosmos.add_plugin('nvchad/showkeys', { cmd = 'ShowkeysToggle' })
 
+cosmos.add_plugin('folke/zen-mode.nvim', {
+  cmd = 'ZenMode',
+  opts = {
+    window = {
+      backdrop = 0.95,
+      width = 0.68,
+      height = 1,
+      options = {
+        signcolumn = 'no',
+        number = false,
+        relativenumber = false,
+        cursorline = false,
+        cursorcolumn = false,
+        foldcolumn = '0',
+        list = false,
+      },
+    },
+    plugins = {
+      options = {
+        enabled = true,
+        ruler = false,
+        showcmd = false,
+        laststatus = 0,
+      },
+      twilight = { enabled = false },
+      gitsigns = { enabled = false },
+      tmux = { enabled = false },
+    },
+  },
+})
+
 -- cosmos.add_plugin('jonahgoldwastaken/copilot-status.nvim', {
 --   dependencies = { 'copilot.lua' },
 --   lazy = true,
