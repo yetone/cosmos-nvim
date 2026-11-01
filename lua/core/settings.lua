@@ -27,8 +27,6 @@ vim.cmd('set nocompatible')
 
 opt.complete = ''
 -- opt.background = 'dark'
-vim.cmd('syntax on')
-vim.cmd('filetype plugin indent on')
 
 local indent = 4
 
