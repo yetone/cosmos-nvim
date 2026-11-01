@@ -49,6 +49,7 @@ cosmos.add_plugin('dmitmel/cmp-cmdline-history', { dependencies = { 'hrsh7th/nvi
 cosmos.add_plugin('saadparwaiz1/cmp_luasnip', { dependencies = { 'hrsh7th/nvim-cmp' }, event = 'BufRead' })
 
 cosmos.add_plugin('jackMort/ChatGPT.nvim', {
+  enabled = false,
   event = 'VeryLazy',
   config = configs.chatgpt,
   dependencies = {
@@ -186,6 +187,7 @@ cosmos.add_plugin('ravitemer/mcphub.nvim', {
 -- cosmos.add_plugin('augmentcode/augment.vim')
 
 cosmos.add_plugin('yetone/avante.nvim', {
+  enabled = false, -- paused: copilot provider fails (no hosts.json/apps.json, only auth.db)
   dev = local_avante_dir_exists,
   dir = local_avante_dir_exists and local_avante_dir or nil,
   event = 'VeryLazy',
@@ -194,9 +196,6 @@ cosmos.add_plugin('yetone/avante.nvim', {
     disabled_tools = { 'run_python' },
     debug = false,
     mode = 'agentic',
-    web_search_engine = {
-      provider = 'serpapi',
-    },
     rag_service = {
       enabled = false, -- Enables the RAG service
       host_mount = os.getenv('HOME'),
@@ -236,257 +235,12 @@ cosmos.add_plugin('yetone/avante.nvim', {
         avante_ext.mcp_tool(),
       }
     end,
-    -- provider = 'copilot_gemini',
-    -- provider = 'copilot_openai',
-    -- provider = 'copilot:gpt-4.1',
-    -- provider = 'openai-gpt-4o-mini',
+    provider = 'copilot',
     selector = {
       provider = 'snacks',
     },
     history = {
       -- carried_entry_count = 3,
-    },
-    provider = 'claude',
-    providers = {
-      moonshot = {
-        use_ReAct_prompt = true,
-        model = 'kimi-k2-turbo-preview',
-      },
-      ['moonshot-claude'] = {
-        __inherited_from = 'claude',
-        endpoint = 'https://api.moonshot.ai/anthropic',
-        api_key_name = 'MOONSHOT_API_KEY',
-        model = 'kimi-k2-0711-preview',
-      },
-      -- claude = {
-      -- endpoint = 'https://anyrouter.top',
-      -- },
-      openai = {
-        model = 'o3-mini',
-      },
-      copilot = {
-        -- use_ReAct_prompt = true,
-        is_env_set = function()
-          return true
-        end,
-      },
-      ['gemini_2_0_flash'] = {
-        __inherited_from = 'gemini',
-        model = 'gemini-2.0-flash',
-      },
-      gemini_flash = {
-        __inherited_from = 'gemini',
-        model = 'gemini-2.5-flash-preview-05-20',
-        timeout = 30000,
-        extra_request_body = {
-          generationConfig = {
-            temperature = 0,
-            -- max_tokens = 65536
-          },
-        },
-      },
-      ollama = {
-        -- endpoint = 'http://10.0.0.244:11434',
-        -- endpoint = 'http://10.0.0.207:11434',
-        endpoint = 'http://100.92.182.127:11434',
-        -- model = 'qwen3:14b',
-        -- model = 'qwen2.5-coder:14b',
-        -- model = 'hhao/qwen2.5-coder-tools:14b',
-        model = 'devstral:24b',
-      },
-      ['aihubmix-claude'] = {
-        model = 'claude-sonnet-4-20250514',
-      },
-      aihubmix = {
-        model = 'gpt-5',
-      },
-      gemini = {
-        use_ReAct_prompt = true,
-        model = 'gemini-2.5-pro-preview-06-05',
-        -- model = 'gemini-2.5-flash-preview-04-17',
-        -- api_key_name = 'cmd:security find-generic-password -s GEMINI_KEY -w',
-      },
-      ['gemini-2.0-flash'] = {
-        __inherited_from = 'copilot',
-        display_name = 'copilot/gemini-2.0-flash',
-        model = 'gemini-2.0-flash-001',
-        disable_tools = true,
-      },
-      ['copilot:gpt-4.1'] = {
-        __inherited_from = 'copilot',
-        model = 'gpt-4.1',
-      },
-      ['gemini_2.5_pro'] = {
-        __inherited_from = 'openai',
-        api_key_name = 'GEMINI_API_KEY',
-        endpoint = 'https://generativelanguage.googleapis.com/v1beta',
-        model = 'gemini-2.5-pro-exp-03-25',
-      },
-      ark = {
-        __inherited_from = 'openai',
-        api_key_name = 'ARK_API_KEY',
-        endpoint = 'https://ark.cn-beijing.volces.com/api/v3',
-        model = 'deepseek-v3-250324',
-        extra_request_body = {
-          max_completion_tokens = 12288,
-        },
-      },
-      cursor_claude_3_5_sonnet = {
-        __inherited_from = 'openai',
-        api_key_name = 'CURSOR_REVERSE_API_KEY',
-        endpoint = 'http://localhost:9999/v1',
-        model = 'cursor/claude-3-5-sonnet-20241022',
-      },
-      cursor_deepseek_v3 = {
-        __inherited_from = 'openai',
-        api_key_name = 'CURSOR_REVERSE_API_KEY',
-        endpoint = 'http://localhost:9999/v1',
-        model = 'cursor/deepseek-v3',
-        extra_request_body = {
-          max_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
-        },
-        disable_tools = true,
-      },
-      claude_3_5_sonnet = {
-        __inherited_from = 'claude',
-        model = 'claude-3-5-sonnet-20241022',
-        extra_request_body = {
-          max_tokens = 8192,
-        },
-      },
-      claude_sonnet_4 = {
-        __inherited_from = 'claude',
-        model = 'claude-sonnet-4-20250514',
-        extra_request_body = {
-          max_tokens = 8192,
-        },
-      },
-      copilot_claude = {
-        __inherited_from = 'copilot',
-        model = 'claude-3.7-sonnet',
-      },
-      copilot_claude_3_5 = {
-        __inherited_from = 'copilot',
-        model = 'claude-3.5-sonnet',
-      },
-      copilot_claude_thought = {
-        __inherited_from = 'copilot',
-        model = 'claude-3.7-sonnet-thought',
-        extra_request_body = {
-          temperature = 1,
-          max_tokens = 20000,
-        },
-      },
-      copilot_openai = {
-        __inherited_from = 'copilot',
-        model = 'gpt-4o-2024-11-20',
-        extra_request_body = {
-          max_tokens = 12333,
-        },
-      },
-      copilot_gemini = {
-        __inherited_from = 'copilot',
-        model = 'gemini-2.5-pro-preview-05-06',
-      },
-      copilot_o3_mini = {
-        __inherited_from = 'copilot',
-        model = 'o3-mini',
-      },
-      together = {
-        __inherited_from = 'openai',
-        endpoint = 'https://api.together.xyz/v1',
-        api_key_name = 'TOGETHER_API_KEY',
-        model = 'deepseek-ai/DeepSeek-R1',
-        disable_tools = true,
-      },
-      siliconflow = {
-        __inherited_from = 'openai',
-        endpoint = 'https://api.siliconflow.cn/v1',
-        api_key_name = 'SILICONFLOW_API_KEY',
-        model = 'Pro/deepseek-ai/DeepSeek-R1',
-        disable_tools = true,
-      },
-      mistral = {
-        __inherited_from = 'openai',
-        endpoint = 'https://api.mistral.ai/v1',
-        api_key_name = 'MISTRAL_API_KEY',
-        model = 'codestral-latest',
-      },
-      openrouter = {
-        __inherited_from = 'openai',
-        endpoint = 'https://openrouter.ai/api/v1',
-        api_key_name = 'OPENROUTER_API_KEY',
-        -- model = 'deepseek/deepseek-r1',
-        model = 'moonshotai/kimi-k2:free',
-        use_ReAct_prompt = true,
-        -- model = 'openai/gpt-4o',
-      },
-      fastapply = {
-        __inherited_from = 'openai',
-        api_key_name = '',
-        endpoint = 'http://yetone-mac-mini.local:11434/v1',
-        model = 'hf.co/Kortix/FastApply-7B-v1.0_GGUF:Q4_K_M',
-        -- model = 'hf.co/Kortix/FastApply-1.5B-v1.0_GGUF:F16',
-      },
-      mlc = {
-        __inherited_from = 'openai',
-        api_key_name = '',
-        endpoint = 'http://yetone-mac-mini:8000/v1',
-        model = 'qwen2.5-coder:32b',
-      },
-      groq_deepseek = {
-        __inherited_from = 'openai',
-        api_key_name = 'GROQ_API_KEY',
-        endpoint = 'https://api.groq.com/openai/v1/',
-        model = 'deepseek-r1-distill-llama-70b',
-        -- model = 'qwen-2.5-coder-32b',
-      },
-      groq = {
-        __inherited_from = 'openai',
-        api_key_name = 'GROQ_API_KEY',
-        endpoint = 'https://api.groq.com/openai/v1/',
-        -- model = 'deepseek-r1-distill-llama-70b',
-        -- model = 'qwen-2.5-coder-32b',
-        -- model = 'llama-3.3-70b-versatile',
-        model = 'moonshotai/kimi-k2-instruct',
-        extra_request_body = {
-          max_completion_tokens = 16384, -- remember to increase this value, otherwise it will stop generating halfway
-        },
-        -- disable_tools = true,
-      },
-      groq_qwq = {
-        __inherited_from = 'openai',
-        api_key_name = 'GROQ_API_KEY',
-        endpoint = 'https://api.groq.com/openai/v1/',
-        model = 'qwen-qwq-32b',
-        extra_request_body = {
-          max_completion_tokens = 32768, -- remember to increase this value, otherwise it will stop generating halfway
-        },
-        disable_tools = true,
-      },
-      perplexity = {
-        __inherited_from = 'openai',
-        api_key_name = 'PPLX_API_KEY',
-        endpoint = 'https://api.perplexity.ai',
-        model = 'llama-3.1-sonar-large-128k-online',
-      },
-      deepseek = {
-        __inherited_from = 'openai',
-        api_key_name = 'DEEPSEEK_API_KEY',
-        endpoint = 'https://api.deepseek.com',
-        model = 'deepseek-reasoner',
-        disable_tools = false,
-      },
-      qianwen = {
-        __inherited_from = 'openai',
-        api_key_name = 'DASHSCOPE_API_KEY',
-        endpoint = 'https://dashscope.aliyuncs.com/compatible-mode/v1',
-        model = 'qwen-coder-plus-latest',
-        -- hide_in_model_selector = true,
-      },
-      morph = {
-        model = 'auto',
-      },
     },
     behaviour = {
       auto_focus_sidebar = true,
