@@ -26,124 +26,20 @@ function configs.mason()
     },
   })
 
-  require('mason-null-ls').setup({
-    ensure_installed = nil,
-    automatic_installation = false,
-    automatic_setup = true,
+  require('mason-registry'):on('package:install:success', function()
+    vim.defer_fn(function()
+      require('lazy.core.handler.event').trigger({
+        event = 'FileType',
+        buffer = vim.api.nvim_get_current_buf(),
+      })
+    end, 100)
+  end)
+
+  vim.lsp.config('*', {
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
-  require('null-ls').setup()
-  -- require('mason-null-ls').setup_handlers()
-
-  require('mason-lspconfig').setup()
-  -- require('neodev').setup({
-  --   library = { plugins = { 'nvim-dap-ui' }, types = true },
-  -- })
-
-  local lspconfig = require('lspconfig')
-  local lspconfig_configs = require('lspconfig.configs')
-  if not lspconfig_configs.golangcilsp then
-    lspconfig_configs.golangcilsp = {
-      default_config = {
-        cmd = { 'golangci-lint-langserver' },
-        root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
-        init_options = {
-          command = { 'golangci-lint', 'run', '--out-format', 'json', '--issues-exit-code=1' },
-        },
-      },
-    }
-  end
-  if not lspconfig_configs.ls_emmet then
-    lspconfig_configs.ls_emmet = {
-      default_config = {
-        cmd = { 'ls_emmet', '--stdio' },
-        filetypes = {
-          'html',
-          'css',
-          'scss',
-          'javascript',
-          'javascriptreact',
-          'typescript',
-          'typescriptreact',
-          'haml',
-          'xml',
-          'xsl',
-          'pug',
-          'slim',
-          'sass',
-          'stylus',
-          'less',
-          'sss',
-          'hbs',
-          'handlebars',
-        },
-        ---@diagnostic disable-next-line: unused-local
-        root_dir = function(fname)
-          return vim.loop.cwd()
-        end,
-        settings = {},
-      },
-    }
-  end
-
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-  -- Use an on_attach function to only map the following keys
-  -- after the language server attaches to the current buffer
-  ---@diagnostic disable-next-line: unused-local
-  local on_attach = function(client, bufnr)
-    -- local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...)
-      vim.api.nvim_buf_set_option(bufnr, ...)
-    end
-
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- local opts = { noremap=true, silent=true }
-    -- buf_set_keymap('n', '==', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    -- buf_set_keymap('v', '=', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-    -- if client.supports_method('textDocument/formatting') then
-    --   vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    --   vim.api.nvim_create_autocmd('BufWritePre', {
-    --     group = augroup,
-    --     buffer = bufnr,
-    --     callback = function()
-    --       -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-    --       if vim.fn.has('nvim-0.8') == 1 then
-    --         vim.lsp.buf.format({ bufnr = bufnr })
-    --       else
-    --         vim.lsp.buf.formatting_sync()
-    --       end
-    --     end,
-    --   })
-    -- end
-  end
-
-  local default_opt = {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-  }
-
-  local util = require('lspconfig.util')
 
   local server_opts = {
-    tsserver = {
-      root_dir = lspconfig.util.root_pattern('tsconfig.json', 'package.json', '.git'),
-    },
-    biome = {
-      root_dir = function(fname)
-        local root = util.root_pattern('biome.json', 'biome.jsonc')(fname)
-        return root
-      end,
-    },
-    golangci_lint_ls = {
-      filetypes = { 'go', 'gomod' },
-    },
     lua_ls = {
       settings = {
         Lua = {
@@ -151,14 +47,17 @@ function configs.mason()
             version = 'LuaJIT',
             special = { reload = 'require' },
           },
-          workspace = {
-            library = {
-              vim.fn.expand('$VIMRUNTIME/lua'),
-              vim.fn.expand('$VIMRUNTIME/lua/vim/lsp'),
-              vim.fn.stdpath('data') .. '/lazy/lazy.nvim/lua/lazy',
-              -- vim.fn.expand('$HOME/workspace/projects'), -- parent/avante.nvim
-              '${3rd}/luv/library',
-            },
+          workspace = { checkThirdParty = false },
+          codeLens = { enable = true },
+          completion = { callSnippet = 'Replace' },
+          doc = { privateName = { '^_' } },
+          hint = {
+            enable = true,
+            setType = false,
+            paramType = true,
+            paramName = 'Disable',
+            semicolon = 'Disable',
+            arrayIndex = 'Disable',
           },
         },
       },
@@ -169,10 +68,73 @@ function configs.mason()
     vim.lsp.config(server_name, server_opt)
   end
 
-  -- Package installation folder
-  local install_root_dir = vim.fn.stdpath('data') .. '/mason'
+  require('mason-lspconfig').setup({
+    automatic_enable = {
+      exclude = {
+        'rust_analyzer',
+        'stylua',
+      },
+    },
+  })
 
-  require('mason-lspconfig').setup()
+  vim.api.nvim_create_autocmd('LspAttach', {
+    group = vim.api.nvim_create_augroup('cosmos_lsp_attach', { clear = true }),
+    callback = function(args)
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      local buf = args.buf
+      if not client then
+        return
+      end
+      if
+        client:supports_method('textDocument/inlayHint', buf)
+        and vim.bo[buf].buftype == ''
+        and not vim.tbl_contains({ 'vue' }, vim.bo[buf].filetype)
+      then
+        vim.lsp.inlay_hint.enable(true, { bufnr = buf })
+      end
+    end,
+  })
+end
+
+function configs.conform()
+  -- https://biomejs.dev/internals/language-support/
+  local biome_fts = {
+    'astro',
+    'css',
+    'scss',
+    'graphql',
+    'javascript',
+    'javascriptreact',
+    'json',
+    'jsonc',
+    'svelte',
+    'typescript',
+    'typescriptreact',
+    'vue',
+  }
+
+  local formatters_by_ft = {
+    lua = { 'stylua' },
+    sh = { 'shfmt' },
+    bash = { 'shfmt' },
+  }
+  for _, ft in ipairs(biome_fts) do
+    formatters_by_ft[ft] = { 'biome-check' }
+  end
+
+  require('conform').setup({
+    default_format_opts = {
+      timeout_ms = 3000,
+      async = false,
+      quiet = false,
+      lsp_format = 'fallback',
+    },
+    formatters_by_ft = formatters_by_ft,
+    formatters = {
+      ['biome-check'] = { require_cwd = true },
+      injected = { options = { ignore_errors = true } },
+    },
+  })
 end
 
 function configs.project()
@@ -219,16 +181,12 @@ function configs.lspsaga()
     },
     rename = {
       in_select = false,
-      quit = '<ESC>',
-      exec = '<CR>',
-      confirm = '<CR>',
+      keys = {
+        quit = '<ESC>',
+        exec = '<CR>',
+      },
     },
   })
-end
-
-function configs.lspfuzzy()
-  local lspfuzzy = require('lspfuzzy')
-  lspfuzzy.setup()
 end
 
 function configs.treesitter()
@@ -567,26 +525,7 @@ configs.dap_virtual_text = function()
 end
 
 configs.trouble = function()
-  local signs = {
-    -- icons / text used for a diagnostic
-    error = '󰅚',
-    warning = '',
-    -- for vim.fn.sign_define
-    warn = '',
-    hint = '',
-    information = '',
-    -- for vim.fn.sign_define
-    info = '',
-    other = '',
-  }
-
-  local trouble = require('trouble')
-  trouble.setup({})
-
-  for type, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. type:gsub('^%l', string.upper)
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  require('trouble').setup({})
 end
 
 configs.nvimtree = function()
@@ -823,10 +762,6 @@ function configs.readline()
   vim.keymap.set('!', '<C-w>', readline.unix_word_rubout)
   vim.keymap.set('!', '<C-k>', readline.kill_line)
   vim.keymap.set('!', '<C-u>', readline.backward_kill_line)
-end
-
-function configs.inlay_hints()
-  require('inlay-hints').setup()
 end
 
 function configs.bookmarks()

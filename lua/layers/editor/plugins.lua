@@ -102,28 +102,23 @@ cosmos.add_plugin('nacro90/numb.nvim', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('williamboman/mason.nvim', {
+cosmos.add_plugin('mason-org/mason.nvim', {
+  build = ':MasonUpdate',
+  event = { 'BufReadPre', 'BufNewFile' },
+  cmd = 'Mason',
   dependencies = {
-    { 'williamboman/mason-lspconfig.nvim', lazy = true },
+    { 'mason-org/mason-lspconfig.nvim', lazy = true },
     { 'neovim/nvim-lspconfig', lazy = true },
     { 'hrsh7th/cmp-nvim-lsp', lazy = true, dependencies = { 'hrsh7th/nvim-cmp' } },
-    -- { 'folke/neodev.nvim', lazy = true },
-    { 'nvimtools/none-ls.nvim', lazy = true, event = { 'BufReadPost', 'BufNewFile' } },
-    { 'jay-babu/mason-null-ls.nvim', lazy = true },
-    { 'simrat39/inlay-hints.nvim', lazy = true, config = configs.inlay_hints },
-    { 'simrat39/rust-tools.nvim', lazy = true },
   },
   config = configs.mason,
 })
 
-cosmos.add_plugin('ojroques/nvim-lspfuzzy', {
-  config = configs.lspfuzzy,
-  event = 'BufRead',
-  dependencies = {
-    { 'neovim/nvim-lspconfig' },
-    { 'junegunn/fzf', event = 'BufRead' },
-    { 'junegunn/fzf.vim', event = 'BufRead' }, -- to enable preview (optional)
-  },
+cosmos.add_plugin('stevearc/conform.nvim', {
+  dependencies = { 'mason-org/mason.nvim' },
+  cmd = 'ConformInfo',
+  lazy = true,
+  config = configs.conform,
 })
 
 cosmos.add_plugin('nvimdev/lspsaga.nvim', {

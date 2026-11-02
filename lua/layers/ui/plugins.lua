@@ -87,7 +87,7 @@ cosmos.add_plugin('RRethy/vim-illuminate', {
   event = 'BufRead',
 })
 
-cosmos.add_plugin('norcalli/nvim-colorizer.lua', {
+cosmos.add_plugin('NvChad/nvim-colorizer.lua', {
   enabled = options.enable_colorizer,
   config = configs.colorizer,
   event = 'BufRead',
@@ -148,9 +148,19 @@ cosmos.add_plugin('folke/zen-mode.nvim', {
         api.tree.close()
         vim.b.cosmos_zen_restore_tree = true
       end
+      -- showbreak is global-local; setting it to '' locally falls back to
+      -- the global value ('+++'), and a single space pushes every wrapped
+      -- continuation line right by one column (breaking left alignment).
+      -- So clear the GLOBAL value for the session and restore it on close.
+      vim.g.cosmos_zen_saved_showbreak = vim.go.showbreak
+      vim.go.showbreak = ''
     end,
     on_close = function()
       pcall(vim.cmd.ScrollbarShow)
+      if vim.g.cosmos_zen_saved_showbreak ~= nil then
+        vim.go.showbreak = vim.g.cosmos_zen_saved_showbreak
+        vim.g.cosmos_zen_saved_showbreak = nil
+      end
       if vim.b.cosmos_zen_restore_tree then
         vim.b.cosmos_zen_restore_tree = nil
         local ok, api = pcall(require, 'nvim-tree.api')
